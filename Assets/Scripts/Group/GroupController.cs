@@ -123,10 +123,14 @@ public class GroupController : MonoBehaviour
             return agents[0].transform.position;
         }
 
-        Bounds bounds = new Bounds(agents[0].transform.position, Vector3.zero);
+        Vector3 ignoreYPosition = agents[0].transform.position;
+        ignoreYPosition.y = 0;
+        Bounds bounds = new Bounds(ignoreYPosition, Vector3.zero);
         for (int i = 0; i < agents.Count; i++)
         {
-            bounds.Encapsulate(agents[i].transform.position);
+            ignoreYPosition = agents[i].transform.position;
+            ignoreYPosition.y = 0;
+            bounds.Encapsulate(ignoreYPosition);
         }
 
         return bounds.center;

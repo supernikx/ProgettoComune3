@@ -36,9 +36,17 @@ public class GroupShootController : MonoBehaviour
     /// </summary>
     private bool reload = false;
     /// <summary>
+    /// bool che identifica se è possibile sparare o no
+    /// </summary>
+    private bool canShoot;
+    /// <summary>
     /// Riferimento al vettore di sparo
     /// </summary>
     private Vector3 shootVector;
+    /// <summary>
+    /// Riferimento all'aim feedbakc
+    /// </summary>
+    private AimArrowFeedback aimFeedback;
 
     /// <summary>
     /// Funzione che esegue il Setup
@@ -46,13 +54,14 @@ public class GroupShootController : MonoBehaviour
     /// <param name="_groupCtrl"></param>
     public void Setup(GroupController _groupCtrl)
     {
+        aimFeedback = FindObjectOfType<AimArrowFeedback>();
         groupCtrl = _groupCtrl;
-        isSetupped = true;
+        canShoot = isSetupped = true;
     }
 
     private void Update()
     {
-        if (!isSetupped)
+        if (!isSetupped || !canShoot)
             return;
 
         ReadInput();
@@ -94,6 +103,8 @@ public class GroupShootController : MonoBehaviour
             shootVector = new Vector3(mouseDirection.x, 0, mouseDirection.y);
         }
 
+        aimFeedback.UpdateArrow(groupCtrl.GetGroupCenterPoint(), shootVector); 
+
         if (Input.GetButtonDown("Shoot"))
             shoot = true;
 
@@ -126,7 +137,11 @@ public class GroupShootController : MonoBehaviour
 
     private IEnumerator ReloadingCoroutine()
     {
+        groupCtrl.GetGroupMovementController().SetCanMove(false);
+        canShoot = false;
         yield return new WaitForSeconds(reloadingTime);
         groupCtrl.InstantiateNewAgent();
+        canShoot = true;
+        groupCtrl.GetGroupMovementController().SetCanMove(true);
     }
 }
