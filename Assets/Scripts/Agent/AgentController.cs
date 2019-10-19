@@ -7,6 +7,14 @@ using UnityEngine;
 /// </summary>
 public class AgentController : MonoBehaviour
 {
+    [Header("Agent Group Settings")]
+    //Range alla distanza di raggruppamento del gruppo
+    [SerializeField]
+    private Vector2 regroupDistanceRange;
+    //Range alla distanza di espansione del gruppo
+    [SerializeField]
+    private Vector2 expandDistanceRange;
+
     /// <summary>
     /// Riferimento al Group controller
     /// </summary>
@@ -73,6 +81,24 @@ public class AgentController : MonoBehaviour
     public AgentJumpController GetAgentJumpController()
     {
         return agentJumpCtrl;
+    }
+
+    /// <summary>
+    /// Funzione che ritorna la distanza da tenere quando il gruppo è in raggruppamento
+    /// </summary>
+    /// <returns></returns>
+    public float GetRegroupDistance()
+    {
+        return Random.Range(regroupDistanceRange.x, regroupDistanceRange.y);
+    }
+
+    /// <summary>
+    /// Funzione che ritorna la distanza da tenere quando il gruppo è in espansione
+    /// </summary>
+    /// <returns></returns>
+    public float GetExpandDistance()
+    {
+        return Random.Range(expandDistanceRange.x, expandDistanceRange.y);
     }
     #endregion
     #endregion

@@ -34,6 +34,10 @@ public class GroupController : MonoBehaviour
     /// </summary>
     private GroupMovementController groupMovementCtrl;
     /// <summary>
+    /// Riferimento al group size controller
+    /// </summary>
+    private GroupSizeController groupSizeCtrl;
+    /// <summary>
     /// Riferimento al shoot controller
     /// </summary>
     private GroupShootController shootCtrl;
@@ -45,10 +49,12 @@ public class GroupController : MonoBehaviour
     public void Setup()
     {
         groupMovementCtrl = GetComponent<GroupMovementController>();
+        groupSizeCtrl = GetComponent<GroupSizeController>();
         shootCtrl = GetComponent<GroupShootController>();
 
         AgentsSetup();
         groupMovementCtrl.Setup(this);
+        groupSizeCtrl.Setup(this);
         shootCtrl.Setup(this);
     }
 
@@ -73,6 +79,15 @@ public class GroupController : MonoBehaviour
     public GroupMovementController GetGroupMovementController()
     {
         return groupMovementCtrl;
+    }
+
+    /// <summary>
+    /// Funzione che ritorna il group size controller
+    /// </summary>
+    /// <returns></returns>
+    public GroupSizeController GetGroupSizeController()
+    {
+        return groupSizeCtrl;
     }
 
     /// <summary>
