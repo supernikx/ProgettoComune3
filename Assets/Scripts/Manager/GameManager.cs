@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         groupCtrl = FindObjectOfType<GroupController>();
-
         groupCtrl.Setup();
     }
 }
