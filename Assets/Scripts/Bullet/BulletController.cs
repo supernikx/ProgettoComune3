@@ -40,4 +40,14 @@ public class BulletController : MonoBehaviour
         if (Vector3.Distance(transform.position, spawnPosition) > 100)
             Destroy(gameObject);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        CubeExplosion cube = other.GetComponent<CubeExplosion>();
+        if (cube != null)
+        {
+            cube.Explode();
+            Destroy(gameObject);
+        }
+    }
 }
