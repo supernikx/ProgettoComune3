@@ -46,11 +46,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4173dce02cf9ff14ea3f2df3921dccff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groupStartAgents: 5
+  groupStartAgents: 7
   spawnRange: 5
   agentPrefab: {fileID: 4898873885526971867, guid: 00c2b6c53e70ecf40a3f467609bd84cc,
     type: 3}
-  groupMaxAgents: 5
+  groupMaxAgents: 7
   groupMinAgents: 1
 --- !u!114 &2190637245553949393
 MonoBehaviour:
@@ -79,7 +79,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 2962134240799506771, guid: 5bdfefeea17b32846a56144c6a43ac9f,
     type: 3}
   shootHeight: 2
-  reloadingTime: 1
+  reloadingTime: 0.5
 --- !u!114 &7647136974110419292
 MonoBehaviour:
   m_ObjectHideFlags: 0
