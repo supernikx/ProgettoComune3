@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Linq;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +7,10 @@ using UnityEngine;
 /// </summary>
 public class GroupController : MonoBehaviour
 {
+    #region Actions
+    public Action OnGroupDead;
+    #endregion
+
     [Header("Group Spawn Settings")]
     //Agenti iniziali del gruppo
     [SerializeField]
@@ -145,12 +148,31 @@ public class GroupController : MonoBehaviour
     public bool RemoveRandomAgent()
     {
         if (agents == null || agents.Count == 0 || agents.Count <= groupMinAgents)
+        {
+            CheckGroupCount();
             return false;
+        }
 
-        AgentController agentToRemove = agents[Random.Range(0, agents.Count)];
+        AgentController agentToRemove = agents[UnityEngine.Random.Range(0, agents.Count)];
         agents.Remove(agentToRemove);
         Destroy(agentToRemove.gameObject);
+        CheckGroupCount();
         return true;
+    }
+
+    /// <summary>
+    /// Funzione che si occupa di rimuovere l'agent passato come parametro
+    /// </summary>
+    /// <param name="_agentToRemove"></param>
+    public void RemoveAgent(AgentController _agentToRemove)
+    {
+        if (agents != null && agents.Count > 0)
+        {
+            agents.Remove(_agentToRemove);
+            Destroy(_agentToRemove.gameObject);
+        }
+
+        CheckGroupCount();
     }
 
     /// <summary>
@@ -164,7 +186,7 @@ public class GroupController : MonoBehaviour
             return false;
 
         Vector3 groupCenterPoint = GetGroupCenterPoint();
-        Vector2 randomCirclePoint = Random.insideUnitCircle * spawnRange;
+        Vector2 randomCirclePoint = UnityEngine.Random.insideUnitCircle * spawnRange;
         Vector3 randomSpawnPosition = new Vector3(randomCirclePoint.x + groupCenterPoint.x, transform.position.y, randomCirclePoint.y + groupCenterPoint.z);
         AgentController newAgent = Instantiate(agentPrefab, randomSpawnPosition, Quaternion.identity, transform);
         newAgent.Setup(this);
@@ -184,4 +206,13 @@ public class GroupController : MonoBehaviour
         return false;
     }
     #endregion
+
+    /// <summary>
+    /// Funzione che controlla se ci sono ancora membri nel gruppo
+    /// </summary>
+    private void CheckGroupCount()
+    {
+        if (agents != null && agents.Count == 0)
+            OnGroupDead?.Invoke();
+    }
 }

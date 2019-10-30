@@ -11,6 +11,9 @@ public class BulletController : MonoBehaviour
     //Velocità del proiettile
     [SerializeField]
     private float bulletSpeed;
+    //Danno del proiettile
+    [SerializeField]
+    private int bulletDamage;
 
     /// <summary>
     /// Punto di spawn del proiettile
@@ -43,10 +46,10 @@ public class BulletController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        CubeExplosion cube = other.GetComponent<CubeExplosion>();
-        if (cube != null)
+        BossLifeController bossLifeCtrl = other.GetComponent<BossLifeController>();
+        if (bossLifeCtrl != null)
         {
-            cube.Explode();
+            bossLifeCtrl.TakeDamage(bulletDamage);
             Destroy(gameObject);
         }
     }
