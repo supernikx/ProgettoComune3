@@ -27,9 +27,19 @@ public class GameManager : MonoBehaviour
         bossPrototipo = FindObjectOfType<BossPrototipoController>();
 
         groupCtrl.Setup();
-        bossPrototipo.Setup(this);
 
         groupCtrl.OnGroupDead += HandleOnGroupDead;
+    }
+
+    //Debug
+    bool notagain = false;
+    private void Update()
+    {
+        if (!notagain && bossPrototipo != null && Input.GetKeyDown(KeyCode.K))
+        {
+            notagain = true;
+            bossPrototipo.Setup(this);
+        }
     }
 
     #region Handlers

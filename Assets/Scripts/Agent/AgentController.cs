@@ -49,8 +49,8 @@ public class AgentController : MonoBehaviour
         graphicCtrl = GetComponentInChildren<AgentGraphicController>();
 
         movementCtrl.Setup(this);
-        agentJumpCtrl.Setup(this);
         agentCollisionCtrl.Setup(this);
+        agentJumpCtrl.Setup(this);
         graphicCtrl.Setup();
     }
 

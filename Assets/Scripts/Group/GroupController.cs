@@ -29,6 +29,9 @@ public class GroupController : MonoBehaviour
     //Numero minimo di agents che possono essere presenti
     [SerializeField]
     private int groupMinAgents;
+    //Oggetto che tiene il centro del gruppo
+    [SerializeField]
+    private Transform groupCenterObject;
 
     //Lista di agent che formano il guppo
     private List<AgentController> agents;
@@ -72,6 +75,11 @@ public class GroupController : MonoBehaviour
             InstantiateNewAgent();
     }
     #endregion
+
+    private void Update()
+    {
+        groupCenterObject.position = CalculateGroupCenterPoint();
+    }
 
     #region API
     #region Getter
@@ -117,26 +125,7 @@ public class GroupController : MonoBehaviour
     /// <returns></returns>
     public Vector3 GetGroupCenterPoint()
     {
-        if (agents.Count == 0)
-        {
-            return transform.position;
-        }
-        else if (agents.Count == 1)
-        {
-            return agents[0].transform.position;
-        }
-
-        Vector3 ignoreYPosition = agents[0].transform.position;
-        ignoreYPosition.y = 0;
-        Bounds bounds = new Bounds(ignoreYPosition, Vector3.zero);
-        for (int i = 0; i < agents.Count; i++)
-        {
-            ignoreYPosition = agents[i].transform.position;
-            ignoreYPosition.y = 0;
-            bounds.Encapsulate(ignoreYPosition);
-        }
-
-        return bounds.center;
+        return groupCenterObject.position;
     }
     #endregion
 
@@ -214,5 +203,27 @@ public class GroupController : MonoBehaviour
     {
         if (agents != null && agents.Count == 0)
             OnGroupDead?.Invoke();
+    }
+
+    /// <summary>
+    /// Funzione che Calcola la posizione centrale del gruppo
+    /// </summary>
+    /// <returns></returns>
+    private Vector3 CalculateGroupCenterPoint()
+    {
+        if (agents.Count == 0)
+        {
+            return transform.position;
+        }
+        else if (agents.Count == 1)
+        {
+            return agents[0].transform.position;
+        }
+
+        Bounds bounds = new Bounds(agents[0].transform.position, Vector3.zero);
+        for (int i = 0; i < agents.Count; i++)
+            bounds.Encapsulate(agents[i].transform.position);
+
+        return bounds.center;
     }
 }
