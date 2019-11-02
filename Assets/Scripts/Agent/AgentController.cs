@@ -7,14 +7,6 @@ using UnityEngine;
 /// </summary>
 public class AgentController : MonoBehaviour
 {
-    [Header("Agent Group Settings")]
-    //Range alla distanza di raggruppamento del gruppo
-    [SerializeField]
-    private Vector2 regroupDistanceRange;
-    //Range alla distanza di espansione del gruppo
-    [SerializeField]
-    private Vector2 expandDistanceRange;
-
     /// <summary>
     /// Riferimento al Group controller
     /// </summary>
@@ -35,6 +27,10 @@ public class AgentController : MonoBehaviour
     /// Riferimento all'agent jump controller
     /// </summary>
     private AgentJumpController agentJumpCtrl;
+    /// <summary>
+    /// Riferimento all'agent distance controller
+    /// </summary>
+    private AgentDistanceController agentDistanceCtrl;
 
     /// <summary>
     /// Funzione che esegue il Setup
@@ -46,11 +42,13 @@ public class AgentController : MonoBehaviour
         movementCtrl = GetComponent<AgentMovementController>();
         agentJumpCtrl = GetComponent<AgentJumpController>();
         agentCollisionCtrl = GetComponent<AgentCollisionController>();
+        agentDistanceCtrl = GetComponent<AgentDistanceController>();
         graphicCtrl = GetComponentInChildren<AgentGraphicController>();
 
         movementCtrl.Setup(this);
         agentCollisionCtrl.Setup(this);
         agentJumpCtrl.Setup(this);
+        agentDistanceCtrl.Setup();
         graphicCtrl.Setup();
     }
 
@@ -84,21 +82,12 @@ public class AgentController : MonoBehaviour
     }
 
     /// <summary>
-    /// Funzione che ritorna la distanza da tenere quando il gruppo è in raggruppamento
+    /// Funzione che ritorna l'agent distance controller
     /// </summary>
     /// <returns></returns>
-    public float GetRegroupDistance()
+    public AgentDistanceController GetAgentDistanceController()
     {
-        return Random.Range(regroupDistanceRange.x, regroupDistanceRange.y);
-    }
-
-    /// <summary>
-    /// Funzione che ritorna la distanza da tenere quando il gruppo è in espansione
-    /// </summary>
-    /// <returns></returns>
-    public float GetExpandDistance()
-    {
-        return Random.Range(expandDistanceRange.x, expandDistanceRange.y);
+        return agentDistanceCtrl;
     }
     #endregion
     #endregion

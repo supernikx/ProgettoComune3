@@ -50,9 +50,12 @@ public class AgentJumpController : MonoBehaviour
     /// </summary>
     private bool canJump;
     /// <summary>
-    /// Riferimento alla coroutine di salto
+    /// Bool che identifica se è stato premuto il tasto di salto
     /// </summary>
-    private IEnumerator jumpRoutine;
+    private bool jumpPressed;
+
+    private float jumpDelay;
+    private float jumpTimer;
 
     /// <summary>
     /// Funzione che segue il setup
@@ -68,6 +71,40 @@ public class AgentJumpController : MonoBehaviour
         jumpVelocity = Mathf.Abs(jumpGravity) * jumpTimeToReachTop;
 
         canJump = true;
+        jumpPressed = false;
+    }
+
+    private void FixedUpdate()
+    {
+        if (currentJumpVelocity < 0)
+            currentJumpVelocity += jumpFallingGravity * Time.deltaTime;
+        else
+            currentJumpVelocity += jumpGravity * Time.deltaTime;
+
+        if (agentCollisionCtrl.IsGroundCollision())
+        {
+            currentJumpVelocity = 0;
+            canJump = true;
+        }
+        else
+            canJump = false;
+
+        if (jumpPressed)
+        {
+            jumpTimer += Time.deltaTime;
+            if (jumpTimer >= jumpDelay)
+            {
+                if (canJump)
+                {
+                    currentJumpVelocity = jumpVelocity;
+                    canJump = false;
+                }
+
+                jumpPressed = false;
+            }
+        }
+
+        transform.Translate(Vector3.up * currentJumpVelocity * Time.deltaTime);
     }
 
     /// <summary>
@@ -75,13 +112,11 @@ public class AgentJumpController : MonoBehaviour
     /// </summary>
     public void Jump()
     {
-        if (canJump)
+        if (canJump && !jumpPressed)
         {
-            if (jumpRoutine != null)
-                StopCoroutine(jumpRoutine);
-
-            jumpRoutine = JumpCoroutine();
-            StartCoroutine(jumpRoutine);
+            jumpPressed = true;
+            jumpDelay = Random.Range(jumpDelayRange.x, jumpDelayRange.y);
+            jumpTimer = 0;
         }
     }
 
@@ -98,7 +133,7 @@ public class AgentJumpController : MonoBehaviour
         WaitForFixedUpdate wffu = new WaitForFixedUpdate();
         currentJumpVelocity = jumpVelocity;
 
-        while (!agentCollisionCtrl.CheckGroundCollision(currentJumpVelocity * Time.deltaTime))
+        while (!agentCollisionCtrl.IsGroundCollision())
         {
             if (currentJumpVelocity < 0)
                 currentJumpVelocity += jumpFallingGravity * Time.deltaTime;
@@ -111,11 +146,5 @@ public class AgentJumpController : MonoBehaviour
 
         currentJumpVelocity = 0;
         canJump = true;
-    }
-
-    private void OnDisable()
-    {
-        if (jumpRoutine != null)
-            StopCoroutine(jumpRoutine);
     }
 }

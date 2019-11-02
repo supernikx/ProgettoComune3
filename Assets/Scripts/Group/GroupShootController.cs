@@ -65,12 +65,6 @@ public class GroupShootController : MonoBehaviour
             return;
 
         ReadInput();
-    }
-
-    private void FixedUpdate()
-    {
-        if (!isSetupped)
-            return;
 
         if (shoot)
         {

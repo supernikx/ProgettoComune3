@@ -49,7 +49,7 @@ public class AgentMovementController : MonoBehaviour
         }
 
         //Mi muovo
-        transform.position = Vector3.MoveTowards(transform.position, transform.position + _movementDirection, movementSpeed);
+        transform.position = Vector3.MoveTowards(transform.position, transform.position + _movementDirection, movementSpeed * Time.deltaTime);
     }
 
     #region Getter

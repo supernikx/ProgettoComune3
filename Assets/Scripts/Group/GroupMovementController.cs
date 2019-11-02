@@ -40,13 +40,6 @@ public class GroupMovementController : MonoBehaviour
             return;
 
         ReadInput();
-    }
-
-    private void FixedUpdate()
-    {
-        if (!isSetupped || !canMove)
-            return;
-
         MoveAgents();
     }
 
