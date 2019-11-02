@@ -66,7 +66,6 @@ public class BossPrototipoMoveState : BossPrototipoStateBase
     private void HandleOnAgentHit(AgentController _agent)
     {
         groupCtrl.RemoveAgent(_agent);
-        Debug.Log("Hit Agent");
     }
 
     /// <summary>
@@ -75,7 +74,6 @@ public class BossPrototipoMoveState : BossPrototipoStateBase
     private void HandleOnObstacleHit(GameObject _obstacle)
     {
         distanceTraveled = maxMoveDistance;
-        Debug.Log("Hit Obstacle");
     }
 
     /// <summary>
