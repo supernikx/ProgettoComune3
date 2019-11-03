@@ -54,7 +54,7 @@ public class AgentController : MonoBehaviour
         agentCollisionCtrl.Setup(this);
         agentJumpCtrl.Setup(this);
         agentGravityCtrl.Setup(this);
-        agentDistanceCtrl.Setup();
+        agentDistanceCtrl.Setup(this);
         graphicCtrl.Setup();
     }
 

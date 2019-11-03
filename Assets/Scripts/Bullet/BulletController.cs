@@ -52,5 +52,8 @@ public class BulletController : MonoBehaviour
             bossLifeCtrl.TakeDamage(bulletDamage);
             Destroy(gameObject);
         }
+
+        if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
+            Destroy(gameObject);
     }
 }

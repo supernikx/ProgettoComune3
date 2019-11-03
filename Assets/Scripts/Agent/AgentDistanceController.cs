@@ -25,6 +25,10 @@ public class AgentDistanceController : MonoBehaviour
     private float obstacleCheckRayLenght;
 
     /// <summary>
+    /// Riferimento all'agent controller
+    /// </summary>
+    private AgentController agentCtrl;
+    /// <summary>
     /// Distanza di espansione
     /// </summary>
     private float expandDistance;
@@ -36,8 +40,10 @@ public class AgentDistanceController : MonoBehaviour
     /// <summary>
     /// Funzione che setup
     /// </summary>
-    public void Setup()
+    public void Setup(AgentController _agentCtrl)
     {
+        agentCtrl = _agentCtrl;
+
         CalculateDistances();
     }
 

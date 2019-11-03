@@ -20,6 +20,10 @@ public class AgentCollisionController : MonoBehaviour
     /// </summary>
     private bool groundCollision;
     /// <summary>
+    /// Riferimento al collider
+    /// </summary>
+    private new Collider collider;
+    /// <summary>
     /// Riferimento al rigidBody
     /// </summary>
     private Rigidbody rb;
@@ -35,6 +39,8 @@ public class AgentCollisionController : MonoBehaviour
     public void Setup(AgentController _agentCtrl)
     {
         agentCtrl = _agentCtrl;
+
+        collider = GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
     }
 
@@ -62,6 +68,15 @@ public class AgentCollisionController : MonoBehaviour
     public Rigidbody GetRigidBody()
     {
         return rb;
+    }
+
+    /// <summary>
+    /// Funzione che ritorna il collider
+    /// </summary>
+    /// <returns></returns>
+    public Collider GetCollider()
+    {
+        return collider;
     }
     #endregion
     #endregion
