@@ -7,10 +7,22 @@ using UnityEngine;
 /// </summary>
 public class AgentCollisionController : MonoBehaviour
 {
+    [Header("Collision Settings")]
+    //Layer del terreno
+    [SerializeField]
+    private LayerMask groundLayer;
+    //Lunghezza del Ray
+    [SerializeField]
+    private float rayLength;
+
     /// <summary>
     /// Bool che indentifica se c'è una collision con il ground o no
     /// </summary>
     private bool groundCollision;
+    /// <summary>
+    /// Riferimento al rigidBody
+    /// </summary>
+    private Rigidbody rb;
     /// <summary>
     /// Riferimento all'agent controller
     /// </summary>
@@ -23,22 +35,13 @@ public class AgentCollisionController : MonoBehaviour
     public void Setup(AgentController _agentCtrl)
     {
         agentCtrl = _agentCtrl;
+        rb = GetComponent<Rigidbody>();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void Update()
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
-        {
-            groundCollision = true;
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
-        {
-            groundCollision = false;
-        }
+        groundCollision = Physics.Raycast(transform.position, -transform.up, rayLength, groundLayer);
+        Debug.DrawRay(transform.position, -transform.up * rayLength, Color.red);
     }
 
     #region API
@@ -50,6 +53,15 @@ public class AgentCollisionController : MonoBehaviour
     public bool IsGroundCollision()
     {
         return groundCollision;
+    }
+
+    /// <summary>
+    /// Funzione che ritorna il RigidBody
+    /// </summary>
+    /// <returns></returns>
+    public Rigidbody GetRigidBody()
+    {
+        return rb;
     }
     #endregion
     #endregion

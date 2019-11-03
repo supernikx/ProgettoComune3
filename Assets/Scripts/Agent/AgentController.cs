@@ -28,6 +28,10 @@ public class AgentController : MonoBehaviour
     /// </summary>
     private AgentJumpController agentJumpCtrl;
     /// <summary>
+    /// Riferimento all'agent gravity controller
+    /// </summary>
+    private AgentGravityController agentGravityCtrl;
+    /// <summary>
     /// Riferimento all'agent distance controller
     /// </summary>
     private AgentDistanceController agentDistanceCtrl;
@@ -41,6 +45,7 @@ public class AgentController : MonoBehaviour
         groupCtrl = _groupCtrl;
         movementCtrl = GetComponent<AgentMovementController>();
         agentJumpCtrl = GetComponent<AgentJumpController>();
+        agentGravityCtrl = GetComponent<AgentGravityController>();
         agentCollisionCtrl = GetComponent<AgentCollisionController>();
         agentDistanceCtrl = GetComponent<AgentDistanceController>();
         graphicCtrl = GetComponentInChildren<AgentGraphicController>();
@@ -48,6 +53,7 @@ public class AgentController : MonoBehaviour
         movementCtrl.Setup(this);
         agentCollisionCtrl.Setup(this);
         agentJumpCtrl.Setup(this);
+        agentGravityCtrl.Setup(this);
         agentDistanceCtrl.Setup();
         graphicCtrl.Setup();
     }

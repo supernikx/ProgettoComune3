@@ -10,13 +10,7 @@ public class AgentJumpController : MonoBehaviour
     [Header("Jump Settings")]
     // Altezza massima raggiungibile in unity unit
     [SerializeField]
-    private float jumpHeight;
-    // Tempo in secondi che ci vuole per raggiungere l'altezza massima del salto
-    [SerializeField]
-    private float jumpTimeToReachTop;
-    // Moltiplicatore per la gravità di caduta
-    [SerializeField]
-    private float fallingSpeedMultiplier;
+    private float jumpForce;
     //Delay dalla pressione del tasto al salto effettivo
     [SerializeField]
     private Vector2 jumpDelayRange;
@@ -30,21 +24,9 @@ public class AgentJumpController : MonoBehaviour
     /// </summary>
     private AgentCollisionController agentCollisionCtrl;
     /// <summary>
-    /// Gravità del salto
+    /// Riferimento al RigidBody
     /// </summary>
-    private float jumpGravity;
-    /// <summary>
-    /// Gravità del salto
-    /// </summary>
-    private float jumpFallingGravity;
-    /// <summary>
-    /// Velocity del salto
-    /// </summary>
-    private float jumpVelocity;
-    /// <summary>
-    /// Velocity del salto
-    /// </summary>
-    private float currentJumpVelocity;
+    private Rigidbody rb;
     /// <summary>
     /// Bool che identifica se l'agent può saltare
     /// </summary>
@@ -53,8 +35,13 @@ public class AgentJumpController : MonoBehaviour
     /// Bool che identifica se è stato premuto il tasto di salto
     /// </summary>
     private bool jumpPressed;
-
+    /// <summary>
+    /// Tempo di delay del salto
+    /// </summary>
     private float jumpDelay;
+    /// <summary>
+    /// Timer che tiene conto del delay del salto
+    /// </summary>
     private float jumpTimer;
 
     /// <summary>
@@ -65,10 +52,7 @@ public class AgentJumpController : MonoBehaviour
     {
         agentCtrl = _agentCtrl;
         agentCollisionCtrl = agentCtrl.GetAgentCollisionController();
-
-        jumpGravity = -(2 * jumpHeight) / Mathf.Pow(jumpTimeToReachTop, 2);
-        jumpFallingGravity = jumpGravity * fallingSpeedMultiplier;
-        jumpVelocity = Mathf.Abs(jumpGravity) * jumpTimeToReachTop;
+        rb = agentCollisionCtrl.GetRigidBody();
 
         canJump = true;
         jumpPressed = false;
@@ -76,16 +60,8 @@ public class AgentJumpController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (currentJumpVelocity < 0)
-            currentJumpVelocity += jumpFallingGravity * Time.deltaTime;
-        else
-            currentJumpVelocity += jumpGravity * Time.deltaTime;
-
         if (agentCollisionCtrl.IsGroundCollision())
-        {
-            currentJumpVelocity = 0;
             canJump = true;
-        }
         else
             canJump = false;
 
@@ -96,15 +72,14 @@ public class AgentJumpController : MonoBehaviour
             {
                 if (canJump)
                 {
-                    currentJumpVelocity = jumpVelocity;
+                    rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                    //rb.velocity = Vector3.up * jumpForce;
                     canJump = false;
                 }
 
                 jumpPressed = false;
             }
         }
-
-        transform.Translate(Vector3.up * currentJumpVelocity * Time.deltaTime);
     }
 
     /// <summary>
@@ -118,33 +93,5 @@ public class AgentJumpController : MonoBehaviour
             jumpDelay = Random.Range(jumpDelayRange.x, jumpDelayRange.y);
             jumpTimer = 0;
         }
-    }
-
-    /// <summary>
-    /// Coroutine che esegue il salto
-    /// </summary>
-    /// <returns></returns>
-    private IEnumerator JumpCoroutine()
-    {
-        canJump = false;
-
-        yield return new WaitForSeconds(Random.Range(jumpDelayRange.x, jumpDelayRange.y));
-
-        WaitForFixedUpdate wffu = new WaitForFixedUpdate();
-        currentJumpVelocity = jumpVelocity;
-
-        while (!agentCollisionCtrl.IsGroundCollision())
-        {
-            if (currentJumpVelocity < 0)
-                currentJumpVelocity += jumpFallingGravity * Time.deltaTime;
-            else
-                currentJumpVelocity += jumpGravity * Time.deltaTime;
-
-            transform.Translate(Vector3.up * currentJumpVelocity * Time.deltaTime);
-            yield return wffu;
-        }
-
-        currentJumpVelocity = 0;
-        canJump = true;
     }
 }

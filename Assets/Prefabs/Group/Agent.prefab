@@ -76,8 +76,9 @@ GameObject:
   - component: {fileID: 4898873885526971867}
   - component: {fileID: 4898873885526971864}
   - component: {fileID: -1524394038204084140}
-  - component: {fileID: 6648088072051772253}
+  - component: {fileID: -2810710497818570696}
   - component: {fileID: 2092385467068672880}
+  - component: {fileID: 6648088072051772253}
   - component: {fileID: 3088757506646970127}
   - component: {fileID: 1543953872571742121}
   m_Layer: 10
@@ -139,10 +140,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6fd21f7f18cd0648bce7caa27d387d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpHeight: 4
-  jumpTimeToReachTop: 0.3
-  fallingSpeedMultiplier: 1
+  jumpForce: 10
   jumpDelayRange: {x: 0, y: 0.2}
+--- !u!114 &-2810710497818570696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4898873885526971862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6abcb1d4f040b1147a79f68584a4e462, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fallingMultiplier: 2.5
+--- !u!114 &2092385467068672880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4898873885526971862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5eff5e0fb472a744ba12039c983a81b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  rayLength: 0.2
 --- !u!114 &6648088072051772253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,18 +188,7 @@ MonoBehaviour:
   obstaclesLayer:
     serializedVersion: 2
     m_Bits: 512
---- !u!114 &2092385467068672880
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4898873885526971862}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5eff5e0fb472a744ba12039c983a81b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  obstacleCheckRayLenght: 0
 --- !u!136 &3088757506646970127
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -195,9 +212,9 @@ Rigidbody:
   m_GameObject: {fileID: 4898873885526971862}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: Infinity
+  m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112

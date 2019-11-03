@@ -97,7 +97,7 @@ public class GroupShootController : MonoBehaviour
             shootVector = new Vector3(mouseDirection.x, 0, mouseDirection.y);
         }
 
-        aimFeedback.UpdateArrow(groupCtrl.GetGroupCenterPoint(), shootVector); 
+        aimFeedback.UpdateArrow(groupCtrl.GetGroupCenterPoint(), shootVector);
 
         if (Input.GetButtonDown("Shoot"))
             shoot = true;
@@ -114,7 +114,7 @@ public class GroupShootController : MonoBehaviour
         if (groupCtrl.RemoveRandomAgent())
         {
             Vector3 shootPoint = groupCtrl.GetGroupCenterPoint();
-            shootPoint.y = shootHeight;
+            shootPoint.y = shootPoint.y + shootHeight;
             BulletController instantiatedBullet = Instantiate(bulletPrefab, shootPoint, Quaternion.LookRotation(shootVector.normalized));
             instantiatedBullet.Setup();
         }

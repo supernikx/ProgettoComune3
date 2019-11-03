@@ -176,7 +176,7 @@ public class GroupController : MonoBehaviour
 
         Vector3 groupCenterPoint = GetGroupCenterPoint();
         Vector2 randomCirclePoint = UnityEngine.Random.insideUnitCircle * spawnRange;
-        Vector3 randomSpawnPosition = new Vector3(randomCirclePoint.x + groupCenterPoint.x, transform.position.y, randomCirclePoint.y + groupCenterPoint.z);
+        Vector3 randomSpawnPosition = new Vector3(randomCirclePoint.x + groupCenterPoint.x, groupCenterPoint.y, randomCirclePoint.y + groupCenterPoint.z);
         AgentController newAgent = Instantiate(agentPrefab, randomSpawnPosition, Quaternion.identity, transform);
         newAgent.Setup(this);
         agents.Add(newAgent);
