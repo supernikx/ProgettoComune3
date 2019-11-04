@@ -220,10 +220,10 @@ public class GroupController : MonoBehaviour
             return agents[0].transform.position;
         }
 
-        Bounds bounds = new Bounds(agents[0].transform.position, Vector3.zero);
+        Vector3 centerPoint = Vector3.zero;
         for (int i = 0; i < agents.Count; i++)
-            bounds.Encapsulate(agents[i].transform.position);
+            centerPoint += agents[i].transform.position;
 
-        return bounds.center;
+        return centerPoint / agents.Count;
     }
 }

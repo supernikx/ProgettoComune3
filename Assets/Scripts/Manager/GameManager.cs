@@ -24,10 +24,11 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         groupCtrl = FindObjectOfType<GroupController>();
-        bossPrototipo = FindObjectOfType<BossPrototipoController>();
+        //Orribile ma giusto per test
+        if (Resources.FindObjectsOfTypeAll<BossPrototipoController>().Length > 0)
+            bossPrototipo = Resources.FindObjectsOfTypeAll<BossPrototipoController>()[0];
 
         groupCtrl.Setup();
-
         groupCtrl.OnGroupDead += HandleOnGroupDead;
     }
 
@@ -37,6 +38,7 @@ public class GameManager : MonoBehaviour
     {
         if (!notagain && bossPrototipo != null && Input.GetKeyDown(KeyCode.K))
         {
+            bossPrototipo.gameObject.SetActive(true);
             notagain = true;
             bossPrototipo.Setup(this);
         }

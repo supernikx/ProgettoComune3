@@ -8,7 +8,7 @@ public class QuickSceneSwitcher : MonoBehaviour
     [System.Serializable]
     public struct SceneKey
     {
-        public Object scene;
+        public string sceneName;
         public KeyCode key;
     }
     public List<SceneKey> scenes;
@@ -18,7 +18,7 @@ public class QuickSceneSwitcher : MonoBehaviour
         foreach (SceneKey s in scenes)
         {
             if (Input.GetKeyDown(s.key))
-                SceneManager.LoadScene(s.scene.name);
+                SceneManager.LoadScene(s.sceneName);
         }
     }
 }
