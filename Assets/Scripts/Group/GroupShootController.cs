@@ -18,6 +18,9 @@ public class GroupShootController : MonoBehaviour
     //Tempo di ricarica
     [SerializeField]
     private float reloadingTime;
+    //Numero di personaggi che ricarica
+    [SerializeField]
+    private float reloadingAgents;
 
     /// <summary>
     /// Riferimento al group controller
@@ -134,7 +137,11 @@ public class GroupShootController : MonoBehaviour
         groupCtrl.GetGroupMovementController().SetCanMove(false);
         canShoot = false;
         yield return new WaitForSeconds(reloadingTime);
-        groupCtrl.InstantiateNewAgent();
+
+        for (int i = 0; i < reloadingAgents; i++)
+            if (!groupCtrl.IsGroupFull())
+                groupCtrl.InstantiateNewAgent();
+
         canShoot = true;
         groupCtrl.GetGroupMovementController().SetCanMove(true);
     }
