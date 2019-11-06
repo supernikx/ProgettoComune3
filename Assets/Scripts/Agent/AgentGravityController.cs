@@ -20,19 +20,50 @@ public class AgentGravityController : MonoBehaviour
     /// Riferimento al RigidBody
     /// </summary>
     private Rigidbody rb;
+    /// <summary>
+    /// Bool che identifica se lo script è setuppato o no
+    /// </summary>
+    private bool isSetupped = false;
+
+    #region Setup
+
+    /// <summary>
+    /// Funzione che inizializza lo script e prende le referenze
+    /// </summary>
+    /// <param name="_agentCtrl"></param>
+    public void Init(AgentController _agentCtrl)
+    {
+        agentCtrl = _agentCtrl;
+        rb = agentCtrl.GetAgentCollisionController().GetRigidBody();
+        UnSetup();
+    }
 
     /// <summary>
     /// Funzione di Setup
     /// </summary>
-    /// <param name="_collisionCtrl"></param>
-    public void Setup(AgentController _agentCtrl)
+    public void Setup()
     {
-        agentCtrl = _agentCtrl;
-        rb = agentCtrl.GetAgentCollisionController().GetRigidBody();
+        isSetupped = true;
+        rb.useGravity = true;
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
     }
+
+    /// <summary>
+    /// Funzione che esegue l'UnSetup
+    /// </summary>
+    public void UnSetup()
+    {
+        isSetupped = false;
+        rb.useGravity = false;
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+    }
+    #endregion
 
     private void FixedUpdate()
     {
+        if (!isSetupped)
+            return;
+
         if (rb.velocity.y < 0)
         {
             rb.velocity += Vector3.up * Physics.gravity.y * (fallingMultiplier - 1) * Time.deltaTime;

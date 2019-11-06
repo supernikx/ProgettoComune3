@@ -24,12 +24,32 @@ public class AgentGraphicController : MonoBehaviour
     /// </summary>
     private bool isSetupped = false;
 
-    public void Setup()
+    #region Setup
+    /// <summary>
+    /// Funzione che inizializza lo script e prende le referenza
+    /// </summary>
+    public void Init()
     {
         anim = GetComponent<Animator>();
+    }
+
+    /// <summary>
+    /// Funzione che esegue il Setup
+    /// </summary>
+    public void Setup()
+    {
         calculatedMovementSpeed = 0f;
         isSetupped = true;
     }
+
+    /// <summary>
+    /// Funzione che esegue l'UnSetup
+    /// </summary>
+    public void UnSetup()
+    {
+        isSetupped = false;
+    }
+    #endregion
 
     private void FixedUpdate()
     {

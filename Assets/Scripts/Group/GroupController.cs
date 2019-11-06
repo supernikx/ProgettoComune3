@@ -143,9 +143,7 @@ public class GroupController : MonoBehaviour
         }
 
         AgentController agentToRemove = agents[UnityEngine.Random.Range(0, agents.Count)];
-        agents.Remove(agentToRemove);
-        Destroy(agentToRemove.gameObject);
-        CheckGroupCount();
+        RemoveAgent(agentToRemove);
         return true;
     }
 
@@ -157,8 +155,8 @@ public class GroupController : MonoBehaviour
     {
         if (agents != null && agents.Count > 0)
         {
+            _agentToRemove.UnSetup();
             agents.Remove(_agentToRemove);
-            Destroy(_agentToRemove.gameObject);
         }
 
         CheckGroupCount();
@@ -177,10 +175,17 @@ public class GroupController : MonoBehaviour
         Vector3 groupCenterPoint = GetGroupCenterPoint();
         Vector2 randomCirclePoint = UnityEngine.Random.insideUnitCircle * spawnRange;
         Vector3 randomSpawnPosition = new Vector3(randomCirclePoint.x + groupCenterPoint.x, groupCenterPoint.y, randomCirclePoint.y + groupCenterPoint.z);
-        AgentController newAgent = Instantiate(agentPrefab, randomSpawnPosition, Quaternion.identity, transform);
-        newAgent.Setup(this);
-        agents.Add(newAgent);
-        return true;
+        AgentController newAgent = PoolManager.instance.GetPooledObject(ObjectTypes.Agent, gameObject).GetComponent<AgentController>();
+        if (newAgent != null)
+        {
+            newAgent.transform.position = randomSpawnPosition;
+            newAgent.transform.SetParent(transform);
+            newAgent.Setup(this);
+            agents.Add(newAgent);
+            return true;
+        }
+
+        return false;
     }
 
     /// <summary>

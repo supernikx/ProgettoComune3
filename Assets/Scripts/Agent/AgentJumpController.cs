@@ -43,23 +43,48 @@ public class AgentJumpController : MonoBehaviour
     /// Timer che tiene conto del delay del salto
     /// </summary>
     private float jumpTimer;
+    /// <summary>
+    /// Bool che identifica se lo script è setuppato
+    /// </summary>
+    private bool isSetupped = false;
+
+    #region Setup
+    /// <summary>
+    /// Funzione che Inizializza lo script e prende le referenza
+    /// </summary>
+    /// <param name="_agentCtrl"></param>
+    public void Init(AgentController _agentCtrl)
+    {
+        agentCtrl = _agentCtrl;
+        agentCollisionCtrl = agentCtrl.GetAgentCollisionController();
+        rb = agentCollisionCtrl.GetRigidBody();
+    }
 
     /// <summary>
     /// Funzione che segue il setup
     /// </summary>
     /// <param name="_agentCtrl"></param>
-    public void Setup(AgentController _agentCtrl)
+    public void Setup()
     {
-        agentCtrl = _agentCtrl;
-        agentCollisionCtrl = agentCtrl.GetAgentCollisionController();
-        rb = agentCollisionCtrl.GetRigidBody();
-
         canJump = true;
         jumpPressed = false;
+        isSetupped = true;
     }
+
+    /// <summary>
+    /// Funzione che esegue l'UnSetup
+    /// </summary>
+    public void UnSetup()
+    {
+        isSetupped = false;
+    }
+    #endregion
 
     private void FixedUpdate()
     {
+        if (!isSetupped)
+            return;
+
         if (agentCollisionCtrl.IsGroundCollision())
             canJump = true;
         else

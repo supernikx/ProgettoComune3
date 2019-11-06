@@ -13,10 +13,6 @@ public class AgentMovementController : MonoBehaviour
     private Vector2 movementSpeedRange;
 
     /// <summary>
-    /// Riferimento all'agent controller
-    /// </summary>
-    private AgentController agentCtrl;
-    /// <summary>
     /// Velocità di movimento
     /// </summary>
     private float movementSpeed;
@@ -25,9 +21,8 @@ public class AgentMovementController : MonoBehaviour
     /// Funzione che esegue il Setup
     /// </summary>
     /// <param name="_agentCtrl"></param>
-    public void Setup(AgentController _agentCtrl)
+    public void Setup()
     {
-        agentCtrl = _agentCtrl;
         movementSpeed = Random.Range(movementSpeedRange.x, movementSpeedRange.y);
     }
 

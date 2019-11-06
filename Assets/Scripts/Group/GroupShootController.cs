@@ -118,8 +118,12 @@ public class GroupShootController : MonoBehaviour
         {
             Vector3 shootPoint = groupCtrl.GetGroupCenterPoint();
             shootPoint.y = shootPoint.y + shootHeight;
-            BulletController instantiatedBullet = Instantiate(bulletPrefab, shootPoint, Quaternion.LookRotation(shootVector.normalized));
-            instantiatedBullet.Setup();
+            BulletController newBullet = PoolManager.instance.GetPooledObject(ObjectTypes.Bullet, gameObject).GetComponent<BulletController>();
+            if (newBullet != null)
+            {
+                newBullet.transform.SetPositionAndRotation(shootPoint, Quaternion.LookRotation(shootVector.normalized));
+                newBullet.Setup();
+            }
         }
     }
 

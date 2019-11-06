@@ -16,10 +16,6 @@ public class AgentCollisionController : MonoBehaviour
     private float rayLength;
 
     /// <summary>
-    /// Bool che indentifica se c'è una collision con il ground o no
-    /// </summary>
-    private bool groundCollision;
-    /// <summary>
     /// Riferimento al collider
     /// </summary>
     private new Collider collider;
@@ -28,24 +24,46 @@ public class AgentCollisionController : MonoBehaviour
     /// </summary>
     private Rigidbody rb;
     /// <summary>
-    /// Riferimento all'agent controller
+    /// Bool che indentifica se c'è una collision con il ground o no
     /// </summary>
-    private AgentController agentCtrl;
+    private bool groundCollision;
+    /// <summary>
+    /// Bool che indentifica se lo script è setuppato
+    /// </summary>
+    private bool isSetupped = false;
+
+    #region Setup
+    /// <summary>
+    /// Funzione che Inizializza lo script e prende le referenza
+    /// </summary>
+    public void Init()
+    {
+        collider = GetComponent<Collider>();
+        rb = GetComponent<Rigidbody>();
+    }
 
     /// <summary>
     /// Funzione che esegue il Setup
     /// </summary>
     /// <param name="_agentCtrl"></param>
-    public void Setup(AgentController _agentCtrl)
+    public void Setup()
     {
-        agentCtrl = _agentCtrl;
-
-        collider = GetComponent<Collider>();
-        rb = GetComponent<Rigidbody>();
+        isSetupped = true;
     }
+
+    /// <summary>
+    /// Funzione che esegue l'UnSetup dello script
+    /// </summary>
+    public void UnSetup()
+    {
+        isSetupped = false;
+    }
+    #endregion
 
     private void Update()
     {
+        if (!isSetupped)
+            return;
         groundCollision = Physics.Raycast(transform.position, -transform.up, rayLength, groundLayer);
         Debug.DrawRay(transform.position, -transform.up * rayLength, Color.red);
     }

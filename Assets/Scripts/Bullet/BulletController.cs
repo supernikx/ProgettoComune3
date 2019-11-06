@@ -5,8 +5,59 @@ using UnityEngine;
 /// <summary>
 /// Classe che gestisce il bullet
 /// </summary>
-public class BulletController : MonoBehaviour
+public class BulletController : MonoBehaviour, IPoolObject
 {
+    #region Pool Interface
+    /// <summary>
+    /// Evento che toglie dalla Pool il bullet
+    /// </summary>
+    public event PoolManagerEvets.Events OnObjectSpawn;
+    /// <summary>
+    /// Evento che rimette in Pool il bullet
+    /// </summary>
+    public event PoolManagerEvets.Events OnObjectDestroy;
+
+    /// <summary>
+    /// Variabile che identifica l'owner del bullet
+    /// </summary>
+    private GameObject _ownerObject;
+    public GameObject ownerObject
+    {
+        get
+        {
+            return _ownerObject;
+        }
+        set
+        {
+            _ownerObject = value;
+        }
+    }
+
+    /// <summary>
+    /// Variabile che identifica lo stato della Pool del bullet
+    /// </summary>
+    private State _CurrentState;
+    public State CurrentState
+    {
+        get
+        {
+            return _CurrentState;
+        }
+        set
+        {
+            _CurrentState = value;
+        }
+    }
+
+    /// <summary>
+    /// Funzione chiamata allo spawn in Pool dell'oggetto
+    /// </summary>
+    public void PoolInit()
+    {
+        return;
+    }
+    #endregion
+
     [Header("Bullet Settings")]
     //Velocità del proiettile
     [SerializeField]
@@ -31,6 +82,7 @@ public class BulletController : MonoBehaviour
     {
         spawnPosition = transform.position;
         isSetupped = true;
+        OnObjectSpawn?.Invoke(this);
     }
 
     private void FixedUpdate()
@@ -41,7 +93,7 @@ public class BulletController : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, transform.position + transform.forward, bulletSpeed);
 
         if (Vector3.Distance(transform.position, spawnPosition) > 100)
-            Destroy(gameObject);
+            BulletDestroy();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -50,10 +102,19 @@ public class BulletController : MonoBehaviour
         if (bossLifeCtrl != null)
         {
             bossLifeCtrl.TakeDamage(bulletDamage);
-            Destroy(gameObject);
+            BulletDestroy();
         }
 
         if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
-            Destroy(gameObject);
+            BulletDestroy();
+    }
+
+    /// <summary>
+    /// Funzione che rimanda in Pool il Bullet
+    /// </summary>
+    private void BulletDestroy()
+    {
+        isSetupped = false;
+        OnObjectDestroy?.Invoke(this);
     }
 }
