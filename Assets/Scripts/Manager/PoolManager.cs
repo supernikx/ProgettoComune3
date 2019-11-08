@@ -34,7 +34,7 @@ public class PoolManager : MonoBehaviour
         instance = this;
     }
 
-    private void Start()
+    public void Setup()
     {
         poolDictionary = new Dictionary<ObjectTypes, List<IPoolObject>>();
         foreach (PoolObjects obj in poolObjects)
@@ -42,6 +42,7 @@ public class PoolManager : MonoBehaviour
             List<IPoolObject> objectsToAdd = new List<IPoolObject>();
             Transform spawnParent = new GameObject(obj.objectType.ToString()).transform;
             spawnParent.parent = transform;
+
             for (int i = 0; i < obj.ammount; i++)
             {
                 GameObject instantiateObject = Instantiate(obj.prefab, spawnParent);

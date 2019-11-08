@@ -16,6 +16,10 @@ public class AgentCollisionController : MonoBehaviour
     private float rayLength;
 
     /// <summary>
+    /// Riferimento all'agent controller
+    /// </summary>
+    private AgentController agentCtrl;
+    /// <summary>
     /// Riferimento al collider
     /// </summary>
     private new Collider collider;
@@ -36,8 +40,9 @@ public class AgentCollisionController : MonoBehaviour
     /// <summary>
     /// Funzione che Inizializza lo script e prende le referenza
     /// </summary>
-    public void Init()
+    public void Init(AgentController _agentCtrl)
     {
+        agentCtrl = _agentCtrl;
         collider = GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
     }
@@ -62,8 +67,9 @@ public class AgentCollisionController : MonoBehaviour
 
     private void Update()
     {
-        if (!isSetupped)
+        if (!isSetupped || !agentCtrl.GetGroupController().IsSetuppedAndEnabled())
             return;
+
         groundCollision = Physics.Raycast(transform.position, -transform.up, rayLength, groundLayer);
         Debug.DrawRay(transform.position, -transform.up * rayLength, Color.red);
     }

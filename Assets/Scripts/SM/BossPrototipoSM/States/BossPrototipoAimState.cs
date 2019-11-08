@@ -35,7 +35,7 @@ public class BossPrototipoAimState : BossPrototipoStateBase
 
     public override void Enter()
     {
-        groupCtrl = context.GetGameManager().GetGroupController();
+        groupCtrl = context.GetLevelManager().GetGroupController();
         bossCtrl = context.GetBossController();
         lifeCtrl = bossCtrl.GetBossLifeController();
 

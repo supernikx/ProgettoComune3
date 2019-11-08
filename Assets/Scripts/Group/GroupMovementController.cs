@@ -16,10 +16,6 @@ public class GroupMovementController : MonoBehaviour
     /// </summary>
     private Vector3 movementVector;
     /// <summary>
-    /// bool che indentifica se la classe è setuppata
-    /// </summary>
-    private bool isSetupped = false;
-    /// <summary>
     /// bool che identifica se il gruppo può muoversi
     /// </summary>
     private bool canMove = false;
@@ -31,12 +27,12 @@ public class GroupMovementController : MonoBehaviour
     public void Setup(GroupController _groupCtrl)
     {
         groupCtrl = _groupCtrl;
-        canMove = isSetupped = true;
+        canMove = true;
     }
 
     private void Update()
     {
-        if (!isSetupped || !canMove)
+        if (!groupCtrl.IsSetuppedAndEnabled() || !canMove)
             return;
 
         ReadInput();

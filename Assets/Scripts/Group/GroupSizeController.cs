@@ -12,10 +12,6 @@ public class GroupSizeController : MonoBehaviour
     /// </summary>
     private GroupController groupCtrl;
     /// <summary>
-    /// Bool che indentifica se la classe è setuppata
-    /// </summary>
-    private bool isSetupped = false;
-    /// <summary>
     /// Bool che identifica se il gruppo si deve raggruppare
     /// </summary>
     private bool regroup;
@@ -35,21 +31,14 @@ public class GroupSizeController : MonoBehaviour
     public void Setup(GroupController _groupCtrl)
     {
         groupCtrl = _groupCtrl;
-        isSetupped = true;
     }
 
     private void Update()
     {
-        if (!isSetupped)
+        if (!groupCtrl.IsSetuppedAndEnabled())
             return;
 
         ReadInput();
-    }
-
-    private void FixedUpdate()
-    {
-        if (!isSetupped)
-            return;
 
         if (regroup || expand)
         {

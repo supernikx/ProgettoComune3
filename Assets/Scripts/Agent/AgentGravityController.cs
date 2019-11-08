@@ -61,7 +61,7 @@ public class AgentGravityController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!isSetupped)
+        if (!isSetupped || !agentCtrl.GetGroupController().IsSetuppedAndEnabled())
             return;
 
         if (rb.velocity.y < 0)

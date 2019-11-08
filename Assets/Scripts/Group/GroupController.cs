@@ -33,7 +33,9 @@ public class GroupController : MonoBehaviour
     [SerializeField]
     private Transform groupCenterObject;
 
-    //Lista di agent che formano il guppo
+    /// <summary>
+    /// Lista di agent che formano il guppo
+    /// </summary>
     private List<AgentController> agents;
     /// <summary>
     /// Riferimento al group movement controller
@@ -47,6 +49,14 @@ public class GroupController : MonoBehaviour
     /// Riferimento al shoot controller
     /// </summary>
     private GroupShootController shootCtrl;
+    /// <summary>
+    /// Bool che identifica se lo script è setuppato
+    /// </summary>
+    private bool isSetupped = false;
+    /// <summary>
+    /// Bool che identifica se lo script è attivo
+    /// </summary>
+    private bool isEnabled = false;
 
     #region Setup
     /// <summary>
@@ -62,6 +72,9 @@ public class GroupController : MonoBehaviour
         groupMovementCtrl.Setup(this);
         groupSizeCtrl.Setup(this);
         shootCtrl.Setup(this);
+
+        isSetupped = true;
+        isEnabled = false;
     }
 
     /// <summary>
@@ -78,6 +91,9 @@ public class GroupController : MonoBehaviour
 
     private void Update()
     {
+        if (!IsSetuppedAndEnabled())
+            return;
+
         groupCenterObject.position = CalculateGroupCenterPoint();
     }
 
@@ -127,7 +143,53 @@ public class GroupController : MonoBehaviour
     {
         return groupCenterObject.position;
     }
+
+    /// <summary>
+    /// Funzione che ritorna se lo script è attivo
+    /// </summary>
+    /// <returns></returns>
+    public bool IsEnabled()
+    {
+        return isEnabled;
+    }
+
+    /// <summary>
+    /// Funzione che ritorna se lo script è setuppato
+    /// </summary>
+    /// <returns></returns>
+    public bool IsSetupped()
+    {
+        return isSetupped;
+    }
+
+    /// <summary>
+    /// Funzione che ritorna se lo script è setuppato e attivo
+    /// </summary>
+    /// <returns></returns>
+    public bool IsSetuppedAndEnabled()
+    {
+        return isSetupped && isEnabled;
+    }
     #endregion
+
+    /// <summary>
+    /// Funzione che sposta il gruppo nella posizione passata come parametro
+    /// </summary>
+    /// <param name="position"></param>
+    public void Move(Vector3 position)
+    {
+        transform.position = position;
+
+        Vector3 groupCenterPoint = GetGroupCenterPoint();
+        Vector2 randomCirclePoint = Vector2.zero;
+        Vector3 randomPosition = Vector3.zero;
+        foreach (AgentController agent in agents)
+        {
+            randomCirclePoint = UnityEngine.Random.insideUnitCircle * spawnRange;
+            randomPosition = new Vector3(randomCirclePoint.x + groupCenterPoint.x, groupCenterPoint.y, randomCirclePoint.y + groupCenterPoint.z);
+            agent.transform.position = randomPosition;
+        }
+    }
 
     /// <summary>
     /// Funzione che si occupa di rimuovere un agent
@@ -198,6 +260,11 @@ public class GroupController : MonoBehaviour
             return true;
 
         return false;
+    }
+
+    public void Enable(bool _enableGrup)
+    {
+        isEnabled = _enableGrup;
     }
     #endregion
 

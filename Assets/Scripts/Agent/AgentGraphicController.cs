@@ -8,6 +8,10 @@ using UnityEngine;
 public class AgentGraphicController : MonoBehaviour
 {
     /// <summary>
+    /// Riferimento all'agent controller
+    /// </summary>
+    private AgentController agentCtrl;
+    /// <summary>
     /// Riferimento all'animator
     /// </summary>
     private Animator anim;
@@ -28,8 +32,9 @@ public class AgentGraphicController : MonoBehaviour
     /// <summary>
     /// Funzione che inizializza lo script e prende le referenza
     /// </summary>
-    public void Init()
+    public void Init(AgentController _agentCtrl)
     {
+        agentCtrl = _agentCtrl;
         anim = GetComponent<Animator>();
     }
 
@@ -53,7 +58,7 @@ public class AgentGraphicController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!isSetupped)
+        if (!isSetupped || !agentCtrl.GetGroupController().IsSetuppedAndEnabled())
             return;
 
         CalculateMovementSpeed();

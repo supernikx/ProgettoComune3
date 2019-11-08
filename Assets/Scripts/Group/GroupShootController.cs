@@ -27,10 +27,6 @@ public class GroupShootController : MonoBehaviour
     /// </summary>
     private GroupController groupCtrl;
     /// <summary>
-    /// bool che indentifica se la classe è setuppata
-    /// </summary>
-    private bool isSetupped = false;
-    /// <summary>
     /// bool che identifica se è stato premuto il tasto di sparo
     /// </summary>
     private bool shoot = false;
@@ -59,12 +55,12 @@ public class GroupShootController : MonoBehaviour
     {
         aimFeedback = FindObjectOfType<AimArrowFeedback>();
         groupCtrl = _groupCtrl;
-        canShoot = isSetupped = true;
+        canShoot = true;
     }
 
     private void Update()
     {
-        if (!isSetupped || !canShoot)
+        if (!groupCtrl.IsSetuppedAndEnabled() || !canShoot)
             return;
 
         ReadInput();

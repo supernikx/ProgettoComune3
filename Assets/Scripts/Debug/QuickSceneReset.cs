@@ -12,18 +12,6 @@ public class QuickSceneReset : MonoBehaviour
     [SerializeField]
     private KeyCode quitKey;
 
-    private void Awake()
-    {
-        if (i == null)
-        {
-            i = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-            Destroy(gameObject);
-
-    }
-
     void Update()
     {
         if (Input.GetKeyDown(quitKey))

@@ -8,9 +8,9 @@ using UnityEngine;
 public class BossPrototipoController : MonoBehaviour
 {
     /// <summary>
-    /// Riferimento al game manager
+    /// Riferimento al Level Manager
     /// </summary>
-    private GameManager gm;
+    private LevelManager lvlMng;
     /// <summary>
     /// Riferimento alla StateMachine
     /// </summary>
@@ -31,16 +31,16 @@ public class BossPrototipoController : MonoBehaviour
     /// <summary>
     /// Funzione di Setup
     /// </summary>
-    /// <param name="_gm"></param>
-    public void Setup(GameManager _gm)
+    /// <param name="_lvlMng"></param>
+    public void Setup(LevelManager _lvlMng)
     {
-        gm = _gm;
+        lvlMng = _lvlMng;
         sm = GetComponent<BossPrototipoSMController>();
         collisionCtrl = GetComponent<BossPrototipoCollisionController>();
         lifeCtrl = GetComponent<BossLifeController>();
         cubeExplosion = GetComponent<CubeExplosion>();
 
-        BossPrototipoSMController.Context context = new BossPrototipoSMController.Context(this, sm, _gm);
+        BossPrototipoSMController.Context context = new BossPrototipoSMController.Context(this, sm, lvlMng);
         sm.Setup(context);
         lifeCtrl.Setup();
     }

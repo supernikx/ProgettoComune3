@@ -92,8 +92,8 @@ public class AgentController : MonoBehaviour, IPoolObject
         agentDistanceCtrl = GetComponent<AgentDistanceController>();
         graphicCtrl = GetComponentInChildren<AgentGraphicController>();
 
-        agentCollisionCtrl.Init();
-        graphicCtrl.Init();
+        graphicCtrl.Init(this);
+        agentCollisionCtrl.Init(this);
         agentJumpCtrl.Init(this);
         agentGravityCtrl.Init(this);
     }
@@ -134,6 +134,15 @@ public class AgentController : MonoBehaviour, IPoolObject
 
     #region API
     #region Getter
+    /// <summary>
+    /// Funzione che ritorna il group controller
+    /// </summary>
+    /// <returns></returns>
+    public GroupController GetGroupController()
+    {
+        return groupCtrl;
+    }
+
     /// <summary>
     /// Funzioe che ritorna il movement controller dell'agent
     /// </summary>

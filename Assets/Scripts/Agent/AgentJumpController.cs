@@ -82,7 +82,7 @@ public class AgentJumpController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!isSetupped)
+        if (!isSetupped || !agentCtrl.GetGroupController().IsSetuppedAndEnabled())
             return;
 
         if (agentCollisionCtrl.IsGroundCollision())

@@ -8,69 +8,89 @@ using UnityEngine;
 /// </summary>
 public class GameManager : MonoBehaviour
 {
-    [Header("Debug")]
-    [SerializeField]
-    GameObject gameOverText;
+    #region Singleton
+    public static GameManager instance;
 
     /// <summary>
-    /// Riferimento al group controller
+    /// Funzione che imposta lo script come Singleton
     /// </summary>
-    private GroupController groupCtrl;
+    private void Singleton()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+            Destroy(gameObject);
+    }
+    #endregion
+
     /// <summary>
-    /// Riferimento al BossPrototipo
+    /// Riferimento al Controller della GameSM
     /// </summary>
-    private BossPrototipoController bossPrototipo;
+    private GameSMController smCtrl;
+    /// <summary>
+    /// Riferimento all'UI Manager
+    /// </summary>
+    private UI_Manager uiMng;
+    /// <summary>
+    /// Riferimento al LevelManager
+    /// </summary>
+    private LevelManager lvlMng;
+
+    private void Awake()
+    {
+        Singleton();
+    }
 
     void Start()
     {
-        groupCtrl = FindObjectOfType<GroupController>();
-        //Orribile ma giusto per test
-        if (Resources.FindObjectsOfTypeAll<BossPrototipoController>().Length > 0)
-            bossPrototipo = Resources.FindObjectsOfTypeAll<BossPrototipoController>()[0];
+        smCtrl = GetComponent<GameSMController>();
 
-        groupCtrl.Setup();
-        groupCtrl.OnGroupDead += HandleOnGroupDead;
+        GameSMController.Context context = new GameSMController.Context(this);
+        smCtrl.Setup(context);
     }
-
-    //Debug
-    bool notagain = false;
-    private void Update()
-    {
-        if (!notagain && bossPrototipo != null && Input.GetKeyDown(KeyCode.K))
-        {
-            bossPrototipo.gameObject.SetActive(true);
-            notagain = true;
-            bossPrototipo.Setup(this);
-        }
-    }
-
-    #region Handlers
-    /// <summary>
-    /// Funzione che gestisce l'evento di morte del gruppo
-    /// </summary>
-    private void HandleOnGroupDead()
-    {
-        gameOverText.SetActive(true);
-        bossPrototipo.StopBoss();
-        Destroy(groupCtrl.gameObject);
-    }
-    #endregion
 
     #region API
-    #region Getter
+    #region Setter
     /// <summary>
-    /// Funzione che ritorna il GroupController
+    /// Funzione che imposta l'UIManager
     /// </summary>
-    /// <returns></returns>
-    public GroupController GetGroupController()
+    /// <param name="_uiMng"></param>
+    public void SetUIManager(UI_Manager _uiMng)
     {
-        return groupCtrl;
+        uiMng = _uiMng;
     }
-    #endregion
+
+    /// <summary>
+    /// Funzione che imposta il level manager
+    /// </summary>
+    /// <param name="_lvlMng"></param>
+    public void SetLevelManager(LevelManager _lvlMng)
+    {
+        lvlMng = _lvlMng;
+    }
     #endregion
 
-    private void OnDisable()
+    #region Getter
+    /// <summary>
+    /// Funzione che ritorna l'ui Manager
+    /// </summary>
+    /// <returns></returns>
+    public UI_Manager GetUIManager()
     {
-        groupCtrl.OnGroupDead -= HandleOnGroupDead;
+        return uiMng;
     }
+
+    /// <summary>
+    /// Funzione che ritorna il LevelManager
+    /// </summary>
+    /// <returns></returns>
+    public LevelManager GetLevelManager()
+    {
+        return lvlMng;
+    }
+    #endregion
+    #endregion
 }

@@ -8,7 +8,7 @@ using UnityEngine;
 public class BossPrototipoSMController : StateMachineBase
 {
     /// <summary>
-    /// Classe che definisce il contesto della GameSM
+    /// Classe che definisce il contesto della BossPrototipoSM
     /// </summary>
     public class Context : IContext
     {
@@ -23,7 +23,7 @@ public class BossPrototipoSMController : StateMachineBase
         /// <summary>
         /// Riferimento al GameManager
         /// </summary>
-        GameManager gameMng;
+        LevelManager lvlMng;
 
         /// <summary>
         /// Costruttore
@@ -31,11 +31,11 @@ public class BossPrototipoSMController : StateMachineBase
         /// <param name="_bossCtrl"></param>
         /// <param name="_smController"></param>
         /// <param name="_gameMng"></param>
-        public Context(BossPrototipoController _bossCtrl, BossPrototipoSMController _smController, GameManager _gameMng)
+        public Context(BossPrototipoController _bossCtrl, BossPrototipoSMController _smController, LevelManager _lvlMng)
         {
             bossCtrl = _bossCtrl;
             smController = _smController;
-            gameMng = _gameMng;
+            lvlMng = _lvlMng;
         }
 
         /// <summary>
@@ -57,17 +57,24 @@ public class BossPrototipoSMController : StateMachineBase
         }
 
         /// <summary>
-        /// Funzione che ritorna il riferimento al GameManager
+        /// Funzione che ritorna il riferimento al LevelManager
         /// </summary>
         /// <returns></returns>
-        public GameManager GetGameManager()
+        public LevelManager GetLevelManager()
         {
-            return gameMng;
+            return lvlMng;
         }
     }
 
+    /// <summary>
+    /// Contesto corrente
+    /// </summary>
     private Context currentContext;
 
+    /// <summary>
+    /// Funzione di Setup
+    /// </summary>
+    /// <param name="_context"></param>
     public override void Setup(IContext _context)
     {
         base.Setup(_context);
