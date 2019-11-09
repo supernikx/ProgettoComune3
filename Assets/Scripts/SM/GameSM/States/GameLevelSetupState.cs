@@ -89,7 +89,7 @@ public class GameLevelSetupState : GameSMStateBase
         LevelManager lvlMng = FindObjectOfType<LevelManager>();
 
         gm.SetLevelManager(lvlMng);
-        lvlMng.Setup(gm);
+        lvlMng.Setup();
     }
 
     public override void Exit()

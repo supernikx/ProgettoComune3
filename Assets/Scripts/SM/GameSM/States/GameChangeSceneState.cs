@@ -87,7 +87,7 @@ public class GameChangeSceneState : GameSMStateBase
         lvlMng = newLvlMng;
 
         gm.SetLevelManager(newLvlMng);
-        lvlMng.Setup(gm);
+        lvlMng.Setup();
     }
 
     public override void Exit()

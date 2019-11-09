@@ -28,8 +28,7 @@ public class LevelManager : MonoBehaviour
     /// <summary>
     /// Funzione di Setup dello script
     /// </summary>
-    /// <param name="_gm"></param>
-    public void Setup(GameManager _gm)
+    public void Setup()
     {
         lvlSceneCtrl = GetComponent<LevelSceneController>();
         lvlCamCtrl = GetComponent<LevelCameraController>();

@@ -18,4 +18,12 @@ public class UIMenu_MainMenu : UIControllerBase
     {
         StartButtonPressed?.Invoke();
     }
+
+    /// <summary>
+    /// Funzione che gestisce il bottone di Quit del pannello
+    /// </summary>
+    public void QuitButton()
+    {
+        Application.Quit();
+    }
 }
