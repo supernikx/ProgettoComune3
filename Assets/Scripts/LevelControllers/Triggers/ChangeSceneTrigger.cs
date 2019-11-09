@@ -11,7 +11,7 @@ public class ChangeSceneTrigger : MonoBehaviour
     /// </summary>
     public static Action<string> OnExitTriggered;
 
-    [Header("Exit Settings")]
+    [Header("Exit Trigger Settings")]
     //Nome della scena in cui porta questa uscita
     [SerializeField]
     private string sceneName;

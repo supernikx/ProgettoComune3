@@ -25,6 +25,10 @@ public class LevelManager : MonoBehaviour
     /// </summary>
     private LevelPauseController lvlPauseCtrl;
     /// <summary>
+    /// Riferimento al level boss controller
+    /// </summary>
+    private LevelBossController lvlBossCtrl;
+    /// <summary>
     /// Riferimento al GroupController
     /// </summary>
     private GroupController groupCtrl;
@@ -37,10 +41,12 @@ public class LevelManager : MonoBehaviour
         lvlSceneCtrl = GetComponent<LevelSceneController>();
         lvlCamCtrl = GetComponent<LevelCameraController>();
         lvlPauseCtrl = GetComponent<LevelPauseController>();
+        lvlBossCtrl = GetComponent<LevelBossController>();
         groupCtrl = FindObjectOfType<GroupController>();
 
         lvlSceneCtrl.Setup();
         lvlCamCtrl.Setup(this);
+        lvlBossCtrl.Setup(this);
 
         groupCtrl.Enable(true);
         groupCtrl.Move(groupStartPosition.position);

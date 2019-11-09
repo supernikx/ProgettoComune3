@@ -8,6 +8,9 @@ using TMPro;
 public class BossLifeController : MonoBehaviour
 {
     #region Action
+    /// <summary>
+    /// Evento che notifica la morte del Boss
+    /// </summary>
     public Action OnBossDead;
     #endregion
 
@@ -15,10 +18,6 @@ public class BossLifeController : MonoBehaviour
     //Vita iniziale del Boss
     [SerializeField]
     private int bossStartLife;
-
-    [Header("Debug")]
-    [SerializeField]
-    private TextMeshProUGUI lifeText;
 
     /// <summary>
     /// Vita attuale del boss
@@ -33,7 +32,7 @@ public class BossLifeController : MonoBehaviour
         set
         {
             _currentLife = value;
-            lifeText.text = "BossLife: " + _currentLife.ToString();
+            //lifeText.text = "BossLife: " + _currentLife.ToString();
         }
     }
 

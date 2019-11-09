@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Classe che gestisce tutte le referenze del boss
 /// </summary>
-public class BossPrototipoController : MonoBehaviour
+public class BossPrototipoController : BossControllerBase
 {
     /// <summary>
     /// Riferimento al Level Manager
@@ -32,34 +32,40 @@ public class BossPrototipoController : MonoBehaviour
     /// Funzione di Setup
     /// </summary>
     /// <param name="_lvlMng"></param>
-    public void Setup(LevelManager _lvlMng)
+    public override void Setup(LevelManager _lvlMng)
     {
         lvlMng = _lvlMng;
         sm = GetComponent<BossPrototipoSMController>();
         collisionCtrl = GetComponent<BossPrototipoCollisionController>();
         lifeCtrl = GetComponent<BossLifeController>();
         cubeExplosion = GetComponent<CubeExplosion>();
+    }
 
+    #region API
+    /// <summary>
+    /// Funzione che attiva il boss
+    /// </summary>
+    public override void StartBoss()
+    {
         BossPrototipoSMController.Context context = new BossPrototipoSMController.Context(this, sm, lvlMng);
         sm.Setup(context);
         lifeCtrl.Setup();
     }
 
-    #region API
+    /// <summary>
+    /// Funzione che ferma il Boss
+    /// </summary>
+    public override void StopBoss()
+    {
+        sm.GoToState("Empty");
+    }
+
     /// <summary>
     /// Funzione che uccide il Boss
     /// </summary>
     public void KillBoss()
     {
         cubeExplosion.Explode();
-    }
-
-    /// <summary>
-    /// Funzione che ferma il Boss
-    /// </summary>
-    public void StopBoss()
-    {
-        sm.GoToState("Empty");
     }
 
     #region Getter

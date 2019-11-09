@@ -35,6 +35,10 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private UI_Manager uiMng;
     /// <summary>
+    /// Riferimento al scene reference manager
+    /// </summary>
+    private SceneReferenceManager sceneRefMng;
+    /// <summary>
     /// Riferimento al LevelManager
     /// </summary>
     private LevelManager lvlMng;
@@ -64,6 +68,15 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Funzione che ritorna il Scene Referenze Manager
+    /// </summary>
+    /// <param name="_sceneRefMng"></param>
+    public void SetSceneReferenceManager(SceneReferenceManager _sceneRefMng)
+    {
+        sceneRefMng = _sceneRefMng;
+    }
+
+    /// <summary>
     /// Funzione che imposta il level manager
     /// </summary>
     /// <param name="_lvlMng"></param>
@@ -81,6 +94,15 @@ public class GameManager : MonoBehaviour
     public UI_Manager GetUIManager()
     {
         return uiMng;
+    }
+
+    /// <summary>
+    /// Funzione che ritorna il scene reference manager
+    /// </summary>
+    /// <returns></returns>
+    public SceneReferenceManager GetSceneReferenceManager()
+    {
+        return sceneRefMng;
     }
 
     /// <summary>

@@ -16,8 +16,11 @@ public class GameSetupState : GameSMStateBase
     {
         gm = context.GetGameManager();
         UI_Manager uiMng = FindObjectOfType<UI_Manager>();
+        SceneReferenceManager sceneRef = FindObjectOfType<SceneReferenceManager>();
 
         gm.SetUIManager(uiMng);
+        gm.SetSceneReferenceManager(sceneRef);
+
         uiMng.Setup(gm);
 
         Complete();

@@ -9,10 +9,17 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class GameLevelUnsetupState : GameSMStateBase
 {
+    /// <summary>
+    /// Nome della scena del MainMenu
+    /// </summary>
+    private string mainMenuSceneName;
+
     public override void Enter()
     {
+        mainMenuSceneName = context.GetGameManager().GetSceneReferenceManager().GetMainMenuSceneName();
+
         SceneManager.sceneLoaded += HandleOnSceneLoaded;
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene(mainMenuSceneName);
     }
 
     /// <summary>
@@ -22,8 +29,11 @@ public class GameLevelUnsetupState : GameSMStateBase
     /// <param name="_mode"></param>
     private void HandleOnSceneLoaded(Scene _scene, LoadSceneMode _mode)
     {
-        SceneManager.SetActiveScene(_scene);
-        Complete();
+        if (mainMenuSceneName == _scene.name)
+        {
+            SceneManager.SetActiveScene(_scene);
+            Complete();
+        }
     }
 
     public override void Exit()

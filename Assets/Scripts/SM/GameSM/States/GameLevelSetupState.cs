@@ -9,14 +9,6 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class GameLevelSetupState : GameSMStateBase
 {
-    [Header("Scene Settings")]
-    //Nome della scena di Swarm da caricare
-    [SerializeField]
-    private string swarmSceneName;
-    //Nome della scena di Hub da caricare
-    [SerializeField]
-    private string hubSceneName;
-
     /// <summary>
     /// Riferimento al GameManager
     /// </summary>
@@ -25,11 +17,22 @@ public class GameLevelSetupState : GameSMStateBase
     /// Riferimento all'UI Manager
     /// </summary>
     private UI_Manager uiMng;
+    /// <summary>
+    /// Nome della scena di Swarm da caricare
+    /// </summary>
+    private string swarmSceneName;
+    /// <summary>
+    /// Nome della scena di Hub da caricare
+    /// </summary>
+    private string hubSceneName;
 
     public override void Enter()
     {
         gm = context.GetGameManager();
         uiMng = gm.GetUIManager();
+        swarmSceneName = gm.GetSceneReferenceManager().GetSwarmSceneName();
+        hubSceneName = gm.GetSceneReferenceManager().GetHubSceneName();
+
         uiMng.SetCurrentMenu<UIMenu_Loading>();
 
         SceneManager.sceneLoaded += HandleSwarmSceneLoaded;
