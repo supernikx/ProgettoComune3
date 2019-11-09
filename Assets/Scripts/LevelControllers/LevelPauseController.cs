@@ -40,15 +40,26 @@ public class LevelPauseController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            isPaused = !isPaused;
-            if (isPaused)
-                OnGamePause?.Invoke();
-            else
-                OnGameUnpause?.Invoke();
+            SetPause(!isPaused);
         }
     }
 
     #region API
+    #region Setter
+    /// <summary>
+    /// Funzione che imposta la pausa
+    /// </summary>
+    /// <param name="_pause"></param>
+    public void SetPause(bool _pause)
+    {
+        isPaused = _pause;
+        if (isPaused)
+            OnGamePause?.Invoke();
+        else
+            OnGameUnpause?.Invoke();
+    }
+    #endregion
+
     #region Getter
     /// <summary>
     /// Funzione che ritorna se il gioco in pausa
