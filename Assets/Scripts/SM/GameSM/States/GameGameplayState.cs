@@ -38,7 +38,6 @@ public class GameGameplayState : GameSMStateBase
     /// </summary>
     private void HandleOnChangeLevelScene()
     {
-        lvlMng.GetGroupController().Enable(false);
         Complete(1);
     }
 

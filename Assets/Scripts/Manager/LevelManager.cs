@@ -17,6 +17,10 @@ public class LevelManager : MonoBehaviour
     /// </summary>
     private LevelSceneController lvlSceneCtrl;
     /// <summary>
+    /// Riferimento al level camera controller
+    /// </summary>
+    private LevelCameraController lvlCamCtrl;
+    /// <summary>
     /// Riferimento al GroupController
     /// </summary>
     private GroupController groupCtrl;
@@ -28,9 +32,12 @@ public class LevelManager : MonoBehaviour
     public void Setup(GameManager _gm)
     {
         lvlSceneCtrl = GetComponent<LevelSceneController>();
+        lvlCamCtrl = GetComponent<LevelCameraController>();
         groupCtrl = FindObjectOfType<GroupController>();
 
         lvlSceneCtrl.Setup();
+        lvlCamCtrl.Setup(this);
+
         groupCtrl.Enable(true);
         groupCtrl.Move(groupStartPosition.position);
     }

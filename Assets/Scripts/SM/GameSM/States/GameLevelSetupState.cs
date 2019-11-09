@@ -10,9 +10,10 @@ using UnityEngine.SceneManagement;
 public class GameLevelSetupState : GameSMStateBase
 {
     [Header("Scene Settings")]
-    //Nome della scena di Hub da caricare
+    //Nome della scena di Swarm da caricare
     [SerializeField]
     private string swarmSceneName;
+    //Nome della scena di Hub da caricare
     [SerializeField]
     private string hubSceneName;
 
@@ -76,7 +77,8 @@ public class GameLevelSetupState : GameSMStateBase
     private void SwarmSceneSetup()
     {
         PoolManager.instance.Setup();
-        FindObjectOfType<GroupController>().Setup();
+        GroupController groupCtrl = FindObjectOfType<GroupController>();
+        groupCtrl.Setup();
     }
 
     /// <summary>

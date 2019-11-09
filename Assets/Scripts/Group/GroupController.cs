@@ -145,6 +145,15 @@ public class GroupController : MonoBehaviour
     }
 
     /// <summary>
+    /// Funzione che ritorna la transform centrale del gruppo
+    /// </summary>
+    /// <returns></returns>
+    public Transform GetGroupCenterTransform()
+    {
+        return groupCenterObject;
+    }
+
+    /// <summary>
     /// Funzione che ritorna se lo script è attivo
     /// </summary>
     /// <returns></returns>
@@ -180,13 +189,13 @@ public class GroupController : MonoBehaviour
     {
         transform.position = position;
 
-        Vector3 groupCenterPoint = GetGroupCenterPoint();
+        Vector3 currentPosition = transform.position;
         Vector2 randomCirclePoint = Vector2.zero;
         Vector3 randomPosition = Vector3.zero;
         foreach (AgentController agent in agents)
         {
             randomCirclePoint = UnityEngine.Random.insideUnitCircle * spawnRange;
-            randomPosition = new Vector3(randomCirclePoint.x + groupCenterPoint.x, groupCenterPoint.y, randomCirclePoint.y + groupCenterPoint.z);
+            randomPosition = new Vector3(randomCirclePoint.x + currentPosition.x, currentPosition.y, randomCirclePoint.y + currentPosition.z);
             agent.transform.position = randomPosition;
         }
     }

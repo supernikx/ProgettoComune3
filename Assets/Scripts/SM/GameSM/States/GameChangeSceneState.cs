@@ -37,6 +37,8 @@ public class GameChangeSceneState : GameSMStateBase
         uiMng.SetCurrentMenu<UIMenu_Loading>();
 
         lvlMng = gm.GetLevelManager();
+        lvlMng.GetGroupController().Enable(false);
+
         sceneToUnload = lvlMng.GetLevelSceneController().GetCurrentScene();
         sceneToLoadName = lvlMng.GetLevelSceneController().GetNextSceneName();
 
@@ -53,12 +55,23 @@ public class GameChangeSceneState : GameSMStateBase
     {
         if (_loadedScene.name == sceneToLoadName)
         {
-            GroupController groupCtrl = context.GetGameManager().GetLevelManager().GetGroupController();
             SceneManager.sceneLoaded -= HandleOnNewSceneLoaded;
-
             SceneManager.SetActiveScene(_loadedScene);
-            SceneManager.UnloadSceneAsync(sceneToUnload);
 
+            SceneManager.sceneUnloaded += HandleOnOldSceneUnloaded;
+            SceneManager.UnloadSceneAsync(sceneToUnload);
+        }
+    }
+
+    /// <summary>
+    /// Funzione che gestisce l'evento di scaricamento della vecchia scena
+    /// </summary>
+    /// <param name="_unloadedScene"></param>
+    private void HandleOnOldSceneUnloaded(Scene _unloadedScene)
+    {
+        if (_unloadedScene.name == sceneToUnload.name)
+        {
+            SceneManager.sceneUnloaded -= HandleOnOldSceneUnloaded;
             NewSceneSetup();
 
             Complete();
@@ -71,16 +84,17 @@ public class GameChangeSceneState : GameSMStateBase
     private void NewSceneSetup()
     {
         LevelManager newLvlMng = FindObjectOfType<LevelManager>();
-        GroupController groupCtrl = context.GetGameManager().GetLevelManager().GetGroupController();
-
-
         lvlMng = newLvlMng;
+
         gm.SetLevelManager(newLvlMng);
         lvlMng.Setup(gm);
     }
 
     public override void Exit()
     {
+        lvlMng.GetGroupController().Enable(true);
+
         SceneManager.sceneLoaded -= HandleOnNewSceneLoaded;
+        SceneManager.sceneUnloaded -= HandleOnOldSceneUnloaded;
     }
 }
