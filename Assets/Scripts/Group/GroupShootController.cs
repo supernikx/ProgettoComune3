@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,10 +8,26 @@ using UnityEngine;
 /// </summary>
 public class GroupShootController : MonoBehaviour
 {
+    #region Actions
+    /// <summary>
+    /// Evento che notifica lo start della ricarica e passa come parametro il tempo di ricarica
+    /// </summary>
+    public Action<float> OnReloadingStart;
+    /// <summary>
+    /// Evento che notifica la ricarica in corso e passa come parametro il tempo trascorso
+    /// </summary>
+    public Action<float> OnReloading;
+    /// <summary>
+    /// Evento che noticia la fine della ricarica
+    /// </summary>
+    public Action OnReloadingEnd;
+    #endregion
+
     [Header("Shoot Settings")]
     //Referenza al prefab del proiettile
     [SerializeField]
     private BulletController bulletPrefab;
+    //Offset di altezza di sparo rispetto all posizione del gruppo
     [SerializeField]
     private float shootHeight;
 
@@ -132,11 +149,25 @@ public class GroupShootController : MonoBehaviour
             StartCoroutine(ReloadingCoroutine());
     }
 
+    /// <summary>
+    /// Coroutine che gestisce la ricarica
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator ReloadingCoroutine()
     {
         groupCtrl.GetGroupMovementController().SetCanMove(false);
         canShoot = false;
-        yield return new WaitForSeconds(reloadingTime);
+        OnReloadingStart?.Invoke(reloadingTime);
+
+        WaitForFixedUpdate wffu = new WaitForFixedUpdate();
+        float timer = 0f;
+
+        while (timer < reloadingTime)
+        {
+            timer += Time.deltaTime;
+            OnReloading?.Invoke(timer);
+            yield return wffu;
+        }
 
         for (int i = 0; i < reloadingAgents; i++)
             if (!groupCtrl.IsGroupFull())
@@ -144,5 +175,6 @@ public class GroupShootController : MonoBehaviour
 
         canShoot = true;
         groupCtrl.GetGroupMovementController().SetCanMove(true);
+        OnReloadingEnd?.Invoke();
     }
 }

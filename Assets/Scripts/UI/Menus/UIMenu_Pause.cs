@@ -30,7 +30,7 @@ public class UIMenu_Pause : UIControllerBase
 
         if (_value)
             pauseCtrl = manager.GetGameManager().GetLevelManager().GetLevelPauseController();
-        else
+        else if (pauseCtrl != null)
             pauseCtrl = null;
     }
 
