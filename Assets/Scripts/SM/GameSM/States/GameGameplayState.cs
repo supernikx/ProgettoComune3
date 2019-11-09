@@ -21,6 +21,10 @@ public class GameGameplayState : GameSMStateBase
     /// Riferimento al level scene controller
     /// </summary>
     private LevelSceneController lvlSceneCtrl;
+    /// <summary>
+    /// Riferimento al level pause controller
+    /// </summary>
+    private LevelPauseController lvlPauseCtrl;
 
     public override void Enter()
     {
@@ -28,11 +32,15 @@ public class GameGameplayState : GameSMStateBase
 
         lvlMng = context.GetGameManager().GetLevelManager();
         lvlSceneCtrl = lvlMng.GetLevelSceneController();
+        lvlPauseCtrl = lvlMng.GetLevelPauseController();
 
         lvlSceneCtrl.OnChangeLevelScene += HandleOnChangeLevelScene;
+        lvlPauseCtrl.OnGamePause += HandleOnGamePause;
+
         uiMng.SetCurrentMenu<UIMenu_Gameplay>();
     }
 
+    #region Handles
     /// <summary>
     /// Funzione che gestisce l'evento di cambio scena del livello
     /// </summary>
@@ -41,8 +49,21 @@ public class GameGameplayState : GameSMStateBase
         Complete(1);
     }
 
+    /// <summary>
+    /// Funzione che gestisce l'evento di inizio pausa
+    /// </summary>
+    private void HandleOnGamePause()
+    {
+        Complete(2);
+    }
+    #endregion
+
     public override void Exit()
     {
-        lvlSceneCtrl.OnChangeLevelScene -= HandleOnChangeLevelScene;
+        if (lvlSceneCtrl != null)
+            lvlSceneCtrl.OnChangeLevelScene -= HandleOnChangeLevelScene;
+
+        if (lvlPauseCtrl != null)
+            lvlPauseCtrl.OnGamePause -= HandleOnGamePause;
     }
 }

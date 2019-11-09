@@ -68,6 +68,14 @@ public class GameSMController : StateMachineBase
                     GoToState("MainMenu");
                 else if (_exitCondition == 1)
                     GoToState("GameChangeScene");
+                else if (_exitCondition == 2)
+                    GoToState("Pause");
+                break;
+            case "Pause":
+                if (_exitCondition == 0)
+                    GoToState("Gameplay");
+                else if (_exitCondition == 1)
+                    GoToState("LevelUnsetup");
                 break;
             default:
                 GoToNext();

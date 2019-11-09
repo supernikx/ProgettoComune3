@@ -92,7 +92,8 @@ public class GameChangeSceneState : GameSMStateBase
 
     public override void Exit()
     {
-        lvlMng.GetGroupController().Enable(true);
+        if (lvlMng != null)
+            lvlMng.GetGroupController().Enable(true);
 
         SceneManager.sceneLoaded -= HandleOnNewSceneLoaded;
         SceneManager.sceneUnloaded -= HandleOnOldSceneUnloaded;

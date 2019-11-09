@@ -36,6 +36,7 @@ public class GameMainMenuState : GameSMStateBase
 
     public override void Exit()
     {
-        mainMenuPanel.StartButtonPressed -= HandleStartButtonPressed;
+        if (mainMenuPanel != null)
+            mainMenuPanel.StartButtonPressed -= HandleStartButtonPressed;
     }
 }
