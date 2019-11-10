@@ -8,6 +8,9 @@ using UnityEngine;
 public class GroupController : MonoBehaviour
 {
     #region Actions
+    /// <summary>
+    /// Evento che notifica la morte del gruppo
+    /// </summary>
     public Action OnGroupDead;
     #endregion
 

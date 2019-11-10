@@ -13,6 +13,8 @@ public class UIMenu_Gameplay : UIControllerBase
     //Riferimento all'immagine che deve apparire nel momento della ricarica
     [SerializeField]
     private Image reloadingImage;
+    [SerializeField]
+    private UISubmenu_Boss bossPanel;
 
     /// <summary>
     /// Riferimento al group controller
@@ -33,6 +35,7 @@ public class UIMenu_Gameplay : UIControllerBase
     public override void CustomSetup()
     {
         base.CustomSetup();
+        bossPanel.gameObject.SetActive(false);
         reloadingImage.gameObject.SetActive(false);
     }
 
@@ -52,13 +55,22 @@ public class UIMenu_Gameplay : UIControllerBase
             groupShootCtrl.OnReloadingStart += HandleOnReloadingStart;
             groupShootCtrl.OnReloading += HandleOnReloading;
             groupShootCtrl.OnReloadingEnd += HandleOnReloadingEnd;
+
+            LevelBossController.OnBossFightStart += HandleOnBossFightStart;
+            LevelBossController.OnBossFightEnd += HandleOnBossFightEnd;
         }
-        else if (groupCtrl != null)
+        else
         {
-            groupShootCtrl.OnReloadingStart -= HandleOnReloadingStart;
-            groupShootCtrl.OnReloading -= HandleOnReloading;
-            groupShootCtrl.OnReloadingEnd -= HandleOnReloadingEnd;
-            groupCtrl = null;
+            if (groupCtrl != null)
+            {
+                groupShootCtrl.OnReloadingStart -= HandleOnReloadingStart;
+                groupShootCtrl.OnReloading -= HandleOnReloading;
+                groupShootCtrl.OnReloadingEnd -= HandleOnReloadingEnd;
+                groupCtrl = null;
+            }
+
+            LevelBossController.OnBossFightStart -= HandleOnBossFightStart;
+            LevelBossController.OnBossFightEnd -= HandleOnBossFightEnd;
         }
     }
 
@@ -90,6 +102,25 @@ public class UIMenu_Gameplay : UIControllerBase
     {
         maxReloadingTime = 0;
         reloadingImage.gameObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// Funzione che gestisce l'evento dell'inizio della bossfight
+    /// </summary>
+    /// <param name="obj"></param>
+    private void HandleOnBossFightStart(BossControllerBase _bossCtrl)
+    {
+        bossPanel.Setup(_bossCtrl);
+        bossPanel.gameObject.SetActive(true);
+    }
+
+    /// <summary>
+    /// Funzione che gestisce l'evento di fine della bossfight
+    /// </summary>
+    /// <param name="obj"></param>
+    private void HandleOnBossFightEnd(BossControllerBase _bossCtrl)
+    {
+        bossPanel.gameObject.SetActive(false);
     }
     #endregion
 }

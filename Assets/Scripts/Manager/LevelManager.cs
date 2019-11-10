@@ -80,6 +80,15 @@ public class LevelManager : MonoBehaviour
     {
         return lvlPauseCtrl;
     }
+
+    /// <summary>
+    /// Funzione che ritorna il level boss controller
+    /// </summary>
+    /// <returns></returns>
+    public LevelBossController GetLevelBossController()
+    {
+        return lvlBossCtrl;
+    }
     #endregion
     #endregion
 }

@@ -8,10 +8,6 @@ using UnityEngine;
 public class BossPrototipoController : BossControllerBase
 {
     /// <summary>
-    /// Riferimento al Level Manager
-    /// </summary>
-    private LevelManager lvlMng;
-    /// <summary>
     /// Riferimento alla StateMachine
     /// </summary>
     private BossPrototipoSMController sm;
@@ -19,10 +15,6 @@ public class BossPrototipoController : BossControllerBase
     /// Riferimento al Collision Controller
     /// </summary>
     private BossPrototipoCollisionController collisionCtrl;
-    /// <summary>
-    /// Riferimentoi al Life Controller
-    /// </summary>
-    private BossLifeController lifeCtrl;
     /// <summary>
     /// Riferimento al CubeExplosion
     /// </summary>
@@ -34,10 +26,9 @@ public class BossPrototipoController : BossControllerBase
     /// <param name="_lvlMng"></param>
     public override void Setup(LevelManager _lvlMng)
     {
-        lvlMng = _lvlMng;
+        base.Setup(_lvlMng);
         sm = GetComponent<BossPrototipoSMController>();
         collisionCtrl = GetComponent<BossPrototipoCollisionController>();
-        lifeCtrl = GetComponent<BossLifeController>();
         cubeExplosion = GetComponent<CubeExplosion>();
     }
 
@@ -47,9 +38,11 @@ public class BossPrototipoController : BossControllerBase
     /// </summary>
     public override void StartBoss()
     {
+        base.StartBoss();
         BossPrototipoSMController.Context context = new BossPrototipoSMController.Context(this, sm, lvlMng);
         sm.Setup(context);
-        lifeCtrl.Setup();
+        lifeCtrl.Setup(this);
+        collisionCtrl.Setup(this);
     }
 
     /// <summary>
@@ -58,6 +51,7 @@ public class BossPrototipoController : BossControllerBase
     public override void StopBoss()
     {
         sm.GoToState("Empty");
+        base.StopBoss();
     }
 
     /// <summary>
@@ -66,6 +60,7 @@ public class BossPrototipoController : BossControllerBase
     public void KillBoss()
     {
         cubeExplosion.Explode();
+        OnBossDead?.Invoke(this);
     }
 
     #region Getter
@@ -76,15 +71,6 @@ public class BossPrototipoController : BossControllerBase
     public BossPrototipoCollisionController GetCollisionController()
     {
         return collisionCtrl;
-    }
-
-    /// <summary>
-    /// Funzione che ritorna il LifeController
-    /// </summary>
-    /// <returns></returns>
-    public BossLifeController GetBossLifeController()
-    {
-        return lifeCtrl;
     }
     #endregion
     #endregion
