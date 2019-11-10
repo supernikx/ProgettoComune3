@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// Classe che gestisce lo sparo del gruppo
@@ -16,7 +17,7 @@ public class GroupShootController : MonoBehaviour
     /// <summary>
     /// Evento che notifica la ricarica in corso e passa come parametro il tempo trascorso
     /// </summary>
-    public Action<float> OnReloading;
+    public Action<float> OnReloadingInProgress;
     /// <summary>
     /// Evento che noticia la fine della ricarica
     /// </summary>
@@ -80,50 +81,56 @@ public class GroupShootController : MonoBehaviour
         if (!groupCtrl.IsSetuppedAndEnabled() || !canShoot)
             return;
 
-        ReadInput();
-
-        if (shoot)
-        {
-            shoot = false;
-            ShootAgent();
-        }
-
-        if (reload)
-        {
-            reload = false;
-            ReloadAgent();
-        }
+        aimFeedback.UpdateArrow(groupCtrl.GetGroupCenterPoint(), shootVector);
     }
 
     /// <summary>
-    /// Funzione che si occupa di leggere gl'input
+    /// Funzione chiamata alla mira dal PlayerInput
     /// </summary>
-    private void ReadInput()
+    public void OnLook(InputValue _value)
     {
-        if (Input.GetJoystickNames().Length > 0 && !string.IsNullOrEmpty(Input.GetJoystickNames()[0]))
+        if (!groupCtrl.IsSetuppedAndEnabled() || !canShoot)
+            return;
+
+        if (Gamepad.current == null)
         {
-            Vector2 newAim = new Vector2(Input.GetAxis("RHorizontal"), Input.GetAxis("RVertical"));
+            Vector3 fixedMousePosition = new Vector3(_value.Get<Vector2>().x, _value.Get<Vector2>().y, 0);
+            Vector3 screenCenterPosition = Camera.main.WorldToScreenPoint(groupCtrl.GetGroupCenterPoint());
+            screenCenterPosition.z = 0;
+            Vector3 mouseDirection = (fixedMousePosition - screenCenterPosition).normalized;
+            shootVector = new Vector3(mouseDirection.x, 0, mouseDirection.y);
+        }
+        else
+        {
+            Vector2 newAim = _value.Get<Vector2>();
             if (newAim.x != 0 || newAim.y != 0)
             {
                 shootVector.x = newAim.x;
                 shootVector.z = newAim.y;
             }
         }
-        else
-        {
-            Vector3 screenCenterPosition = Camera.main.WorldToScreenPoint(groupCtrl.GetGroupCenterPoint());
-            screenCenterPosition.z = 0;
-            Vector3 mouseDirection = (Input.mousePosition - screenCenterPosition).normalized;
-            shootVector = new Vector3(mouseDirection.x, 0, mouseDirection.y);
-        }
+    }
 
-        aimFeedback.UpdateArrow(groupCtrl.GetGroupCenterPoint(), shootVector);
+    /// <summary>
+    /// Funzione chiamata allo sparo dal PlayerInput
+    /// </summary>
+    public void OnShoot()
+    {
+        if (!groupCtrl.IsSetuppedAndEnabled() || !canShoot)
+            return;
 
-        if (Input.GetButtonDown("Shoot"))
-            shoot = true;
+        ShootAgent();
+    }
 
-        if (Input.GetButtonDown("Reload"))
-            reload = true;
+    /// <summary>
+    /// Funzione chiamata alla ricarica dal PlayerInput
+    /// </summary>
+    public void OnReloading()
+    {
+        if (!groupCtrl.IsSetuppedAndEnabled() || !canShoot)
+            return;
+
+        ReloadAgent();
     }
 
     /// <summary>
@@ -169,7 +176,7 @@ public class GroupShootController : MonoBehaviour
         while (timer < reloadingTime)
         {
             timer += Time.deltaTime;
-            OnReloading?.Invoke(timer);
+            OnReloadingInProgress?.Invoke(timer);
             yield return wffu;
         }
 

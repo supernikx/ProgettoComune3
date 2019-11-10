@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+
 
 /// <summary>
 /// Classe che gestisce il gruppo e fornisce il punto di accesso agli altri controller del gruppo

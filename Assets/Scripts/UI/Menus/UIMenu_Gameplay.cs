@@ -58,7 +58,7 @@ public class UIMenu_Gameplay : UIControllerBase
             groupShootCtrl = groupCtrl.GetGroupShootController();
 
             groupShootCtrl.OnReloadingStart += HandleOnReloadingStart;
-            groupShootCtrl.OnReloading += HandleOnReloading;
+            groupShootCtrl.OnReloadingInProgress += HandleOnReloading;
             groupShootCtrl.OnReloadingEnd += HandleOnReloadingEnd;
 
             LevelBossController.OnBossFightStart += HandleOnBossFightStart;
@@ -71,7 +71,7 @@ public class UIMenu_Gameplay : UIControllerBase
             if (groupCtrl != null)
             {
                 groupShootCtrl.OnReloadingStart -= HandleOnReloadingStart;
-                groupShootCtrl.OnReloading -= HandleOnReloading;
+                groupShootCtrl.OnReloadingInProgress -= HandleOnReloading;
                 groupShootCtrl.OnReloadingEnd -= HandleOnReloadingEnd;
                 groupCtrl = null;
             }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// Classe che gestisce gl'input del gruppo
@@ -35,18 +36,25 @@ public class GroupMovementController : MonoBehaviour
         if (!groupCtrl.IsSetuppedAndEnabled() || !canMove)
             return;
 
-        ReadInput();
         MoveAgents();
     }
 
     /// <summary>
-    /// Funzione che si occupa di leggere gl'input
+    /// Funzione chiamata al movimento dal PlayerInput
     /// </summary>
-    private void ReadInput()
+    public void OnMove(InputValue _value)
     {
-        movementVector.x = Input.GetAxis("Horizontal");
-        movementVector.z = Input.GetAxis("Vertical");
-        movementVector.y = Input.GetButton("Jump") ? 1 : 0;
+        Vector2 newMove = _value.Get<Vector2>();
+        movementVector.x = newMove.x;
+        movementVector.z = newMove.y;
+    }
+
+    /// <summary>
+    /// Funzione chiamata alla pressione del tasto jump dal PlayerInput
+    /// </summary>
+    public void OnJump()
+    {
+        movementVector.y = 1;
     }
 
     /// <summary>
