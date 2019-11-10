@@ -102,8 +102,12 @@ public class GroupShootController : MonoBehaviour
     {
         if (Input.GetJoystickNames().Length > 0 && !string.IsNullOrEmpty(Input.GetJoystickNames()[0]))
         {
-            shootVector.x = Input.GetAxis("RHorizontal");
-            shootVector.z = Input.GetAxis("RVertical");
+            Vector2 newAim = new Vector2(Input.GetAxis("RHorizontal"), Input.GetAxis("RVertical"));
+            if (newAim.x != 0 || newAim.y != 0)
+            {
+                shootVector.x = newAim.x;
+                shootVector.z = newAim.y;
+            }
         }
         else
         {

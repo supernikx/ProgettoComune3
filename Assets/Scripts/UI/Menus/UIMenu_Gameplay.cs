@@ -17,6 +17,10 @@ public class UIMenu_Gameplay : UIControllerBase
     private UISubmenu_Boss bossPanel;
 
     /// <summary>
+    /// Riferimento al level scene controller
+    /// </summary>
+    private LevelSceneController lvlSceneCtrl;
+    /// <summary>
     /// Riferimento al group controller
     /// </summary>
     private GroupController groupCtrl;
@@ -49,6 +53,7 @@ public class UIMenu_Gameplay : UIControllerBase
 
         if (_value)
         {
+            lvlSceneCtrl = manager.GetGameManager().GetLevelManager().GetLevelSceneController();
             groupCtrl = manager.GetGameManager().GetLevelManager().GetGroupController();
             groupShootCtrl = groupCtrl.GetGroupShootController();
 
@@ -58,6 +63,8 @@ public class UIMenu_Gameplay : UIControllerBase
 
             LevelBossController.OnBossFightStart += HandleOnBossFightStart;
             LevelBossController.OnBossFightEnd += HandleOnBossFightEnd;
+
+            lvlSceneCtrl.OnChangeLevelScene += HandleOnChangeLevelScene;
         }
         else
         {
@@ -68,6 +75,9 @@ public class UIMenu_Gameplay : UIControllerBase
                 groupShootCtrl.OnReloadingEnd -= HandleOnReloadingEnd;
                 groupCtrl = null;
             }
+
+            if (lvlSceneCtrl != null)
+                lvlSceneCtrl.OnChangeLevelScene -= HandleOnChangeLevelScene;
 
             LevelBossController.OnBossFightStart -= HandleOnBossFightStart;
             LevelBossController.OnBossFightEnd -= HandleOnBossFightEnd;
@@ -119,6 +129,14 @@ public class UIMenu_Gameplay : UIControllerBase
     /// </summary>
     /// <param name="obj"></param>
     private void HandleOnBossFightEnd(BossControllerBase _bossCtrl)
+    {
+        bossPanel.gameObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// Funzione che gestisce l'evento di cambio scena
+    /// </summary>
+    private void HandleOnChangeLevelScene()
     {
         bossPanel.gameObject.SetActive(false);
     }

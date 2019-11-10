@@ -23,6 +23,12 @@ public class UISubmenu_Boss : MonoBehaviour
     /// </summary>
     private int bossMaxLife;
 
+    private void OnEnable()
+    {
+        if (bossLifeCtrl != null)
+            bossLifeCtrl.OnBossTakeDamage += HandleOnBossTakeDamage;
+    }
+
     /// <summary>
     /// Funzione che esegue il Setup
     /// </summary>
@@ -47,6 +53,7 @@ public class UISubmenu_Boss : MonoBehaviour
 
     private void OnDisable()
     {
-        bossLifeCtrl.OnBossTakeDamage -= HandleOnBossTakeDamage;
+        if (bossLifeCtrl != null)
+            bossLifeCtrl.OnBossTakeDamage -= HandleOnBossTakeDamage;
     }
 }
