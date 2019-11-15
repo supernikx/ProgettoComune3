@@ -45,13 +45,9 @@ public class GroupShootController : MonoBehaviour
     /// </summary>
     private GroupController groupCtrl;
     /// <summary>
-    /// bool che identifica se è stato premuto il tasto di sparo
+    /// Riferimento al PlayerInput
     /// </summary>
-    private bool shoot = false;
-    /// <summary>
-    /// bool che identifica se è stato premuto il tasto di reload
-    /// </summary>
-    private bool reload = false;
+    private PlayerInput playerInput;
     /// <summary>
     /// bool che identifica se è possibile sparare o no
     /// </summary>
@@ -73,6 +69,7 @@ public class GroupShootController : MonoBehaviour
     {
         aimFeedback = FindObjectOfType<AimArrowFeedback>();
         groupCtrl = _groupCtrl;
+        playerInput = groupCtrl.GetPlayerInput();
         canShoot = true;
     }
 
@@ -92,15 +89,7 @@ public class GroupShootController : MonoBehaviour
         if (!groupCtrl.IsSetuppedAndEnabled() || !canShoot)
             return;
 
-        if (Gamepad.current == null)
-        {
-            Vector3 fixedMousePosition = new Vector3(_value.Get<Vector2>().x, _value.Get<Vector2>().y, 0);
-            Vector3 screenCenterPosition = Camera.main.WorldToScreenPoint(groupCtrl.GetGroupCenterPoint());
-            screenCenterPosition.z = 0;
-            Vector3 mouseDirection = (fixedMousePosition - screenCenterPosition).normalized;
-            shootVector = new Vector3(mouseDirection.x, 0, mouseDirection.y);
-        }
-        else
+        if (playerInput.currentControlScheme == "Gamepad")
         {
             Vector2 newAim = _value.Get<Vector2>();
             if (newAim.x != 0 || newAim.y != 0)
@@ -108,6 +97,14 @@ public class GroupShootController : MonoBehaviour
                 shootVector.x = newAim.x;
                 shootVector.z = newAim.y;
             }
+        }
+        else
+        {
+            Vector3 fixedMousePosition = new Vector3(_value.Get<Vector2>().x, _value.Get<Vector2>().y, 0);
+            Vector3 screenCenterPosition = Camera.main.WorldToScreenPoint(groupCtrl.GetGroupCenterPoint());
+            screenCenterPosition.z = 0;
+            Vector3 mouseDirection = (fixedMousePosition - screenCenterPosition).normalized;
+            shootVector = new Vector3(mouseDirection.x, 0, mouseDirection.y);
         }
     }
 

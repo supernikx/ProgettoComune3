@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// Classe che gestisce la pausa
@@ -18,6 +19,12 @@ public class LevelPauseController : MonoBehaviour
     public Action OnGameUnpause;
     #endregion
 
+    [Header("Binding Settings")]
+    //Mappatura dei tasti per la pausa
+    [SerializeField]
+    InputAction inputPauseMapping;
+
+
     /// <summary>
     /// Bool che identifica se lo script è setuppato
     /// </summary>
@@ -27,21 +34,27 @@ public class LevelPauseController : MonoBehaviour
     /// </summary>
     private bool isPaused;
 
+    private void OnEnable()
+    {
+        inputPauseMapping.Enable();
+    }
+
     /// <summary>
     /// Funzione di Setup
     /// </summary>
     public void Setup()
     {
+        inputPauseMapping.performed += OnPause;
         isPaused = false;
         isSetupped = true;
     }
 
-    void Update()
+    /// <summary>
+    /// Funzione chiamata alla pressione del tasto di pausa
+    /// </summary>
+    public void OnPause(InputAction.CallbackContext _context)
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            SetPause(!isPaused);
-        }
+        SetPause(!isPaused);
     }
 
     #region API
@@ -71,4 +84,10 @@ public class LevelPauseController : MonoBehaviour
     }
     #endregion
     #endregion
+
+    private void OnDisable()
+    {
+        inputPauseMapping.performed -= OnPause;
+        inputPauseMapping.Disable();
+    }
 }

@@ -55,6 +55,10 @@ public class GroupController : MonoBehaviour
     /// </summary>
     private GroupShootController shootCtrl;
     /// <summary>
+    /// Riferimento al PlayerInput
+    /// </summary>
+    private PlayerInput playerInput;
+    /// <summary>
     /// Bool che identifica se lo script è setuppato
     /// </summary>
     private bool isSetupped = false;
@@ -72,6 +76,7 @@ public class GroupController : MonoBehaviour
         groupMovementCtrl = GetComponent<GroupMovementController>();
         groupSizeCtrl = GetComponent<GroupSizeController>();
         shootCtrl = GetComponent<GroupShootController>();
+        playerInput = GetComponent<PlayerInput>();
 
         AgentsSetup();
         groupMovementCtrl.Setup(this);
@@ -129,6 +134,15 @@ public class GroupController : MonoBehaviour
     public GroupShootController GetGroupShootController()
     {
         return shootCtrl;
+    }
+
+    /// <summary>
+    /// Funzione che ritorna il riferimento al PlayerInput
+    /// </summary>
+    /// <returns></returns>
+    public PlayerInput GetPlayerInput()
+    {
+        return playerInput;
     }
 
     /// <summary>

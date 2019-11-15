@@ -85,6 +85,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a0f8867d3de15a46be9e320185b9376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputPauseMapping:
+    m_Name: Input Pause Mapping
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: 4467b3dc-4175-4384-97f8-90168ba66d84
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: a5722ffd-51ba-4407-80ed-3385b0b8b591
+      m_Path: <Keyboard>/escape
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Input Pause Mapping
+      m_Flags: 0
+    - m_Name: 
+      m_Id: cbeb0611-f078-4518-b5c5-fc87ec487235
+      m_Path: <Gamepad>/start
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Input Pause Mapping
+      m_Flags: 0
 --- !u!114 &7567729171804131389
 MonoBehaviour:
   m_ObjectHideFlags: 0

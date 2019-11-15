@@ -193,7 +193,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 3.0092666e-36, y: 1.009742e-28, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 4e-45}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -371,5 +371,50 @@ PrefabInstance:
       propertyPath: m_FirstSelected
       value: 
       objectReference: {fileID: 1136141113}
+    - target: {fileID: 5334964762512059824, guid: f66425bce90921c47a6a98c5fb9eebc1,
+        type: 3}
+      propertyPath: m_TrackedDevicePositionAction
+      value: 
+      objectReference: {fileID: 1125095867961558136, guid: 753ee6f5bfa42524b990b080bb53f406,
+        type: 3}
+    - target: {fileID: 5334964762512059824, guid: f66425bce90921c47a6a98c5fb9eebc1,
+        type: 3}
+      propertyPath: m_TrackedDeviceOrientationAction
+      value: 
+      objectReference: {fileID: 8677232415670795782, guid: 753ee6f5bfa42524b990b080bb53f406,
+        type: 3}
+    - target: {fileID: 5334964762512059824, guid: f66425bce90921c47a6a98c5fb9eebc1,
+        type: 3}
+      propertyPath: m_TrackedDeviceSelectAction
+      value: 
+      objectReference: {fileID: -6634315427726993642, guid: 753ee6f5bfa42524b990b080bb53f406,
+        type: 3}
+    - target: {fileID: 1736860326, guid: f66425bce90921c47a6a98c5fb9eebc1, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1736860326, guid: f66425bce90921c47a6a98c5fb9eebc1, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1736860326, guid: f66425bce90921c47a6a98c5fb9eebc1, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5355477855424363318, guid: f66425bce90921c47a6a98c5fb9eebc1,
+        type: 3}
+      propertyPath: m_Colors.m_SelectedColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5355477855424363318, guid: f66425bce90921c47a6a98c5fb9eebc1,
+        type: 3}
+      propertyPath: m_Colors.m_SelectedColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5355477855424363318, guid: f66425bce90921c47a6a98c5fb9eebc1,
+        type: 3}
+      propertyPath: m_Colors.m_SelectedColor.b
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f66425bce90921c47a6a98c5fb9eebc1, type: 3}
