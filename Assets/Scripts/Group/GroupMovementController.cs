@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// Classe che gestisce gl'input del gruppo
@@ -19,6 +20,10 @@ public class GroupMovementController : MonoBehaviour
     /// bool che identifica se il gruppo può muoversi
     /// </summary>
     private bool canMove = false;
+    /// <summary>
+    /// Funzione che identifca se il tasto jump è premuto
+    /// </summary>
+    private bool jumpPressed = false;
 
     /// <summary>
     /// Funzione che esegue il Setup
@@ -35,18 +40,29 @@ public class GroupMovementController : MonoBehaviour
         if (!groupCtrl.IsSetuppedAndEnabled() || !canMove)
             return;
 
-        ReadInput();
         MoveAgents();
     }
 
     /// <summary>
-    /// Funzione che si occupa di leggere gl'input
+    /// Funzione chiamata al movimento dal PlayerInput
     /// </summary>
-    private void ReadInput()
+    public void OnMove(InputValue _value)
     {
-        movementVector.x = Input.GetAxis("Horizontal");
-        movementVector.z = Input.GetAxis("Vertical");
-        movementVector.y = Input.GetButton("Jump") ? 1 : 0;
+        Vector2 newMove = _value.Get<Vector2>();
+        movementVector.x = newMove.x;
+        movementVector.z = newMove.y;
+    }
+
+    /// <summary>
+    /// Funzione chiamata alla pressione del tasto jump dal PlayerInput
+    /// </summary>
+    public void OnJump(InputValue _value)
+    {
+        int buttonValue = (int)_value.Get<float>();
+        if (buttonValue == 1)
+            jumpPressed = true;
+        else if (buttonValue == 0)
+            jumpPressed = false;
     }
 
     /// <summary>
@@ -59,8 +75,9 @@ public class GroupMovementController : MonoBehaviour
             return;
 
         //Salto
-        if (movementVector.y == 1)
+        if (jumpPressed)
         {
+            movementVector.y = 1;
             foreach (AgentController agent in agents)
                 agent.GetAgentJumpController().Jump();
         }

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 /// <summary>
 /// Classe che gestisce il Pannello di Gameplay
 /// </summary>
-public class UIMenu_Gameplay : UIControllerBase
+public class UIMenu_Gameplay : UIMenu_Base
 {
     [Header("References")]
     //Riferimento all'immagine che deve apparire nel momento della ricarica
@@ -58,7 +58,7 @@ public class UIMenu_Gameplay : UIControllerBase
             groupShootCtrl = groupCtrl.GetGroupShootController();
 
             groupShootCtrl.OnReloadingStart += HandleOnReloadingStart;
-            groupShootCtrl.OnReloading += HandleOnReloading;
+            groupShootCtrl.OnReloadingInProgress += HandleOnReloading;
             groupShootCtrl.OnReloadingEnd += HandleOnReloadingEnd;
 
             LevelBossController.OnBossFightStart += HandleOnBossFightStart;
@@ -71,7 +71,7 @@ public class UIMenu_Gameplay : UIControllerBase
             if (groupCtrl != null)
             {
                 groupShootCtrl.OnReloadingStart -= HandleOnReloadingStart;
-                groupShootCtrl.OnReloading -= HandleOnReloading;
+                groupShootCtrl.OnReloadingInProgress -= HandleOnReloading;
                 groupShootCtrl.OnReloadingEnd -= HandleOnReloadingEnd;
                 groupCtrl = null;
             }

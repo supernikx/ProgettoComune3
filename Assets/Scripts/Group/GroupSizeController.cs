@@ -12,14 +12,6 @@ public class GroupSizeController : MonoBehaviour
     /// </summary>
     private GroupController groupCtrl;
     /// <summary>
-    /// Bool che identifica se il gruppo si deve raggruppare
-    /// </summary>
-    private bool regroup;
-    /// <summary>
-    /// Bool che identifica se il gruppo si deve espandere
-    /// </summary>
-    private bool expand;
-    /// <summary>
     /// Riferimento alla coroutine che deve controllare la size del gruppo (expand o regroup)
     /// </summary>
     IEnumerator sizeControllerRoutine;
@@ -33,50 +25,34 @@ public class GroupSizeController : MonoBehaviour
         groupCtrl = _groupCtrl;
     }
 
-    private void Update()
+    /// <summary>
+    /// Funzione chiamata alla pressione del tasto Group dal PlayerInput
+    /// </summary>
+    public void OnGroup()
     {
         if (!groupCtrl.IsSetuppedAndEnabled())
             return;
 
-        ReadInput();
+        if (sizeControllerRoutine != null)
+            StopCoroutine(sizeControllerRoutine);
 
-        if (regroup || expand)
-        {
-            expand = regroup = false;
-            StartCoroutine(sizeControllerRoutine);
-        }
+        sizeControllerRoutine = GroupCoroutine();
+        StartCoroutine(sizeControllerRoutine);
     }
 
-
     /// <summary>
-    /// Funzione che si occupa di leggere gl'input
+    /// Funzione chiamata alla pressione del tasto Expand dal PlayerInput
     /// </summary>
-    private void ReadInput()
+    public void OnExpand()
     {
-        if (Input.GetButtonDown("Regroup"))
-        {
-            if (expand)
-                expand = false;
+        if (!groupCtrl.IsSetuppedAndEnabled())
+            return;
 
-            if (sizeControllerRoutine != null)
-                StopCoroutine(sizeControllerRoutine);
+        if (sizeControllerRoutine != null)
+            StopCoroutine(sizeControllerRoutine);
 
-            sizeControllerRoutine = RegroupGroupCoroutine();
-            regroup = true;
-        }
-
-        if (Input.GetButtonDown("Expand"))
-        {
-            if (regroup)
-                regroup = false;
-
-            if (sizeControllerRoutine != null)
-                StopCoroutine(sizeControllerRoutine);
-
-            sizeControllerRoutine = ExpandGroupCoroutine();
-
-            expand = true;
-        }
+        sizeControllerRoutine = ExpandGroupCoroutine();
+        StartCoroutine(sizeControllerRoutine);
     }
 
     /// <summary>
@@ -131,7 +107,7 @@ public class GroupSizeController : MonoBehaviour
     /// Coroutine che raggruppa il gruppo
     /// </summary>
     /// <returns></returns>
-    private IEnumerator RegroupGroupCoroutine()
+    private IEnumerator GroupCoroutine()
     {
         //Prendo il riferimento agli agent
         List<AgentController> agents = groupCtrl.GetAgents();

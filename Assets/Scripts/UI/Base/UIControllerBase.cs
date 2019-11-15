@@ -9,7 +9,6 @@ public abstract class UIControllerBase : MonoBehaviour
     /// Riferimento al prorpio manager
     /// </summary>
     protected UIManagerBase manager;
-
     /// <summary>
     /// Stato di attivo o disattivo del menù
     /// </summary>
