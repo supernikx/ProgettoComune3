@@ -5,11 +5,6 @@
 /// </summary>
 public abstract class UIControllerBase : MonoBehaviour
 {
-    [Header("Gamepad Settings")]
-    //Bottone selezionato di base quando questo pannello è attivo
-    [SerializeField]
-    private GameObject defaultSelecedButton;
-
     /// <summary>
     /// Riferimento al prorpio manager
     /// </summary>
@@ -50,14 +45,5 @@ public abstract class UIControllerBase : MonoBehaviour
     {
         isActive = _value;
         gameObject.SetActive(isActive);
-    }
-
-    /// <summary>
-    /// Funzione che ritorna il pulsante selezionato di default in questo pannello
-    /// </summary>
-    /// <returns></returns>
-    public GameObject GetDefaultSelectedButton()
-    {
-        return defaultSelecedButton;
     }
 }

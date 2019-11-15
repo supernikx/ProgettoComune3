@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// Classe che gestisce il Pannello di Pausa
 /// </summary>
-public class UIMenu_Pause : UIControllerBase
+public class UIMenu_Pause : UIMenu_Base
 {
     /// <summary>
     /// Evento che notifica la pressione del bottone Resume

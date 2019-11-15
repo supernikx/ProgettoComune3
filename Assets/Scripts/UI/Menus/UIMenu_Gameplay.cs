@@ -7,7 +7,7 @@ using UnityEngine.UI;
 /// <summary>
 /// Classe che gestisce il Pannello di Gameplay
 /// </summary>
-public class UIMenu_Gameplay : UIControllerBase
+public class UIMenu_Gameplay : UIMenu_Base
 {
     [Header("References")]
     //Riferimento all'immagine che deve apparire nel momento della ricarica

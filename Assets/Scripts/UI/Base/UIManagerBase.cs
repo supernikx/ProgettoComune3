@@ -38,10 +38,10 @@ public abstract class UIManagerBase : MonoBehaviour
         gm = _gm;
         menus = GetComponentsInChildren<UIControllerBase>(true).ToList();
 
+        CustomSetup();
+
         for (int i = 0; i < menus.Count; i++)
             menus[i].Setup(this);
-
-        CustomSetup();
     }
 
     /// <summary>
