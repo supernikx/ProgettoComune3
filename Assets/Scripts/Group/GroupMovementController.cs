@@ -20,10 +20,6 @@ public class GroupMovementController : MonoBehaviour
     /// bool che identifica se il gruppo può muoversi
     /// </summary>
     private bool canMove = false;
-    /// <summary>
-    /// Funzione che identifca se il tasto jump è premuto
-    /// </summary>
-    private bool jumpPressed = false;
 
     /// <summary>
     /// Funzione che esegue il Setup
@@ -54,18 +50,6 @@ public class GroupMovementController : MonoBehaviour
     }
 
     /// <summary>
-    /// Funzione chiamata alla pressione del tasto jump dal PlayerInput
-    /// </summary>
-    public void OnJump(InputValue _value)
-    {
-        int buttonValue = (int)_value.Get<float>();
-        if (buttonValue == 1)
-            jumpPressed = true;
-        else if (buttonValue == 0)
-            jumpPressed = false;
-    }
-
-    /// <summary>
     /// Funzione che si occupa di muovere tutti gli agent
     /// </summary>
     private void MoveAgents()
@@ -73,15 +57,6 @@ public class GroupMovementController : MonoBehaviour
         List<AgentController> agents = groupCtrl.GetAgents();
         if (agents == null || agents.Count == 0)
             return;
-
-        //Salto
-        if (jumpPressed)
-        {
-            movementVector.y = 1;
-            foreach (AgentController agent in agents)
-                agent.GetAgentJumpController().Jump();
-        }
-        movementVector.y = 0;
 
         //Movimento
         if (movementVector == Vector3.zero)

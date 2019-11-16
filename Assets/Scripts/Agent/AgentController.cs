@@ -67,10 +67,6 @@ public class AgentController : MonoBehaviour, IPoolObject
     /// </summary>
     private AgentCollisionController agentCollisionCtrl;
     /// <summary>
-    /// Riferimento all'agent jump controller
-    /// </summary>
-    private AgentJumpController agentJumpCtrl;
-    /// <summary>
     /// Riferimento all'agent gravity controller
     /// </summary>
     private AgentGravityController agentGravityCtrl;
@@ -86,7 +82,6 @@ public class AgentController : MonoBehaviour, IPoolObject
     public void PoolInit()
     {
         movementCtrl = GetComponent<AgentMovementController>();
-        agentJumpCtrl = GetComponent<AgentJumpController>();
         agentGravityCtrl = GetComponent<AgentGravityController>();
         agentCollisionCtrl = GetComponent<AgentCollisionController>();
         agentDistanceCtrl = GetComponent<AgentDistanceController>();
@@ -94,7 +89,6 @@ public class AgentController : MonoBehaviour, IPoolObject
 
         graphicCtrl.Init(this);
         agentCollisionCtrl.Init(this);
-        agentJumpCtrl.Init(this);
         agentGravityCtrl.Init(this);
     }
 
@@ -108,7 +102,6 @@ public class AgentController : MonoBehaviour, IPoolObject
 
         movementCtrl.Setup();
         agentCollisionCtrl.Setup();
-        agentJumpCtrl.Setup();
         agentGravityCtrl.Setup();
         agentDistanceCtrl.Setup();
         graphicCtrl.Setup();
@@ -124,7 +117,6 @@ public class AgentController : MonoBehaviour, IPoolObject
         groupCtrl = null;
 
         agentCollisionCtrl.UnSetup();
-        agentJumpCtrl.UnSetup();
         agentGravityCtrl.UnSetup();
         graphicCtrl.UnSetup();
 
@@ -159,15 +151,6 @@ public class AgentController : MonoBehaviour, IPoolObject
     public AgentCollisionController GetAgentCollisionController()
     {
         return agentCollisionCtrl;
-    }
-
-    /// <summary>
-    /// Funzione che ritorna l'agent jump controller
-    /// </summary>
-    /// <returns></returns>
-    public AgentJumpController GetAgentJumpController()
-    {
-        return agentJumpCtrl;
     }
 
     /// <summary>
