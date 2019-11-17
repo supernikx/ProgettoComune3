@@ -6,10 +6,6 @@
 public abstract class UIControllerBase : MonoBehaviour
 {
     /// <summary>
-    /// Riferimento al prorpio manager
-    /// </summary>
-    protected UIManagerBase manager;
-    /// <summary>
     /// Stato di attivo o disattivo del menù
     /// </summary>
     protected bool isActive;
@@ -19,14 +15,13 @@ public abstract class UIControllerBase : MonoBehaviour
     /// </summary>
     public void Setup(UIManagerBase _manager)
     {
-        manager = _manager;
-        CustomSetup();
+        CustomSetup(_manager);
     }
 
     /// <summary>
     /// Funzione chimata al setup della classe base
     /// </summary>
-    public virtual void CustomSetup() { }
+    public virtual void CustomSetup(UIManagerBase _manager) { }
 
     /// <summary>
     /// Funzione che ritorna true se il menù è attivo, false altrimenti

@@ -16,7 +16,7 @@ public class UIMenu_Base : UIControllerBase
     /// <summary>
     /// Riferimento all'UI Manager
     /// </summary>
-    protected new UI_Manager manager;
+    protected UI_Manager manager;
     /// <summary>
     /// Riferimento all'event system
     /// </summary>
@@ -25,9 +25,9 @@ public class UIMenu_Base : UIControllerBase
     /// <summary>
     /// Override della funzione di Setup dell'UIControllerBase
     /// </summary>
-    public override void CustomSetup()
+    public override void CustomSetup(UIManagerBase _manager)
     {
-        manager = base.manager as UI_Manager;
+        manager = _manager as UI_Manager;
         eventSystem = manager.GetEventSystem();
     }
 

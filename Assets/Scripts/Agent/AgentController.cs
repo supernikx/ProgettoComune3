@@ -37,7 +37,7 @@ public class AgentController : MonoBehaviour, IPoolObject
     /// Variabile che identifica lo stato della Pool dell'agent
     /// </summary>
     private State _CurrentState;
-    public State CurrentState
+    public State currentState
     {
         get
         {

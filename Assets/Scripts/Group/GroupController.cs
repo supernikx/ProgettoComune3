@@ -290,6 +290,10 @@ public class GroupController : MonoBehaviour
         return false;
     }
 
+    /// <summary>
+    /// Funzione che abilita/disabilita il gruppo in base al parametro passato
+    /// </summary>
+    /// <param name="_enableGrup"></param>
     public void Enable(bool _enableGrup)
     {
         isEnabled = _enableGrup;

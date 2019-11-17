@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// Classe che gestisce le collisioni del boss
 /// </summary>
-public class BossPrototipoCollisionController : MonoBehaviour
+public class BossCollisionController : MonoBehaviour
 {
     #region Actions
     /// <summary>
@@ -18,17 +18,22 @@ public class BossPrototipoCollisionController : MonoBehaviour
     #endregion
 
     /// <summary>
-    /// Riferimento al Boss Prototipo Controller
+    /// Riferimento al BossController
     /// </summary>
-    private BossPrototipoController bossCtrl;
+    private BossControllerBase bossCtrl;
+    /// <summary>
+    /// Riferimento al RigidBody
+    /// </summary>
+    private Rigidbody rb;
 
     /// <summary>
     /// Funzione di Setup
     /// </summary>
     /// <param name="_bossCtrl"></param>
-    public void Setup(BossPrototipoController _bossCtrl)
+    public void Setup(BossControllerBase _bossCtrl)
     {
         bossCtrl = _bossCtrl;
+        rb = GetComponent<Rigidbody>();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -47,4 +52,17 @@ public class BossPrototipoCollisionController : MonoBehaviour
                 OnAgentHit?.Invoke(agent);
         }
     }
+
+    #region API
+    #region Getter
+    /// <summary>
+    /// Funzione che ritorna il rigid body
+    /// </summary>
+    /// <returns></returns>
+    public Rigidbody GetRigidBody()
+    {
+        return rb;
+    }
+    #endregion
+    #endregion
 }

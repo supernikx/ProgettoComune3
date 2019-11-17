@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Classe che gestisce il bullet
+/// Classe base del bullet
 /// </summary>
-public class BulletController : MonoBehaviour, IPoolObject
+public abstract class BulletControllerBase : MonoBehaviour, IPoolObject
 {
     #region Pool Interface
     /// <summary>
@@ -36,16 +36,16 @@ public class BulletController : MonoBehaviour, IPoolObject
     /// <summary>
     /// Variabile che identifica lo stato della Pool del bullet
     /// </summary>
-    private State _CurrentState;
-    public State CurrentState
+    private State _currentState;
+    public State currentState
     {
         get
         {
-            return _CurrentState;
+            return _currentState;
         }
         set
         {
-            _CurrentState = value;
+            _currentState = value;
         }
     }
 
@@ -58,27 +58,27 @@ public class BulletController : MonoBehaviour, IPoolObject
     }
     #endregion
 
-    [Header("Bullet Settings")]
+    [Header("Base Bullet Settings")]
     //Velocità del proiettile
     [SerializeField]
-    private float bulletSpeed;
-    //Danno del proiettile
+    protected float bulletSpeed;
+    //Range del proiettile
     [SerializeField]
-    private int bulletDamage;
+    protected float bulletRange;
 
     /// <summary>
     /// Punto di spawn del proiettile
     /// </summary>
-    private Vector3 spawnPosition;
+    protected Vector3 spawnPosition;
     /// <summary>
     /// bool che idetifica se il bullet è setuppato o no
     /// </summary>
-    private bool isSetupped = false;
+    protected bool isSetupped = false;
 
     /// <summary>
     /// Funzione che esegue il setup
     /// </summary>
-    public void Setup()
+    public virtual void Setup()
     {
         spawnPosition = transform.position;
         isSetupped = true;
@@ -92,27 +92,14 @@ public class BulletController : MonoBehaviour, IPoolObject
 
         transform.position = Vector3.MoveTowards(transform.position, transform.position + transform.forward, bulletSpeed);
 
-        if (Vector3.Distance(transform.position, spawnPosition) > 100)
-            BulletDestroy();
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        BossLifeController bossLifeCtrl = other.GetComponent<BossLifeController>();
-        if (bossLifeCtrl != null)
-        {
-            bossLifeCtrl.TakeDamage(bulletDamage);
-            BulletDestroy();
-        }
-
-        if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
+        if (Vector3.Distance(transform.position, spawnPosition) > bulletRange)
             BulletDestroy();
     }
 
     /// <summary>
     /// Funzione che rimanda in Pool il Bullet
     /// </summary>
-    private void BulletDestroy()
+    protected virtual void BulletDestroy()
     {
         isSetupped = false;
         OnObjectDestroy?.Invoke(this);

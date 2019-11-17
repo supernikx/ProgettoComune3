@@ -36,9 +36,9 @@ public class UIMenu_Gameplay : UIMenu_Base
     /// <summary>
     /// Override funzione che esegue il setup del pannello
     /// </summary>
-    public override void CustomSetup()
+    public override void CustomSetup(UIManagerBase _manage)
     {
-        base.CustomSetup();
+        base.CustomSetup(_manage);
         bossPanel.gameObject.SetActive(false);
         reloadingImage.gameObject.SetActive(false);
     }

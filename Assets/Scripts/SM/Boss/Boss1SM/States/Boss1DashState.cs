@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Classe che gestisce lo stato di moviemento del boss
+/// Classe che gestisce lo stato di Dash del Boss 1
 /// </summary>
-public class BossPrototipoMoveState : BossPrototipoStateBase
+public class Boss1DashState : Boss1StateBase
 {
     [Header("State Settings")]
     //Velocità di movimento del Boss
@@ -23,15 +23,19 @@ public class BossPrototipoMoveState : BossPrototipoStateBase
     /// <summary>
     /// Riferimento al BossController
     /// </summary>
-    private BossPrototipoController bossCtrl;
+    private Boss1Controller bossCtrl;
     /// <summary>
     /// Riferimento al BossCollisionController
     /// </summary>
-    private BossPrototipoCollisionController collisionCtrl;
+    private BossCollisionController collisionCtrl;
     /// <summary>
     /// Riferimento al LifeController
     /// </summary>
     private BossLifeController lifeCtrl;
+    /// <summary>
+    /// Riferimento al BossPhaseController
+    /// </summary>
+    private Boss1PhaseController bossPhaseCtrl;
     /// <summary>
     /// Distanza percorsa
     /// </summary>
@@ -42,9 +46,14 @@ public class BossPrototipoMoveState : BossPrototipoStateBase
         groupCtrl = context.GetLevelManager().GetGroupController();
         bossCtrl = context.GetBossController();
         lifeCtrl = bossCtrl.GetBossLifeController();
-        collisionCtrl = bossCtrl.GetCollisionController();
-        distanceTraveled = 0;
+        collisionCtrl = bossCtrl.GetBossCollisionController();
+        bossPhaseCtrl = bossCtrl.GetBossPhaseController();
 
+        distanceTraveled = 0;
+        LookAtPosition(groupCtrl.GetGroupCenterPoint());
+
+        bossPhaseCtrl.OnSecondPhaseStart += HandleOnSecondPhaseStart;
+        bossPhaseCtrl.OnThirdPhaseStart += HandleOnThirdPhaseStart;
         lifeCtrl.OnBossDead += HandleOnBossDead;
         collisionCtrl.OnObstacleHit += HandleOnObstacleHit;
         collisionCtrl.OnAgentHit += HandleOnAgentHit;
@@ -57,6 +66,17 @@ public class BossPrototipoMoveState : BossPrototipoStateBase
             Complete();
 
         bossCtrl.transform.position = Vector3.MoveTowards(bossCtrl.transform.position, bossCtrl.transform.position + bossCtrl.transform.forward, movementSpeed * Time.deltaTime);
+    }
+
+
+    /// <summary>
+    /// Funzione che fa guardare al Boss la posizione passata come parametro
+    /// </summary>
+    /// <param name="_lookPos"></param>
+    private void LookAtPosition(Vector3 _lookPos)
+    {
+        _lookPos.y = bossCtrl.transform.position.y;
+        bossCtrl.transform.LookAt(_lookPos, Vector3.up);
     }
 
     #region Handlers
@@ -83,6 +103,22 @@ public class BossPrototipoMoveState : BossPrototipoStateBase
     {
         Complete(1);
     }
+
+    /// <summary>
+    /// Funzione che gestisce l'evento di inizio secondo fase del Boss
+    /// </summary>
+    private void HandleOnSecondPhaseStart()
+    {
+        Complete(2);
+    }
+
+    /// <summary>
+    /// Funzione che gestisce l'evento di inizio terza fase del Boss
+    /// </summary>
+    private void HandleOnThirdPhaseStart()
+    {
+        Complete(3);
+    }
     #endregion
 
     public override void Exit()
@@ -96,8 +132,16 @@ public class BossPrototipoMoveState : BossPrototipoStateBase
         if (lifeCtrl != null)
             lifeCtrl.OnBossDead -= HandleOnBossDead;
 
+        if (bossPhaseCtrl != null)
+        {
+            bossPhaseCtrl.OnSecondPhaseStart -= HandleOnSecondPhaseStart;
+            bossPhaseCtrl.OnThirdPhaseStart -= HandleOnThirdPhaseStart;
+        }
+
         bossCtrl = null;
         collisionCtrl = null;
+        bossPhaseCtrl = null;
+        lifeCtrl = null;
         distanceTraveled = 0;
     }
 }

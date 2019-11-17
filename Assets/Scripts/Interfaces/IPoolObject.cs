@@ -35,7 +35,7 @@ public interface IPoolObject
     /// <summary>
     /// Stato attuale dell'oggetto in relazione alla Pool
     /// </summary>
-    State CurrentState
+    State currentState
     {
         get;
         set;

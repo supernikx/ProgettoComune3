@@ -18,6 +18,10 @@ public abstract class BossControllerBase : MonoBehaviour
     /// </summary>
     protected BossLifeController lifeCtrl;
     /// <summary>
+    /// Riferimento al BossCollision Controller
+    /// </summary>
+    protected BossCollisionController collisionCtrl;
+    /// <summary>
     /// Riferimento al level manager
     /// </summary>
     protected LevelManager lvlMng;
@@ -37,6 +41,7 @@ public abstract class BossControllerBase : MonoBehaviour
     {
         lvlMng = _lvlMng;
         lifeCtrl = GetComponent<BossLifeController>();
+        collisionCtrl = GetComponent<BossCollisionController>();
         isSetupped = true;
     }
 
@@ -92,6 +97,15 @@ public abstract class BossControllerBase : MonoBehaviour
     public virtual BossLifeController GetBossLifeController()
     {
         return lifeCtrl;
+    }
+
+    /// <summary>
+    /// Funzione che ritorna il CollisionController
+    /// </summary>
+    /// <returns></returns>
+    public virtual BossCollisionController GetBossCollisionController()
+    {
+        return collisionCtrl;
     }
     #endregion
     #endregion

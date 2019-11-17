@@ -3,14 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Classe che gestisce tutte le referenze del boss
+/// Classe che gestisce tutte le referenze del Boss 1
 /// </summary>
-public class BossPrototipoController : BossControllerBase
+public class Boss1Controller : BossControllerBase
 {
     /// <summary>
     /// Riferimento alla StateMachine
     /// </summary>
-    private BossPrototipoSMController sm;
+    private Boss1SMController sm;
+    /// <summary>
+    /// Riferimento al ShootController
+    /// </summary>
+    private Boss1ShootController shootCtrl;
+    /// <summary>
+    /// Riferimento al PhaseController
+    /// </summary>
+    private Boss1PhaseController phaseCtrl;
     /// <summary>
     /// Riferimento al CubeExplosion
     /// </summary>
@@ -23,7 +31,10 @@ public class BossPrototipoController : BossControllerBase
     public override void Setup(LevelManager _lvlMng)
     {
         base.Setup(_lvlMng);
-        sm = GetComponent<BossPrototipoSMController>();
+
+        sm = GetComponent<Boss1SMController>();
+        shootCtrl = GetComponent<Boss1ShootController>();
+        phaseCtrl = GetComponent<Boss1PhaseController>();
         cubeExplosion = GetComponent<CubeExplosion>();
     }
 
@@ -34,10 +45,12 @@ public class BossPrototipoController : BossControllerBase
     public override void StartBoss()
     {
         base.StartBoss();
-        BossPrototipoSMController.Context context = new BossPrototipoSMController.Context(this, sm, lvlMng);
+        Boss1SMController.Context context = new Boss1SMController.Context(this, sm, lvlMng);
         sm.Setup(context);
         lifeCtrl.Setup(this);
         collisionCtrl.Setup(this);
+        phaseCtrl.Setup(this);
+        shootCtrl.Setup(this);
     }
 
     /// <summary>
@@ -60,12 +73,21 @@ public class BossPrototipoController : BossControllerBase
 
     #region Getter
     /// <summary>
-    /// Funzione che ritorna il CollisionController
+    /// Funzione che ritorna il BossPhaseController
     /// </summary>
     /// <returns></returns>
-    public BossCollisionController GetCollisionController()
+    public Boss1PhaseController GetBossPhaseController()
     {
-        return collisionCtrl;
+        return phaseCtrl;
+    }
+
+    /// <summary>
+    /// Funzione che ritorna il BossShootController
+    /// </summary>
+    /// <returns></returns>
+    public Boss1ShootController GetBossShootController()
+    {
+        return shootCtrl;
     }
     #endregion
     #endregion

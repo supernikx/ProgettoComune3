@@ -27,7 +27,7 @@ public class GroupShootController : MonoBehaviour
     [Header("Shoot Settings")]
     //Referenza al prefab del proiettile
     [SerializeField]
-    private BulletController bulletPrefab;
+    private PlayerBulletController bulletPrefab;
     //Offset di altezza di sparo rispetto all posizione del gruppo
     [SerializeField]
     private float shootHeight;
@@ -139,7 +139,7 @@ public class GroupShootController : MonoBehaviour
         {
             Vector3 shootPoint = groupCtrl.GetGroupCenterPoint();
             shootPoint.y = shootPoint.y + shootHeight;
-            BulletController newBullet = PoolManager.instance.GetPooledObject(ObjectTypes.Bullet, gameObject).GetComponent<BulletController>();
+            PlayerBulletController newBullet = PoolManager.instance.GetPooledObject(ObjectTypes.PlayerBullet, gameObject).GetComponent<PlayerBulletController>();
             if (newBullet != null)
             {
                 newBullet.transform.SetPositionAndRotation(shootPoint, Quaternion.LookRotation(shootVector.normalized));

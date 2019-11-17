@@ -8,7 +8,8 @@ using UnityEngine;
 public enum ObjectTypes
 {
     Agent,
-    Bullet,
+    PlayerBullet,
+    Boss1Bullet,
 }
 
 /// <summary>
@@ -101,7 +102,7 @@ public class PoolManager : MonoBehaviour
     /// <param name="objectToDestroy"></param>
     private void OnObjectDestroy(IPoolObject objectToDestroy)
     {
-        objectToDestroy.CurrentState = State.InPool;
+        objectToDestroy.currentState = State.InPool;
         objectToDestroy.gameObject.transform.position = poolPosition;
         objectToDestroy.gameObject.transform.SetParent(transform);
         objectToDestroy.ownerObject = null;
@@ -113,7 +114,7 @@ public class PoolManager : MonoBehaviour
     /// <param name="objectToSpawn"></param>
     private void OnObjectSpawn(IPoolObject objectToSpawn)
     {
-        objectToSpawn.CurrentState = State.InUse;
+        objectToSpawn.currentState = State.InUse;
     }
 
     #region API
@@ -127,7 +128,7 @@ public class PoolManager : MonoBehaviour
     {
         foreach (IPoolObject _object in poolDictionary[type])
         {
-            if (_object.CurrentState == State.InPool)
+            if (_object.currentState == State.InPool)
             {
                 _object.ownerObject = _ownerObject;
                 OnObjectPooled?.Invoke(_object);
