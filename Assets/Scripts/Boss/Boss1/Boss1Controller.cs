@@ -20,6 +20,10 @@ public class Boss1Controller : BossControllerBase
     /// </summary>
     private Boss1PhaseController phaseCtrl;
     /// <summary>
+    /// Riferimento al BossTrailController
+    /// </summary>
+    private Boss1TrailController trailCtrl;
+    /// <summary>
     /// Riferimento al CubeExplosion
     /// </summary>
     private CubeExplosion cubeExplosion;
@@ -35,6 +39,7 @@ public class Boss1Controller : BossControllerBase
         sm = GetComponent<Boss1SMController>();
         shootCtrl = GetComponent<Boss1ShootController>();
         phaseCtrl = GetComponent<Boss1PhaseController>();
+        trailCtrl = GetComponent<Boss1TrailController>();
         cubeExplosion = GetComponent<CubeExplosion>();
     }
 
@@ -50,6 +55,7 @@ public class Boss1Controller : BossControllerBase
         lifeCtrl.Setup(this);
         collisionCtrl.Setup(this);
         phaseCtrl.Setup(this);
+        trailCtrl.Setup(this);
         shootCtrl.Setup(this);
     }
 
@@ -88,6 +94,15 @@ public class Boss1Controller : BossControllerBase
     public Boss1ShootController GetBossShootController()
     {
         return shootCtrl;
+    }
+
+    /// <summary>
+    /// Funzione che ritorna il BossTrailController
+    /// </summary>
+    /// <returns></returns>
+    public Boss1TrailController GetBossTrailController()
+    {
+        return trailCtrl;
     }
     #endregion
     #endregion

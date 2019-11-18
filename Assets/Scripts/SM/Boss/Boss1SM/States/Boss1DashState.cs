@@ -16,6 +16,8 @@ public class Boss1DashState : Boss1StateBase
     [SerializeField]
     private float maxMoveDistance;
 
+    public TrailController trail;
+
     /// <summary>
     /// Riferimento al GroupController
     /// </summary>
@@ -37,6 +39,10 @@ public class Boss1DashState : Boss1StateBase
     /// </summary>
     private Boss1PhaseController bossPhaseCtrl;
     /// <summary>
+    /// Riferimento al TrailController
+    /// </summary>
+    private Boss1TrailController trailController;
+    /// <summary>
     /// Distanza percorsa
     /// </summary>
     private float distanceTraveled;
@@ -48,9 +54,11 @@ public class Boss1DashState : Boss1StateBase
         lifeCtrl = bossCtrl.GetBossLifeController();
         collisionCtrl = bossCtrl.GetBossCollisionController();
         bossPhaseCtrl = bossCtrl.GetBossPhaseController();
+        trailController = bossCtrl.GetBossTrailController();
 
         distanceTraveled = 0;
         LookAtPosition(groupCtrl.GetGroupCenterPoint());
+        trailController.InstantiateNewTrail();
 
         bossPhaseCtrl.OnSecondPhaseStart += HandleOnSecondPhaseStart;
         bossPhaseCtrl.OnThirdPhaseStart += HandleOnThirdPhaseStart;
@@ -66,6 +74,7 @@ public class Boss1DashState : Boss1StateBase
             Complete();
 
         bossCtrl.transform.position = Vector3.MoveTowards(bossCtrl.transform.position, bossCtrl.transform.position + bossCtrl.transform.forward, movementSpeed * Time.deltaTime);
+        trailController.UpdateLastTrail();
     }
 
 
@@ -137,6 +146,9 @@ public class Boss1DashState : Boss1StateBase
             bossPhaseCtrl.OnSecondPhaseStart -= HandleOnSecondPhaseStart;
             bossPhaseCtrl.OnThirdPhaseStart -= HandleOnThirdPhaseStart;
         }
+
+        if (trailController != null)
+            trailController.EndTrail();
 
         bossCtrl = null;
         collisionCtrl = null;
