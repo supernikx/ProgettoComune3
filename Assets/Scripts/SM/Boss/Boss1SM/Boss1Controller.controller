@@ -501,7 +501,7 @@ MonoBehaviour:
   id: Dash
   movementSpeed: 20
   maxMoveDistance: 30
-  trail: {fileID: 2952743934301057762, guid: 3a4e77b4691139b499f9bd7f16370bd0, type: 3}
+  leaveTrail: 1
 --- !u!1101 &-1731927470619137258
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -606,7 +606,7 @@ MonoBehaviour:
   id: Dash
   movementSpeed: 30
   maxMoveDistance: 40
-  trail: {fileID: 0}
+  leaveTrail: 1
 --- !u!91 &9100000
 AnimatorController:
   m_ObjectHideFlags: 0

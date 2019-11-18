@@ -15,8 +15,9 @@ public class Boss1DashState : Boss1StateBase
     //Distanza massima percorribile dal movimento
     [SerializeField]
     private float maxMoveDistance;
-
-    public TrailController trail;
+    //Attiva/Disattiva il Trail durante il dash
+    [SerializeField]
+    private bool leaveTrail = true;
 
     /// <summary>
     /// Riferimento al GroupController
@@ -58,7 +59,9 @@ public class Boss1DashState : Boss1StateBase
 
         distanceTraveled = 0;
         LookAtPosition(groupCtrl.GetGroupCenterPoint());
-        trailController.InstantiateNewTrail();
+
+        if (leaveTrail)
+            trailController.InstantiateNewTrail();
 
         bossPhaseCtrl.OnSecondPhaseStart += HandleOnSecondPhaseStart;
         bossPhaseCtrl.OnThirdPhaseStart += HandleOnThirdPhaseStart;
@@ -74,7 +77,9 @@ public class Boss1DashState : Boss1StateBase
             Complete();
 
         bossCtrl.transform.position = Vector3.MoveTowards(bossCtrl.transform.position, bossCtrl.transform.position + bossCtrl.transform.forward, movementSpeed * Time.deltaTime);
-        trailController.UpdateLastTrail();
+
+        if (leaveTrail)
+            trailController.UpdateLastTrail();
     }
 
 
@@ -147,7 +152,7 @@ public class Boss1DashState : Boss1StateBase
             bossPhaseCtrl.OnThirdPhaseStart -= HandleOnThirdPhaseStart;
         }
 
-        if (trailController != null)
+        if (trailController != null && leaveTrail)
             trailController.EndTrail();
 
         bossCtrl = null;
