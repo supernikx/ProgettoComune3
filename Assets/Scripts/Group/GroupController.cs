@@ -66,6 +66,10 @@ public class GroupController : MonoBehaviour
     /// Bool che identifica se lo script è attivo
     /// </summary>
     private bool isEnabled = false;
+    /// <summary>
+    /// Vecchia posizione del centro del gruppo
+    /// </summary>
+    private Vector3? oldGroupCenterPos = null;
 
     #region Setup
     /// <summary>
@@ -90,9 +94,10 @@ public class GroupController : MonoBehaviour
     /// <summary>
     /// Funzione che spawna ed esegue il Setup degli agents
     /// </summary>
-    private void AgentsSetup()
+    public void AgentsSetup()
     {
         agents = new List<AgentController>();
+        oldGroupCenterPos = null;
 
         for (int i = 0; i < groupStartAgents; i++)
             InstantiateNewAgent();
@@ -317,7 +322,10 @@ public class GroupController : MonoBehaviour
     {
         if (agents.Count == 0)
         {
-            return transform.position;
+            if (oldGroupCenterPos == null)
+                return transform.position;
+            else
+                return oldGroupCenterPos.Value;
         }
         else if (agents.Count == 1)
         {
@@ -328,6 +336,7 @@ public class GroupController : MonoBehaviour
         for (int i = 0; i < agents.Count; i++)
             centerPoint += agents[i].transform.position;
 
+        oldGroupCenterPos = groupCenterObject.transform.position;
         return centerPoint / agents.Count;
     }
 }

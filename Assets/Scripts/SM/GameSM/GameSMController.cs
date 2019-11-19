@@ -70,6 +70,8 @@ public class GameSMController : StateMachineBase
                     GoToState("GameChangeScene");
                 else if (_exitCondition == 2)
                     GoToState("Pause");
+                else if (_exitCondition == 3)
+                    GoToState("EndGame");
                 break;
             case "Pause":
                 if (_exitCondition == 0)

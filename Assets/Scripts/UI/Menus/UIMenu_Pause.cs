@@ -6,6 +6,7 @@ using UnityEngine;
 /// </summary>
 public class UIMenu_Pause : UIMenu_Base
 {
+    #region Actions
     /// <summary>
     /// Evento che notifica la pressione del bottone Resume
     /// </summary>
@@ -14,6 +15,7 @@ public class UIMenu_Pause : UIMenu_Base
     /// Evento che notifica la pressione del bottone MainMenu
     /// </summary>
     public Action MainMenuButtonPressed;
+    #endregion
 
     /// <summary>
     /// Riferimento al level pause controller

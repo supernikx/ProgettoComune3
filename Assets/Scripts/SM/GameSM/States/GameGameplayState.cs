@@ -18,6 +18,10 @@ public class GameGameplayState : GameSMStateBase
     /// </summary>
     private LevelManager lvlMng;
     /// <summary>
+    /// Riferimento al group controller
+    /// </summary>
+    private GroupController groupCtrl;
+    /// <summary>
     /// Riferimento al level scene controller
     /// </summary>
     private LevelSceneController lvlSceneCtrl;
@@ -33,7 +37,9 @@ public class GameGameplayState : GameSMStateBase
         lvlMng = context.GetGameManager().GetLevelManager();
         lvlSceneCtrl = lvlMng.GetLevelSceneController();
         lvlPauseCtrl = lvlMng.GetLevelPauseController();
+        groupCtrl = lvlMng.GetGroupController();
 
+        groupCtrl.OnGroupDead += HandleOnGroupDead;
         lvlSceneCtrl.OnChangeLevelScene += HandleOnChangeLevelScene;
         lvlPauseCtrl.OnGamePause += HandleOnGamePause;
 
@@ -56,6 +62,14 @@ public class GameGameplayState : GameSMStateBase
     {
         Complete(2);
     }
+
+    /// <summary>
+    /// Funzione che gestisce l'evento di morte del gruppo
+    /// </summary>
+    private void HandleOnGroupDead()
+    {
+        Complete(3);
+    }
     #endregion
 
     public override void Exit()
@@ -65,5 +79,8 @@ public class GameGameplayState : GameSMStateBase
 
         if (lvlPauseCtrl != null)
             lvlPauseCtrl.OnGamePause -= HandleOnGamePause;
+
+        if (groupCtrl != null)
+            groupCtrl.OnGroupDead -= HandleOnGroupDead;
     }
 }

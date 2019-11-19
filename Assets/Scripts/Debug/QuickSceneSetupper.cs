@@ -17,6 +17,9 @@ public class QuickSceneSetupper : MonoBehaviour
 
             LevelManager lvlMgn = FindObjectOfType<LevelManager>();
             lvlMgn.Setup();
+
+            QuickSceneReset reset = FindObjectOfType<QuickSceneReset>();
+            reset.Setup(groupCtrl);
         }
         else
         {

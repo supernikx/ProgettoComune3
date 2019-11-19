@@ -60,6 +60,10 @@ public class GroupShootController : MonoBehaviour
     /// Riferimento all'aim feedbakc
     /// </summary>
     private AimArrowFeedback aimFeedback;
+    /// <summary>
+    /// Riferimento alla Coroutine di Reloading
+    /// </summary>
+    private IEnumerator reloadingRoutine;
 
     /// <summary>
     /// Funzione che esegue il Setup
@@ -70,6 +74,8 @@ public class GroupShootController : MonoBehaviour
         aimFeedback = FindObjectOfType<AimArrowFeedback>();
         groupCtrl = _groupCtrl;
         playerInput = groupCtrl.GetPlayerInput();
+
+        groupCtrl.OnGroupDead += EndReloading;
         canShoot = true;
     }
 
@@ -154,7 +160,27 @@ public class GroupShootController : MonoBehaviour
     private void ReloadAgent()
     {
         if (!groupCtrl.IsGroupFull())
-            StartCoroutine(ReloadingCoroutine());
+        {
+            groupCtrl.GetGroupMovementController().SetCanMove(false);
+            canShoot = false;
+            OnReloadingStart?.Invoke(reloadingTime);
+
+            reloadingRoutine = ReloadingCoroutine();
+            StartCoroutine(reloadingRoutine);
+        }
+    }
+
+    /// <summary>
+    /// Funzione che reimposta i valori come prima la ricarica
+    /// </summary>
+    private void EndReloading()
+    {
+        if (reloadingRoutine != null)
+            StopCoroutine(reloadingRoutine);
+
+        canShoot = true;
+        groupCtrl.GetGroupMovementController().SetCanMove(true);
+        OnReloadingEnd?.Invoke();
     }
 
     /// <summary>
@@ -163,10 +189,6 @@ public class GroupShootController : MonoBehaviour
     /// <returns></returns>
     private IEnumerator ReloadingCoroutine()
     {
-        groupCtrl.GetGroupMovementController().SetCanMove(false);
-        canShoot = false;
-        OnReloadingStart?.Invoke(reloadingTime);
-
         WaitForFixedUpdate wffu = new WaitForFixedUpdate();
         float timer = 0f;
 
@@ -181,8 +203,12 @@ public class GroupShootController : MonoBehaviour
             if (!groupCtrl.IsGroupFull())
                 groupCtrl.InstantiateNewAgent();
 
-        canShoot = true;
-        groupCtrl.GetGroupMovementController().SetCanMove(true);
-        OnReloadingEnd?.Invoke();
+        EndReloading();
+    }
+
+    private void OnDisable()
+    {
+        if (groupCtrl != null)
+            groupCtrl.OnGroupDead -= EndReloading;
     }
 }

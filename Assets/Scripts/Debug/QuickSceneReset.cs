@@ -1,23 +1,61 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class QuickSceneReset : MonoBehaviour
 {
-    private static QuickSceneReset i;
+    GroupController groupCtrl;
 
-    [SerializeField]
-    private KeyCode resetSceneKey;
-    [SerializeField]
-    private KeyCode quitKey;
-
-    void Update()
+    public void Setup(GroupController _groupCtrl)
     {
-        if (Input.GetKeyDown(quitKey))
-            Application.Quit();
+        groupCtrl = _groupCtrl;
+        groupCtrl.OnGroupDead += HandleOnGroupDead;
+    }
 
-        if (Input.GetKeyDown(resetSceneKey))
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    private void HandleOnGroupDead()
+    {
+        Scene sceneToReload = new Scene();
+        for (int i = 0; i < SceneManager.sceneCount; i++)
+        {
+            Scene currentScene = SceneManager.GetSceneAt(i);
+            if (currentScene.name != "Swarm")
+            {
+                sceneToReload = currentScene;
+                break;
+            }
+        }
+
+        SceneManager.sceneUnloaded += HandleOnSceneUnloaded;
+        SceneManager.UnloadSceneAsync(sceneToReload);
+    }
+
+    private void HandleOnSceneUnloaded(Scene _scene)
+    {
+        SceneManager.sceneUnloaded -= HandleOnSceneUnloaded;
+        SceneManager.sceneLoaded += HandleOnSceneLoaded;
+
+        SceneManager.LoadScene(_scene.name, LoadSceneMode.Additive);
+    }
+
+    private void HandleOnSceneLoaded(Scene _scene, LoadSceneMode _mode)
+    {
+        SceneManager.sceneLoaded -= HandleOnSceneLoaded;
+        SceneManager.SetActiveScene(_scene);
+        groupCtrl.AgentsSetup();
+        NewSceneSetup();
+    }
+
+    private void NewSceneSetup()
+    {
+        LevelManager newLvlMng = FindObjectOfType<LevelManager>();
+        newLvlMng.Setup();
+    }
+
+    private void OnDisable()
+    {
+        if (groupCtrl != null)
+            groupCtrl.OnGroupDead -= HandleOnGroupDead;
     }
 }
