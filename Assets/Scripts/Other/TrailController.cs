@@ -130,10 +130,7 @@ public class TrailController : MonoBehaviour
     {
         AgentController agent = other.GetComponent<AgentController>();
         if (agent != null)
-        {
             OnAgentHit?.Invoke(agent);
-            Debug.Log("Hit agent");
-        }
     }
 
     private void OnDisable()
