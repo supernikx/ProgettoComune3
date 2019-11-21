@@ -23,11 +23,11 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 0
   exposure:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 0.1
   multiplier:
-    m_OverrideState: 0
-    m_Value: 1
+    m_OverrideState: 1
+    m_Value: 0.25
     min: 0
   upperHemisphereLuxValue:
     m_OverrideState: 0
@@ -48,25 +48,25 @@ MonoBehaviour:
     m_Value: 0
   top:
     m_OverrideState: 1
-    m_Value: {r: 0.11974902, g: 0.11974902, b: 0.3679245, a: 1}
+    m_Value: {r: 0.05660379, g: 0.04083416, b: 0.006140978, a: 1}
     hdr: 1
     showAlpha: 0
     showEyeDropper: 1
   middle:
     m_OverrideState: 1
-    m_Value: {r: 0.3, g: 0.7, b: 1, a: 1}
+    m_Value: {r: 0.4528302, g: 0.29640988, b: 0.05339978, a: 1}
     hdr: 1
     showAlpha: 0
     showEyeDropper: 1
   bottom:
     m_OverrideState: 1
-    m_Value: {r: 1, g: 1, b: 1, a: 1}
+    m_Value: {r: 0.009433985, g: 0.004800147, b: 0.00022249961, a: 1}
     hdr: 1
     showAlpha: 0
     showEyeDropper: 1
   gradientDiffusion:
-    m_OverrideState: 0
-    m_Value: 1
+    m_OverrideState: 1
+    m_Value: -3.82
 --- !u!114 &-6652044745738411356
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -88,8 +88,8 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 0
   fogType:
-    m_OverrideState: 0
-    m_Value: 2
+    m_OverrideState: 1
+    m_Value: 3
 --- !u!114 &-1056301454687717456
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3df29e7cc05fbec4aa43e06ea875565d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   m_AdvancedMode: 0
   rotation:
     m_OverrideState: 1
@@ -325,7 +325,7 @@ MonoBehaviour:
     max: 1
   maxFogDistance:
     m_OverrideState: 1
-    m_Value: 5000
+    m_Value: 200
     min: 0
   mipFogMaxMip:
     m_OverrideState: 1
@@ -342,7 +342,7 @@ MonoBehaviour:
     min: 0
   fogDistance:
     m_OverrideState: 1
-    m_Value: 200
+    m_Value: 300
     min: 0
   fogBaseHeight:
     m_OverrideState: 1
