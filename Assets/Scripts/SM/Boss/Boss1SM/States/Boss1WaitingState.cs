@@ -13,9 +13,17 @@ public class Boss1WaitingState : Boss1StateBase
     private Vector2 waitTimeRange;
 
     /// <summary>
+    /// Riferimento al GroupController
+    /// </summary>
+    private GroupController groupCtrl;
+    /// <summary>
     /// Riferimento al BossController
     /// </summary>
     private Boss1Controller bossCtrl;
+    /// <summary>
+    /// Riferimento al BossCollisionController
+    /// </summary>
+    private BossCollisionController collisionCtrl;
     /// <summary>
     /// Riferimento al LifeController
     /// </summary>
@@ -35,8 +43,10 @@ public class Boss1WaitingState : Boss1StateBase
 
     public override void Enter()
     {
+        groupCtrl = context.GetLevelManager().GetGroupController();
         bossCtrl = context.GetBossController();
         lifeCtrl = bossCtrl.GetBossLifeController();
+        collisionCtrl = bossCtrl.GetBossCollisionController();
         bossPhaseCtrl = bossCtrl.GetBossPhaseController();
 
         timer = 0;
@@ -45,6 +55,7 @@ public class Boss1WaitingState : Boss1StateBase
         bossPhaseCtrl.OnSecondPhaseStart += HandleOnSecondPhaseStart;
         bossPhaseCtrl.OnThirdPhaseStart += HandleOnThirdPhaseStart;
         lifeCtrl.OnBossDead += HandleOnBossDead;
+        collisionCtrl.OnAgentHit += HandleOnAgentHit;
     }
 
     public override void Tick()
@@ -55,6 +66,14 @@ public class Boss1WaitingState : Boss1StateBase
     }
 
     #region Handlers
+    /// <summary>
+    /// Funzione che gestisce l'evento collisionCtrl.OnAgentHit
+    /// <param name="obj"></param>
+    private void HandleOnAgentHit(AgentController _agent)
+    {
+        groupCtrl.RemoveAgent(_agent);
+    }
+
     /// <summary>
     /// Funzione che gestisce l'evento di morte del Boss
     /// </summary>
@@ -90,6 +109,9 @@ public class Boss1WaitingState : Boss1StateBase
 
         if (lifeCtrl != null)
             lifeCtrl.OnBossDead -= HandleOnBossDead;
+
+        if(collisionCtrl != null)
+            collisionCtrl.OnAgentHit -= HandleOnAgentHit;
 
         bossPhaseCtrl = null;
         lifeCtrl = null;

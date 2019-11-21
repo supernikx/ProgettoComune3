@@ -128,8 +128,8 @@ public class Boss1JumpState : Boss1StateBase
             distanceToTravel = Vector3.Distance(landingPosition, fakeBossPos);
             currentStatePhase = StatePhases.Moving;
         }
-
-        bossCtrl.transform.position = Vector3.MoveTowards(bossCtrl.transform.position, bossCtrl.transform.position + Vector3.up, raisingSpeed * Time.deltaTime);
+        else
+            bossCtrl.transform.position = Vector3.MoveTowards(bossCtrl.transform.position, bossCtrl.transform.position + Vector3.up, raisingSpeed * Time.deltaTime);
     }
 
     /// <summary>
@@ -142,8 +142,8 @@ public class Boss1JumpState : Boss1StateBase
         {
             currentStatePhase = StatePhases.Landing;
         }
-
-        bossCtrl.transform.position = Vector3.MoveTowards(bossCtrl.transform.position, bossCtrl.transform.position + bossCtrl.transform.forward, movementSpeed * Time.deltaTime);
+        else
+            bossCtrl.transform.position = Vector3.MoveTowards(bossCtrl.transform.position, bossCtrl.transform.position + bossCtrl.transform.forward, movementSpeed * Time.deltaTime);
     }
 
     /// <summary>
@@ -158,8 +158,8 @@ public class Boss1JumpState : Boss1StateBase
             bossCtrl.transform.position = fiexdBossPosition;
             Complete();
         }
-
-        bossCtrl.transform.position = Vector3.MoveTowards(bossCtrl.transform.position, bossCtrl.transform.position - Vector3.up, landingSpeed * Time.deltaTime);
+        else
+            bossCtrl.transform.position = Vector3.MoveTowards(bossCtrl.transform.position, bossCtrl.transform.position - Vector3.up, landingSpeed * Time.deltaTime);
     }
 
     /// <summary>

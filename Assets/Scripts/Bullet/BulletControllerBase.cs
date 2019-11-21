@@ -54,6 +54,8 @@ public abstract class BulletControllerBase : MonoBehaviour, IPoolObject
     /// </summary>
     public void PoolInit()
     {
+        collider = GetComponent<Collider>();
+        collider.enabled = false;
         return;
     }
     #endregion
@@ -74,6 +76,10 @@ public abstract class BulletControllerBase : MonoBehaviour, IPoolObject
     /// bool che idetifica se il bullet è setuppato o no
     /// </summary>
     protected bool isSetupped = false;
+    /// <summary>
+    /// Riferimento al collider
+    /// </summary>
+    protected new Collider collider;
 
     /// <summary>
     /// Funzione che esegue il setup
@@ -81,6 +87,7 @@ public abstract class BulletControllerBase : MonoBehaviour, IPoolObject
     public virtual void Setup()
     {
         spawnPosition = transform.position;
+        collider.enabled = true;
         isSetupped = true;
         OnObjectSpawn?.Invoke(this);
     }
@@ -101,6 +108,7 @@ public abstract class BulletControllerBase : MonoBehaviour, IPoolObject
     /// </summary>
     protected virtual void BulletDestroy()
     {
+        collider.enabled = false;
         isSetupped = false;
         OnObjectDestroy?.Invoke(this);
     }
