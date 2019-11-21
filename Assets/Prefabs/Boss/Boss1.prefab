@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 1142149463027168232}
   - component: {fileID: 1142149463027168235}
   - component: {fileID: 1142149463027168234}
-  m_Layer: 0
+  - component: {fileID: 1133080545}
+  m_Layer: 12
   m_Name: Graphic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cd1186dcc9c57d84696e4f510facfca8, type: 2}
+  - {fileID: 2100000, guid: e923a3e0a1d134d4aaad0c2bda260ad1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -78,6 +79,24 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &1133080545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1142149463027168228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2513a664465cf74baaa09c0af044143, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Presets: 1
+  m_EffectIntensity: 1
+  m_Damping: 0.85
+  m_Mass: 2
+  m_Stiffness: 0.5
+  sleeping: 1
 --- !u!1 &1142149463609591416
 GameObject:
   m_ObjectHideFlags: 0
@@ -98,7 +117,7 @@ GameObject:
   - component: {fileID: 1142149463609591412}
   - component: {fileID: 2865052796054123418}
   - component: {fileID: 1527741189524114676}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Boss1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -265,9 +284,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65f18d041e6909a49a6159ab95e1ae27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trailControllerPrefab: {fileID: 0}
-  trailDespawnDelayTime: 0
-  trailDespawnTime: 0
+  trailControllerPrefab: {fileID: 2952743934301057762, guid: 3a4e77b4691139b499f9bd7f16370bd0,
+    type: 3}
+  trailDespawnDelayTime: 1
+  trailDespawnTime: 5
 --- !u!114 &1527741189524114676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -287,8 +307,7 @@ MonoBehaviour:
   explosionUpward: 1
   cubesDestroyDelay: 5
   piceMaterials:
-  - {fileID: 2100000, guid: efcbd9e79e3047442a338543f63b541a, type: 2}
-  - {fileID: 2100000, guid: 5016340e36c21b545b0a740cb7073001, type: 2}
+  - {fileID: 2100000, guid: e923a3e0a1d134d4aaad0c2bda260ad1, type: 2}
 --- !u!1 &9001343174267503412
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,7 +317,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9001343174267503413}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Point 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -328,7 +347,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9001343174321018443}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Point 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -358,7 +377,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9001343174396929676}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Point 8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -388,7 +407,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9001343174832846500}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Point 7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -418,7 +437,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9001343174953313149}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Point 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -448,7 +467,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9001343175121717408}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Point 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -478,7 +497,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9001343175384891722}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Point 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -508,7 +527,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9001343175590223588}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ShootPoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -546,7 +565,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9001343176161086571}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Point 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}

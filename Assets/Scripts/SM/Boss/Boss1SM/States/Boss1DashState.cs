@@ -47,6 +47,10 @@ public class Boss1DashState : Boss1StateBase
     /// Distanza percorsa
     /// </summary>
     private float distanceTraveled;
+    /// <summary>
+    /// Vecchio dato distanza percorsa
+    /// </summary>
+    private float oldDistanceTraveled;
 
     public override void Enter()
     {
@@ -72,14 +76,21 @@ public class Boss1DashState : Boss1StateBase
 
     public override void Tick()
     {
+        oldDistanceTraveled = distanceTraveled;
         distanceTraveled += movementSpeed * Time.deltaTime;
         if (distanceTraveled >= maxMoveDistance)
+        {
+            float remamingDistance = maxMoveDistance - oldDistanceTraveled;
+            bossCtrl.transform.position = Vector3.MoveTowards(bossCtrl.transform.position, bossCtrl.transform.position + bossCtrl.transform.forward, remamingDistance * Time.deltaTime);
             Complete();
+        }
+        else
+        {
+            bossCtrl.transform.position = Vector3.MoveTowards(bossCtrl.transform.position, bossCtrl.transform.position + bossCtrl.transform.forward, movementSpeed * Time.deltaTime);
 
-        bossCtrl.transform.position = Vector3.MoveTowards(bossCtrl.transform.position, bossCtrl.transform.position + bossCtrl.transform.forward, movementSpeed * Time.deltaTime);
-
-        if (leaveTrail)
-            trailController.UpdateLastTrail();
+            if (leaveTrail)
+                trailController.UpdateLastTrail();
+        }
     }
 
 
