@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.04720289, g: 0.06655227, b: 0.10552798, a: 1}
+  m_IndirectSpecularColor: {r: 0.04720277, g: 0.06655191, b: 0.105527505, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -212,11 +212,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cameras
       objectReference: {fileID: 0}
-    - target: {fileID: 7142180729208085619, guid: f9ae4e3063e5af84ba9ba163ad646006,
-        type: 3}
-      propertyPath: m_ScreenY
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 7142180729832148720, guid: f9ae4e3063e5af84ba9ba163ad646006,
         type: 3}
       propertyPath: m_Follow
@@ -251,16 +246,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: -41.535027
-      objectReference: {fileID: 0}
-    - target: {fileID: 7972081130191460076, guid: f9ae4e3063e5af84ba9ba163ad646006,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 137.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7972081130191460076, guid: f9ae4e3063e5af84ba9ba163ad646006,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -33
       objectReference: {fileID: 0}
     - target: {fileID: 7972081130191460077, guid: f9ae4e3063e5af84ba9ba163ad646006,
         type: 3}
@@ -346,6 +331,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7972081130191460076, guid: f9ae4e3063e5af84ba9ba163ad646006,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 137.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7972081130191460076, guid: f9ae4e3063e5af84ba9ba163ad646006,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -33
+      objectReference: {fileID: 0}
+    - target: {fileID: 7142180729208085619, guid: f9ae4e3063e5af84ba9ba163ad646006,
+        type: 3}
+      propertyPath: m_ScreenY
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9ae4e3063e5af84ba9ba163ad646006, type: 3}
@@ -443,7 +443,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Profile: {fileID: 11400000, guid: 3a1bd61c953f647418368dca81e1813d, type: 2}
   m_StaticLightingSkyUniqueID: 2
-  m_SkySettings: {fileID: 924082737}
+  m_SkySettings: {fileID: 974881863}
   m_SkySettingsFromProfile: {fileID: 7797225166117215015, guid: 3a1bd61c953f647418368dca81e1813d,
     type: 2}
 --- !u!114 &466092891
@@ -543,27 +543,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2865052796054123418, guid: 5acb97dd4cc966a48a2249282232d8f1,
-        type: 3}
-      propertyPath: trailControllerPrefab
-      value: 
-      objectReference: {fileID: 2952743934301057762, guid: 3a4e77b4691139b499f9bd7f16370bd0,
-        type: 3}
-    - target: {fileID: 2865052796054123418, guid: 5acb97dd4cc966a48a2249282232d8f1,
-        type: 3}
-      propertyPath: trailDespawnTime
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2865052796054123418, guid: 5acb97dd4cc966a48a2249282232d8f1,
-        type: 3}
-      propertyPath: trailDespawnDelayTime
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1142149463609591393, guid: 5acb97dd4cc966a48a2249282232d8f1,
-        type: 3}
-      propertyPath: bossStartLife
-      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5acb97dd4cc966a48a2249282232d8f1, type: 3}
@@ -817,7 +796,7 @@ Transform:
   m_Father: {fileID: 34982121}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &924082737
+--- !u!114 &974881863
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
