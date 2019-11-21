@@ -74,6 +74,10 @@ public class Boss1JumpState : Boss1StateBase
     /// Distanza percorsa
     /// </summary>
     private float distanceTraveled;
+    /// <summary>
+    /// Distanza percorsa
+    /// </summary>
+    private float oldDistanceTraveled;
 
     public override void Enter()
     {
@@ -137,9 +141,12 @@ public class Boss1JumpState : Boss1StateBase
     /// </summary>
     private void MovingBehaviour()
     {
+        oldDistanceTraveled = distanceTraveled;
         distanceTraveled += movementSpeed * Time.deltaTime;
         if (distanceTraveled >= distanceToTravel)
         {
+            float remamingDistance = distanceToTravel - oldDistanceTraveled;
+            bossCtrl.transform.position = Vector3.MoveTowards(bossCtrl.transform.position, bossCtrl.transform.position + bossCtrl.transform.forward, remamingDistance * Time.deltaTime);
             currentStatePhase = StatePhases.Landing;
         }
         else
