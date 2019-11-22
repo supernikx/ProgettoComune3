@@ -89,7 +89,7 @@ public class GroupShootController : MonoBehaviour
 
     private void Update()
     {
-        if (!groupCtrl.IsSetuppedAndEnabled())
+        if (!groupCtrl.IsSetuppedAndEnabled() || !canShoot)
             return;
 
         aimFeedback.UpdateArrow(groupCtrl.GetGroupCenterPoint(), shootVector);
@@ -100,7 +100,7 @@ public class GroupShootController : MonoBehaviour
     /// </summary>
     public void OnLook(InputValue _value)
     {
-        if (!groupCtrl.IsSetuppedAndEnabled())
+        if (!groupCtrl.IsSetuppedAndEnabled() || !canShoot)
             return;
 
         if (playerInput.currentControlScheme == "Gamepad")

@@ -81,7 +81,7 @@ public class Boss1DashState : Boss1StateBase
         if (distanceTraveled >= maxMoveDistance)
         {
             float remamingDistance = maxMoveDistance - oldDistanceTraveled;
-            bossCtrl.transform.position = Vector3.MoveTowards(bossCtrl.transform.position, bossCtrl.transform.position + bossCtrl.transform.forward, remamingDistance * Time.deltaTime);
+            bossCtrl.transform.position = Vector3.MoveTowards(bossCtrl.transform.position, bossCtrl.transform.position + bossCtrl.transform.forward, remamingDistance);
             Complete();
         }
         else

@@ -146,7 +146,7 @@ public class Boss1JumpState : Boss1StateBase
         if (distanceTraveled >= distanceToTravel)
         {
             float remamingDistance = distanceToTravel - oldDistanceTraveled;
-            bossCtrl.transform.position = Vector3.MoveTowards(bossCtrl.transform.position, bossCtrl.transform.position + bossCtrl.transform.forward, remamingDistance * Time.deltaTime);
+            bossCtrl.transform.position = Vector3.MoveTowards(bossCtrl.transform.position, bossCtrl.transform.position + bossCtrl.transform.forward, remamingDistance);
             currentStatePhase = StatePhases.Landing;
         }
         else
