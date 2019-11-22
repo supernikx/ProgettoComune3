@@ -132,7 +132,7 @@ public class RubberEffect : MonoBehaviour
 
     void FixedUpdate()
     {
-        if ((this.transform.position != last_world_position))// || this.transform.rotation != last_world_rotation))
+        if ((this.transform.position != last_world_position) || (this.transform.rotation != last_world_rotation))
         {
             WakeUp();
         }
@@ -169,7 +169,7 @@ public class RubberEffect : MonoBehaviour
 
             WorkingMesh.vertices = V3_WorkingMesh;
 
-            if (this.transform.position == last_world_position && v_sleeping_counter == vr.Length)
+            if (this.transform.position == last_world_position && this.transform.rotation == last_world_rotation && v_sleeping_counter == vr.Length)
             {
                 sleeping = true;
             }
