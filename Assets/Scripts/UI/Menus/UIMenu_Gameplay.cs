@@ -13,8 +13,12 @@ public class UIMenu_Gameplay : UIMenu_Base
     //Riferimento all'immagine che deve apparire nel momento della ricarica
     [SerializeField]
     private Image reloadingImage;
+    //Riferimento al pannello del Boss
     [SerializeField]
     private UISubmenu_Boss bossPanel;
+    //Riferimento al pannello di vittoria
+    [SerializeField]
+    private UISubmenu_Win winPanel;
 
     /// <summary>
     /// Riferimento al level scene controller
@@ -41,6 +45,7 @@ public class UIMenu_Gameplay : UIMenu_Base
         base.CustomSetup(_manage);
         bossPanel.gameObject.SetActive(false);
         reloadingImage.gameObject.SetActive(false);
+        winPanel.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -127,10 +132,14 @@ public class UIMenu_Gameplay : UIMenu_Base
     /// <summary>
     /// Funzione che gestisce l'evento di fine della bossfight
     /// </summary>
-    /// <param name="obj"></param>
-    private void HandleOnBossFightEnd(BossControllerBase _bossCtrl)
+    /// <param name="_bossCtrl"></param>
+    /// /// <param name="_win"></param>
+    private void HandleOnBossFightEnd(BossControllerBase _bossCtrl, bool _win)
     {
         bossPanel.gameObject.SetActive(false);
+
+        if (_win)
+            winPanel.gameObject.SetActive(true);
     }
 
     /// <summary>
