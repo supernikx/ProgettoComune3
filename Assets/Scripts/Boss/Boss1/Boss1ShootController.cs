@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +10,7 @@ public class Boss1ShootController : MonoBehaviour
 {
     [Header("Shoot Settings")]
     [SerializeField]
-    private List<Transform> shootPoints;
+    private List<Transform> shootPointsParent;
 
     /// <summary>
     /// Riferimento al BossController
@@ -29,8 +30,10 @@ public class Boss1ShootController : MonoBehaviour
     /// <summary>
     /// Funzione che spara un proiettile per ogni shoot point
     /// </summary>
-    public void Shoot()
+    public void Shoot(int _shootPointIndex)
     {
+        _shootPointIndex = Mathf.Clamp(_shootPointIndex, 0, shootPointsParent.Count - 1);
+        List<Transform> shootPoints = shootPointsParent[_shootPointIndex].GetComponentsInChildren<Transform>().ToList();
         if (bossCtrl.IsSetuppedAndEnabled())
         {
             foreach (Transform point in shootPoints)

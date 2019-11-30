@@ -36,8 +36,6 @@ public class Boss1BulletController : BulletControllerBase
         {
             if (bossCollisionCtrl != null)
                 bossCollisionCtrl.OnAgentHit?.Invoke(agent);
-
-            BulletDestroy();
         }
 
         if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))

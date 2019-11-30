@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,10 @@ using UnityEngine;
 /// </summary>
 public class Boss1ShootState : Boss1StateBase
 {
+    [Header("State Settings")]
+    [SerializeField]
+    private int shootPointIndex;
+
     /// <summary>
     /// Riferimento al GroupController
     /// </summary>
@@ -37,7 +42,7 @@ public class Boss1ShootState : Boss1StateBase
         groupCtrl = context.GetLevelManager().GetGroupController();
 
         Boss1ShootController shootCtrl = context.GetBossController().GetBossShootController();
-        shootCtrl.Shoot();
+        shootCtrl.Shoot(shootPointIndex - 1);
 
         bossPhaseCtrl.OnSecondPhaseStart += HandleOnSecondPhaseStart;
         bossPhaseCtrl.OnThirdPhaseStart += HandleOnThirdPhaseStart;
