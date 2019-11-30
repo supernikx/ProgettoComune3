@@ -77,7 +77,6 @@ public class Boss1DashState : Boss1StateBase
     public override void Tick()
     {
         oldDistanceTraveled = distanceTraveled;
-        distanceTraveled += movementSpeed * Time.deltaTime;
         if (distanceTraveled >= maxMoveDistance)
         {
             float remamingDistance = maxMoveDistance - oldDistanceTraveled;
@@ -86,7 +85,9 @@ public class Boss1DashState : Boss1StateBase
         }
         else
         {
-            bossCtrl.transform.position = Vector3.MoveTowards(bossCtrl.transform.position, bossCtrl.transform.position + bossCtrl.transform.forward, movementSpeed * Time.deltaTime);
+            Vector3 newPos = Vector3.MoveTowards(bossCtrl.transform.position, bossCtrl.transform.position + bossCtrl.transform.forward, movementSpeed * Time.deltaTime);
+            distanceTraveled += Vector3.Distance(newPos, bossCtrl.transform.position);
+            bossCtrl.transform.position = newPos;
 
             if (leaveTrail)
                 trailController.UpdateLastTrail();
