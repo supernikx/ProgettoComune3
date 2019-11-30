@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -8,6 +8,13 @@ using UnityEngine.InputSystem;
 /// </summary>
 public class GroupMovementController : MonoBehaviour
 {
+    #region Actions
+    /// <summary>
+    /// Evento che notifica che il gruppo si sta muovendo
+    /// </summary>
+    public Action OnGroupMove;
+    #endregion
+
     /// <summary>
     /// Rifeirmento al Group controller
     /// </summary>
@@ -64,6 +71,8 @@ public class GroupMovementController : MonoBehaviour
 
         foreach (AgentController agent in agents)
             agent.GetAgentMovementController().Move(movementVector.normalized, true);
+
+        OnGroupMove?.Invoke();
     }
 
     #region API
@@ -77,5 +86,13 @@ public class GroupMovementController : MonoBehaviour
         canMove = _canMove;
     }
     #endregion
+
+    /// <summary>
+    /// Funzione che resetta il vettore di moviemento a 0
+    /// </summary>
+    public void ResetMovementVelocity()
+    {
+        movementVector = Vector3.zero;
+    }
     #endregion
 }

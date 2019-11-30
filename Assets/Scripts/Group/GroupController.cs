@@ -26,6 +26,9 @@ public class GroupController : MonoBehaviour
     //Riferimento al prefab dell'agent
     [SerializeField]
     private AgentController agentPrefab;
+    //Layer del terreno
+    [SerializeField]
+    private LayerMask groundLayer;
 
     [Header("Group Settings")]
     //Numero massimo di agents che possono essere presenti
@@ -270,6 +273,8 @@ public class GroupController : MonoBehaviour
         Vector3 groupCenterPoint = GetGroupCenterPoint();
         Vector2 randomCirclePoint = UnityEngine.Random.insideUnitCircle * spawnRange;
         Vector3 randomSpawnPosition = new Vector3(randomCirclePoint.x + groupCenterPoint.x, groupCenterPoint.y, randomCirclePoint.y + groupCenterPoint.z);
+        randomSpawnPosition = CheckPointIsInsideGround(randomSpawnPosition);
+
         AgentController newAgent = PoolManager.instance.GetPooledObject(ObjectTypes.Agent, gameObject).GetComponent<AgentController>();
         if (newAgent != null)
         {
@@ -338,5 +343,32 @@ public class GroupController : MonoBehaviour
 
         oldGroupCenterPos = groupCenterObject.transform.position;
         return centerPoint / agents.Count;
+    }
+
+    /// <summary>
+    /// Funzione che controlla se il punto è dentro il ground, se false fixa la posizione
+    /// </summary>
+    /// <param name="_point"></param>
+    /// <returns></returns>
+    private Vector3 CheckPointIsInsideGround(Vector3 _point)
+    {
+        //Controllo se il punto è sul terreno
+        Ray ray = new Ray(_point, Vector3.down);
+        if (Physics.Raycast(ray, 5f, groundLayer))
+            return _point;
+
+        //Se non è sul terreno prendo il punto opposto
+        Vector3 groupCenter = GetGroupCenterPoint();
+        Vector3 pointDir = (_point - groupCenter).normalized;
+        float pointDis = Vector3.Distance(groupCenter, _point);
+        Vector3 oppositePoint = groupCenter + (-pointDir * pointDis);
+
+        //Controllo se il punto opposto è sul terreno
+        Ray oppositeRay = new Ray(oppositePoint, Vector3.down);
+        if (Physics.Raycast(oppositeRay, 5f, groundLayer))
+            return oppositePoint;
+
+        //Se anche il punto opposto è fuori dal terreno spawna in centro
+        return groupCenter;
     }
 }

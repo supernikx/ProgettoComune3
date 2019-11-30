@@ -142,15 +142,18 @@ public class Boss1JumpState : Boss1StateBase
     private void MovingBehaviour()
     {
         oldDistanceTraveled = distanceTraveled;
-        distanceTraveled += movementSpeed * Time.deltaTime;
         if (distanceTraveled >= distanceToTravel)
         {
-            float remamingDistance = distanceToTravel - oldDistanceTraveled;
-            bossCtrl.transform.position = Vector3.MoveTowards(bossCtrl.transform.position, bossCtrl.transform.position + bossCtrl.transform.forward, remamingDistance * Time.deltaTime);
+            float remamingDistance = Mathf.Abs(distanceToTravel - oldDistanceTraveled);
+            bossCtrl.transform.position = Vector3.MoveTowards(bossCtrl.transform.position, bossCtrl.transform.position + bossCtrl.transform.forward, remamingDistance);
             currentStatePhase = StatePhases.Landing;
         }
         else
-            bossCtrl.transform.position = Vector3.MoveTowards(bossCtrl.transform.position, bossCtrl.transform.position + bossCtrl.transform.forward, movementSpeed * Time.deltaTime);
+        {
+            Vector3 newPos = Vector3.MoveTowards(bossCtrl.transform.position, bossCtrl.transform.position + bossCtrl.transform.forward, movementSpeed * Time.deltaTime);
+            distanceTraveled += Vector3.Distance(newPos, bossCtrl.transform.position);
+            bossCtrl.transform.position = newPos;
+        }
     }
 
     /// <summary>

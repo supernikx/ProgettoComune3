@@ -39,11 +39,18 @@ public class GroupShootController : MonoBehaviour
     //Numero di personaggi che ricarica
     [SerializeField]
     private float reloadingAgents;
+    //Se true la ricarica può essere interrotta altrimenti no
+    [SerializeField]
+    private bool canBeInterruped;
 
     /// <summary>
     /// Riferimento al group controller
     /// </summary>
     private GroupController groupCtrl;
+    /// <summary>
+    /// Riferimento al group movement controller
+    /// </summary>
+    private GroupMovementController groupMovementCtrl;
     /// <summary>
     /// Riferimento al PlayerInput
     /// </summary>
@@ -73,6 +80,7 @@ public class GroupShootController : MonoBehaviour
     {
         aimFeedback = FindObjectOfType<AimArrowFeedback>();
         groupCtrl = _groupCtrl;
+        groupMovementCtrl = groupCtrl.GetGroupMovementController();
         playerInput = groupCtrl.GetPlayerInput();
 
         groupCtrl.OnGroupDead += EndReloading;
@@ -161,7 +169,14 @@ public class GroupShootController : MonoBehaviour
     {
         if (!groupCtrl.IsGroupFull())
         {
-            groupCtrl.GetGroupMovementController().SetCanMove(false);
+            if (!canBeInterruped)
+                groupCtrl.GetGroupMovementController().SetCanMove(false);
+            else
+            {
+                groupMovementCtrl.OnGroupMove += EndReloading;
+                groupMovementCtrl.ResetMovementVelocity();
+            }
+
             canShoot = false;
             OnReloadingStart?.Invoke(reloadingTime);
 
@@ -178,8 +193,12 @@ public class GroupShootController : MonoBehaviour
         if (reloadingRoutine != null)
             StopCoroutine(reloadingRoutine);
 
+        if (!canBeInterruped)
+            groupCtrl.GetGroupMovementController().SetCanMove(true);
+        else
+            groupMovementCtrl.OnGroupMove -= EndReloading;
+
         canShoot = true;
-        groupCtrl.GetGroupMovementController().SetCanMove(true);
         OnReloadingEnd?.Invoke();
     }
 
@@ -210,5 +229,8 @@ public class GroupShootController : MonoBehaviour
     {
         if (groupCtrl != null)
             groupCtrl.OnGroupDead -= EndReloading;
+
+        if (groupMovementCtrl != null)
+            groupMovementCtrl.OnGroupMove -= EndReloading;
     }
 }

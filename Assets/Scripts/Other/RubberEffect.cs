@@ -132,7 +132,7 @@ public class RubberEffect : MonoBehaviour
 
     void FixedUpdate()
     {
-        if ((this.transform.position != last_world_position || this.transform.rotation != last_world_rotation))
+        if ((this.transform.position != last_world_position) || (this.transform.rotation != last_world_rotation))
         {
             WakeUp();
         }
@@ -180,19 +180,6 @@ public class RubberEffect : MonoBehaviour
             }
         }
     }
-    /*
-    void OnDrawGizmos()
-    {
-        if (vr == null){
-            return;
-        }
-
-        for (int i = 0; i < vr.Length; i++)
-        {
-            Gizmos.color = new Color(vr[i].v_intensity, vr[i].v_intensity, vr[i].v_intensity);
-            Gizmos.DrawCube(transform.TransformPoint(WorkingMesh.vertices[vr[i].indexId]), Vector3.one * 0.05f);
-        }
-    }*/
 
     void checkPreset()
     {

@@ -16,7 +16,7 @@ public class LevelBossController : MonoBehaviour
     /// <summary>
     /// Evento che notifica la fine della BossFight
     /// </summary>
-    public static Action<BossControllerBase> OnBossFightEnd;
+    public static Action<BossControllerBase, bool> OnBossFightEnd;
     #endregion
 
     /// <summary>
@@ -78,7 +78,7 @@ public class LevelBossController : MonoBehaviour
         if (currentBoss != null && _deadBoss == currentBoss)
         {
             currentBoss.OnBossDead -= HandleOnBossDead;
-            OnBossFightEnd?.Invoke(currentBoss);
+            OnBossFightEnd?.Invoke(currentBoss, true);
             currentBoss = null;
         }
     }
@@ -94,7 +94,7 @@ public class LevelBossController : MonoBehaviour
         if (groupCtrl != null)
             groupCtrl.OnGroupDead -= HandleOnGroupDead;
 
-        OnBossFightEnd?.Invoke(currentBoss);
+        OnBossFightEnd?.Invoke(currentBoss, false);
         currentBoss = null;
     }
     #endregion

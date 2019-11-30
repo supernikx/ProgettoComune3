@@ -34,6 +34,7 @@ public class Boss1ShootState : Boss1StateBase
         lifeCtrl = bossCtrl.GetBossLifeController();
         collisionCtrl = bossCtrl.GetBossCollisionController();
         bossPhaseCtrl = bossCtrl.GetBossPhaseController();
+        groupCtrl = context.GetLevelManager().GetGroupController();
 
         Boss1ShootController shootCtrl = context.GetBossController().GetBossShootController();
         shootCtrl.Shoot();
