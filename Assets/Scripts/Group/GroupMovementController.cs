@@ -86,5 +86,13 @@ public class GroupMovementController : MonoBehaviour
         canMove = _canMove;
     }
     #endregion
+
+    /// <summary>
+    /// Funzione che resetta il vettore di moviemento a 0
+    /// </summary>
+    public void ResetMovementVelocity()
+    {
+        movementVector = Vector3.zero;
+    }
     #endregion
 }

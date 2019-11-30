@@ -172,7 +172,10 @@ public class GroupShootController : MonoBehaviour
             if (!canBeInterruped)
                 groupCtrl.GetGroupMovementController().SetCanMove(false);
             else
+            {
                 groupMovementCtrl.OnGroupMove += EndReloading;
+                groupMovementCtrl.ResetMovementVelocity();
+            }
 
             canShoot = false;
             OnReloadingStart?.Invoke(reloadingTime);
