@@ -75,14 +75,15 @@ public class AgentDistanceController : MonoBehaviour
     public bool CheckExpandDistance(Vector3 _groupCenter)
     {
         Vector3 rayDirection = (transform.position - _groupCenter).normalized;
+        Vector3 origin = transform.position;
+
+        origin.y += 0.5f;
         rayDirection.y = 0;
-        Ray ray = new Ray(transform.position, rayDirection);
 
-        if (Physics.Raycast(ray, obstacleCheckRayLenght, obstaclesLayer))
-            return false;
+        Debug.DrawRay(origin, rayDirection * obstacleCheckRayLenght, Color.red);
 
-        Debug.DrawRay(transform.position, rayDirection * obstacleCheckRayLenght, Color.red);
-        return true;
+        Ray ray = new Ray(origin, rayDirection);
+        return !Physics.Raycast(ray, obstacleCheckRayLenght, obstaclesLayer);
     }
 
     /// <summary>
@@ -92,13 +93,14 @@ public class AgentDistanceController : MonoBehaviour
     public bool CheckRegroupDistance(Vector3 _groupCenter)
     {
         Vector3 rayDirection = (_groupCenter - transform.position).normalized;
+        Vector3 origin = transform.position;
+
+        origin.y += 0.5f;
         rayDirection.y = 0;
-        Ray ray = new Ray(transform.position, rayDirection);
 
-        if (Physics.Raycast(ray, obstacleCheckRayLenght, obstaclesLayer))
-            return false;
+        Debug.DrawRay(origin, rayDirection * obstacleCheckRayLenght, Color.blue);
 
-        Debug.DrawRay(transform.position, rayDirection * obstacleCheckRayLenght, Color.blue);
-        return true;
+        Ray ray = new Ray(origin, rayDirection);
+        return !Physics.Raycast(ray, obstacleCheckRayLenght, obstaclesLayer);
     }
 }
