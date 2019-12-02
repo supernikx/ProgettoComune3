@@ -32,7 +32,8 @@ public class AgentMovementController : MonoBehaviour
     /// </summary>
     /// <param name="_movementDirection"></param>
     /// <param name="_lookAtDirection"></param>
-    public void Move(Vector3 _movementDirection, bool _lookAtDirection)
+    /// <param name="_speedMultiplier"></param>
+    public void Move(Vector3 _movementDirection, bool _lookAtDirection, float _speedMultiplier = 1f)
     {
         //Se devo guardare la direzione in cui sto andando ruoto
         if (_lookAtDirection)
@@ -44,7 +45,7 @@ public class AgentMovementController : MonoBehaviour
         }
 
         //Mi muovo
-        transform.position = Vector3.MoveTowards(transform.position, transform.position + _movementDirection, movementSpeed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, transform.position + _movementDirection, movementSpeed * _speedMultiplier * Time.deltaTime);
     }
 
     #region Getter

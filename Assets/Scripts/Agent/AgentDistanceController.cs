@@ -11,7 +11,7 @@ public class AgentDistanceController : MonoBehaviour
     [Header("Agent Group Settings")]
     //Range alla distanza di raggruppamento del gruppo
     [SerializeField]
-    private Vector2 regroupDistanceRange;
+    private Vector2 groupDistanceRange;
     //Range alla distanza di espansione del gruppo
     [SerializeField]
     private Vector2 expandDistanceRange;
@@ -31,7 +31,7 @@ public class AgentDistanceController : MonoBehaviour
     /// <summary>
     /// Distanza di raggruppamento
     /// </summary>
-    private float regroupDistance;
+    private float groupDistance;
 
     /// <summary>
     /// Funzione che setup
@@ -47,16 +47,16 @@ public class AgentDistanceController : MonoBehaviour
     public void CalculateDistances()
     {
         expandDistance = UnityEngine.Random.Range(expandDistanceRange.x, expandDistanceRange.y);
-        regroupDistance = UnityEngine.Random.Range(regroupDistanceRange.x, regroupDistanceRange.y);
+        groupDistance = UnityEngine.Random.Range(groupDistanceRange.x, groupDistanceRange.y);
     }
 
     /// <summary>
     /// Funzione che ritorna la distanza da tenere quando il gruppo è in raggruppamento
     /// </summary>
     /// <returns></returns>
-    public float GetRegroupDistance()
+    public float GetGroupDistance()
     {
-        return regroupDistance;
+        return groupDistance;
     }
 
     /// <summary>
@@ -90,7 +90,7 @@ public class AgentDistanceController : MonoBehaviour
     /// Funzione che controlla se ci sono ostacoli nel tragitto di raggruppamento
     /// </summary>
     /// <param name="_groupCenter"></param>
-    public bool CheckRegroupDistance(Vector3 _groupCenter)
+    public bool CheckGroupDistance(Vector3 _groupCenter)
     {
         Vector3 rayDirection = (_groupCenter - transform.position).normalized;
         Vector3 origin = transform.position;

@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76e7d5640e7dd7d49917307dbf3a35ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  regroupDistanceRange: {x: 0.5, y: 1}
+  groupDistanceRange: {x: 0.5, y: 1}
   expandDistanceRange: {x: 2, y: 3}
   obstaclesLayer:
     serializedVersion: 2
@@ -207,6 +207,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4898873884623623286}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 002afa2f3d968204594d6b6ba0e2fba3,
+        type: 3}
+      propertyPath: m_Name
+      value: PitottinoModel
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 002afa2f3d968204594d6b6ba0e2fba3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -261,11 +266,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 002afa2f3d968204594d6b6ba0e2fba3,
-        type: 3}
-      propertyPath: m_Name
-      value: PitottinoModel
       objectReference: {fileID: 0}
     - target: {fileID: 5902419001559106108, guid: 002afa2f3d968204594d6b6ba0e2fba3,
         type: 3}

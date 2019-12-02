@@ -15,10 +15,19 @@ public class GroupMovementController : MonoBehaviour
     public Action OnGroupMove;
     #endregion
 
+    [Header("Group Movement Settings")]
+    //Variabile che identifica il moltiplicatore della velocità se il gruppo è in raggruppamento
+    [SerializeField]
+    private float groupSpeedMultiplier;
+
     /// <summary>
     /// Rifeirmento al Group controller
     /// </summary>
     private GroupController groupCtrl;
+    /// <summary>
+    /// Rifeirmento al Group Size Controller
+    /// </summary>
+    private GroupSizeController sizeCtrl;
     /// <summary>
     /// Riferimento al vettore di movimento
     /// </summary>
@@ -27,6 +36,10 @@ public class GroupMovementController : MonoBehaviour
     /// bool che identifica se il gruppo può muoversi
     /// </summary>
     private bool canMove = false;
+    /// <summary>
+    /// bool che identifica se il gruppo si sta raggruppando
+    /// </summary>
+    private bool grouping = false;
 
     /// <summary>
     /// Funzione che esegue il Setup
@@ -35,6 +48,9 @@ public class GroupMovementController : MonoBehaviour
     public void Setup(GroupController _groupCtrl)
     {
         groupCtrl = _groupCtrl;
+        sizeCtrl = groupCtrl.GetGroupSizeController();
+
+        sizeCtrl.OnGroupPressed += HandleOnGroupPressed;
         canMove = true;
     }
 
@@ -69,10 +85,20 @@ public class GroupMovementController : MonoBehaviour
         if (movementVector == Vector3.zero)
             return;
 
+        float speedMultiplier = grouping ? groupSpeedMultiplier : 1;
         foreach (AgentController agent in agents)
-            agent.GetAgentMovementController().Move(movementVector.normalized, true);
+            agent.GetAgentMovementController().Move(movementVector.normalized, true, speedMultiplier);
 
         OnGroupMove?.Invoke();
+    }
+
+    /// <summary>
+    /// Funzione che gestisce l'evento di raggruppamento
+    /// </summary>
+    /// <param name="_value"></param>
+    private void HandleOnGroupPressed(bool _value)
+    {
+        grouping = _value;
     }
 
     #region API
@@ -95,4 +121,10 @@ public class GroupMovementController : MonoBehaviour
         movementVector = Vector3.zero;
     }
     #endregion
+
+    private void OnDisable()
+    {
+        if (sizeCtrl != null)
+            sizeCtrl.OnGroupPressed += HandleOnGroupPressed;
+    }
 }

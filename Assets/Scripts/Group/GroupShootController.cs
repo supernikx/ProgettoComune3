@@ -52,6 +52,10 @@ public class GroupShootController : MonoBehaviour
     /// </summary>
     private GroupMovementController groupMovementCtrl;
     /// <summary>
+    /// Riferimento al group size controller
+    /// </summary>
+    private GroupSizeController groupSizeCtrl;
+    /// <summary>
     /// Riferimento al PlayerInput
     /// </summary>
     private PlayerInput playerInput;
@@ -81,6 +85,7 @@ public class GroupShootController : MonoBehaviour
         aimFeedback = FindObjectOfType<AimArrowFeedback>();
         groupCtrl = _groupCtrl;
         groupMovementCtrl = groupCtrl.GetGroupMovementController();
+        groupSizeCtrl = groupCtrl.GetGroupSizeController();
         playerInput = groupCtrl.GetPlayerInput();
 
         groupCtrl.OnGroupDead += EndReloading;
@@ -127,7 +132,7 @@ public class GroupShootController : MonoBehaviour
     /// </summary>
     public void OnShoot()
     {
-        if (!groupCtrl.IsSetuppedAndEnabled() || !canShoot)
+        if (!CanShoot())
             return;
 
         ShootAgent();
@@ -138,7 +143,7 @@ public class GroupShootController : MonoBehaviour
     /// </summary>
     public void OnReloading()
     {
-        if (!groupCtrl.IsSetuppedAndEnabled() || !canShoot)
+        if (!CanShoot())
             return;
 
         ReloadAgent();
@@ -223,6 +228,15 @@ public class GroupShootController : MonoBehaviour
                 groupCtrl.InstantiateNewAgent();
 
         EndReloading();
+    }
+
+    /// <summary>
+    /// Funzione che fa tutti i controlli necessari e ritorna se si può sparare
+    /// </summary>
+    /// <returns></returns>
+    private bool CanShoot()
+    {
+        return (groupCtrl.IsSetuppedAndEnabled() && canShoot && !groupSizeCtrl.IsGrouping());
     }
 
     private void OnDisable()
