@@ -11,6 +11,8 @@ public class AgentMovementController : MonoBehaviour
     //Range della velocità di movimento dell'agent
     [SerializeField]
     private Vector2 movementSpeedRange;
+    [SerializeField]
+    private LayerMask obstacleLayer;
 
     /// <summary>
     /// Velocità di movimento
@@ -24,6 +26,18 @@ public class AgentMovementController : MonoBehaviour
     public void Setup()
     {
         movementSpeed = Random.Range(movementSpeedRange.x, movementSpeedRange.y);
+    }
+
+    /// <summary>
+    /// Funzione che controlla se ci sono collisioni nel nuovo punto di moviemento
+    /// </summary>
+    /// <param name="_newPos"></param>
+    /// <returns></returns>
+    private bool CheckCollision(Vector3 _newPos)
+    {
+        float distance = Vector3.Distance(_newPos, transform.position);
+        Ray ray = new Ray(transform.position, transform.forward);
+        return Physics.Raycast(ray, distance, obstacleLayer);
     }
 
     #region API
@@ -44,12 +58,12 @@ public class AgentMovementController : MonoBehaviour
                 transform.rotation = Quaternion.LookRotation(directionToLook);
         }
 
-        //Mi muovo
-        transform.position = Vector3.MoveTowards(transform.position, transform.position + _movementDirection, movementSpeed * _speedMultiplier * Time.deltaTime);
+        //Calcolo la nuova posizione e controllo le collisioni, se non c'è niente mi muovo
+        Vector3 newPos = Vector3.MoveTowards(transform.position, transform.position + _movementDirection, movementSpeed * _speedMultiplier * Time.deltaTime);
+        if (!CheckCollision(newPos))
+            transform.position = newPos;
     }
-
     #region Getter
-
     #endregion
     #endregion
 }
