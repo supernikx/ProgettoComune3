@@ -36,8 +36,11 @@ public class AgentMovementController : MonoBehaviour
     private bool CheckCollision(Vector3 _newPos)
     {
         float distance = Vector3.Distance(_newPos, transform.position);
-        Ray ray = new Ray(transform.position, transform.forward);
-        return Physics.Raycast(ray, distance, obstacleLayer);
+        Vector3 fiexdPos = transform.position;
+        fiexdPos.y += 0.5f;
+        Ray ray = new Ray(fiexdPos, transform.forward);
+        Debug.DrawRay(fiexdPos, transform.forward);
+        return Physics.Raycast(ray, distance + 1f, obstacleLayer);
     }
 
     #region API
