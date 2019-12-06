@@ -14,10 +14,10 @@ public class PlayerBulletController : BulletControllerBase
 
     private void OnTriggerEnter(Collider other)
     {
-        BossLifeController bossLifeCtrl = other.GetComponent<BossLifeController>();
-        if (bossLifeCtrl != null)
+        IBossDamageable bossDamageable = other.GetComponent<IBossDamageable>();
+        if (bossDamageable != null)
         {
-            bossLifeCtrl.TakeDamage(bulletDamage);
+            bossDamageable.TakeDamage(bulletDamage);
             BulletDestroy();
         }
 

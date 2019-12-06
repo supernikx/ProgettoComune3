@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Classe che gestisce l'inizio della prima fase del Boss 1
+/// Classe che gestisce l'inizio della prima fase del Boss 2
 /// </summary>
-public class Boss1StartPhase1State : Boss1StateBase
+public class Boss2StartPhase1State : Boss2StateBase
 {
     public override void Enter()
     {

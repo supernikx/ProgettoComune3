@@ -1,15 +1,17 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Classe dello stato base della state machine del Boss 1
+/// Classe dello stato base della state machine del Boss 2
 /// </summary>
-public class Boss1StateBase : StateBase
+public class Boss2StateBase : StateBase
 {
     /// <summary>
     /// Riferimento sovrascritto del context
     /// </summary>
-    protected new Boss1SMController.Context context;
+    protected new Boss2SMController.Context context;
 
     /// <summary>
     /// Setup dello stato
@@ -20,6 +22,6 @@ public class Boss1StateBase : StateBase
     public override void Setup(IContext _context, Action<IState> _onStateStartCallback, Action<IState> _onStateEndCallback)
     {
         base.Setup(_context, _onStateStartCallback, _onStateEndCallback);
-        context = _context as Boss1SMController.Context;
+        context = _context as Boss2SMController.Context;
     }
 }

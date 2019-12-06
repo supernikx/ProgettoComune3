@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Classe ch gestisce la macchina a stati del Boss 1
+/// Classe ch gestisce la macchina a stati del Boss 2
 /// </summary>
-public class Boss1SMController : StateMachineBase
+public class Boss2SMController : StateMachineBase
 {
     /// <summary>
-    /// Classe che definisce il contesto della Boss1SM
+    /// Classe che definisce il contesto della Boss2SM
     /// </summary>
     public class Context : IContext
     {
         /// <summary>
         /// Riferimento al BossController
         /// </summary>
-        Boss1Controller bossCtrl;
+        Boss2Controller bossCtrl;
         /// <summary>
         /// Riferimento al controller della SM
         /// </summary>
-        Boss1SMController smController;
+        Boss2SMController smController;
         /// <summary>
         /// Riferimento al GameManager
         /// </summary>
@@ -31,7 +31,7 @@ public class Boss1SMController : StateMachineBase
         /// <param name="_bossCtrl"></param>
         /// <param name="_smController"></param>
         /// <param name="_gameMng"></param>
-        public Context(Boss1Controller _bossCtrl, Boss1SMController _smController, LevelManager _lvlMng)
+        public Context(Boss2Controller _bossCtrl, Boss2SMController _smController, LevelManager _lvlMng)
         {
             bossCtrl = _bossCtrl;
             smController = _smController;
@@ -42,7 +42,7 @@ public class Boss1SMController : StateMachineBase
         /// Funzione che ritorna il riferimento al BossController
         /// </summary>
         /// <returns></returns>
-        public Boss1Controller GetBossController()
+        public Boss2Controller GetBossController()
         {
             return bossCtrl;
         }
@@ -51,7 +51,7 @@ public class Boss1SMController : StateMachineBase
         /// Funzione che ritorna il riferimento al GameSMController
         /// </summary>
         /// <returns></returns>
-        public Boss1SMController GetSMController()
+        public Boss2SMController GetSMController()
         {
             return smController;
         }

@@ -5,7 +5,7 @@ using TMPro;
 /// <summary>
 /// Classe che gestisce la vita del Boss
 /// </summary>
-public class BossLifeController : MonoBehaviour
+public class BossLifeController : MonoBehaviour, IBossDamageable
 {
     #region Action
     /// <summary>
@@ -31,6 +31,10 @@ public class BossLifeController : MonoBehaviour
     /// Vita attuale del boss
     /// </summary>
     private int currentLife;
+    /// <summary>
+    /// Identifica se il boss può prendere danno
+    /// </summary>
+    private bool canTakeDamage = true;
 
     /// <summary>
     /// Funzione di Setup
@@ -48,7 +52,7 @@ public class BossLifeController : MonoBehaviour
     /// <param name="_damage"></param>
     public void TakeDamage(int _damage)
     {
-        if (!bossCtrl.IsSetuppedAndEnabled())
+        if (!bossCtrl.IsSetuppedAndEnabled() || !canTakeDamage)
             return;
 
         currentLife = Mathf.Clamp(currentLife - _damage, 0, bossStartLife);
@@ -75,6 +79,17 @@ public class BossLifeController : MonoBehaviour
     public int GetCurrentBossLife()
     {
         return currentLife;
+    }
+    #endregion
+
+    #region Setter
+    /// <summary>
+    /// Funzione che imposta se il boss può prendere danno
+    /// </summary>
+    /// <param name="_canTakeDamage"></param>
+    public void SetCanTakeDamage(bool _canTakeDamage)
+    {
+        canTakeDamage = _canTakeDamage;
     }
     #endregion
     #endregion
