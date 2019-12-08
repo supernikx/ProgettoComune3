@@ -33,10 +33,9 @@ public class Boss1ShootController : MonoBehaviour
     public void Shoot(int _shootPointIndex)
     {
         _shootPointIndex = Mathf.Clamp(_shootPointIndex, 0, shootPointsParent.Count - 1);
-        List<Transform> shootPoints = shootPointsParent[_shootPointIndex].GetComponentsInChildren<Transform>().ToList();
         if (bossCtrl.IsSetuppedAndEnabled())
         {
-            foreach (Transform point in shootPoints)
+            foreach (Transform point in shootPointsParent[_shootPointIndex])
             {
                 Boss1BulletController newBullet = PoolManager.instance.GetPooledObject(ObjectTypes.Boss1Bullet, gameObject).GetComponent<Boss1BulletController>();
                 if (newBullet != null)
