@@ -16,7 +16,7 @@ public class Boss2SuckState : Boss2StateBase
     /// <summary>
     /// Riferimento al GroupController
     /// </summary>
-    private GroupController groupCtrl;   
+    private GroupController groupCtrl;
     /// <summary>
     /// Riferimento al GroupMovementController
     /// </summary>
@@ -29,6 +29,10 @@ public class Boss2SuckState : Boss2StateBase
     /// Riferimento al Life Controller
     /// </summary>
     private BossLifeController lifeCtrl;
+    /// <summary>
+    /// Riferimento al Collision Controller
+    /// </summary>
+    private BossCollisionController collisionCtrl;
 
     public override void Enter()
     {
@@ -36,8 +40,10 @@ public class Boss2SuckState : Boss2StateBase
         groupMovementCtrl = groupCtrl.GetGroupMovementController();
         bossCtrl = context.GetBossController();
         lifeCtrl = bossCtrl.GetBossLifeController();
+        collisionCtrl = bossCtrl.GetBossCollisionController();
 
         lifeCtrl.OnBossDead += HandleOnBossDead;
+        collisionCtrl.OnAgentHit += HandleOnAgentHit;
     }
 
     public override void Tick()
@@ -46,6 +52,15 @@ public class Boss2SuckState : Boss2StateBase
     }
 
     #region Handles
+    /// <summary>
+    /// Funzione che gestisce l'evento di hit di un agent
+    /// </summary>
+    /// <param name="_agent"></param>
+    private void HandleOnAgentHit(AgentController _agent)
+    {
+        groupCtrl.RemoveAgent(_agent);
+    }
+
     /// <summary>
     /// Funzione che gestisce l'evento di morte del Boss
     /// </summary>
@@ -59,5 +74,8 @@ public class Boss2SuckState : Boss2StateBase
     {
         if (lifeCtrl != null)
             lifeCtrl.OnBossDead -= HandleOnBossDead;
+
+        if (collisionCtrl != null)
+            collisionCtrl.OnAgentHit -= HandleOnAgentHit;
     }
 }
