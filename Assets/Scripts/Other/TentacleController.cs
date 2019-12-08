@@ -64,16 +64,26 @@ public class TentacleController : MonoBehaviour, IBossDamageable
     /// <summary>
     /// Funzione che fa ruotare il tentacolo al punto successivo
     /// </summary>
-    /// <param name="rotationSpeed"></param>
-    public void RotateToNextPoint(float rotationSpeed)
+    /// <param name="_rotatingTime"></param>
+    public void RotateToNextPoint(float _rotatingTime)
     {
         Transform nextZone = tentaclesctrl.GetZoneByIndex(currentZoneIndex + 1);
-        transform.DORotateQuaternion(nextZone.transform.rotation, 10f / rotationSpeed).SetEase(Ease.Linear).OnComplete(() =>
+        transform.DORotateQuaternion(nextZone.transform.rotation, _rotatingTime).SetEase(Ease.Linear).OnComplete(() =>
          {
              transform.rotation = nextZone.rotation;
              currentZoneIndex = tentaclesctrl.GetIndexByZone(nextZone);
              OnTentacleRotated?.Invoke(this);
          });
+    }
+
+    /// <summary>
+    /// Funzione che fa eseguire un salto al tentacolo in base ai parametri passati
+    /// </summary>
+    /// <param name="_jumpForce"></param>
+    /// <param name="_jumpTime"></param>
+    public void Jump(float _jumpForce, float _jumpTime)
+    {
+        transform.DOJump(transform.position, _jumpForce, 1, _jumpTime);
     }
 
     /// <summary>
@@ -91,6 +101,17 @@ public class TentacleController : MonoBehaviour, IBossDamageable
             OnTentacleDead?.Invoke(this);
         }
     }
+
+    #region Getter
+    /// <summary>
+    /// Funzione che ritorna la zona attuale del tentacolo
+    /// </summary>
+    /// <returns></returns>
+    public int GetCurrentZone()
+    {
+        return currentZoneIndex;
+    }
+    #endregion
     #endregion
 
     private void OnDisable()

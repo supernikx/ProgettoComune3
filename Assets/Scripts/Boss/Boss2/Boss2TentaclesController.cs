@@ -118,14 +118,35 @@ public class Boss2TentaclesController : MonoBehaviour
     /// <summary>
     /// Funzione che fa ruotare i tentacoli
     /// </summary>
-    /// <param name="_rotationSpeed"></param>
-    public void Rotate(float _rotationSpeed)
+    /// <param name="_rotationTime"></param>
+    public void Rotate(float _rotationTime)
     {
         for (int i = 0; i < aliveTentacles.Count; i++)
         {
             aliveTentacles[i].OnTentacleRotated += HandleOnTentacleRotated;
             rotatingTentacles.Add(aliveTentacles[i]);
-            aliveTentacles[i].RotateToNextPoint(_rotationSpeed);
+            aliveTentacles[i].RotateToNextPoint(_rotationTime);
+        }
+    }
+
+    /// <summary>
+    /// Funzione che fa saltare i tentacoli che si trovano nella zona passata come parametro
+    /// </summary>
+    /// <param name="_jumpZone"></param>
+    /// <param name="_jumpForce"></param>
+    /// <param name="_jumpTime"></param>
+    public void Jump(int _jumpZone, float _jumpForce, float _jumpTime)
+    {
+        if (_jumpZone < 0 || _jumpZone > zones.Count - 1)
+            return;
+
+        for (int i = 0; i < aliveTentacles.Count; i++)
+        {
+            if (aliveTentacles[i].GetCurrentZone() == _jumpZone)
+            {
+                aliveTentacles[i].Jump(_jumpForce, _jumpTime);
+                return;
+            }
         }
     }
 

@@ -6,12 +6,12 @@ using UnityEngine;
 /// <summary>
 /// CLasse che gestisce lo stato di rotazione dei tentacoli
 /// </summary>
-public class Boss2TentacleRotateState : Boss2StateBase
+public class Boss2TentaclesRotateState : Boss2StateBase
 {
     [Header("Rotation Settings")]
     //Velocità di rotazione
     [SerializeField]
-    private float rotationSpeed;
+    private float rotationTime;
 
     /// <summary>
     /// Riferimento al GroupController
@@ -48,7 +48,7 @@ public class Boss2TentacleRotateState : Boss2StateBase
         lifeCtrl.OnBossDead += HandleOnTentaclesDead;
 
         lifeCtrl.SetCanTakeDamage(false);
-        tentaclesCtrl.Rotate(rotationSpeed);
+        tentaclesCtrl.Rotate(rotationTime);
     }
 
     #region Handlers

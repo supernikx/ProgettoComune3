@@ -42,6 +42,8 @@ public class Boss1ShootState : Boss1StateBase
         groupCtrl = context.GetLevelManager().GetGroupController();
 
         Boss1ShootController shootCtrl = context.GetBossController().GetBossShootController();
+
+        //HACK: Così i designer possono partire a contare da 1
         shootCtrl.Shoot(shootPointIndex - 1);
 
         bossPhaseCtrl.OnSecondPhaseStart += HandleOnSecondPhaseStart;
