@@ -17,16 +17,17 @@ public class QuickSceneReset : MonoBehaviour
     private void HandleOnGroupDead()
     {
         Scene sceneToReload = new Scene();
+        Scene swarmScene = new Scene();
         for (int i = 0; i < SceneManager.sceneCount; i++)
         {
             Scene currentScene = SceneManager.GetSceneAt(i);
-            if (currentScene.name != "Swarm")
-            {
+            if (currentScene.name == "Swarm")
+                swarmScene = currentScene;
+            else
                 sceneToReload = currentScene;
-                break;
-            }
         }
 
+        SceneManager.SetActiveScene(swarmScene);
         SceneManager.sceneUnloaded += HandleOnSceneUnloaded;
         SceneManager.UnloadSceneAsync(sceneToReload);
     }
