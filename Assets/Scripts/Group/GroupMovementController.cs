@@ -102,6 +102,33 @@ public class GroupMovementController : MonoBehaviour
     }
 
     #region API
+    /// <summary>
+    /// Funzione che muove tutti gli agent nella direzione della posizione e alla velocità passati come parametro
+    /// </summary>
+    /// <param name="_movementDirection"></param>
+    /// <param name="_movementSpeed"></param>
+    public void MoveAgentsToPoint(Vector3 _movementPosition, float _movementSpeed)
+    {
+        //Prendo il riferimento agli agent
+        List<AgentController> agents = groupCtrl.GetAgents();
+        Vector3 movementDirection;
+
+        for (int i = 0; i < agents.Count; i++)
+        {
+            movementDirection = (_movementPosition - agents[i].transform.position).normalized;
+            movementDirection.y = 0;
+            agents[i].GetAgentMovementController().Move(movementDirection, false, _movementSpeed);
+        }
+    }
+
+    /// <summary>
+    /// Funzione che resetta il vettore di moviemento a 0
+    /// </summary>
+    public void ResetMovementVelocity()
+    {
+        movementVector = Vector3.zero;
+    }
+
     #region Setter
     /// <summary>
     /// Funzione che imposta la variabile can move con il valore passato come parametro
@@ -112,14 +139,6 @@ public class GroupMovementController : MonoBehaviour
         canMove = _canMove;
     }
     #endregion
-
-    /// <summary>
-    /// Funzione che resetta il vettore di moviemento a 0
-    /// </summary>
-    public void ResetMovementVelocity()
-    {
-        movementVector = Vector3.zero;
-    }
     #endregion
 
     private void OnDisable()

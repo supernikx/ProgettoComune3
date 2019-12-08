@@ -25,7 +25,7 @@ public class Boss2TentaclesJumpState : Boss2StateBase
     /// <summary>
     /// Riferiemtno al Boss Controller
     /// </summary>
-    private Boss2Controller bossCltr;
+    private Boss2Controller bossCtrl;
     /// <summary>
     /// Riferimento al Tentacles Controller
     /// </summary>
@@ -42,15 +42,15 @@ public class Boss2TentaclesJumpState : Boss2StateBase
     public override void Enter()
     {
         groupCtrl = context.GetLevelManager().GetGroupController();
-        bossCltr = context.GetBossController();
-        tentaclesCtrl = bossCltr.GetTentaclesController();
-        collisionCtrl = bossCltr.GetBossCollisionController();
-        lifeCtrl = bossCltr.GetBossLifeController();
+        bossCtrl = context.GetBossController();
+        tentaclesCtrl = bossCtrl.GetTentaclesController();
+        collisionCtrl = bossCtrl.GetBossCollisionController();
+        lifeCtrl = bossCtrl.GetBossLifeController();
 
         tentaclesCtrl.OnTentaclesRotated += HandleOnTentaclesRotated;
         tentaclesCtrl.OnAllTentaclesDead += HandleOnTentaclesDead;
         collisionCtrl.OnAgentHit += HandleOnAgentHit;
-        lifeCtrl.OnBossDead += HandleOnTentaclesDead;
+        lifeCtrl.OnBossDead += HandleOnBossDead;
 
         TentaclesJump();
     }
@@ -90,6 +90,14 @@ public class Boss2TentaclesJumpState : Boss2StateBase
     /// </summary>
     private void HandleOnTentaclesDead()
     {
+        Complete(2);
+    }
+
+    /// <summary>
+    /// Funzione che gestisce l'evento di morte del Boss
+    /// </summary>
+    private void HandleOnBossDead()
+    {
         Complete(1);
     }
     #endregion
@@ -106,6 +114,6 @@ public class Boss2TentaclesJumpState : Boss2StateBase
             collisionCtrl.OnAgentHit -= HandleOnAgentHit;
 
         if (lifeCtrl != null)
-            lifeCtrl.OnBossDead -= HandleOnTentaclesDead;
+            lifeCtrl.OnBossDead -= HandleOnBossDead;
     }
 }
