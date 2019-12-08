@@ -7,7 +7,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ShootWaitingState2 0
+  m_Name: ShootWaitingState 4
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -175,6 +175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: Phase3
+  canTakeDirectDamage: 1
 --- !u!1102 &-8594931855303012850
 AnimatorState:
   serializedVersion: 5
@@ -431,7 +432,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DashState 0
+  m_Name: DashState 2
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -712,7 +713,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DashState 3
+  m_Name: DashState 5
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -882,7 +883,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ShootWaitingState2 1
+  m_Name: ShootWaitingState 6
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1183,7 +1184,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WaitingStateDash 0
+  m_Name: WaitingStateDash 4
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1628,7 +1629,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ShootState 1 1 0
+  m_Name: ShootState 7
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1851,7 +1852,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ShootState 1 0
+  m_Name: ShootState 3
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1960,7 +1961,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: JumpState 0 1 0
+  m_Name: JumpState 4
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -2193,106 +2194,106 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -2907692258973429966}
-    m_Position: {x: 1830, y: 2430, z: 0}
+    m_Position: {x: 1540, y: 2190, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4657984367484435253}
-    m_Position: {x: 2440, y: 2430, z: 0}
+    m_Position: {x: 2150, y: 2190, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 934804778827782699}
-    m_Position: {x: 2440, y: 2510, z: 0}
+    m_Position: {x: 2150, y: 2270, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6712921031806020917}
-    m_Position: {x: 2090, y: 2430, z: 0}
+    m_Position: {x: 1800, y: 2190, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2435378065396389221}
-    m_Position: {x: 2090, y: 2340, z: 0}
+    m_Position: {x: 1800, y: 2100, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 230964919818613430}
-    m_Position: {x: 2090, y: 2250, z: 0}
+    m_Position: {x: 1800, y: 2010, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5978330987955094352}
-    m_Position: {x: 2440, y: 2250, z: 0}
+    m_Position: {x: 2150, y: 2010, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1637167155491204154}
-    m_Position: {x: 2440, y: 2340, z: 0}
+    m_Position: {x: 2150, y: 2100, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7943013894468618183}
-    m_Position: {x: 2440, y: 2610, z: 0}
+    m_Position: {x: 2150, y: 2370, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -9200468381427278162}
-    m_Position: {x: 2440, y: 3070, z: 0}
+    m_Position: {x: 2150, y: 2830, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4573874407466610331}
-    m_Position: {x: 2440, y: 2990, z: 0}
+    m_Position: {x: 2150, y: 2750, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3774069352277100935}
-    m_Position: {x: 2440, y: 2900, z: 0}
+    m_Position: {x: 2150, y: 2660, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5412029025678359190}
-    m_Position: {x: 2440, y: 2800, z: 0}
+    m_Position: {x: 2150, y: 2560, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1997036131318645896}
-    m_Position: {x: 2440, y: 2710, z: 0}
+    m_Position: {x: 2150, y: 2470, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7258551899062217970}
-    m_Position: {x: 2440, y: 3500, z: 0}
+    m_Position: {x: 2150, y: 3260, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1691155376348198674}
-    m_Position: {x: 2440, y: 3410, z: 0}
+    m_Position: {x: 2150, y: 3170, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2253367139053013846}
-    m_Position: {x: 2440, y: 3320, z: 0}
+    m_Position: {x: 2150, y: 3080, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2331230486175347923}
-    m_Position: {x: 2440, y: 3240, z: 0}
+    m_Position: {x: 2150, y: 3000, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 468961335422806752}
-    m_Position: {x: 2440, y: 3150, z: 0}
+    m_Position: {x: 2150, y: 2910, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2574826695129809322}
-    m_Position: {x: 2090, y: 3500, z: 0}
+    m_Position: {x: 1800, y: 3260, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2603592352736817451}
-    m_Position: {x: 2090, y: 3070, z: 0}
+    m_Position: {x: 1800, y: 2830, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -167378274258820131}
-    m_Position: {x: 2090, y: 3150, z: 0}
+    m_Position: {x: 1800, y: 2910, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -427815239467728688}
-    m_Position: {x: 2090, y: 3240, z: 0}
+    m_Position: {x: 1800, y: 3000, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5990462177871274831}
-    m_Position: {x: 2090, y: 3320, z: 0}
+    m_Position: {x: 1800, y: 3080, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5215135653216370672}
-    m_Position: {x: 2090, y: 3410, z: 0}
+    m_Position: {x: 1800, y: 3170, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8976640969749880052}
-    m_Position: {x: 2090, y: 2990, z: 0}
+    m_Position: {x: 1800, y: 2750, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6880302680764681715}
-    m_Position: {x: 2090, y: 2900, z: 0}
+    m_Position: {x: 1800, y: 2660, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7422570352368544921}
-    m_Position: {x: 2090, y: 2800, z: 0}
+    m_Position: {x: 1800, y: 2560, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 767488199036109397}
-    m_Position: {x: 2090, y: 2700, z: 0}
+    m_Position: {x: 1800, y: 2460, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2188210210615608497}
-    m_Position: {x: 2090, y: 2510, z: 0}
+    m_Position: {x: 1800, y: 2270, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2339791393085950924}
-    m_Position: {x: 2090, y: 2610, z: 0}
+    m_Position: {x: 1800, y: 2370, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 1610, y: 2330, z: 0}
-  m_EntryPosition: {x: 1610, y: 2430, z: 0}
-  m_ExitPosition: {x: 1610, y: 2380, z: 0}
-  m_ParentStateMachinePosition: {x: 1590, y: 2280, z: 0}
+  m_AnyStatePosition: {x: 1320, y: 2090, z: 0}
+  m_EntryPosition: {x: 1320, y: 2190, z: 0}
+  m_ExitPosition: {x: 1320, y: 2140, z: 0}
+  m_ParentStateMachinePosition: {x: 1300, y: 2040, z: 0}
   m_DefaultState: {fileID: -2907692258973429966}
 --- !u!1101 &-4294297486099092048
 AnimatorStateTransition:
@@ -2520,7 +2521,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ShootWaitingState 0
+  m_Name: ShootWaitingState 3
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -2751,6 +2752,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: Phase1
+  canTakeDirectDamage: 1
 --- !u!1102 &-3227110304953967295
 AnimatorState:
   serializedVersion: 5
@@ -3151,6 +3153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: Phase2
+  canTakeDirectDamage: 1
 --- !u!1102 &-2339791393085950924
 AnimatorState:
   serializedVersion: 5
@@ -3158,7 +3161,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DashState 3 0
+  m_Name: DashState 6
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -3186,7 +3189,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ShootState 1 1
+  m_Name: ShootState 5
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -3281,7 +3284,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ShootWaitingState 1
+  m_Name: ShootWaitingState 5
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -3436,7 +3439,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: JumpState 0 0
+  m_Name: JumpState 2
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -4083,7 +4086,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ShootWaitingState 1 0
+  m_Name: ShootWaitingState 7
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -4164,7 +4167,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ShootState 2 1 0
+  m_Name: ShootState 8
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -4342,7 +4345,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ShootWaitingState
+  m_Name: ShootWaitingState 1
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -4426,7 +4429,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: JumpState 0 1
+  m_Name: JumpState 3
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -4562,7 +4565,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WaitingStateDash 1
+  m_Name: WaitingStateDash 5
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -4640,7 +4643,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WaitingStateDash
+  m_Name: WaitingStateDash 1
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -4896,7 +4899,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ShootWaitingState2
+  m_Name: ShootWaitingState 2
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -4924,7 +4927,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ShootState 2 1
+  m_Name: ShootState 6
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -5154,7 +5157,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WaitingStateDash 1 0
+  m_Name: WaitingStateDash 6
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -5313,7 +5316,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DashState 1
+  m_Name: DashState 3
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -5341,7 +5344,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ShootWaitingState2 1 0
+  m_Name: ShootWaitingState 8
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -6031,7 +6034,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ShootState 2 0
+  m_Name: ShootState 4
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -6126,7 +6129,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DashState
+  m_Name: DashState 1
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -7030,7 +7033,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: JumpState 0
+  m_Name: JumpState 1
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -7983,7 +7986,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DashState 2
+  m_Name: DashState 4
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:

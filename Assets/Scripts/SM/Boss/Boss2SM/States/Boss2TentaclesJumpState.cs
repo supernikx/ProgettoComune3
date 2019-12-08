@@ -48,11 +48,10 @@ public class Boss2TentaclesJumpState : Boss2StateBase
         lifeCtrl = bossCltr.GetBossLifeController();
 
         tentaclesCtrl.OnTentaclesRotated += HandleOnTentaclesRotated;
-        tentaclesCtrl.OnTentaclesDead += HandleOnTentaclesDead;
+        tentaclesCtrl.OnAllTentaclesDead += HandleOnTentaclesDead;
         collisionCtrl.OnAgentHit += HandleOnAgentHit;
         lifeCtrl.OnBossDead += HandleOnTentaclesDead;
 
-        lifeCtrl.SetCanTakeDamage(false);
         TentaclesJump();
     }
 
@@ -100,7 +99,7 @@ public class Boss2TentaclesJumpState : Boss2StateBase
         if (tentaclesCtrl != null)
         {
             tentaclesCtrl.OnTentaclesRotated -= HandleOnTentaclesRotated;
-            tentaclesCtrl.OnTentaclesDead -= HandleOnTentaclesDead;
+            tentaclesCtrl.OnAllTentaclesDead -= HandleOnTentaclesDead;
         }
 
         if (collisionCtrl != null)

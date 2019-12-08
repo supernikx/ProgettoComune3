@@ -80,6 +80,15 @@ public class BossLifeController : MonoBehaviour, IBossDamageable
     {
         return currentLife;
     }
+
+    /// <summary>
+    /// Funzione che ritorna se il boss può prendere danno
+    /// </summary>
+    /// <returns></returns>
+    public bool GetCanTakeDamage()
+    {
+        return canTakeDamage;
+    }
     #endregion
 
     #region Setter

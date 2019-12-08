@@ -43,11 +43,11 @@ public class Boss2TentaclesRotateState : Boss2StateBase
         lifeCtrl = bossCltr.GetBossLifeController();
 
         tentaclesCtrl.OnTentaclesRotated += HandleOnTentaclesRotated;
-        tentaclesCtrl.OnTentaclesDead += HandleOnTentaclesDead;
+        tentaclesCtrl.OnTentacleDead += HandleOnTentacleDead;
+        tentaclesCtrl.OnAllTentaclesDead += HandleOnAllTentaclesDead;
         collisionCtrl.OnAgentHit += HandleOnAgentHit;
-        lifeCtrl.OnBossDead += HandleOnTentaclesDead;
+        lifeCtrl.OnBossDead += HandleOnAllTentaclesDead;
 
-        lifeCtrl.SetCanTakeDamage(false);
         tentaclesCtrl.Rotate(rotationTime);
     }
 
@@ -70,9 +70,20 @@ public class Boss2TentaclesRotateState : Boss2StateBase
     }
 
     /// <summary>
-    /// Funzione che gestisce l'evento di morte dei tantacoli
+    /// Funzione che gestisce l'evento di morte di un tentacolo
     /// </summary>
-    private void HandleOnTentaclesDead()
+    private void HandleOnTentacleDead()
+    {
+        bool canTakeDamage = lifeCtrl.GetCanTakeDamage();
+        lifeCtrl.SetCanTakeDamage(true);
+        lifeCtrl.TakeDamage(tentaclesCtrl.GetDeadTentacleDamage());
+        lifeCtrl.SetCanTakeDamage(canTakeDamage);
+    }
+
+    /// <summary>
+    /// Funzione che gestisce l'evento di morte di tutti i tantacoli
+    /// </summary>
+    private void HandleOnAllTentaclesDead()
     {
         Complete(1);
     }
@@ -83,13 +94,14 @@ public class Boss2TentaclesRotateState : Boss2StateBase
         if (tentaclesCtrl != null)
         {
             tentaclesCtrl.OnTentaclesRotated -= HandleOnTentaclesRotated;
-            tentaclesCtrl.OnTentaclesDead -= HandleOnTentaclesDead;
+            tentaclesCtrl.OnTentacleDead -= HandleOnTentacleDead;
+            tentaclesCtrl.OnAllTentaclesDead -= HandleOnAllTentaclesDead;
         }
 
         if (collisionCtrl != null)
             collisionCtrl.OnAgentHit -= HandleOnAgentHit;
 
         if (lifeCtrl != null)
-            lifeCtrl.OnBossDead -= HandleOnTentaclesDead;
+            lifeCtrl.OnBossDead -= HandleOnAllTentaclesDead;
     }
 }

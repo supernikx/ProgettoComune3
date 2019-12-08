@@ -14,18 +14,27 @@ public class Boss2TentaclesController : MonoBehaviour
     /// </summary>
     public Action OnTentaclesRotated;
     /// <summary>
-    /// Evento che notifica l'avvenuta rotazione del tentacolo
+    /// Evento che notifica che un tentacolo è morto
     /// </summary>
-    public Action OnTentaclesDead;
+    public Action OnTentacleDead;
+    /// <summary>
+    /// Evento che notifica che tutti i tentacoli sono porti
+    /// </summary>
+    public Action OnAllTentaclesDead;
     #endregion
 
-    [Header("Tentacles Settings")]
+    [Header("Reference Tentacles Settings")]
     //Tentacoli
     [SerializeField]
     private List<TentacleController> tentacles;
     //Zone
     [SerializeField]
     private List<Transform> zones;
+
+    [Header("Tentacles Settings")]
+    //Danno del tentacolo al boss quando muore
+    [SerializeField]
+    private int deadTentacleDamage;
 
     /// <summary>
     /// Riferimento al Boss Controller
@@ -107,8 +116,9 @@ public class Boss2TentaclesController : MonoBehaviour
         rotatingTentacles.Remove(_tentacle);
         aliveTentacles.Remove(_tentacle);
 
+        OnTentacleDead?.Invoke();
         if (aliveTentacles.Count == 0)
-            OnTentaclesDead?.Invoke();
+            OnAllTentaclesDead?.Invoke();
         else if (rotatingTentacles.Count == 0)
             OnTentaclesRotated?.Invoke();
     }
@@ -181,6 +191,15 @@ public class Boss2TentaclesController : MonoBehaviour
         }
 
         return -1;
+    }
+
+    /// <summary>
+    /// Funzione che ritorna il danno che fa il tentacolo al boss quando muore
+    /// </summary>
+    /// <returns></returns>
+    public int GetDeadTentacleDamage()
+    {
+        return deadTentacleDamage;
     }
     #endregion
     #endregion
