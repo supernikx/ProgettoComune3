@@ -12,6 +12,9 @@ public class Boss2SuckState : Boss2StateBase
     //Forza di risucchio
     [SerializeField]
     private float suckForce;
+    //Forza di risucchio
+    [SerializeField]
+    private float suckDuration;
 
     /// <summary>
     /// Riferimento al GroupController
@@ -33,6 +36,14 @@ public class Boss2SuckState : Boss2StateBase
     /// Riferimento al Collision Controller
     /// </summary>
     private BossCollisionController collisionCtrl;
+    /// <summary>
+    /// Riferimento al phase controller
+    /// </summary>
+    private Boss2PhaseController phaseCtrl;
+    /// <summary>
+    /// Timer che conta quanto tempo dura lo stato
+    /// </summary>
+    private float suckTimer;
 
     public override void Enter()
     {
@@ -41,17 +52,33 @@ public class Boss2SuckState : Boss2StateBase
         bossCtrl = context.GetBossController();
         lifeCtrl = bossCtrl.GetBossLifeController();
         collisionCtrl = bossCtrl.GetBossCollisionController();
+        phaseCtrl = bossCtrl.GetPhaseController();
 
         lifeCtrl.OnBossDead += HandleOnBossDead;
         collisionCtrl.OnAgentHit += HandleOnAgentHit;
+        phaseCtrl.OnSecondPhaseStart += HandleOnSecondPhaseStart;
+
+        suckTimer = suckDuration;
     }
 
     public override void Tick()
     {
         groupMovementCtrl.MoveAgentsToPoint(bossCtrl.transform.position, suckForce);
+
+        suckTimer -= Time.deltaTime;
+        if (suckTimer < 0)
+            Complete(4);
     }
 
     #region Handles
+    /// <summary>
+    /// Funzione che gestisce l'evento di inizio della seconda fase
+    /// </summary>
+    private void HandleOnSecondPhaseStart()
+    {
+        Complete(2);
+    }
+
     /// <summary>
     /// Funzione che gestisce l'evento di hit di un agent
     /// </summary>
@@ -77,5 +104,8 @@ public class Boss2SuckState : Boss2StateBase
 
         if (collisionCtrl != null)
             collisionCtrl.OnAgentHit -= HandleOnAgentHit;
+
+        if (phaseCtrl != null)
+            phaseCtrl.OnSecondPhaseStart -= HandleOnSecondPhaseStart;
     }
 }

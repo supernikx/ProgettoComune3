@@ -16,7 +16,7 @@ public class Boss2TentaclesController : MonoBehaviour
     /// <summary>
     /// Evento che notifica che un tentacolo è morto
     /// </summary>
-    public Action OnTentacleDead;
+    public Action<int> OnTentacleDead;
     /// <summary>
     /// Evento che notifica che tutti i tentacoli sono porti
     /// </summary>
@@ -24,17 +24,15 @@ public class Boss2TentaclesController : MonoBehaviour
     #endregion
 
     [Header("Reference Tentacles Settings")]
-    //Tentacoli
+    //Tentacoli della fase 1
     [SerializeField]
-    private List<TentacleController> tentacles;
+    private List<TentacleController> phase1Tentacles;
+    //Tentacoli della fase 3
+    [SerializeField]
+    private List<TentacleController> phase2Tentacles;
     //Zone
     [SerializeField]
     private List<Transform> zones;
-
-    [Header("Tentacles Settings")]
-    //Danno del tentacolo al boss quando muore
-    [SerializeField]
-    private int deadTentacleDamage;
 
     /// <summary>
     /// Riferimento al Boss Controller
@@ -63,18 +61,53 @@ public class Boss2TentaclesController : MonoBehaviour
         collisionCtrl = bossCtrl.GetBossCollisionController();
         rotatingTentacles = new List<TentacleController>();
         aliveTentacles = new List<TentacleController>();
-        TentaclesSetup();
     }
 
     /// <summary>
-    /// Funzione che esegue il Setup dei tentacoli
+    /// Funzione che esegue il Setup dei tentacoli della fase 1
     /// </summary>
-    private void TentaclesSetup()
+    public void Phase1TentaclesSetup()
     {
-        for (int i = 0; i < tentacles.Count; i++)
+        aliveTentacles.Clear();
+
+        for (int i = 0; i < phase2Tentacles.Count; i++)
         {
-            aliveTentacles.Add(tentacles[i]);
-            aliveTentacles[i].Setup(this, i);
+            phase2Tentacles[i].OnTentacleRotated -= HandleOnTentacleRotated;
+            phase2Tentacles[i].OnTentacleDead -= HandleOnTentacleDead;
+            phase2Tentacles[i].OnAgentHit -= HandleOnAgentHit;
+            phase2Tentacles[i].gameObject.SetActive(false);
+        }
+
+        for (int i = 0; i < phase1Tentacles.Count; i++)
+        {
+            phase1Tentacles[i].gameObject.SetActive(true);
+            aliveTentacles.Add(phase1Tentacles[i]);
+            aliveTentacles[i].Setup(this, GetFixedZoneIndex(i));
+            aliveTentacles[i].OnTentacleDead += HandleOnTentacleDead;
+            aliveTentacles[i].OnAgentHit += HandleOnAgentHit;
+        }
+    }
+
+    /// <summary>
+    /// Funzione che esegue il Setup dei tentacoli della fase 2
+    /// </summary>
+    public void Phase2TentaclesSetup()
+    {
+        aliveTentacles.Clear();
+
+        for (int i = 0; i < phase1Tentacles.Count; i++)
+        {
+            phase1Tentacles[i].OnTentacleRotated -= HandleOnTentacleRotated;
+            phase1Tentacles[i].OnTentacleDead -= HandleOnTentacleDead;
+            phase1Tentacles[i].OnAgentHit -= HandleOnAgentHit;
+            phase1Tentacles[i].gameObject.SetActive(false);
+        }
+
+        for (int i = 0; i < phase2Tentacles.Count; i++)
+        {
+            phase2Tentacles[i].gameObject.SetActive(true);
+            aliveTentacles.Add(phase2Tentacles[i]);
+            aliveTentacles[i].Setup(this);
             aliveTentacles[i].OnTentacleDead += HandleOnTentacleDead;
             aliveTentacles[i].OnAgentHit += HandleOnAgentHit;
         }
@@ -116,7 +149,7 @@ public class Boss2TentaclesController : MonoBehaviour
         rotatingTentacles.Remove(_tentacle);
         aliveTentacles.Remove(_tentacle);
 
-        OnTentacleDead?.Invoke();
+        OnTentacleDead?.Invoke(_tentacle.GetDeadTentacleDamage());
         if (aliveTentacles.Count == 0)
             OnAllTentaclesDead?.Invoke();
         else if (rotatingTentacles.Count == 0)
@@ -160,6 +193,33 @@ public class Boss2TentaclesController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Funzione che chiama lo stomp del tentacolo passato come parametro
+    /// </summary>
+    /// <param name="_tentacleIndex"></param>
+    /// <param name="_stompPosition"></param>
+    /// <param name="_stompDuration"></param>
+    public void Stomp(int _tentacleIndex, Vector3 _stompPosition, float _stompDuration)
+    {
+        if (_tentacleIndex < 0 || _tentacleIndex > aliveTentacles.Count - 1)
+            return;
+
+        aliveTentacles[_tentacleIndex].Stomp(_stompPosition, _stompDuration);
+    }
+
+    /// <summary>
+    /// Funzione che chiama il reset del tentacolo passato come parametro
+    /// </summary>
+    /// <param name="_tentacleIndex"></param>
+    /// <param name="_resetDuration"></param>
+    public void Reset(int _tentacleIndex, float _resetDuration)
+    {
+        if (_tentacleIndex < 0 || _tentacleIndex > aliveTentacles.Count - 1)
+            return;
+
+        aliveTentacles[_tentacleIndex].Reset(_resetDuration);
+    }
+
     #region Getter
     /// <summary>
     /// Funzione che ritorna la transform della zone in base all'index
@@ -168,13 +228,8 @@ public class Boss2TentaclesController : MonoBehaviour
     /// <returns></returns>
     public Transform GetZoneByIndex(int _zoneIndex)
     {
-        if (_zoneIndex > zones.Count - 1)
-            return zones[_zoneIndex - zones.Count];
-
-        if (_zoneIndex < 0)
-            return zones[zones.Count - _zoneIndex];
-
-        return zones[_zoneIndex];
+        int fixedIndex = GetFixedZoneIndex(_zoneIndex);
+        return zones[fixedIndex];
     }
 
     /// <summary>
@@ -194,12 +249,19 @@ public class Boss2TentaclesController : MonoBehaviour
     }
 
     /// <summary>
-    /// Funzione che ritorna il danno che fa il tentacolo al boss quando muore
+    /// Funzione che ritorna l'index delle zone fixato
     /// </summary>
+    /// <param name="_zoneIndex"></param>
     /// <returns></returns>
-    public int GetDeadTentacleDamage()
+    public int GetFixedZoneIndex(int _zoneIndex)
     {
-        return deadTentacleDamage;
+        if (_zoneIndex > zones.Count - 1)
+            return _zoneIndex - zones.Count;
+
+        if (_zoneIndex < 0)
+            return zones.Count - _zoneIndex;
+
+        return _zoneIndex;
     }
     #endregion
     #endregion

@@ -94,7 +94,9 @@ public class Boss2SMController : StateMachineBase
         else if (_exitCondition == 2)
             GoToState("Phase2");
         else if (_exitCondition == 3)
-            GoToState("Phase3");
+            GoToState("SubPhase");
+        else if (_exitCondition == 4)
+            GoToState("Phase1");
         else
             GoToNext();
     }

@@ -17,6 +17,10 @@ public class Boss2StartPhase1State : Boss2StateBase
     /// </summary>
     private Boss2Controller bossCtrl;
     /// <summary>
+    /// Riferiemtno al Boss Tentacle Controller
+    /// </summary>
+    private Boss2TentaclesController bossTentacleCtrl;
+    /// <summary>
     /// Riferimento al Life Controller
     /// </summary>
     private BossLifeController lifeCtrl;
@@ -24,9 +28,11 @@ public class Boss2StartPhase1State : Boss2StateBase
     public override void Enter()
     {
         bossCtrl = context.GetBossController();
+        bossTentacleCtrl = bossCtrl.GetTentaclesController();
         lifeCtrl = bossCtrl.GetBossLifeController();
 
         lifeCtrl.SetCanTakeDamage(canTakeDirectDamage);
+        bossTentacleCtrl.Phase1TentaclesSetup();
 
         Debug.Log("Phase 1 Iniziata");
         Complete();

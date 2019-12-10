@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Classe che gestisce lo stato di attesa del Boss 1
+/// Classe che gestisce lo stato di attesa del Boss 2
 /// </summary>
-public class Boss1WaitingState : Boss1StateBase
+public class Boss2WaitingState : Boss2StateBase
 {
     [Header("State Settings")]
     //Range di tempo che il boss deve aspettare
@@ -19,7 +19,7 @@ public class Boss1WaitingState : Boss1StateBase
     /// <summary>
     /// Riferimento al BossController
     /// </summary>
-    private Boss1Controller bossCtrl;
+    private Boss2Controller bossCtrl;
     /// <summary>
     /// Riferimento al BossCollisionController
     /// </summary>
@@ -29,9 +29,9 @@ public class Boss1WaitingState : Boss1StateBase
     /// </summary>
     private BossLifeController lifeCtrl;
     /// <summary>
-    /// Riferimento al BossPhaseController
+    /// Riferimento al Tentacles Controller
     /// </summary>
-    private Boss1PhaseController bossPhaseCtrl;
+    private Boss2TentaclesController tentaclesCtrl;
     /// <summary>
     /// Tempo che il boss deve aspettare
     /// </summary>
@@ -47,15 +47,15 @@ public class Boss1WaitingState : Boss1StateBase
         bossCtrl = context.GetBossController();
         lifeCtrl = bossCtrl.GetBossLifeController();
         collisionCtrl = bossCtrl.GetBossCollisionController();
-        bossPhaseCtrl = bossCtrl.GetBossPhaseController();
+        tentaclesCtrl = bossCtrl.GetTentaclesController();
 
         timer = 0;
         waitTime = Random.Range(waitTimeRange.x, waitTimeRange.y);
 
-        bossPhaseCtrl.OnSecondPhaseStart += HandleOnSecondPhaseStart;
-        bossPhaseCtrl.OnThirdPhaseStart += HandleOnThirdPhaseStart;
         lifeCtrl.OnBossDead += HandleOnBossDead;
         collisionCtrl.OnAgentHit += HandleOnAgentHit;
+        tentaclesCtrl.OnTentacleDead += HandleOnTentacleDead;
+        tentaclesCtrl.OnAllTentaclesDead += HandleOnAllTentaclesDead;
     }
 
     public override void Tick()
@@ -66,6 +66,25 @@ public class Boss1WaitingState : Boss1StateBase
     }
 
     #region Handlers
+    /// <summary>
+    /// Funzione che gestisce l'evento di morte di un tentacolo
+    /// </summary>
+    private void HandleOnTentacleDead(int _damage)
+    {
+        bool canTakeDamage = lifeCtrl.GetCanTakeDamage();
+        lifeCtrl.SetCanTakeDamage(true);
+        lifeCtrl.TakeDamage(_damage);
+        lifeCtrl.SetCanTakeDamage(canTakeDamage);
+    }
+
+    /// <summary>
+    /// Funzione che gestisce l'evento di morte dei tantacoli
+    /// </summary>
+    private void HandleOnAllTentaclesDead()
+    {
+        Complete(1);
+    }
+
     /// <summary>
     /// Funzione che gestisce l'evento collisionCtrl.OnAgentHit
     /// <param name="obj"></param>
@@ -81,30 +100,14 @@ public class Boss1WaitingState : Boss1StateBase
     {
         Complete(1);
     }
-
-    /// <summary>
-    /// Funzione che gestisce l'evento di inizio secondo fase del Boss
-    /// </summary>
-    private void HandleOnSecondPhaseStart()
-    {
-        Complete(2);
-    }
-
-    /// <summary>
-    /// Funzione che gestisce l'evento di inizio terza fase del Boss
-    /// </summary>
-    private void HandleOnThirdPhaseStart()
-    {
-        Complete(3);
-    }
     #endregion
 
     public override void Exit()
     {
-        if (bossPhaseCtrl != null)
+        if (tentaclesCtrl != null)
         {
-            bossPhaseCtrl.OnSecondPhaseStart -= HandleOnSecondPhaseStart;
-            bossPhaseCtrl.OnThirdPhaseStart -= HandleOnThirdPhaseStart;
+            tentaclesCtrl.OnTentacleDead -= HandleOnTentacleDead;
+            tentaclesCtrl.OnAllTentaclesDead -= HandleOnAllTentaclesDead;
         }
 
         if (lifeCtrl != null)

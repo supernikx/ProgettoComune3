@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// CLasse che gestisce lo stato di salto dei tentacoli
+/// CLasse che gestisce lo stato di reset dei tentacoli
 /// </summary>
-public class Boss2TentaclesJumpState : Boss2StateBase
+public class Boss2TentaclesResetState : Boss2StateBase
 {
     [Header("Jump Settings")]
-    //Zone in cui verrà eseguito il salto
+    //Tentacolo che deve resettare
     [SerializeField]
-    private List<int> jumpZones;
-    //Forza del salto
+    private List<int> tentaclesResetIndex;
+    //Velocità del tentacolo
     [SerializeField]
-    private float jumpForce;
-    //Durata del salto
+    private float resetDuration;
+    //Delay tra i tentacoli
     [SerializeField]
-    private float jumpTime;
+    private float delayBetweenTentacles;
 
     /// <summary>
     /// Riferimento al GroupController
@@ -39,9 +39,9 @@ public class Boss2TentaclesJumpState : Boss2StateBase
     /// </summary>
     private BossLifeController lifeCtrl;
     /// <summary>
-    /// Riferimento al phase controller
+    /// Riferimento alla coroutine che esegue il tentacles reset
     /// </summary>
-    private Boss2PhaseController phaseCtrl;
+    private IEnumerator tentaclesResetRoutine;
 
     public override void Enter()
     {
@@ -50,38 +50,35 @@ public class Boss2TentaclesJumpState : Boss2StateBase
         tentaclesCtrl = bossCtrl.GetTentaclesController();
         collisionCtrl = bossCtrl.GetBossCollisionController();
         lifeCtrl = bossCtrl.GetBossLifeController();
-        phaseCtrl = bossCtrl.GetPhaseController();
 
         tentaclesCtrl.OnTentacleDead += HandleOnTentacleDead;
         tentaclesCtrl.OnAllTentaclesDead += HandleOnAllTentaclesDead;
         collisionCtrl.OnAgentHit += HandleOnAgentHit;
         lifeCtrl.OnBossDead += HandleOnBossDead;
-        phaseCtrl.OnSecondPhaseStart += HandleOnSecondPhaseStart;
 
-        TentaclesJump();
+        tentaclesResetRoutine = TentaclesResetCoroutine();
+        tentaclesCtrl.StartCoroutine(tentaclesResetRoutine);
     }
 
-    private void TentaclesJump()
+    /// <summary>
+    /// Coroutine che esegue il reset dei tentacoli
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator TentaclesResetCoroutine()
     {
-        for (int i = 0; i < jumpZones.Count; i++)
+        for (int i = 0; i < tentaclesResetIndex.Count; i++)
         {
+            yield return new WaitForSeconds(delayBetweenTentacles);
+
             //HACK: Così i designer possono partire a contare da 1
-            int jumpZone = jumpZones[i] - 1;
-            tentaclesCtrl.Jump(jumpZone, jumpForce, jumpTime);
+            int tentacleIndex = tentaclesResetIndex[i] - 1;
+            tentaclesCtrl.Reset(tentacleIndex, resetDuration);
         }
 
         Complete();
     }
 
     #region Handlers
-    /// <summary>
-    /// Funzione che gestisce l'evento di inizio della seconda fase
-    /// </summary>
-    private void HandleOnSecondPhaseStart()
-    {
-        Complete(2);
-    }
-
     /// <summary>
     /// Funzione che gestisce l'evento di hit di un agent
     /// </summary>
@@ -107,7 +104,7 @@ public class Boss2TentaclesJumpState : Boss2StateBase
     /// </summary>
     private void HandleOnAllTentaclesDead()
     {
-        Complete(3);
+        Complete(1);
     }
 
     /// <summary>
@@ -125,6 +122,9 @@ public class Boss2TentaclesJumpState : Boss2StateBase
         {
             tentaclesCtrl.OnTentacleDead -= HandleOnTentacleDead;
             tentaclesCtrl.OnAllTentaclesDead -= HandleOnAllTentaclesDead;
+
+            if (tentaclesResetRoutine != null)
+                tentaclesCtrl.StopCoroutine(tentaclesResetRoutine);
         }
 
         if (collisionCtrl != null)
@@ -132,8 +132,5 @@ public class Boss2TentaclesJumpState : Boss2StateBase
 
         if (lifeCtrl != null)
             lifeCtrl.OnBossDead -= HandleOnBossDead;
-
-        if (phaseCtrl != null)
-            phaseCtrl.OnSecondPhaseStart -= HandleOnSecondPhaseStart;
     }
 }

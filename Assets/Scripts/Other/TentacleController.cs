@@ -28,6 +28,9 @@ public class TentacleController : MonoBehaviour, IBossDamageable
     //Vita del tentacolo
     [SerializeField]
     private int tentacleLife;
+    //Danno del tentacolo al boss quando muore
+    [SerializeField]
+    private int deadTentacleDamage;
 
     /// <summary>
     /// Riferimento al tentacles controller
@@ -41,16 +44,23 @@ public class TentacleController : MonoBehaviour, IBossDamageable
     /// Zona attuale
     /// </summary>
     private int currentZoneIndex;
+    /// <summary>
+    /// Rotazione iniziale
+    /// </summary>
+    private Quaternion startRotation;
 
     /// <summary>
     /// Funzione di Setup
     /// </summary>
-    public void Setup(Boss2TentaclesController _tentaclesCtrl, int _startZoneIndex)
+    public void Setup(Boss2TentaclesController _tentaclesCtrl, int _startZoneIndex = -1)
     {
         currentTentacleLife = tentacleLife;
         tentaclesctrl = _tentaclesCtrl;
         currentZoneIndex = _startZoneIndex;
-        transform.rotation = tentaclesctrl.GetZoneByIndex(_startZoneIndex).transform.rotation;
+        startRotation = transform.rotation;
+
+        if (_startZoneIndex != -1)
+            transform.rotation = tentaclesctrl.GetZoneByIndex(currentZoneIndex).transform.rotation;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -87,6 +97,17 @@ public class TentacleController : MonoBehaviour, IBossDamageable
     }
 
     /// <summary>
+    /// Funzione che esegue lo Stomp del tentacolo nella posizione passata come paraemtro
+    /// </summary>
+    /// <param name="stompPosition"></param>
+    /// <param name="tentacleSpeed"></param>
+    public void Stomp(Vector3 _stompPosition, float _stompDuration)
+    {
+        Quaternion stompRotation = Quaternion.LookRotation(_stompPosition, Vector3.up);
+        transform.DORotateQuaternion(stompRotation, _stompDuration);
+    }
+
+    /// <summary>
     /// Funzione che fa prendere danno al tentacolo
     /// </summary>
     /// <param name="_damage"></param>
@@ -102,6 +123,15 @@ public class TentacleController : MonoBehaviour, IBossDamageable
         }
     }
 
+    /// <summary>
+    /// Funzione che esegue il reset della rotazione del tentacolo
+    /// </summary>
+    /// <param name="_resetDuration"></param>
+    public void Reset(float _resetDuration)
+    {
+        transform.DORotateQuaternion(startRotation, _resetDuration);
+    }
+
     #region Getter
     /// <summary>
     /// Funzione che ritorna la zona attuale del tentacolo
@@ -110,6 +140,15 @@ public class TentacleController : MonoBehaviour, IBossDamageable
     public int GetCurrentZone()
     {
         return currentZoneIndex;
+    }
+
+    /// <summary>
+    /// Funzione che ritorna il danno che fa il tentacolo quando muore
+    /// </summary>
+    /// <returns></returns>
+    public int GetDeadTentacleDamage()
+    {
+        return deadTentacleDamage;
     }
     #endregion
     #endregion

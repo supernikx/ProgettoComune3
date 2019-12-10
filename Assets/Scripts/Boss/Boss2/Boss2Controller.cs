@@ -15,6 +15,10 @@ public class Boss2Controller : BossControllerBase
     /// Riferimento al TentaclesController
     /// </summary>
     private Boss2TentaclesController tentaclesCtrl;
+    /// <summary>
+    /// Riferimento al phase controller
+    /// </summary>
+    private Boss2PhaseController phaseCtrl;
 
     /// <summary>
     /// Funzione di Setup
@@ -26,6 +30,7 @@ public class Boss2Controller : BossControllerBase
 
         sm = GetComponent<Boss2SMController>();
         tentaclesCtrl = GetComponent<Boss2TentaclesController>();
+        phaseCtrl = GetComponent<Boss2PhaseController>();
     }
 
     #region API
@@ -40,6 +45,7 @@ public class Boss2Controller : BossControllerBase
         tentaclesCtrl.Setup(this);
         lifeCtrl.Setup(this);
         collisionCtrl.Setup(this);
+        phaseCtrl.Setup(this);
     }
 
     /// <summary>
@@ -68,6 +74,15 @@ public class Boss2Controller : BossControllerBase
     public Boss2TentaclesController GetTentaclesController()
     {
         return tentaclesCtrl;
+    }
+
+    /// <summary>
+    /// Funzione che ritorna il phase controlelr
+    /// </summary>
+    /// <returns></returns>
+    public Boss2PhaseController GetPhaseController()
+    {
+        return phaseCtrl;
     }
     #endregion
     #endregion
