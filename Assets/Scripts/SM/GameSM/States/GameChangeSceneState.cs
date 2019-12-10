@@ -38,6 +38,8 @@ public class GameChangeSceneState : GameSMStateBase
 
         lvlMng = gm.GetLevelManager();
         lvlMng.GetGroupController().Enable(false);
+        PoolManager.instance.ResetPoolObjects(ObjectTypes.Boss1Bullet);
+        PoolManager.instance.ResetPoolObjects(ObjectTypes.PlayerBullet);
 
         sceneToUnload = lvlMng.GetLevelSceneController().GetCurrentScene();
         sceneToLoadName = lvlMng.GetLevelSceneController().GetNextSceneName();

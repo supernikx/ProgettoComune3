@@ -48,6 +48,18 @@ public class AgentController : MonoBehaviour, IPoolObject
             _CurrentState = value;
         }
     }
+
+    /// <summary>
+    /// Funzione chiamata al reset forzato nella Pool dell'oggetto
+    /// </summary>
+    public void ResetPool()
+    {
+        groupCtrl = null;
+
+        agentCollisionCtrl.UnSetup();
+        agentGravityCtrl.UnSetup();
+        graphicCtrl.UnSetup();
+    }
     #endregion
 
     /// <summary>

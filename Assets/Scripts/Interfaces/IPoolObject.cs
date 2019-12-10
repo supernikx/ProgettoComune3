@@ -47,6 +47,11 @@ public interface IPoolObject
     void PoolInit();
 
     /// <summary>
+    /// Funzione chiamata al ritorno forzato in Pool dell'oggetto
+    /// </summary>
+    void ResetPool();
+
+    /// <summary>
     /// Evento che gestisce l'uscita dell'oggetto dalla Pool
     /// </summary>
     event PoolManagerEvets.Events OnObjectSpawn;

@@ -58,6 +58,15 @@ public abstract class BulletControllerBase : MonoBehaviour, IPoolObject
         collider.enabled = false;
         return;
     }
+
+    /// <summary>
+    /// Funzione chiamata al reset forzato nella Pool dell'oggetto
+    /// </summary>
+    public void ResetPool()
+    {
+        collider.enabled = false;
+        isSetupped = false;
+    }
     #endregion
 
     [Header("Base Bullet Settings")]

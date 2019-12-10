@@ -135,8 +135,25 @@ public class PoolManager : MonoBehaviour
                 return _object.gameObject;
             }
         }
+
         Debug.Log("Nessun " + type + " disponibile");
         return null;
+    }
+
+    /// <summary>
+    /// Funzione che fa tornare in Pool tutti gli oggetti del tipo passato come parametro
+    /// </summary>
+    /// <param name="type"></param>
+    public void ResetPoolObjects(ObjectTypes type)
+    {
+        foreach (IPoolObject _object in poolDictionary[type])
+        {
+            if (_object.currentState == State.InUse)
+            {
+                _object.ResetPool();
+                OnObjectDestroy(_object);
+            }
+        }
     }
     #endregion
 

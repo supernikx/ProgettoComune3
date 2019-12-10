@@ -16,6 +16,9 @@ public class QuickSceneReset : MonoBehaviour
 
     private void HandleOnGroupDead()
     {
+        PoolManager.instance.ResetPoolObjects(ObjectTypes.Boss1Bullet);
+        PoolManager.instance.ResetPoolObjects(ObjectTypes.PlayerBullet);
+
         Scene sceneToReload = new Scene();
         Scene swarmScene = new Scene();
         for (int i = 0; i < SceneManager.sceneCount; i++)
