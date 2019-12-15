@@ -334,6 +334,7 @@ public class GroupController : MonoBehaviour
         }
         else if (agents.Count == 1)
         {
+            oldGroupCenterPos = agents[0].transform.position;
             return agents[0].transform.position;
         }
 

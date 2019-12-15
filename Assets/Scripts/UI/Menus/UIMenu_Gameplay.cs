@@ -43,9 +43,9 @@ public class UIMenu_Gameplay : UIMenu_Base
     public override void CustomSetup(UIManagerBase _manage)
     {
         base.CustomSetup(_manage);
-        bossPanel.gameObject.SetActive(false);
+        ToggleBossPanel(false);
+        ToggleWinPanel(false);
         reloadingImage.gameObject.SetActive(false);
-        winPanel.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -89,6 +89,24 @@ public class UIMenu_Gameplay : UIMenu_Base
         }
     }
 
+    /// <summary>
+    /// Funzione che attiva/disattiva il pannello del boss
+    /// </summary>
+    /// <param name="_toggle"></param>
+    public void ToggleBossPanel(bool _toggle)
+    {
+        bossPanel.gameObject.SetActive(_toggle);
+    }
+
+    /// <summary>
+    /// Funzione che attiva/disattiva il pannello di vittoria
+    /// </summary>
+    /// <param name="_toggle"></param>
+    public void ToggleWinPanel(bool _toggle)
+    {
+        winPanel.gameObject.SetActive(_toggle);
+    }
+
     #region Handles
     /// <summary>
     /// Funzione che gestisce l'evento di inizio ricarica
@@ -125,8 +143,8 @@ public class UIMenu_Gameplay : UIMenu_Base
     /// <param name="obj"></param>
     private void HandleOnBossFightStart(BossControllerBase _bossCtrl)
     {
+        ToggleBossPanel(true);
         bossPanel.Setup(_bossCtrl);
-        bossPanel.gameObject.SetActive(true);
     }
 
     /// <summary>
@@ -136,10 +154,10 @@ public class UIMenu_Gameplay : UIMenu_Base
     /// /// <param name="_win"></param>
     private void HandleOnBossFightEnd(BossControllerBase _bossCtrl, bool _win)
     {
-        bossPanel.gameObject.SetActive(false);
+        ToggleBossPanel(false);
 
         if (_win)
-            winPanel.gameObject.SetActive(true);
+            ToggleWinPanel(true);
     }
 
     /// <summary>
@@ -147,7 +165,8 @@ public class UIMenu_Gameplay : UIMenu_Base
     /// </summary>
     private void HandleOnChangeLevelScene()
     {
-        bossPanel.gameObject.SetActive(false);
+        ToggleBossPanel(false);
+        ToggleWinPanel(false);
     }
     #endregion
 }

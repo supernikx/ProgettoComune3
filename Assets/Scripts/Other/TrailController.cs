@@ -19,6 +19,12 @@ public class TrailController : MonoBehaviour
     public Action<TrailController> OnTrailDespawn;
     #endregion
 
+    [Header("Trail Settings")]
+    /// <summary>
+    /// Offset sulla Y
+    /// </summary>
+    private float startPosYOffset = 3.5f;
+
     /// <summary>
     /// Dimensione iniziale del Trail
     /// </summary>
@@ -35,10 +41,6 @@ public class TrailController : MonoBehaviour
     /// Riferimento alla Coroutine di despawn
     /// </summary>
     private IEnumerator trailDespawnRoutine;
-    /// <summary>
-    /// Offset sulla Y
-    /// </summary>
-    private float startPosYOffset = 3.5f;
 
     /// <summary>
     /// Funzione di Setup

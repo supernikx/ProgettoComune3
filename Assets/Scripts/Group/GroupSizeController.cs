@@ -65,16 +65,16 @@ public class GroupSizeController : MonoBehaviour
     {
         grouping = (int)_value.Get<float>() == 1;
 
-        if (!groupCtrl.IsSetuppedAndEnabled() || !canChangeSize)
-            return;
-
-        if (sizeControllerRoutine != null)
-            StopCoroutine(sizeControllerRoutine);
-
-        if (grouping)
+        if (groupCtrl.IsSetuppedAndEnabled() && canChangeSize)
         {
-            sizeControllerRoutine = GroupCoroutine();
-            StartCoroutine(sizeControllerRoutine);
+            if (sizeControllerRoutine != null)
+                StopCoroutine(sizeControllerRoutine);
+
+            if (grouping)
+            {
+                sizeControllerRoutine = GroupCoroutine();
+                StartCoroutine(sizeControllerRoutine);
+            }
         }
 
         OnGroupPressed?.Invoke(grouping);

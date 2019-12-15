@@ -17,6 +17,10 @@ public class GamePauseState : GameSMStateBase
     /// </summary>
     private UIMenu_Pause uiPausePanel;
     /// <summary>
+    /// Riferimento al pannello di gameplay
+    /// </summary>
+    private UIMenu_Gameplay gameplayPanel;
+    /// <summary>
     /// Riferimento al level manager
     /// </summary>
     private LevelManager lvlMng;
@@ -38,6 +42,7 @@ public class GamePauseState : GameSMStateBase
         lvlPauseCtrl = lvlMng.GetLevelPauseController();
         groupCtrl = lvlMng.GetGroupController();
         uiPausePanel = uiMng.GetMenu<UIMenu_Pause>();
+        gameplayPanel = uiMng.GetMenu<UIMenu_Gameplay>();
 
         lvlPauseCtrl.OnGameUnpause += HandleOnGameUnpause;
         uiPausePanel.ResumeButtonPressed += HandleOnGameUnpause;
@@ -61,6 +66,8 @@ public class GamePauseState : GameSMStateBase
     /// </summary>
     private void HandleOnMainMenuButtonPressed()
     {
+        gameplayPanel.ToggleBossPanel(false);
+        gameplayPanel.ToggleWinPanel(false);
         Complete(1);
     }
     #endregion
