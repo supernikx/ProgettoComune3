@@ -24,7 +24,6 @@ public class LevelPauseController : MonoBehaviour
     [SerializeField]
     InputAction inputPauseMapping;
 
-
     /// <summary>
     /// Bool che identifica se lo script è setuppato
     /// </summary>

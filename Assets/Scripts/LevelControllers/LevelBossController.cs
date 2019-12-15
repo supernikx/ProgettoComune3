@@ -19,6 +19,10 @@ public class LevelBossController : MonoBehaviour
     public static Action<BossControllerBase, bool> OnBossFightEnd;
     #endregion
 
+    [Header("Boss Settings")]
+    [SerializeField]
+    private ActiveBossTrigger bossTrigger;
+
     /// <summary>
     /// Riferimento al level manager
     /// </summary>
@@ -40,13 +44,7 @@ public class LevelBossController : MonoBehaviour
     {
         lvlMng = _lvlMng;
         groupCtrl = lvlMng.GetGroupController();
-
-
-        foreach (BossControllerBase boss in FindObjectsOfType<BossControllerBase>())
-        {
-            if (boss != null)
-                boss.Setup(lvlMng);
-        }
+        bossTrigger.Setup(lvlMng);
 
         groupCtrl.OnGroupDead += HandleOnGroupDead;
         ActiveBossTrigger.OnBossTriggered += HandleOnBossTriggered;

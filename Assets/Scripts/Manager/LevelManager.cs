@@ -47,7 +47,9 @@ public class LevelManager : MonoBehaviour
         lvlSceneCtrl.Setup();
         lvlCamCtrl.Setup(this);
         lvlPauseCtrl.Setup();
-        lvlBossCtrl.Setup(this);
+
+        if (lvlBossCtrl != null)
+            lvlBossCtrl.Setup(this);
 
         groupCtrl.Enable(true);
         groupCtrl.Move(groupStartPosition.position);
