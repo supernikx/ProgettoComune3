@@ -33,14 +33,20 @@ public class AgentMovementController : MonoBehaviour
     /// </summary>
     /// <param name="_newPos"></param>
     /// <returns></returns>
-    private bool CheckCollision(Vector3 _newPos)
+    private Vector3 CheckCollision(Vector3 _newPos, Vector3 _dir, float _speed)
     {
         float distance = Vector3.Distance(_newPos, transform.position);
         Vector3 fiexdPos = transform.position;
         fiexdPos.y += 0.5f;
         Ray ray = new Ray(fiexdPos, transform.forward);
-        Debug.DrawRay(fiexdPos, transform.forward);
-        return Physics.Raycast(ray, distance + 1f, obstacleLayer);
+        RaycastHit hitInfo;
+        if (Physics.Raycast(ray, out hitInfo, distance + 1f, obstacleLayer))
+        {
+            Vector3 newDir = (_dir.normalized + hitInfo.normal).normalized;
+            return Vector3.MoveTowards(transform.position, transform.position + newDir, _speed);
+        }
+
+        return _newPos;
     }
 
     #region API
@@ -52,6 +58,8 @@ public class AgentMovementController : MonoBehaviour
     /// <param name="_speedMultiplier"></param>
     public void Move(Vector3 _movementDirection, bool _lookAtDirection, float _speedMultiplier = 1f)
     {
+        float speed = movementSpeed * _speedMultiplier * Time.deltaTime;
+
         //Se devo guardare la direzione in cui sto andando ruoto
         if (_lookAtDirection)
         {
@@ -62,10 +70,10 @@ public class AgentMovementController : MonoBehaviour
         }
 
         //Calcolo la nuova posizione e controllo le collisioni, se non c'è niente mi muovo
-        Vector3 newPos = Vector3.MoveTowards(transform.position, transform.position + _movementDirection, movementSpeed * _speedMultiplier * Time.deltaTime);
-        if (!CheckCollision(newPos))
-            transform.position = newPos;
+        Vector3 newPos = Vector3.MoveTowards(transform.position, transform.position + _movementDirection, speed);
+        transform.position = CheckCollision(newPos, _movementDirection, speed);
     }
+
     #region Getter
     #endregion
     #endregion

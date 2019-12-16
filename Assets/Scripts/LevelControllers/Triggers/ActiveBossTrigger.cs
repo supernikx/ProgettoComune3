@@ -94,8 +94,6 @@ public class ActiveBossTrigger : MonoBehaviour
     {
         inputSkipCutscene.performed -= SkipCutscene;
         cutsceneDirector.time = cutsceneDirector.duration;
-        //groupCtrl.Enable(true);
-        //OnBossTriggered?.Invoke(bossToEnable);
     }
 
     /// <summary>
