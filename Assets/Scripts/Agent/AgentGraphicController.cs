@@ -8,9 +8,9 @@ using UnityEngine;
 public class AgentGraphicController : MonoBehaviour
 {
     /// <summary>
-    /// Riferimento all'agent controller
+    /// Riferimento al group controller
     /// </summary>
-    private AgentController agentCtrl;
+    private GroupController groupCtrl;
     /// <summary>
     /// Riferimento all'animator
     /// </summary>
@@ -32,17 +32,18 @@ public class AgentGraphicController : MonoBehaviour
     /// <summary>
     /// Funzione che inizializza lo script e prende le referenza
     /// </summary>
-    public void Init(AgentController _agentCtrl)
+    public void Init()
     {
-        agentCtrl = _agentCtrl;
         anim = GetComponent<Animator>();
     }
 
     /// <summary>
     /// Funzione che esegue il Setup
     /// </summary>
-    public void Setup()
+    /// <param name="_groupCtrl"></param>
+    public void Setup(GroupController _groupCtrl)
     {
+        groupCtrl = _groupCtrl;
         calculatedMovementSpeed = 0f;
         isSetupped = true;
     }
@@ -58,7 +59,7 @@ public class AgentGraphicController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!isSetupped || !agentCtrl.GetGroupController().IsSetuppedAndEnabled())
+        if (!isSetupped || !groupCtrl.IsSetuppedAndEnabled())
             return;
 
         CalculateMovementSpeed();

@@ -152,9 +152,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4898873885526971862}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5eff5e0fb472a744ba12039c983a81b, type: 3}
+  m_Script: {fileID: 11500000, guid: e2311a3093a02c74e8c31b0a8642790e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxYDistanceFromGroup: 2
 --- !u!114 &6648088072051772253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,16 +216,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CH_Pitottinov3
       objectReference: {fileID: 0}
-    - target: {fileID: -7796393011940852363, guid: a460d09c062051b4ca13f796b3954420,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: aecaee6abf1a6804ca6f9d222c276ae7, type: 2}
-    - target: {fileID: -6377777741332494744, guid: a460d09c062051b4ca13f796b3954420,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: aecaee6abf1a6804ca6f9d222c276ae7, type: 2}
     - target: {fileID: -4216859302048453862, guid: a460d09c062051b4ca13f796b3954420,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -280,12 +271,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8168203948914655556, guid: a460d09c062051b4ca13f796b3954420,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: aecaee6abf1a6804ca6f9d222c276ae7, type: 2}
+    - target: {fileID: -7796393011940852363, guid: a460d09c062051b4ca13f796b3954420,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: aecaee6abf1a6804ca6f9d222c276ae7, type: 2}
     - target: {fileID: 3076400567214695558, guid: a460d09c062051b4ca13f796b3954420,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: aecaee6abf1a6804ca6f9d222c276ae7, type: 2}
-    - target: {fileID: 8168203948914655556, guid: a460d09c062051b4ca13f796b3954420,
+    - target: {fileID: -6377777741332494744, guid: a460d09c062051b4ca13f796b3954420,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
