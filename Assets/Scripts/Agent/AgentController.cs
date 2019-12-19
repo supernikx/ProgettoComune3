@@ -56,7 +56,6 @@ public class AgentController : MonoBehaviour, IPoolObject
     {
         groupCtrl = null;
 
-        agentCollisionCtrl.UnSetup();
         agentGravityCtrl.UnSetup();
         graphicCtrl.UnSetup();
     }
@@ -67,6 +66,10 @@ public class AgentController : MonoBehaviour, IPoolObject
     /// </summary>
     private GroupController groupCtrl;
     /// <summary>
+    /// Riferimento all'agent group controller
+    /// </summary>
+    private AgentGroupController agentGroupCtrl;
+    /// <summary>
     /// Riferimento all'agent movement controller
     /// </summary>
     private AgentMovementController movementCtrl;
@@ -74,10 +77,6 @@ public class AgentController : MonoBehaviour, IPoolObject
     /// Riferimento al graphic controller
     /// </summary>
     private AgentGraphicController graphicCtrl;
-    /// <summary>
-    /// Riferimento all'agent collision controller
-    /// </summary>
-    private AgentCollisionController agentCollisionCtrl;
     /// <summary>
     /// Riferimento all'agent gravity controller
     /// </summary>
@@ -95,13 +94,13 @@ public class AgentController : MonoBehaviour, IPoolObject
     {
         movementCtrl = GetComponent<AgentMovementController>();
         agentGravityCtrl = GetComponent<AgentGravityController>();
-        agentCollisionCtrl = GetComponent<AgentCollisionController>();
         agentDistanceCtrl = GetComponent<AgentDistanceController>();
+        agentGroupCtrl = GetComponent<AgentGroupController>();
         graphicCtrl = GetComponentInChildren<AgentGraphicController>();
 
-        graphicCtrl.Init(this);
-        agentCollisionCtrl.Init(this);
-        agentGravityCtrl.Init(this);
+        graphicCtrl.Init();
+        agentGravityCtrl.Init();
+        agentGroupCtrl.Init(this);
     }
 
     /// <summary>
@@ -113,10 +112,10 @@ public class AgentController : MonoBehaviour, IPoolObject
         groupCtrl = _groupCtrl;
 
         movementCtrl.Setup();
-        agentCollisionCtrl.Setup();
-        agentGravityCtrl.Setup();
         agentDistanceCtrl.Setup();
-        graphicCtrl.Setup();
+        agentGravityCtrl.Setup(groupCtrl);
+        graphicCtrl.Setup(groupCtrl);
+        agentGroupCtrl.Setup(groupCtrl);
 
         OnObjectSpawn?.Invoke(this);
     }
@@ -128,9 +127,9 @@ public class AgentController : MonoBehaviour, IPoolObject
     {
         groupCtrl = null;
 
-        agentCollisionCtrl.UnSetup();
         agentGravityCtrl.UnSetup();
         graphicCtrl.UnSetup();
+        agentGroupCtrl.UnSetup();
 
         OnObjectDestroy?.Invoke(this);
     }
@@ -154,15 +153,6 @@ public class AgentController : MonoBehaviour, IPoolObject
     public AgentMovementController GetAgentMovementController()
     {
         return movementCtrl;
-    }
-
-    /// <summary>
-    /// Funzione che ritorna l'agent collision controller
-    /// </summary>
-    /// <returns></returns>
-    public AgentCollisionController GetAgentCollisionController()
-    {
-        return agentCollisionCtrl;
     }
 
     /// <summary>

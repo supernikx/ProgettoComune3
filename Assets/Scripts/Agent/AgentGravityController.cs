@@ -13,9 +13,9 @@ public class AgentGravityController : MonoBehaviour
     private float fallingMultiplier;
 
     /// <summary>
-    /// Riferimento all'agent controller
+    /// Riferimento al group controller
     /// </summary>
-    private AgentController agentCtrl;
+    private GroupController groupCtrl;
     /// <summary>
     /// Riferimento al RigidBody
     /// </summary>
@@ -30,19 +30,19 @@ public class AgentGravityController : MonoBehaviour
     /// <summary>
     /// Funzione che inizializza lo script e prende le referenze
     /// </summary>
-    /// <param name="_agentCtrl"></param>
-    public void Init(AgentController _agentCtrl)
+    public void Init()
     {
-        agentCtrl = _agentCtrl;
-        rb = agentCtrl.GetAgentCollisionController().GetRigidBody();
+        rb = GetComponent<Rigidbody>();
         UnSetup();
     }
 
     /// <summary>
     /// Funzione di Setup
     /// </summary>
-    public void Setup()
+    /// <param name="_groupCtrl"></param>
+    public void Setup(GroupController _groupCtrl)
     {
+        groupCtrl = _groupCtrl;
         isSetupped = true;
         rb.useGravity = true;
         rb.constraints = RigidbodyConstraints.FreezeRotation;
@@ -61,7 +61,7 @@ public class AgentGravityController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!isSetupped || !agentCtrl.GetGroupController().IsSetuppedAndEnabled())
+        if (!isSetupped || !groupCtrl.IsSetuppedAndEnabled())
             return;
 
         if (rb.velocity.y < 0)
