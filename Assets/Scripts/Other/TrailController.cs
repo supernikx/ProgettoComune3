@@ -23,7 +23,7 @@ public class TrailController : MonoBehaviour
     /// <summary>
     /// Offset sulla Y
     /// </summary>
-    private float startPosYOffset = 3.5f;
+    private float startPosYOffset = 5.4f;
 
     /// <summary>
     /// Dimensione iniziale del Trail
