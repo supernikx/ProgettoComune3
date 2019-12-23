@@ -24,7 +24,10 @@ public class ActiveBossTrigger : MonoBehaviour
     private bool disableAfterTrigger;
     //Director della cutscene di attivazione del Boss
     [SerializeField]
-    private PlayableDirector cutsceneDirector;
+    private PlayableDirector startBossCutsceneDirector;
+    //Director della cutscene di fine del Boss
+    [SerializeField]
+    private PlayableDirector endBossCutsceneDirector;
 
     [Header("Binding Settings")]
     //Mappatura dei tasti per saltare la cutscene
@@ -58,9 +61,90 @@ public class ActiveBossTrigger : MonoBehaviour
         groupCtrl = lvlMng.GetGroupController();
         triggerCollider = GetComponent<Collider>();
 
+        LevelBossController.OnBossFightEnd += HandleOnBossFightEnd;
+
         triggerCollider.enabled = true;
-        bossToEnable.Setup(lvlMng);        
+        bossToEnable.Setup(lvlMng);
     }
+
+    #region Handlers
+    /// <summary>
+    /// Funzione che gestisce l'evento di fine boss fight
+    /// </summary>
+    /// <param name="arg1"></param>
+    /// <param name="arg2"></param>
+    private void HandleOnBossFightEnd(BossControllerBase _bossCtrl, bool _win)
+    {
+        if (_win)
+        {
+            if (endBossCutsceneDirector != null)
+                EndBossCutscene();
+        }
+    }
+    #endregion
+
+    #region StartCutscene
+    /// <summary>
+    /// Funzione che fa partire la cutscene di inizio della bossfight
+    /// </summary>
+    private void StartBossCutscene()
+    {
+        inputSkipCutscene.performed += SkipStartBossCutscene;
+        groupCtrl.Enable(false);
+        startBossCutsceneDirector.Play();
+    }
+
+    /// <summary>
+    /// Funzione che esgue lo skip della cutscene
+    /// </summary>
+    /// <param name="_context"></param>
+    private void SkipStartBossCutscene(InputAction.CallbackContext _context)
+    {
+        inputSkipCutscene.performed -= SkipStartBossCutscene;
+        startBossCutsceneDirector.time = startBossCutsceneDirector.duration;
+    }
+
+    /// <summary>
+    /// Callback di fine cutscene di inizio bossfight
+    /// </summary>
+    public void StartCutsceneCallback()
+    {
+        inputSkipCutscene.performed -= SkipStartBossCutscene;
+        groupCtrl.Enable(true);
+        OnBossTriggered?.Invoke(bossToEnable);
+    }
+    #endregion
+
+    #region EndCurscene
+    /// <summary>
+    /// Funzione che fa partire la cutscene di fine della bossfight
+    /// </summary>
+    private void EndBossCutscene()
+    {
+        inputSkipCutscene.performed += SkipEndBossCutscene;
+        groupCtrl.Enable(false);
+        endBossCutsceneDirector.Play();
+    }
+
+    /// <summary>
+    /// Funzione che esgue lo skip della cutscene fine bossfight
+    /// </summary>
+    /// <param name="_context"></param>
+    private void SkipEndBossCutscene(InputAction.CallbackContext _context)
+    {
+        inputSkipCutscene.performed -= SkipEndBossCutscene;
+        endBossCutsceneDirector.time = endBossCutsceneDirector.duration;
+    }
+
+    /// <summary>
+    /// Callback di fine cutscene della fine bossfight
+    /// </summary>
+    public void EndCutsceneCallback()
+    {
+        inputSkipCutscene.performed -= SkipEndBossCutscene;
+        groupCtrl.Enable(true);
+    }
+    #endregion
 
     private void OnTriggerEnter(Collider other)
     {
@@ -69,46 +153,18 @@ public class ActiveBossTrigger : MonoBehaviour
             if (disableAfterTrigger)
                 triggerCollider.enabled = false;
 
-            if (cutsceneDirector != null)
-                StartCutscene();
+            if (startBossCutsceneDirector != null)
+                StartBossCutscene();
             else
                 OnBossTriggered?.Invoke(bossToEnable);
         }
     }
 
-    /// <summary>
-    /// Funzione che fa partire la cutscene di inizio della bossfight
-    /// </summary>
-    private void StartCutscene()
-    {
-        inputSkipCutscene.performed += SkipCutscene;
-        groupCtrl.Enable(false);
-        cutsceneDirector.Play();
-    }
-
-    /// <summary>
-    /// Funzione che esgue lo skip della cutscene
-    /// </summary>
-    /// <param name="_context"></param>
-    private void SkipCutscene(InputAction.CallbackContext _context)
-    {
-        inputSkipCutscene.performed -= SkipCutscene;
-        cutsceneDirector.time = cutsceneDirector.duration;
-    }
-
-    /// <summary>
-    /// Callback di fine cutscene
-    /// </summary>
-    public void EndCusceneCallback()
-    {
-        inputSkipCutscene.performed -= SkipCutscene;
-        groupCtrl.Enable(true);
-        OnBossTriggered?.Invoke(bossToEnable);
-    }
-
     private void OnDisable()
     {
-        inputSkipCutscene.performed -= SkipCutscene;
+        LevelBossController.OnBossFightEnd -= HandleOnBossFightEnd;
+        inputSkipCutscene.performed -= SkipStartBossCutscene;
+        inputSkipCutscene.performed -= SkipEndBossCutscene;
         inputSkipCutscene.Disable();
     }
 }

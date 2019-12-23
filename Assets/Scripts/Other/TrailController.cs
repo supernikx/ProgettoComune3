@@ -20,10 +20,11 @@ public class TrailController : MonoBehaviour
     #endregion
 
     [Header("Trail Settings")]
+    [SerializeField]
     /// <summary>
     /// Offset sulla Y
     /// </summary>
-    private float startPosYOffset = 5.4f;
+    private float startPosYOffset = -0.5f;
 
     /// <summary>
     /// Dimensione iniziale del Trail

@@ -407,9 +407,12 @@ public class GroupController : MonoBehaviour
     /// <returns></returns>
     private Vector3 CheckPointIsInsideGround(Vector3 _point)
     {
+        //Fix della posizone per evitare di controllare dentro il collider
+        _point.y += 0.1f;
+
         //Controllo se il punto è sul terreno
         Ray ray = new Ray(_point, Vector3.down);
-        if (Physics.Raycast(ray, 5f, groundLayer))
+        if (Physics.Raycast(ray, 1f, groundLayer))
             return _point;
 
         //Se non è sul terreno prendo il punto opposto
@@ -420,7 +423,7 @@ public class GroupController : MonoBehaviour
 
         //Controllo se il punto opposto è sul terreno
         Ray oppositeRay = new Ray(oppositePoint, Vector3.down);
-        if (Physics.Raycast(oppositeRay, 5f, groundLayer))
+        if (Physics.Raycast(oppositeRay, 1f, groundLayer))
             return oppositePoint;
 
         //Se anche il punto opposto è fuori dal terreno spawna in centro
