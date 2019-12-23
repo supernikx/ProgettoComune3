@@ -14,6 +14,14 @@ public class GroupController : MonoBehaviour
     /// Evento che notifica la morte del gruppo
     /// </summary>
     public Action OnGroupDead;
+    /// <summary>
+    /// Evento che notifica lo spawn di un nuovo agent
+    /// </summary>
+    public Action<AgentController> OnAgentSpawn;
+    /// <summary>
+    /// Evento che notifica la morte di un agent
+    /// </summary>
+    public Action<AgentController> OnAgentDead;
     #endregion
 
     [Header("Group Spawn Settings")]
@@ -58,6 +66,10 @@ public class GroupController : MonoBehaviour
     /// </summary>
     private GroupShootController shootCtrl;
     /// <summary>
+    /// Riferimento al group feedback controller
+    /// </summary>
+    private GroupFeedbackController groupFeedbackCtrl;
+    /// <summary>
     /// Riferimento al PlayerInput
     /// </summary>
     private PlayerInput playerInput;
@@ -83,7 +95,11 @@ public class GroupController : MonoBehaviour
         groupMovementCtrl = GetComponent<GroupMovementController>();
         groupSizeCtrl = GetComponent<GroupSizeController>();
         shootCtrl = GetComponent<GroupShootController>();
+        groupFeedbackCtrl = GetComponent<GroupFeedbackController>();
         playerInput = GetComponent<PlayerInput>();
+
+        //Feedback setup prima di tutti perchè deve gestire eventi di spawn degli agent
+        groupFeedbackCtrl.Setup(this);
 
         AgentsSetup();
         groupMovementCtrl.Setup(this);
@@ -145,6 +161,15 @@ public class GroupController : MonoBehaviour
     }
 
     /// <summary>
+    /// Funzione che ritorna il group feedback controller
+    /// </summary>
+    /// <returns></returns>
+    public GroupFeedbackController GetGroupFeedbackController()
+    {
+        return groupFeedbackCtrl;
+    }
+
+    /// <summary>
     /// Funzione che ritorna il riferimento al PlayerInput
     /// </summary>
     /// <returns></returns>
@@ -160,6 +185,33 @@ public class GroupController : MonoBehaviour
     public List<AgentController> GetAgents()
     {
         return agents;
+    }
+
+    /// <summary>
+    /// Funzione che ritorna quanti membri ci sono nel gruppo
+    /// </summary>
+    /// <returns></returns>
+    public int GetGroupCont()
+    {
+        return agents.Count;
+    }
+
+    /// <summary>
+    /// Funzione che ritorna quanti membri possono esserci al massimo del gruppo
+    /// </summary>
+    /// <returns></returns>
+    public int GetGroupMaxAgentCont()
+    {
+        return groupMaxAgents;
+    }
+
+    /// <summary>
+    /// Funzione che ritorna quanti membri  possono esserci al minimo del gruppo
+    /// </summary>
+    /// <returns></returns>
+    public int GetGroupMinAgentCont()
+    {
+        return groupMinAgents;
     }
 
     /// <summary>
@@ -257,6 +309,7 @@ public class GroupController : MonoBehaviour
             agents.Remove(_agentToRemove);
         }
 
+        OnAgentDead?.Invoke(_agentToRemove);
         CheckGroupCount();
     }
 
@@ -282,6 +335,7 @@ public class GroupController : MonoBehaviour
             newAgent.transform.SetParent(transform);
             newAgent.Setup(this);
             agents.Add(newAgent);
+            OnAgentSpawn?.Invoke(newAgent);
             return true;
         }
 

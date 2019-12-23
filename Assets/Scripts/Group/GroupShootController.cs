@@ -81,12 +81,12 @@ public class GroupShootController : MonoBehaviour
     /// </summary>
     /// <param name="_groupCtrl"></param>
     public void Setup(GroupController _groupCtrl)
-    {
-        aimFeedback = FindObjectOfType<AimArrowFeedback>();
+    {        
         groupCtrl = _groupCtrl;
         groupMovementCtrl = groupCtrl.GetGroupMovementController();
         groupSizeCtrl = groupCtrl.GetGroupSizeController();
         playerInput = groupCtrl.GetPlayerInput();
+        aimFeedback = groupCtrl.GetGroupFeedbackController().GetAimArrow();
 
         groupCtrl.OnGroupDead += EndReloading;
         canShoot = true;

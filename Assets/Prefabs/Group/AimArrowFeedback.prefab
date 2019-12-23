@@ -44,6 +44,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33edc19fb86758e47a5eb50b49a84f71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fullGrupArrow:
+    arrowSprite: {fileID: 21300000, guid: d83e24f26a30db3468e659141e3ade99, type: 3}
+    arrowColor: {r: 0.23821567, g: 0.5471698, b: 0.080010675, a: 1}
+  normalGroupArrow:
+    arrowSprite: {fileID: 21300000, guid: eff11a8afe9a64049a91bafe956deebb, type: 3}
+    arrowColor: {r: 0.6759773, g: 0.7075472, b: 0.056737285, a: 1}
+  emptyGroupArrow:
+    arrowSprite: {fileID: 21300000, guid: 21d94e63403746542985ee78ca68d39d, type: 3}
+    arrowColor: {r: 0.6603774, g: 0.19380745, b: 0.109024554, a: 1}
 --- !u!1 &5806641584843593564
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,7 +122,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: db18cda1586da2745896b49157d6ee3a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d83e24f26a30db3468e659141e3ade99, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
