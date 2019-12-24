@@ -17,6 +17,11 @@ public class BossCollisionController : MonoBehaviour
     public Action<AgentController> OnAgentHit;
     #endregion
 
+    [Header("Collision Settings")]
+    //Layer degli ostacoli
+    [SerializeField]
+    private LayerMask obstacleLayer;
+
     /// <summary>
     /// Riferimento al BossController
     /// </summary>
@@ -40,7 +45,7 @@ public class BossCollisionController : MonoBehaviour
     {
         if (bossCtrl == null || (bossCtrl != null && !bossCtrl.IsSetuppedAndEnabled()))
             return;
-
+        
         if (collision.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
         {
             OnObstacleHit?.Invoke(collision.gameObject);
@@ -54,6 +59,21 @@ public class BossCollisionController : MonoBehaviour
     }
 
     #region API
+    /// <summary>
+    /// Funzione che controlla se ci sono collisioni nel nuovo punto di moviemento
+    /// </summary>
+    /// <param name="_newPos"></param>
+    /// <returns></returns>
+    public bool CheckCollision(Vector3 _newPos)
+    {
+        float distance = Vector3.Distance(_newPos, bossCtrl.transform.position);
+        Vector3 fiexdPos = bossCtrl.transform.position;
+        fiexdPos.y += 0.5f;
+        Ray ray = new Ray(fiexdPos, bossCtrl.transform.forward);
+        RaycastHit hitInfo;
+        return Physics.Raycast(ray, out hitInfo, distance + 1f, obstacleLayer);
+    }
+
     #region Getter
     /// <summary>
     /// Funzione che ritorna il rigid body
@@ -62,6 +82,15 @@ public class BossCollisionController : MonoBehaviour
     public Rigidbody GetRigidBody()
     {
         return rb;
+    }
+
+    /// <summary>
+    /// Funzione che ritorna il layer di ostacoli
+    /// </summary>
+    /// <returns></returns>
+    public LayerMask GetObstacleLayer()
+    {
+        return obstacleLayer;
     }
     #endregion
     #endregion

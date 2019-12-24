@@ -80,17 +80,26 @@ public class Boss1DashState : Boss1StateBase
         if (distanceTraveled >= maxMoveDistance)
         {
             float remamingDistance = maxMoveDistance - oldDistanceTraveled;
-            bossCtrl.transform.position = Vector3.MoveTowards(bossCtrl.transform.position, bossCtrl.transform.position + bossCtrl.transform.forward, remamingDistance);
+            Vector3 newPos = Vector3.MoveTowards(bossCtrl.transform.position, bossCtrl.transform.position + bossCtrl.transform.forward, remamingDistance);
+            if (!collisionCtrl.CheckCollision(newPos))
+                bossCtrl.transform.position = newPos;
+
             Complete();
         }
         else
         {
+            Vector3 oldPos = bossCtrl.transform.position;
             Vector3 newPos = Vector3.MoveTowards(bossCtrl.transform.position, bossCtrl.transform.position + bossCtrl.transform.forward, movementSpeed * Time.deltaTime);
-            distanceTraveled += Vector3.Distance(newPos, bossCtrl.transform.position);
-            bossCtrl.transform.position = newPos;
+            if (collisionCtrl.CheckCollision(newPos))
+                HandleOnObstacleHit(null);
+            else
+            {
+                bossCtrl.transform.position = newPos;
+                distanceTraveled += Vector3.Distance(bossCtrl.transform.position, oldPos);
 
-            if (leaveTrail)
-                trailController.UpdateLastTrail();
+                if (leaveTrail)
+                    trailController.UpdateLastTrail();
+            }
         }
     }
 
