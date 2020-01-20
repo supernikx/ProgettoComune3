@@ -44,12 +44,12 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private LevelManager lvlMng;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         Singleton();
     }
 
-    void Start()
+    protected virtual void Start()
     {
         smCtrl = GetComponent<GameSMController>();
 

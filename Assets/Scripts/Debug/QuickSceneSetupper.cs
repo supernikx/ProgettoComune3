@@ -2,24 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class QuickSceneSetupper : MonoBehaviour
+public class QuickSceneSetupper : GameManager
 {
-    private void Start()
+    private QuickSceneInstantiator inst;
+    private QuickSceneReset reset;
+    private PoolManager poolMng;
+    private LevelManager lvlMgn;
+    private UI_Manager uiMng;
+    private GroupController groupCtrl;
+
+    protected override void Start()
     {
-        GameManager gm = FindObjectOfType<GameManager>();
-        if (gm == null)
+        if (FindObjectsOfType<GameManager>().Length == 1)
         {
-            PoolManager poolMng = FindObjectOfType<PoolManager>();
-            poolMng.Setup();
+            //Controllo e istanzio se mancano cose
+            inst = FindObjectOfType<QuickSceneInstantiator>();
+            inst.Setup();
 
-            GroupController groupCtrl = FindObjectOfType<GroupController>();
-            groupCtrl.Setup();
+            //Flow normale di setup
+            reset = FindObjectOfType<QuickSceneReset>();
+            uiMng = FindObjectOfType<UI_Manager>();
+            poolMng = FindObjectOfType<PoolManager>();
+            groupCtrl = FindObjectOfType<GroupController>();
+            lvlMgn = FindObjectOfType<LevelManager>();
 
-            LevelManager lvlMgn = FindObjectOfType<LevelManager>();
-            lvlMgn.Setup();
+            SetLevelManager(lvlMgn);
+            SetUIManager(uiMng);
 
-            QuickSceneReset reset = FindObjectOfType<QuickSceneReset>();
             reset.Setup(groupCtrl);
+            poolMng.Setup();
+            groupCtrl.Setup();
+            lvlMgn.Setup();
+            uiMng.Setup(this);
+
+            uiMng.SetCurrentMenu<UIMenu_Gameplay>();
         }
         else
         {
