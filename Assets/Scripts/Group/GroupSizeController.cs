@@ -122,7 +122,7 @@ public class GroupSizeController : MonoBehaviour
 
 
         //Finchè tutti gli agent non sono all distanza corretta li sposto
-        while (agentsAtWrongDistance > 0)
+        while (agentsAtWrongDistance > 0 && groupCtrl.IsSetuppedAndEnabled())
         {
             groupCenter = groupCtrl.GetGroupCenterPoint();
             agentsAtWrongDistance = 0;
@@ -158,7 +158,7 @@ public class GroupSizeController : MonoBehaviour
     /// <returns></returns>
     private IEnumerator GroupCoroutine()
     {
-        while (grouping)
+        while (grouping && groupCtrl.IsSetuppedAndEnabled())
         {
             //Prendo il riferimento agli agent
             List<AgentController> agents = groupCtrl.GetAgents();
@@ -174,7 +174,7 @@ public class GroupSizeController : MonoBehaviour
                 agents[i].GetAgentDistanceController().CalculateDistances();
 
             //Finchè tutti gli agent non sono all distanza corretta li sposto
-            while (agentsAtWrongDistance > 0)
+            while (agentsAtWrongDistance > 0 && groupCtrl.IsSetuppedAndEnabled())
             {
                 groupCenter = groupCtrl.GetGroupCenterPoint();
                 agentsAtWrongDistance = 0;
