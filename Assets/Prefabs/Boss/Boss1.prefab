@@ -84,7 +84,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 636105095}
   m_LocalRotation: {x: 0, y: 0.15212336, z: 0, w: 0.98836154}
-  m_LocalPosition: {x: 0, y: -1.2, z: 0}
+  m_LocalPosition: {x: 0, y: -1.074, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1801945680}
@@ -739,7 +739,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9001343175590223591}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.2, z: 0}
+  m_LocalPosition: {x: 0, y: -1.074, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9001343174953313149}
@@ -795,6 +795,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ooze_Machine
       objectReference: {fileID: 0}
+    - target: {fileID: -8331148895342993392, guid: 75debac4bac56334ab24b98157fe3b31,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7a28749d47f7f7847adfa067323c70a2, type: 2}
     - target: {fileID: -4216859302048453862, guid: 75debac4bac56334ab24b98157fe3b31,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -850,11 +855,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8331148895342993392, guid: 75debac4bac56334ab24b98157fe3b31,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 7a28749d47f7f7847adfa067323c70a2, type: 2}
     - target: {fileID: 8181648956740992576, guid: 75debac4bac56334ab24b98157fe3b31,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
