@@ -22,7 +22,7 @@ public class LevelPauseController : MonoBehaviour
     [Header("Binding Settings")]
     //Mappatura dei tasti per la pausa
     [SerializeField]
-    InputAction inputPauseMapping;
+    private InputAction inputPauseMapping;
 
     /// <summary>
     /// Bool che identifica se lo script è setuppato

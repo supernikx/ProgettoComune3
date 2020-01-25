@@ -32,6 +32,10 @@ public class GamePauseState : GameSMStateBase
     /// Riferiemento al group controller
     /// </summary>
     private GroupController groupCtrl;
+    /// <summary>
+    /// Bool che identifica lo status precedente del gruppo
+    /// </summary>
+    private bool oldGroupStatus;
 
     public override void Enter()
     {
@@ -49,6 +53,7 @@ public class GamePauseState : GameSMStateBase
         uiPausePanel.MainMenuButtonPressed += HandleOnMainMenuButtonPressed;
 
         groupCtrl.Enable(false);
+        oldGroupStatus = groupCtrl.IsEnabled();
         uiMng.SetCurrentMenu<UIMenu_Pause>();
     }
 
@@ -84,7 +89,7 @@ public class GamePauseState : GameSMStateBase
         }
 
         if (groupCtrl != null)
-            groupCtrl.Enable(true);
+            groupCtrl.Enable(oldGroupStatus);
 
         Time.timeScale = 1;
     }

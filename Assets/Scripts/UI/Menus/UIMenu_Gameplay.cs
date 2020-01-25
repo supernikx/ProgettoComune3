@@ -3,13 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 /// <summary>
 /// Classe che gestisce il Pannello di Gameplay
 /// </summary>
 public class UIMenu_Gameplay : UIMenu_Base
 {
-    [Header("References")]
+    [Header("General References")]
     //Riferimento all'immagine che deve apparire nel momento della ricarica
     [SerializeField]
     private Image reloadingImage;
@@ -19,6 +20,9 @@ public class UIMenu_Gameplay : UIMenu_Base
     //Riferimento al pannello di vittoria
     [SerializeField]
     private UISubmenu_Win winPanel;
+    //Riferimento al pannello di tutorial
+    [SerializeField]
+    private UISubmenu_Tutorial tutorialPanel;
 
     /// <summary>
     /// Riferimento al level scene controller
@@ -69,6 +73,9 @@ public class UIMenu_Gameplay : UIMenu_Base
             LevelBossController.OnBossFightStart += HandleOnBossFightStart;
             LevelBossController.OnBossFightEnd += HandleOnBossFightEnd;
 
+            LevelTutorialController.OnTutorialOpen += HandleOnTutorialPanelOpen;
+            LevelTutorialController.OnTutorialClose += HandleOnTutorialPanelClosed;
+
             lvlSceneCtrl.OnChangeLevelScene += HandleOnChangeLevelScene;
         }
         else
@@ -86,6 +93,9 @@ public class UIMenu_Gameplay : UIMenu_Base
 
             LevelBossController.OnBossFightStart -= HandleOnBossFightStart;
             LevelBossController.OnBossFightEnd -= HandleOnBossFightEnd;
+
+            LevelTutorialController.OnTutorialOpen -= HandleOnTutorialPanelOpen;
+            LevelTutorialController.OnTutorialClose -= HandleOnTutorialPanelClosed;
         }
     }
 
@@ -105,6 +115,15 @@ public class UIMenu_Gameplay : UIMenu_Base
     public void ToggleWinPanel(bool _toggle)
     {
         winPanel.gameObject.SetActive(_toggle);
+    }
+
+    /// <summary>
+    /// Funzione che attiva/disattiva il pannello di tutorial
+    /// </summary>
+    /// <param name="_toggle"></param>
+    public void ToggleTutorialPanel(bool _toggle)
+    {
+        tutorialPanel.gameObject.SetActive(_toggle);
     }
 
     #region Handles
@@ -158,6 +177,25 @@ public class UIMenu_Gameplay : UIMenu_Base
 
         if (_win)
             ToggleWinPanel(true);
+    }
+
+    /// <summary>
+    /// Funzione che gestisce l'evento di apertura del pannello tutorial
+    /// </summary>
+    /// <param name="_trigger"></param>
+    private void HandleOnTutorialPanelOpen(TutorialTrigger _trigger)
+    {
+        tutorialPanel.SetupTutorialPanel(_trigger.GetTutorialSprite(), _trigger.GetTutorialText());
+        ToggleTutorialPanel(true);
+    }
+
+    /// <summary>
+    /// Funzione che gestisce l'evento di chiusura del pannello tutorial
+    /// </summary>
+    /// <param name="_trigger"></param>
+    private void HandleOnTutorialPanelClosed(TutorialTrigger _trigger)
+    {
+        ToggleTutorialPanel(false);
     }
 
     /// <summary>

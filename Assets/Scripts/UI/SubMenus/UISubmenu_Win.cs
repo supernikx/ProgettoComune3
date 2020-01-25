@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Funzione che controlla il pannello di vittoria
+/// Classe che controlla il pannello di vittoria
 /// </summary>
 public class UISubmenu_Win : MonoBehaviour
 {
