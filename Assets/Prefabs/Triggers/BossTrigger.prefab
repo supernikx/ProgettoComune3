@@ -46,6 +46,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bossToEnable: {fileID: 0}
   disableAfterTrigger: 1
+  startBossCutsceneDirector: {fileID: 0}
+  endBossCutsceneDirector: {fileID: 0}
+  inputSkipCutscene:
+    m_Name: Input Skip Cutscene
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: cf295f1f-8892-4fee-8da0-9a62c07e1d97
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
 --- !u!65 &1314880165526898419
 BoxCollider:
   m_ObjectHideFlags: 0
