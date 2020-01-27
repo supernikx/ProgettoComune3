@@ -14,9 +14,6 @@ public class GroupSizeController : MonoBehaviour
     #endregion
 
     [Header("Size Settings")]
-    //Velocità di espansione
-    [SerializeField]
-    private float expandSpeed;
     //Velocità di raggruppamento
     [SerializeField]
     private float groupSpeed;
@@ -81,75 +78,12 @@ public class GroupSizeController : MonoBehaviour
     }
 
     /// <summary>
-    /// Funzione chiamata alla pressione del tasto Expand dal PlayerInput
-    /// </summary>
-    public void OnExpand()
-    {
-        if (!groupCtrl.IsSetuppedAndEnabled() || !canChangeSize)
-            return;
-
-        if (sizeControllerRoutine != null)
-            StopCoroutine(sizeControllerRoutine);
-
-        sizeControllerRoutine = ExpandGroupCoroutine();
-        StartCoroutine(sizeControllerRoutine);
-    }
-
-    /// <summary>
     /// Funzione che ritorna se il gruppo si sta raggruppando o no
     /// </summary>
     /// <returns></returns>
     public bool IsGrouping()
     {
         return grouping;
-    }
-
-    /// <summary>
-    /// Coroutine che espande il gruppo
-    /// </summary>
-    /// <returns></returns>
-    private IEnumerator ExpandGroupCoroutine()
-    {
-        //Prendo il riferimento agli agent
-        List<AgentController> agents = groupCtrl.GetAgents();
-        int agentsAtWrongDistance = agents.Count;
-        Vector3 groupCenter;
-        Vector3 expandDirection;
-
-        //Faccio calcolare ad ogni agent la distanza
-        for (int i = 0; i < agents.Count; i++)
-            agents[i].GetAgentDistanceController().CalculateDistances();
-
-
-        //Finchè tutti gli agent non sono all distanza corretta li sposto
-        while (agentsAtWrongDistance > 0 && groupCtrl.IsSetuppedAndEnabled())
-        {
-            groupCenter = groupCtrl.GetGroupCenterPoint();
-            agentsAtWrongDistance = 0;
-
-            for (int i = 0; i < agents.Count; i++)
-            {
-                //L'agent controlla se ci sono ostacoli nel tragitto
-                AgentDistanceController distanceCtrl = agents[i].GetAgentDistanceController();
-                if (distanceCtrl.CheckExpandDistance(groupCenter))
-                {
-                    //Calcolo la distanza
-                    float distance = Vector3.Distance(agents[i].transform.position, groupCenter);
-
-                    //Controllo la distanza tra l'agent e il centro del gruppo
-                    if (distance < distanceCtrl.GetExpandDistance())
-                    {
-                        //Se è minore di quella prevista per l'espansione lo sposto
-                        expandDirection = (agents[i].transform.position - groupCenter).normalized;
-                        expandDirection.y = 0;
-                        agents[i].GetAgentMovementController().Move(expandDirection, false, expandSpeed);
-                        agentsAtWrongDistance++;
-                    }
-                }
-            }
-
-            yield return null;
-        }
     }
 
     /// <summary>
@@ -244,4 +178,75 @@ public class GroupSizeController : MonoBehaviour
         groupShootCtrl.OnReloadingEnd -= HandleOnReloadingEnd;
         groupCtrl.OnGroupDead -= HandleOnGroupDead;
     }
+
+    #region Unused
+    /*
+    //Velocità di espansione
+    [SerializeField]
+    private float expandSpeed;
+
+    /// <summary>
+    /// Funzione chiamata alla pressione del tasto Expand dal PlayerInput
+    /// </summary>
+    public void OnExpand()
+    {
+        if (!groupCtrl.IsSetuppedAndEnabled() || !canChangeSize)
+            return;
+
+        if (sizeControllerRoutine != null)
+            StopCoroutine(sizeControllerRoutine);
+
+        sizeControllerRoutine = ExpandGroupCoroutine();
+        StartCoroutine(sizeControllerRoutine);
+    }
+
+    /// <summary>
+    /// Coroutine che espande il gruppo
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator ExpandGroupCoroutine()
+    {
+        //Prendo il riferimento agli agent
+        List<AgentController> agents = groupCtrl.GetAgents();
+        int agentsAtWrongDistance = agents.Count;
+        Vector3 groupCenter;
+        Vector3 expandDirection;
+
+        //Faccio calcolare ad ogni agent la distanza
+        for (int i = 0; i < agents.Count; i++)
+            agents[i].GetAgentDistanceController().CalculateDistances();
+
+
+        //Finchè tutti gli agent non sono all distanza corretta li sposto
+        while (agentsAtWrongDistance > 0 && groupCtrl.IsSetuppedAndEnabled())
+        {
+            groupCenter = groupCtrl.GetGroupCenterPoint();
+            agentsAtWrongDistance = 0;
+
+            for (int i = 0; i < agents.Count; i++)
+            {
+                //L'agent controlla se ci sono ostacoli nel tragitto
+                AgentDistanceController distanceCtrl = agents[i].GetAgentDistanceController();
+                if (distanceCtrl.CheckExpandDistance(groupCenter))
+                {
+                    //Calcolo la distanza
+                    float distance = Vector3.Distance(agents[i].transform.position, groupCenter);
+
+                    //Controllo la distanza tra l'agent e il centro del gruppo
+                    if (distance < distanceCtrl.GetExpandDistance())
+                    {
+                        //Se è minore di quella prevista per l'espansione lo sposto
+                        expandDirection = (agents[i].transform.position - groupCenter).normalized;
+                        expandDirection.y = 0;
+                        agents[i].GetAgentMovementController().Move(expandDirection, false, expandSpeed);
+                        agentsAtWrongDistance++;
+                    }
+                }
+            }
+
+            yield return null;
+        }
+    }
+    */
+    #endregion
 }
