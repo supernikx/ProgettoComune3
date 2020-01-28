@@ -12,6 +12,10 @@ public class GameMainMenuState : GameSMStateBase
     /// </summary>
     private UI_Manager uiMng;
     /// <summary>
+    /// Riferimento all'UI Controller attuale
+    /// </summary>
+    private UI_Controller currentUICtrl;
+    /// <summary>
     /// Riferimento al MainMenu Panel
     /// </summary>
     private UIMenu_MainMenu mainMenuPanel;
@@ -19,9 +23,10 @@ public class GameMainMenuState : GameSMStateBase
     public override void Enter()
     {
         uiMng = context.GetGameManager().GetUIManager();
+        currentUICtrl = uiMng.GetCurrentUIController();
 
-        mainMenuPanel = uiMng.GetMenu<UIMenu_MainMenu>();
-        uiMng.SetCurrentMenu<UIMenu_MainMenu>();
+        mainMenuPanel = currentUICtrl.GetMenu<UIMenu_MainMenu>();
+        currentUICtrl.SetCurrentMenu<UIMenu_MainMenu>();
 
         mainMenuPanel.StartButtonPressed += HandleStartButtonPressed;
     }

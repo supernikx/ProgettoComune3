@@ -4,39 +4,56 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 /// <summary>
-/// Classe che gestisce la UI
+/// Classe che gestisce le UI
 /// </summary>
-public class UI_Manager : UIManagerBase
+public class UI_Manager : MonoBehaviour
 {
-    // Riferimento all'event system
+    [Header("General Settings")]
     [SerializeField]
-    private EventSystem eventSystem;
+    private UI_Controller defaultUICtrl;
 
-    /// <summary>
-    /// Riferimento all'UIDeselectFix
-    /// </summary>
-    private UIDeselectFix deselectFix;
+    private GameManager gm;
+    private UI_Controller currentUICtrl;
 
-    /// <summary>
-    /// Override della funzione di Setup del UIManagerBase
-    /// </summary>
-    protected override void CustomSetup()
+    public void Init()
     {
-        eventSystem.gameObject.SetActive(true);
+        currentUICtrl.ClearCurrentMenu();
 
-        deselectFix = GetComponent<UIDeselectFix>();
-        deselectFix.Setup(this);
+        UI_Controller[] uiCtrls = FindObjectsOfType<UI_Controller>();
+        for (int i = 0; i < uiCtrls.Length; i++)
+        {
+            if (uiCtrls[i] != defaultUICtrl)
+            {
+                currentUICtrl = uiCtrls[i];
+                break;
+            }
+        }
+
+        if (currentUICtrl != null)
+            currentUICtrl.Setup(gm);
+        else
+            currentUICtrl = defaultUICtrl;
+    }
+
+    public void Setup(GameManager _gm)
+    {
+        gm = _gm;
+        currentUICtrl = defaultUICtrl;
+        currentUICtrl.Setup(gm);
+
+        Init();
     }
 
     #region API
-    #region Getter
-    /// <summary>
-    /// Funzione che ritorna l'event system
-    /// </summary>
-    /// <returns></returns>
-    public EventSystem GetEventSystem()
+    public void SetDefaultController()
     {
-        return eventSystem;
+        currentUICtrl = defaultUICtrl;
+    }
+
+    #region Getter
+    public UI_Controller GetCurrentUIController()
+    {
+        return currentUICtrl;
     }
     #endregion
     #endregion

@@ -16,7 +16,7 @@ public class UIMenu_Base : UIControllerBase
     /// <summary>
     /// Riferimento all'UI Manager
     /// </summary>
-    protected UI_Manager manager;
+    protected UI_Controller controller;
     /// <summary>
     /// Riferimento all'event system
     /// </summary>
@@ -25,10 +25,10 @@ public class UIMenu_Base : UIControllerBase
     /// <summary>
     /// Override della funzione di Setup dell'UIControllerBase
     /// </summary>
-    public override void CustomSetup(UIManagerBase _manager)
+    public override void CustomSetup(UIManagerBase _controller)
     {
-        manager = _manager as UI_Manager;
-        eventSystem = manager.GetEventSystem();
+        controller = _controller as UI_Controller;
+        eventSystem = controller.GetEventSystem();
     }
 
     /// <summary>
@@ -52,5 +52,10 @@ public class UIMenu_Base : UIControllerBase
     public GameObject GetDefaultSelectedButton()
     {
         return defaultSelecedButton;
+    }
+
+    private void OnDestroy()
+    {
+        ToggleMenu(false);
     }
 }

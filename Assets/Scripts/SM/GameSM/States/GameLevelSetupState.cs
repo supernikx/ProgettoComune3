@@ -33,7 +33,8 @@ public class GameLevelSetupState : GameSMStateBase
         swarmSceneName = gm.GetSceneReferenceManager().GetSwarmSceneName();
         hubSceneName = gm.GetSceneReferenceManager().GetHubSceneName();
 
-        uiMng.SetCurrentMenu<UIMenu_Loading>();
+        uiMng.SetDefaultController();
+        uiMng.GetCurrentUIController().SetCurrentMenu<UIMenu_Loading>();
 
         SceneManager.sceneLoaded += HandleSwarmSceneLoaded;
         SceneManager.LoadScene(swarmSceneName);
@@ -97,6 +98,9 @@ public class GameLevelSetupState : GameSMStateBase
 
     public override void Exit()
     {
+        if (uiMng != null)
+            uiMng.Init();
+
         SceneManager.sceneLoaded -= HandleSwarmSceneLoaded;
         SceneManager.sceneLoaded -= HandeHubSceneLoaded;
     }

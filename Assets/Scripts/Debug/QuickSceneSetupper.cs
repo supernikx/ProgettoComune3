@@ -29,13 +29,13 @@ public class QuickSceneSetupper : GameManager
             SetLevelManager(lvlMgn);
             SetUIManager(uiMng);
 
-            reset.Setup(groupCtrl);
+            reset.Setup(groupCtrl, uiMng);
             poolMng.Setup();
             groupCtrl.Setup();
             lvlMgn.Setup();
             uiMng.Setup(this);
 
-            uiMng.SetCurrentMenu<UIMenu_Gameplay>();
+            uiMng.GetCurrentUIController().SetCurrentMenu<UIMenu_Gameplay>();
         }
         else
         {

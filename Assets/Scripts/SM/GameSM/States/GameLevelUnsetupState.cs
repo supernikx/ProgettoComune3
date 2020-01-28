@@ -10,13 +10,26 @@ using UnityEngine.SceneManagement;
 public class GameLevelUnsetupState : GameSMStateBase
 {
     /// <summary>
+    /// Riferimento al GameManager
+    /// </summary>
+    private GameManager gm;
+    /// <summary>
+    /// Riferimento all'UI Manager
+    /// </summary>
+    private UI_Manager uiMng;
+    /// <summary>
     /// Nome della scena del MainMenu
     /// </summary>
     private string mainMenuSceneName;
 
     public override void Enter()
     {
-        mainMenuSceneName = context.GetGameManager().GetSceneReferenceManager().GetMainMenuSceneName();
+        gm = context.GetGameManager();
+        uiMng = gm.GetUIManager();
+        uiMng.SetDefaultController();
+        uiMng.GetCurrentUIController().SetCurrentMenu<UIMenu_Loading>();
+
+        mainMenuSceneName = gm.GetSceneReferenceManager().GetMainMenuSceneName();
 
         SceneManager.sceneLoaded += HandleOnSceneLoaded;
         SceneManager.LoadScene(mainMenuSceneName);
@@ -38,6 +51,9 @@ public class GameLevelUnsetupState : GameSMStateBase
 
     public override void Exit()
     {
+        if (uiMng != null)
+            uiMng.Init();
+
         SceneManager.sceneLoaded -= HandleOnSceneLoaded;
     }
 }

@@ -34,7 +34,8 @@ public class GameChangeSceneState : GameSMStateBase
     {
         gm = context.GetGameManager();
         uiMng = gm.GetUIManager();
-        uiMng.SetCurrentMenu<UIMenu_Loading>();
+        uiMng.SetDefaultController();
+        uiMng.GetCurrentUIController().SetCurrentMenu<UIMenu_Loading>();
 
         lvlMng = gm.GetLevelManager();
         lvlMng.GetGroupController().Enable(false);
@@ -96,6 +97,9 @@ public class GameChangeSceneState : GameSMStateBase
     {
         if (lvlMng != null)
             lvlMng.GetGroupController().Enable(true);
+
+        if (uiMng != null)
+            uiMng.Init();
 
         SceneManager.sceneLoaded -= HandleOnNewSceneLoaded;
         SceneManager.sceneUnloaded -= HandleOnOldSceneUnloaded;

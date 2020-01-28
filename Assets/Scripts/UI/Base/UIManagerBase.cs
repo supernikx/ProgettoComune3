@@ -49,7 +49,8 @@ public abstract class UIManagerBase : MonoBehaviour
     /// </summary>
     public void ClearCurrentMenu()
     {
-        currentMenu.ToggleMenu(false);
+        if (currentMenu != null)
+            currentMenu.ToggleMenu(false);
         currentMenu = null;
         OnCurrentMenuChange(currentMenu);
     }
@@ -135,8 +136,8 @@ public abstract class UIManagerBase : MonoBehaviour
                     //lancio il fade out del pannello
                     fadeImage.DOFade(0, _fadeOutTime).OnComplete(() =>
                 {
-                        // al completamento del fade in, se non è nulla, esegue la callback sul fade out
-                        _fadeOutCallBack?.Invoke();
+                    // al completamento del fade in, se non è nulla, esegue la callback sul fade out
+                    _fadeOutCallBack?.Invoke();
                 });
                 });
                 return true;
