@@ -95,8 +95,12 @@ public class GroupShootController : MonoBehaviour
     private void Update()
     {
         if (!groupCtrl.IsSetuppedAndEnabled() || !canShoot)
+        {
+            aimFeedback.DisableArrow();
             return;
+        }
 
+        aimFeedback.EnableArrow();
         aimFeedback.UpdateArrow(groupCtrl.GetGroupCenterPoint(), shootVector);
     }
 

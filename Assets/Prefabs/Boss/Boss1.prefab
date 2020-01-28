@@ -479,10 +479,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1073a01d62a094d4d9f054411e46da2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cubeSize: 1
+  cubeSize: 0.3
   cubesInRow: 3
-  explosionForce: 250
-  explosionRadius: 15
+  explosionForce: 100
+  explosionRadius: 5
   explosionUpward: 1
   cubesDestroyDelay: 5
   piceMaterials:
@@ -795,11 +795,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ooze_Machine
       objectReference: {fileID: 0}
-    - target: {fileID: -8331148895342993392, guid: 75debac4bac56334ab24b98157fe3b31,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 7a28749d47f7f7847adfa067323c70a2, type: 2}
     - target: {fileID: -4216859302048453862, guid: 75debac4bac56334ab24b98157fe3b31,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -855,6 +850,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8331148895342993392, guid: 75debac4bac56334ab24b98157fe3b31,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7a28749d47f7f7847adfa067323c70a2, type: 2}
     - target: {fileID: 8181648956740992576, guid: 75debac4bac56334ab24b98157fe3b31,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
