@@ -20,6 +20,10 @@ public class Boss2Controller : BossControllerBase
     /// </summary>
     private Boss2LaserController laserCtrl;
     /// <summary>
+    /// Riferimento al CoverBlockController
+    /// </summary>
+    private Boss2CoverBlocksController coverBlockCtrl;
+    /// <summary>
     /// Riferimento al phase controller
     /// </summary>
     private Boss2PhaseController phaseCtrl;
@@ -35,6 +39,7 @@ public class Boss2Controller : BossControllerBase
         sm = GetComponent<Boss2SMController>();
         tentaclesCtrl = GetComponent<Boss2TentaclesController>();
         laserCtrl = GetComponent<Boss2LaserController>();
+        coverBlockCtrl = GetComponent<Boss2CoverBlocksController>();
         phaseCtrl = GetComponent<Boss2PhaseController>();
     }
 
@@ -52,6 +57,7 @@ public class Boss2Controller : BossControllerBase
         lifeCtrl.Setup(this);
         collisionCtrl.Setup(this);
         phaseCtrl.Setup(this);
+        coverBlockCtrl.Setup();
     }
 
     /// <summary>
@@ -89,6 +95,15 @@ public class Boss2Controller : BossControllerBase
     public Boss2LaserController GetLaserController()
     {
         return laserCtrl;
+    }
+
+    /// <summary>
+    /// Funzione che ritorna il CoverBlockController
+    /// </summary>
+    /// <returns></returns>
+    public Boss2CoverBlocksController GetCoverBlocksController()
+    {
+        return coverBlockCtrl;
     }
 
     /// <summary>
