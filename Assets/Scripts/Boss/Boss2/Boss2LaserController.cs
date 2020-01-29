@@ -9,6 +9,12 @@ using UnityEngine;
 public class Boss2LaserController : MonoBehaviour
 {
     [Header("Reference Laser Settings")]
+    //Larghezza del laser
+    [SerializeField]
+    private float laserRadius;
+    //Range massimo del laser
+    [SerializeField]
+    private float maxLaserRange;
     //Riferimento al laser controller
     [SerializeField]
     private LaserController laserCtrl;
@@ -30,8 +36,7 @@ public class Boss2LaserController : MonoBehaviour
     {
         bossCtrl = _bossCtrl;
         collisionCtrl = bossCtrl.GetBossCollisionController();
-
-        StopLaser();
+        laserCtrl.Setup(maxLaserRange, laserRadius);
     }
 
     #region Handlers

@@ -11,10 +11,7 @@ public class CoverBlockController : MonoBehaviour
     [Header("CoverBlock Reference")]
     //Riferimento al collider che attiva la barriera
     [SerializeField]
-    private Collider coverBlockCollider;
-    //Riferimento alla graficadel coverblock
-    [SerializeField]
-    private GameObject coverBlockGraphic;
+    private GameObject coverBlockButton;
     //Riferimento alla barrier che attiva il coverblock
     [SerializeField]
     private GameObject coverBlockBarrier;
@@ -73,13 +70,14 @@ public class CoverBlockController : MonoBehaviour
     /// <returns></returns>
     private IEnumerator CoverBlockCoroutine()
     {
-        coverBlockGraphic.SetActive(false);
-        coverBlockCollider.enabled = false;
+        coverBlockButton.SetActive(false);
         coverBlockBarrier.SetActive(true);
+
         yield return new WaitForSeconds(coverBlockDuration);
+
         coverBlockBarrier.SetActive(false);
-        coverBlockGraphic.SetActive(true);
-        coverBlockCollider.enabled = true;
+        coverBlockButton.SetActive(true);
+        coverBlockDoneHits = 0;
     }
 
     #region API
@@ -93,8 +91,7 @@ public class CoverBlockController : MonoBehaviour
         if (enable)
         {
             coverBlockDoneHits = 0;
-            coverBlockGraphic.SetActive(true);
-            coverBlockCollider.enabled = true;
+            coverBlockButton.SetActive(true);
             coverBlockBarrier.SetActive(false);
         }
         else
@@ -102,8 +99,7 @@ public class CoverBlockController : MonoBehaviour
             if (coverBlockRoutine != null)
                 StopCoroutine(coverBlockRoutine);
 
-            coverBlockGraphic.SetActive(false);
-            coverBlockCollider.enabled = false;
+            coverBlockButton.SetActive(false);
             coverBlockBarrier.SetActive(false);
         }
     }

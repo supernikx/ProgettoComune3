@@ -16,13 +16,7 @@ public class LaserController : MonoBehaviour
     public Action<AgentController> OnAgentHit;
     #endregion
 
-    [Header("laser References")]
-    //Larghezza del laser
-    [SerializeField]
-    private float laserRadius;
-    //Range massimo del laser
-    [SerializeField]
-    private float maxLaserRange;
+    [Header("Laser References")]
     //Layer con cui può collider il laser
     [SerializeField]
     private LayerMask laserColliderLayer;
@@ -34,9 +28,30 @@ public class LaserController : MonoBehaviour
     private LineRenderer lineRenderer;
 
     /// <summary>
+    /// Raggio del laser
+    /// </summary>
+    private float laserRadius;
+    /// <summary>
+    /// Lunghezza massima del laser
+    /// </summary>
+    private float maxLaserRange;
+    /// <summary>
     /// Bool che identifica se il laser è attivo
     /// </summary>
     private bool enable;
+
+    /// <summary>
+    /// Funzione di Setup
+    /// </summary>
+    /// <param name="_maxLaserRange"></param>
+    /// <param name="_laserRadius"></param>
+    public void Setup(float _maxLaserRange, float _laserRadius)
+    {
+        maxLaserRange = _maxLaserRange;
+        laserRadius = _laserRadius;
+
+        StopLaser();
+    }
 
     // Update is called once per frame
     private void Update()
