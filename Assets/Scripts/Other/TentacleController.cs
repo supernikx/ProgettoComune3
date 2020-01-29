@@ -15,10 +15,6 @@ public class TentacleController : MonoBehaviour, IBossDamageable
     /// </summary>
     public Action<TentacleController> OnTentacleDead;
     /// <summary>
-    /// Evento che notifica il completamnento della rotazione del tentacolo
-    /// </summary>
-    public Action<TentacleController> OnTentacleRotated;
-    /// <summary>
     /// Evento che notifica che un agent è stato colpito
     /// </summary>
     public Action<AgentController> OnAgentHit;
@@ -41,10 +37,6 @@ public class TentacleController : MonoBehaviour, IBossDamageable
     /// </summary>
     private int currentTentacleLife;
     /// <summary>
-    /// Zona attuale
-    /// </summary>
-    private int currentZoneIndex;
-    /// <summary>
     /// Rotazione iniziale
     /// </summary>
     private Quaternion startRotation;
@@ -52,15 +44,11 @@ public class TentacleController : MonoBehaviour, IBossDamageable
     /// <summary>
     /// Funzione di Setup
     /// </summary>
-    public void Setup(Boss2TentaclesController _tentaclesCtrl, int _startZoneIndex = -1)
+    public void Setup(Boss2TentaclesController _tentaclesCtrl)
     {
         currentTentacleLife = tentacleLife;
         tentaclesctrl = _tentaclesCtrl;
-        currentZoneIndex = _startZoneIndex;
         startRotation = transform.rotation;
-
-        if (_startZoneIndex != -1)
-            transform.rotation = tentaclesctrl.GetZoneByIndex(currentZoneIndex).transform.rotation;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -71,31 +59,6 @@ public class TentacleController : MonoBehaviour, IBossDamageable
     }
 
     #region API
-    /// <summary>
-    /// Funzione che fa ruotare il tentacolo al punto successivo
-    /// </summary>
-    /// <param name="_rotatingTime"></param>
-    public void RotateToNextPoint(float _rotatingTime)
-    {
-        Transform nextZone = tentaclesctrl.GetZoneByIndex(currentZoneIndex + 1);
-        transform.DORotateQuaternion(nextZone.transform.rotation, _rotatingTime).SetEase(Ease.Linear).OnComplete(() =>
-         {
-             transform.rotation = nextZone.rotation;
-             currentZoneIndex = tentaclesctrl.GetIndexByZone(nextZone);
-             OnTentacleRotated?.Invoke(this);
-         });
-    }
-
-    /// <summary>
-    /// Funzione che fa eseguire un salto al tentacolo in base ai parametri passati
-    /// </summary>
-    /// <param name="_jumpForce"></param>
-    /// <param name="_jumpTime"></param>
-    public void Jump(float _jumpForce, float _jumpTime)
-    {
-        transform.DOJump(transform.position, _jumpForce, 1, _jumpTime);
-    }
-
     /// <summary>
     /// Funzione che esegue lo Stomp del tentacolo nella posizione passata come paraemtro
     /// </summary>
@@ -133,15 +96,6 @@ public class TentacleController : MonoBehaviour, IBossDamageable
     }
 
     #region Getter
-    /// <summary>
-    /// Funzione che ritorna la zona attuale del tentacolo
-    /// </summary>
-    /// <returns></returns>
-    public int GetCurrentZone()
-    {
-        return currentZoneIndex;
-    }
-
     /// <summary>
     /// Funzione che ritorna il danno che fa il tentacolo quando muore
     /// </summary>

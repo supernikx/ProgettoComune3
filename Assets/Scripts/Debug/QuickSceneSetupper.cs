@@ -7,8 +7,6 @@ public class QuickSceneSetupper : GameManager
     private QuickSceneInstantiator inst;
     private QuickSceneReset reset;
     private PoolManager poolMng;
-    private LevelManager lvlMgn;
-    private UI_Manager uiMng;
     private GroupController groupCtrl;
 
     protected override void Start()
@@ -20,19 +18,16 @@ public class QuickSceneSetupper : GameManager
             inst.Setup();
 
             //Flow normale di setup
+            SetUIManager(FindObjectOfType<UI_Manager>());
+            SetLevelManager(FindObjectOfType<LevelManager>());
             reset = FindObjectOfType<QuickSceneReset>();
-            uiMng = FindObjectOfType<UI_Manager>();
             poolMng = FindObjectOfType<PoolManager>();
             groupCtrl = FindObjectOfType<GroupController>();
-            lvlMgn = FindObjectOfType<LevelManager>();
-
-            SetLevelManager(lvlMgn);
-            SetUIManager(uiMng);
 
             reset.Setup(groupCtrl, uiMng);
             poolMng.Setup();
             groupCtrl.Setup();
-            lvlMgn.Setup();
+            lvlMng.Setup();
             uiMng.Setup(this);
 
             uiMng.GetCurrentUIController().SetCurrentMenu<UIMenu_Gameplay>();

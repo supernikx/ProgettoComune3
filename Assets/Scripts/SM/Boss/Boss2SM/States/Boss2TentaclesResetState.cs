@@ -104,7 +104,7 @@ public class Boss2TentaclesResetState : Boss2StateBase
     /// </summary>
     private void HandleOnAllTentaclesDead()
     {
-        Complete(1);
+        Complete(2);
     }
 
     /// <summary>

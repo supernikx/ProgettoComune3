@@ -4,21 +4,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Classe che gestisce le fasi del Boss 1
+/// Classe che gestisce le fasi del Boss 2
 /// </summary>
 public class Boss2PhaseController : MonoBehaviour
 {
     #region Actions
     /// <summary>
-    /// Evento che notifica l'inizio della seconda fase
+    /// Evento che notifica l'inizio della terza fase
     /// </summary>
-    public Action OnSecondPhaseStart;
+    public Action OnThirdPhaseStart;
     #endregion
 
     [Header("Phases Settings")]
-    //Percentuale di vita per attivare la seconda fase
+    //Percentuale di vita per attivare la terza fase
     [SerializeField]
-    private float secondPhaseLifePercentage;
+    private float thirdPhaseLifePercentage;
 
     /// <summary>
     /// Riferimento al BossController
@@ -33,9 +33,9 @@ public class Boss2PhaseController : MonoBehaviour
     /// </summary>
     private int maxBossLife;
     /// <summary>
-    /// Fase attuale del Boss
+    /// identifica se il Boss si trova nella terza fase
     /// </summary>
-    private int currentPhase;
+    private bool thirdPhase;
 
     /// <summary>
     /// Funzione di Setup
@@ -46,7 +46,7 @@ public class Boss2PhaseController : MonoBehaviour
         bossCtrl = _bossCtrl;
         bossLifeCtrl = bossCtrl.GetBossLifeController();
         maxBossLife = bossLifeCtrl.GetMaxBossLife();
-        currentPhase = 1;
+        thirdPhase = false;
 
         bossLifeCtrl.OnBossTakeDamage += HandleOnBossTakeDamage;
     }
@@ -59,10 +59,10 @@ public class Boss2PhaseController : MonoBehaviour
     {
         float currentBossLifePercentage = (_currentLife * 100) / maxBossLife;
 
-        if (currentPhase == 1 && secondPhaseLifePercentage > currentBossLifePercentage)
+        if (!thirdPhase && thirdPhaseLifePercentage > currentBossLifePercentage)
         {
-            currentPhase = 2;
-            OnSecondPhaseStart?.Invoke();
+            thirdPhase = true;
+            OnThirdPhaseStart?.Invoke();
         }
     }
 

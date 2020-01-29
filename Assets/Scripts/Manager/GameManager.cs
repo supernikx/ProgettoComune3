@@ -30,19 +30,19 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Riferimento al Controller della GameSM
     /// </summary>
-    private GameSMController smCtrl;
+    protected GameSMController smCtrl;
     /// <summary>
     /// Riferimento all'UI Manager
     /// </summary>
-    private UI_Manager uiMng;
+    protected UI_Manager uiMng;
     /// <summary>
     /// Riferimento al scene reference manager
     /// </summary>
-    private SceneReferenceManager sceneRefMng;
+    protected SceneReferenceManager sceneRefMng;
     /// <summary>
     /// Riferimento al LevelManager
     /// </summary>
-    private LevelManager lvlMng;
+    protected LevelManager lvlMng;
 
     protected virtual void Awake()
     {
