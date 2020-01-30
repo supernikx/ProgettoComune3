@@ -63,7 +63,7 @@ public class Boss2SuckState : Boss2StateBase
 
     public override void Tick()
     {
-        groupMovementCtrl.MoveAgentsToPoint(bossCtrl.transform.position, suckForce);
+        groupMovementCtrl.MoveAgentsToPointDirection(bossCtrl.transform.position, suckForce);
 
         suckTimer -= Time.deltaTime;
         if (suckTimer < 0)

@@ -12,9 +12,6 @@ public class AgentDistanceController : MonoBehaviour
     //Range alla distanza di raggruppamento del gruppo
     [SerializeField]
     private Vector2 groupDistanceRange;
-    //Range alla distanza di espansione del gruppo
-    [SerializeField]
-    private Vector2 expandDistanceRange;
 
     [Header("Obstacles Settings")]
     //Layer degli ostacoli
@@ -24,10 +21,6 @@ public class AgentDistanceController : MonoBehaviour
     [SerializeField]
     private float obstacleCheckRayLenght;
 
-    /// <summary>
-    /// Distanza di espansione
-    /// </summary>
-    private float expandDistance;
     /// <summary>
     /// Distanza di raggruppamento
     /// </summary>
@@ -46,7 +39,6 @@ public class AgentDistanceController : MonoBehaviour
     /// </summary>
     public void CalculateDistances()
     {
-        expandDistance = UnityEngine.Random.Range(expandDistanceRange.x, expandDistanceRange.y);
         groupDistance = UnityEngine.Random.Range(groupDistanceRange.x, groupDistanceRange.y);
     }
 
@@ -60,33 +52,6 @@ public class AgentDistanceController : MonoBehaviour
     }
 
     /// <summary>
-    /// Funzione che ritorna la distanza da tenere quando il gruppo è in espansione
-    /// </summary>
-    /// <returns></returns>
-    public float GetExpandDistance()
-    {
-        return expandDistance;
-    }
-
-    /// <summary>
-    /// Funzione che controlla se ci sono ostacoli nel tragitto di espansione
-    /// </summary>
-    /// <param name="_groupCenter"></param>
-    public bool CheckExpandDistance(Vector3 _groupCenter)
-    {
-        Vector3 rayDirection = (transform.position - _groupCenter).normalized;
-        Vector3 origin = transform.position;
-
-        origin.y += 0.5f;
-        rayDirection.y = 0;
-
-        Debug.DrawRay(origin, rayDirection * obstacleCheckRayLenght, Color.red);
-
-        Ray ray = new Ray(origin, rayDirection);
-        return !Physics.Raycast(ray, obstacleCheckRayLenght, obstaclesLayer);
-    }
-
-    /// <summary>
     /// Funzione che controlla se ci sono ostacoli nel tragitto di raggruppamento
     /// </summary>
     /// <param name="_groupCenter"></param>
@@ -95,7 +60,7 @@ public class AgentDistanceController : MonoBehaviour
         Vector3 rayDirection = (_groupCenter - transform.position).normalized;
         Vector3 origin = transform.position;
 
-        origin.y += 0.5f;
+        origin.y += 0.1f;
         rayDirection.y = 0;
 
         Debug.DrawRay(origin, rayDirection * obstacleCheckRayLenght, Color.blue);

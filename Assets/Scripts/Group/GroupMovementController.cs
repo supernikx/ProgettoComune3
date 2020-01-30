@@ -107,7 +107,7 @@ public class GroupMovementController : MonoBehaviour
     /// </summary>
     /// <param name="_movementDirection"></param>
     /// <param name="_movementSpeed"></param>
-    public void MoveAgentsToPoint(Vector3 _movementPosition, float _movementSpeed)
+    public void MoveAgentsToPointDirection(Vector3 _movementPosition, float _movementSpeed)
     {
         //Prendo il riferimento agli agent
         List<AgentController> agents = groupCtrl.GetAgents();
