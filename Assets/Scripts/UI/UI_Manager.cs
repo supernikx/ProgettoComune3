@@ -4,39 +4,77 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 /// <summary>
-/// Classe che gestisce la UI
+/// Classe che gestisce le UI
 /// </summary>
-public class UI_Manager : UIManagerBase
+public class UI_Manager : MonoBehaviour
 {
-    // Riferimento all'event system
+    [Header("General Settings")]
+    //Riferimento all'ui controller di default
     [SerializeField]
-    private EventSystem eventSystem;
+    private UI_Controller defaultUICtrl;
 
     /// <summary>
-    /// Riferimento all'UIDeselectFix
+    /// Riferimento al GameManager
     /// </summary>
-    private UIDeselectFix deselectFix;
+    private GameManager gm;
+    /// <summary>
+    /// Riferimento all'ui controller attivo
+    /// </summary>
+    private UI_Controller currentUICtrl;
 
     /// <summary>
-    /// Override della funzione di Setup del UIManagerBase
+    /// Funzione di Setup
     /// </summary>
-    protected override void CustomSetup()
+    /// <param name="_gm"></param>
+    public void Setup(GameManager _gm)
     {
-        eventSystem.gameObject.SetActive(true);
+        gm = _gm;
+        currentUICtrl = defaultUICtrl;
+        currentUICtrl.Setup(gm);
 
-        deselectFix = GetComponent<UIDeselectFix>();
-        deselectFix.Setup(this);
+        Init();
+    }
+
+    /// <summary>
+    /// Funzione di inizializzione
+    /// </summary>
+    public void Init()
+    {
+        currentUICtrl.ClearCurrentMenu();
+
+        UI_Controller[] uiCtrls = FindObjectsOfType<UI_Controller>();
+        for (int i = 0; i < uiCtrls.Length; i++)
+        {
+            if (uiCtrls[i] != defaultUICtrl)
+            {
+                currentUICtrl = uiCtrls[i];
+                break;
+            }
+        }
+
+        if (currentUICtrl != null)
+            currentUICtrl.Setup(gm);
+        else
+            currentUICtrl = defaultUICtrl;
     }
 
     #region API
+    /// <summary>
+    /// Funzione che imposta il default controller come attivo
+    /// </summary>
+    public void SetDefaultController()
+    {
+        currentUICtrl = defaultUICtrl;
+    }
+
     #region Getter
     /// <summary>
-    /// Funzione che ritorna l'event system
+    /// Funzione che ritorna l'attuale ui controller attivo
     /// </summary>
     /// <returns></returns>
-    public EventSystem GetEventSystem()
+    public UI_Controller GetCurrentUIController()
     {
-        return eventSystem;
+        return currentUICtrl;
     }
     #endregion
     #endregion

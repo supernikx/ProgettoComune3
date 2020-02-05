@@ -38,9 +38,9 @@ public class AgentMovementController : MonoBehaviour
         float distance = Vector3.Distance(_newPos, transform.position);
         Vector3 fiexdPos = transform.position;
         fiexdPos.y += 0.5f;
-        Ray ray = new Ray(fiexdPos, transform.forward);
+        Ray ray = new Ray(fiexdPos, _dir);
         RaycastHit hitInfo;
-        if (Physics.Raycast(ray, out hitInfo, distance + 1f, obstacleLayer))
+        if (Physics.Raycast(ray, out hitInfo, distance + 0.2f, obstacleLayer))
         {
             Vector3 newDir = (_dir.normalized + hitInfo.normal).normalized;
             return Vector3.MoveTowards(transform.position, transform.position + newDir, _speed);

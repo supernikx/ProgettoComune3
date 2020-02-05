@@ -29,6 +29,11 @@ public class ActiveBossTrigger : MonoBehaviour
     [SerializeField]
     private PlayableDirector endBossCutsceneDirector;
 
+    [Header("Group Settings")]
+    //Posizione in cui dovrebbe essere il gruppo alla fine della cinematic di start
+    [SerializeField]
+    private Transform expectedGroupStartPosition;
+
     [Header("Binding Settings")]
     //Mappatura dei tasti per saltare la cutscene
     [SerializeField]
@@ -102,6 +107,8 @@ public class ActiveBossTrigger : MonoBehaviour
     {
         inputSkipCutscene.performed -= SkipStartBossCutscene;
         startBossCutsceneDirector.time = startBossCutsceneDirector.duration;
+
+        groupCtrl.Move(expectedGroupStartPosition.position);
     }
 
     /// <summary>

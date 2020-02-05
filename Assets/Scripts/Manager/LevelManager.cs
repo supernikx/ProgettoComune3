@@ -59,8 +59,8 @@ public class LevelManager : MonoBehaviour
         if (lvlTutorialCtrl != null)
             lvlTutorialCtrl.Setup(this);
 
-        groupCtrl.Enable(true);
         groupCtrl.Move(groupStartPosition.position);
+        groupCtrl.Enable(true);
     }
 
     #region API

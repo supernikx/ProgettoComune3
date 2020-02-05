@@ -17,22 +17,22 @@ public class Boss2StartPhase2State : Boss2StateBase
     /// </summary>
     private Boss2Controller bossCtrl;
     /// <summary>
-    /// Riferiemtno al Boss Tentacle Controller
-    /// </summary>
-    private Boss2TentaclesController bossTentacleCtrl;
-    /// <summary>
     /// Riferimento al Life Controller
     /// </summary>
     private BossLifeController lifeCtrl;
+    /// <summary>
+    /// Riferimento al CoverBlockController
+    /// </summary>
+    private Boss2CoverBlocksController coverBlockCtrl;
 
     public override void Enter()
     {
         bossCtrl = context.GetBossController();
-        bossTentacleCtrl = bossCtrl.GetTentaclesController();
         lifeCtrl = bossCtrl.GetBossLifeController();
+        coverBlockCtrl = bossCtrl.GetCoverBlocksController(); 
 
         lifeCtrl.SetCanTakeDamage(canTakeDirectDamage);
-        bossTentacleCtrl.Phase2TentaclesSetup();
+        coverBlockCtrl.EnableCoverBlocks(true);
 
         Debug.Log("Phase 2 Iniziata");
         Complete();

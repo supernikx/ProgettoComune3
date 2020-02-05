@@ -43,7 +43,7 @@ public class GameGameplayState : GameSMStateBase
         lvlSceneCtrl.OnChangeLevelScene += HandleOnChangeLevelScene;
         lvlPauseCtrl.OnGamePause += HandleOnGamePause;
 
-        uiMng.SetCurrentMenu<UIMenu_Gameplay>();
+        uiMng.GetCurrentUIController().SetCurrentMenu<UIMenu_Gameplay>();
     }
 
     #region Handles

@@ -33,6 +33,10 @@ public class Boss2WaitingState : Boss2StateBase
     /// </summary>
     private Boss2TentaclesController tentaclesCtrl;
     /// <summary>
+    /// Riferimento al phase controller
+    /// </summary>
+    private Boss2PhaseController phaseCtrl;
+    /// <summary>
     /// Tempo che il boss deve aspettare
     /// </summary>
     private float waitTime;
@@ -48,6 +52,7 @@ public class Boss2WaitingState : Boss2StateBase
         lifeCtrl = bossCtrl.GetBossLifeController();
         collisionCtrl = bossCtrl.GetBossCollisionController();
         tentaclesCtrl = bossCtrl.GetTentaclesController();
+        phaseCtrl = bossCtrl.GetPhaseController();
 
         timer = 0;
         waitTime = Random.Range(waitTimeRange.x, waitTimeRange.y);
@@ -56,6 +61,7 @@ public class Boss2WaitingState : Boss2StateBase
         collisionCtrl.OnAgentHit += HandleOnAgentHit;
         tentaclesCtrl.OnTentacleDead += HandleOnTentacleDead;
         tentaclesCtrl.OnAllTentaclesDead += HandleOnAllTentaclesDead;
+        phaseCtrl.OnThirdPhaseStart += HandleOnThirdPhaseStart;
     }
 
     public override void Tick()
@@ -66,6 +72,14 @@ public class Boss2WaitingState : Boss2StateBase
     }
 
     #region Handlers
+    /// <summary>
+    /// Funzione che gestisce l'evento di inizio della seconda fase
+    /// </summary>
+    private void HandleOnThirdPhaseStart()
+    {
+        Complete(3);
+    }
+
     /// <summary>
     /// Funzione che gestisce l'evento di morte di un tentacolo
     /// </summary>
@@ -82,7 +96,7 @@ public class Boss2WaitingState : Boss2StateBase
     /// </summary>
     private void HandleOnAllTentaclesDead()
     {
-        Complete(1);
+        Complete(2);
     }
 
     /// <summary>
@@ -115,5 +129,8 @@ public class Boss2WaitingState : Boss2StateBase
 
         if(collisionCtrl != null)
             collisionCtrl.OnAgentHit -= HandleOnAgentHit;
+
+        if (phaseCtrl != null)
+            phaseCtrl.OnThirdPhaseStart -= HandleOnThirdPhaseStart;
     }
 }

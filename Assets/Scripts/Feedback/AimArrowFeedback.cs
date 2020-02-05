@@ -95,6 +95,22 @@ public class AimArrowFeedback : MonoBehaviour
     }
 
     /// <summary>
+    /// Funzione che disabilita la freccia
+    /// </summary>
+    public void DisableArrow()
+    {
+        spriteRenderer.enabled = false;
+    }
+
+    /// <summary>
+    /// Funzione che abilita la freccia
+    /// </summary>
+    public void EnableArrow()
+    {
+        spriteRenderer.enabled = true;
+    }
+
+    /// <summary>
     /// Funzione che controlla e aggiorna il colore della freccia
     /// </summary>
     /// <param name="_currentGroupCount"></param>

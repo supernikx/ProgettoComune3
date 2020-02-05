@@ -32,7 +32,7 @@ public class Boss2StartPhase1State : Boss2StateBase
         lifeCtrl = bossCtrl.GetBossLifeController();
 
         lifeCtrl.SetCanTakeDamage(canTakeDirectDamage);
-        bossTentacleCtrl.Phase1TentaclesSetup();
+        bossTentacleCtrl.TentaclesSetup();
 
         Debug.Log("Phase 1 Iniziata");
         Complete();

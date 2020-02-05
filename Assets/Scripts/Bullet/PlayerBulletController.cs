@@ -21,7 +21,7 @@ public class PlayerBulletController : BulletControllerBase
             BulletDestroy();
         }
 
-        if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle") || other.gameObject.layer == LayerMask.NameToLayer("ShootInteractable"))
             BulletDestroy();
     }
 }

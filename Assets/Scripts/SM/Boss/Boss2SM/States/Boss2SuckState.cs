@@ -56,27 +56,27 @@ public class Boss2SuckState : Boss2StateBase
 
         lifeCtrl.OnBossDead += HandleOnBossDead;
         collisionCtrl.OnAgentHit += HandleOnAgentHit;
-        phaseCtrl.OnSecondPhaseStart += HandleOnSecondPhaseStart;
+        phaseCtrl.OnThirdPhaseStart += HandleOnThirdPhaseStart;
 
         suckTimer = suckDuration;
     }
 
     public override void Tick()
     {
-        groupMovementCtrl.MoveAgentsToPoint(bossCtrl.transform.position, suckForce);
+        groupMovementCtrl.MoveAgentsToPointDirection(bossCtrl.transform.position, suckForce);
 
         suckTimer -= Time.deltaTime;
         if (suckTimer < 0)
-            Complete(4);
+            Complete();
     }
 
     #region Handles
     /// <summary>
     /// Funzione che gestisce l'evento di inizio della seconda fase
     /// </summary>
-    private void HandleOnSecondPhaseStart()
+    private void HandleOnThirdPhaseStart()
     {
-        Complete(2);
+        Complete(3);
     }
 
     /// <summary>
@@ -106,6 +106,6 @@ public class Boss2SuckState : Boss2StateBase
             collisionCtrl.OnAgentHit -= HandleOnAgentHit;
 
         if (phaseCtrl != null)
-            phaseCtrl.OnSecondPhaseStart -= HandleOnSecondPhaseStart;
+            phaseCtrl.OnThirdPhaseStart -= HandleOnThirdPhaseStart;
     }
 }

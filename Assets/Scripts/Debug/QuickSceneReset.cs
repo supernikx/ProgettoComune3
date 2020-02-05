@@ -7,17 +7,45 @@ using UnityEngine.SceneManagement;
 public class QuickSceneReset : MonoBehaviour
 {
     GroupController groupCtrl;
+    UI_Manager uiMng;
 
-    public void Setup(GroupController _groupCtrl)
+    public void Setup(GroupController _groupCtrl, UI_Manager _uiMng)
     {
+        uiMng = _uiMng;
         groupCtrl = _groupCtrl;
         groupCtrl.OnGroupDead += HandleOnGroupDead;
     }
 
     private void HandleOnGroupDead()
     {
+        groupCtrl.Enable(false);
         PoolManager.instance.ResetPoolObjects(ObjectTypes.Boss1Bullet);
         PoolManager.instance.ResetPoolObjects(ObjectTypes.PlayerBullet);
+
+        UI_Controller currentUiCtrl = uiMng.GetCurrentUIController();
+        UIMenu_EndGame endGamePanel = currentUiCtrl.GetMenu<UIMenu_EndGame>();
+        if (endGamePanel != null)
+        {
+            endGamePanel.RetryButtonPressed += HandleOnRetry;
+            currentUiCtrl.SetCurrentMenu<UIMenu_EndGame>();
+        }
+        else
+        {
+            HandleOnRetry();
+        }
+    }
+
+    private void HandleOnRetry()
+    {
+        PoolManager.instance.ResetPoolObjects(ObjectTypes.Boss1Bullet);
+        PoolManager.instance.ResetPoolObjects(ObjectTypes.PlayerBullet);
+
+        UI_Controller currentUiCtrl = uiMng.GetCurrentUIController();
+        UIMenu_EndGame endGamePanel = currentUiCtrl.GetMenu<UIMenu_EndGame>();
+        endGamePanel.RetryButtonPressed -= HandleOnRetry;
+
+        uiMng.SetDefaultController();
+        uiMng.GetCurrentUIController().SetCurrentMenu<UIMenu_Loading>();
 
         Scene sceneToReload = new Scene();
         Scene swarmScene = new Scene();
@@ -55,6 +83,9 @@ public class QuickSceneReset : MonoBehaviour
     {
         LevelManager newLvlMng = FindObjectOfType<LevelManager>();
         newLvlMng.Setup();
+
+        uiMng.Init();
+        uiMng.GetCurrentUIController().SetCurrentMenu<UIMenu_Gameplay>();
     }
 
     private void OnDisable()

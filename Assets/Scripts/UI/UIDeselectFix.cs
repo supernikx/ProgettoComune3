@@ -9,10 +9,6 @@ using UnityEngine.EventSystems;
 public class UIDeselectFix : MonoBehaviour
 {
     /// <summary>
-    /// Riferimento all'uiManager
-    /// </summary>
-    private UI_Manager uiMng;
-    /// <summary>
     /// Riferimento all'event system
     /// </summary>
     private EventSystem eventSystem;
@@ -29,10 +25,9 @@ public class UIDeselectFix : MonoBehaviour
     /// Funzione di Setup
     /// </summary>
     /// <param name="_uiMng"></param>
-    public void Setup(UI_Manager _uiMng)
+    public void Setup(EventSystem _eventSystem)
     {
-        uiMng = _uiMng;
-        eventSystem = uiMng.GetEventSystem();
+        eventSystem = _eventSystem;
         isSetupped = true;
     }
 

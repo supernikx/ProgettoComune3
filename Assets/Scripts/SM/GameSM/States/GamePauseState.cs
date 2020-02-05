@@ -13,6 +13,10 @@ public class GamePauseState : GameSMStateBase
     /// </summary>
     private UI_Manager uiMng;
     /// <summary>
+    /// Riferimento all'UI Controller attuale
+    /// </summary>
+    private UI_Controller currentUICtrl;
+    /// <summary>
     /// Riferimento al pannello di pausa
     /// </summary>
     private UIMenu_Pause uiPausePanel;
@@ -42,19 +46,21 @@ public class GamePauseState : GameSMStateBase
         Time.timeScale = 0;
 
         uiMng = context.GetGameManager().GetUIManager();
+        currentUICtrl = uiMng.GetCurrentUIController();
+
         lvlMng = context.GetGameManager().GetLevelManager();
         lvlPauseCtrl = lvlMng.GetLevelPauseController();
         groupCtrl = lvlMng.GetGroupController();
-        uiPausePanel = uiMng.GetMenu<UIMenu_Pause>();
-        gameplayPanel = uiMng.GetMenu<UIMenu_Gameplay>();
+        uiPausePanel = currentUICtrl.GetMenu<UIMenu_Pause>();
+        gameplayPanel = currentUICtrl.GetMenu<UIMenu_Gameplay>();
 
         lvlPauseCtrl.OnGameUnpause += HandleOnGameUnpause;
         uiPausePanel.ResumeButtonPressed += HandleOnGameUnpause;
         uiPausePanel.MainMenuButtonPressed += HandleOnMainMenuButtonPressed;
 
-        groupCtrl.Enable(false);
         oldGroupStatus = groupCtrl.IsEnabled();
-        uiMng.SetCurrentMenu<UIMenu_Pause>();
+        groupCtrl.Enable(false);
+        currentUICtrl.SetCurrentMenu<UIMenu_Pause>();
     }
 
     #region Handles

@@ -62,8 +62,8 @@ public class UIMenu_Gameplay : UIMenu_Base
 
         if (_value)
         {
-            lvlSceneCtrl = manager.GetGameManager().GetLevelManager().GetLevelSceneController();
-            groupCtrl = manager.GetGameManager().GetLevelManager().GetGroupController();
+            lvlSceneCtrl = controller.GetGameManager().GetLevelManager().GetLevelSceneController();
+            groupCtrl = controller.GetGameManager().GetLevelManager().GetGroupController();
             groupShootCtrl = groupCtrl.GetGroupShootController();
 
             groupShootCtrl.OnReloadingStart += HandleOnReloadingStart;

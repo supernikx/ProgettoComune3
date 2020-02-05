@@ -22,6 +22,10 @@ public class GameEndGameState : GameSMStateBase
     /// </summary>
     private UI_Manager uiMng;
     /// <summary>
+    /// Riferimento all'UI Controller attuale
+    /// </summary>
+    private UI_Controller currentUICtrl;
+    /// <summary>
     /// Riferiemento al pannello di endgame
     /// </summary>
     private UIMenu_EndGame endGamePanel;
@@ -31,12 +35,13 @@ public class GameEndGameState : GameSMStateBase
         gm = context.GetGameManager();
         groupCtrl = gm.GetLevelManager().GetGroupController();
         uiMng = context.GetGameManager().GetUIManager();
-        endGamePanel = uiMng.GetMenu<UIMenu_EndGame>();
+        currentUICtrl = uiMng.GetCurrentUIController();
+        endGamePanel = currentUICtrl.GetMenu<UIMenu_EndGame>();
 
         endGamePanel.RetryButtonPressed += HandleRetryButtonPressed;
 
         groupCtrl.Enable(false);
-        uiMng.SetCurrentMenu<UIMenu_EndGame>();
+        currentUICtrl.SetCurrentMenu<UIMenu_EndGame>();
     }
 
     /// <summary>
@@ -44,7 +49,8 @@ public class GameEndGameState : GameSMStateBase
     /// </summary>
     private void HandleRetryButtonPressed()
     {
-        uiMng.SetCurrentMenu<UIMenu_Loading>();
+        uiMng.SetDefaultController();
+        uiMng.GetCurrentUIController().SetCurrentMenu<UIMenu_Loading>();
 
         PoolManager.instance.ResetPoolObjects(ObjectTypes.Boss1Bullet);
         PoolManager.instance.ResetPoolObjects(ObjectTypes.PlayerBullet);
@@ -103,10 +109,13 @@ public class GameEndGameState : GameSMStateBase
 
     public override void Exit()
     {
-        SceneManager.sceneUnloaded -= HandleOnSceneUnloaded;
-        SceneManager.sceneLoaded -= HandleOnSceneLoaded;
-
         if (endGamePanel != null)
             endGamePanel.RetryButtonPressed -= HandleRetryButtonPressed;
+
+        if (uiMng != null)
+            uiMng.Init();
+
+        SceneManager.sceneUnloaded -= HandleOnSceneUnloaded;
+        SceneManager.sceneLoaded -= HandleOnSceneLoaded;
     }
 }
