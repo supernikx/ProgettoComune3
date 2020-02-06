@@ -34,7 +34,7 @@ public class UIDeselectFix : MonoBehaviour
 
     private void Update()
     {
-        if (!isSetupped)
+        if (!isSetupped || eventSystem == null)
             return;
 
         if (eventSystem.currentSelectedGameObject != null && eventSystem.currentSelectedGameObject != oldSelected)
@@ -42,4 +42,15 @@ public class UIDeselectFix : MonoBehaviour
         else if (oldSelected != null && eventSystem.currentSelectedGameObject == null)
             eventSystem.SetSelectedGameObject(oldSelected);
     }
+
+    #region API
+    /// <summary>
+    /// Funzione che imposta l'event system
+    /// </summary>
+    /// <param name="_eventSystem"></param>
+    public void SetEventSystem(EventSystem _eventSystem)
+    {
+        eventSystem = _eventSystem;
+    }
+    #endregion
 }

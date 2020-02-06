@@ -28,6 +28,18 @@ public class UI_Controller : UIManagerBase
         deselectFix.Setup(eventSystem);
     }
 
+    /// <summary>
+    /// Override della funzione di Clear del menù attuale
+    /// </summary>
+    public override void ClearCurrentMenu()
+    {
+        eventSystem.gameObject.SetActive(false);
+        deselectFix.SetEventSystem(null);
+
+        base.ClearCurrentMenu();
+    }
+
+
     #region API
     #region Getter
     /// <summary>
