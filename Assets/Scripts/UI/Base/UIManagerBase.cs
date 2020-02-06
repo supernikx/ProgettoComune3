@@ -45,17 +45,6 @@ public abstract class UIManagerBase : MonoBehaviour
     }
 
     /// <summary>
-    /// Funzione che spegne il menù corrente
-    /// </summary>
-    public void ClearCurrentMenu()
-    {
-        if (currentMenu != null)
-            currentMenu.ToggleMenu(false);
-        currentMenu = null;
-        OnCurrentMenuChange(currentMenu);
-    }
-
-    /// <summary>
     /// Funzione che setta il menù corrente a quello del tipo passato.
     /// </summary>
     /// <typeparam name="T"></typeparam>
@@ -188,5 +177,16 @@ public abstract class UIManagerBase : MonoBehaviour
     /// Funzione chiamata al camcbio di menù
     /// </summary>
     protected virtual void OnCurrentMenuChange(UIControllerBase _uIController) { }
+
+    /// <summary>
+    /// Funzione che spegne il menù corrente
+    /// </summary>
+    public virtual void ClearCurrentMenu()
+    {
+        if (currentMenu != null)
+            currentMenu.ToggleMenu(false);
+        currentMenu = null;
+        OnCurrentMenuChange(currentMenu);
+    }
     #endregion
 }
