@@ -14,7 +14,7 @@ public class TutorialTrigger : MonoBehaviour
     [SerializeField]
     private float triggerRange;
     //Testo del tutorial
-    [SerializeField]
+    [SerializeField][Multiline]
     private string tutorialText;
     //Immagine del tutorial
     [SerializeField]
