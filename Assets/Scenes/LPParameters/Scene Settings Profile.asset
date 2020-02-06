@@ -41,10 +41,10 @@ MonoBehaviour:
     m_Value: 0
   exposure:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 0.25
   multiplier:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0.4
     min: 0
   upperHemisphereLuxValue:
     m_OverrideState: 1
@@ -75,18 +75,18 @@ MonoBehaviour:
     max: 10
   atmosphereThickness:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 2.25
     min: 0
     max: 5
   skyTint:
     m_OverrideState: 1
-    m_Value: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    m_Value: {r: 0.5660378, g: 0.46357933, b: 0.22694911, a: 1}
     hdr: 0
     showAlpha: 1
     showEyeDropper: 1
   groundColor:
     m_OverrideState: 1
-    m_Value: {r: 0.369, g: 0.349, b: 0.341, a: 1}
+    m_Value: {r: 0.084905684, g: 0.04828272, b: 0.034843374, a: 1}
     hdr: 0
     showAlpha: 1
     showEyeDropper: 1
@@ -112,7 +112,7 @@ MonoBehaviour:
     m_Value: 1
   color:
     m_OverrideState: 1
-    m_Value: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    m_Value: {r: 0.14150941, g: 0.06741722, b: 0.10388348, a: 1}
     hdr: 1
     showAlpha: 0
     showEyeDropper: 1
@@ -123,7 +123,7 @@ MonoBehaviour:
     max: 1
   maxFogDistance:
     m_OverrideState: 1
-    m_Value: 5000
+    m_Value: 1000
     min: 0
   mipFogMaxMip:
     m_OverrideState: 1
@@ -140,14 +140,14 @@ MonoBehaviour:
     min: 0
   fogDistance:
     m_OverrideState: 1
-    m_Value: 200
+    m_Value: 23
     min: 0
   fogBaseHeight:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 7
   fogHeightAttenuation:
     m_OverrideState: 1
-    m_Value: 0.2
+    m_Value: 0.7
     min: 0
     max: 1
 --- !u!114 &3208548307242975922
