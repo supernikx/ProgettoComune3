@@ -24,7 +24,7 @@ public class QuickSceneSetupper : GameManager
             poolMng = FindObjectOfType<PoolManager>();
             groupCtrl = FindObjectOfType<GroupController>();
 
-            reset.Setup(groupCtrl, uiMng);
+            reset.Setup(this, groupCtrl, uiMng);
             poolMng.Setup();
             groupCtrl.Setup();
             lvlMng.Setup();

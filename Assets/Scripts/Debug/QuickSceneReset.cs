@@ -7,10 +7,12 @@ using UnityEngine.SceneManagement;
 public class QuickSceneReset : MonoBehaviour
 {
     GroupController groupCtrl;
+    GameManager gm;
     UI_Manager uiMng;
 
-    public void Setup(GroupController _groupCtrl, UI_Manager _uiMng)
+    public void Setup(GameManager _gm, GroupController _groupCtrl, UI_Manager _uiMng)
     {
+        gm = _gm;
         uiMng = _uiMng;
         groupCtrl = _groupCtrl;
         groupCtrl.OnGroupDead += HandleOnGroupDead;
@@ -86,6 +88,8 @@ public class QuickSceneReset : MonoBehaviour
 
         uiMng.Init();
         uiMng.GetCurrentUIController().SetCurrentMenu<UIMenu_Gameplay>();
+
+        gm.SetLevelManager(newLvlMng);
     }
 
     private void OnDisable()
