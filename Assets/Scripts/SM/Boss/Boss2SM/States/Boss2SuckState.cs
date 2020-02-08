@@ -66,8 +66,8 @@ public class Boss2SuckState : Boss2StateBase
         groupMovementCtrl.MoveAgentsToPointDirection(bossCtrl.transform.position, suckForce);
 
         suckTimer -= Time.deltaTime;
-        if (suckTimer < 0)
-            Complete();
+        if (suckTimer <= 0)
+            Complete(3);
     }
 
     #region Handles

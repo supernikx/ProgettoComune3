@@ -21,18 +21,18 @@ public class Boss2StartPhase2State : Boss2StateBase
     /// </summary>
     private BossLifeController lifeCtrl;
     /// <summary>
-    /// Riferimento al CoverBlockController
+    /// Riferiemtno al Boss Tourrets Controller
     /// </summary>
-    private Boss2CoverBlocksController coverBlockCtrl;
+    private Boss2TourretsController bossTourretsCtrl;
 
     public override void Enter()
     {
         bossCtrl = context.GetBossController();
-        lifeCtrl = bossCtrl.GetBossLifeController();
-        coverBlockCtrl = bossCtrl.GetCoverBlocksController(); 
+        bossTourretsCtrl = bossCtrl.GetTourretsController();
+        lifeCtrl = bossCtrl.GetBossLifeController();        
 
-        lifeCtrl.SetCanTakeDamage(canTakeDirectDamage);
-        coverBlockCtrl.EnableCoverBlocks(true);
+        lifeCtrl.SetCanTakeDamage(canTakeDirectDamage);        
+        bossTourretsCtrl.SetCanAim(false);
 
         Debug.Log("Phase 2 Iniziata");
         Complete();

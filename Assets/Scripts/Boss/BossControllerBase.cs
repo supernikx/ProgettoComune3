@@ -107,6 +107,15 @@ public abstract class BossControllerBase : MonoBehaviour
     {
         return collisionCtrl;
     }
+
+    /// <summary>
+    /// Funzione che ritorna il level manager
+    /// </summary>
+    /// <returns></returns>
+    public virtual LevelManager GetLevelManager()
+    {
+        return lvlMng;
+    }
     #endregion
     #endregion
 }

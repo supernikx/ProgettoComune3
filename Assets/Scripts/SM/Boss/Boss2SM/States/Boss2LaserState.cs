@@ -11,6 +11,9 @@ public class Boss2LaserState : Boss2StateBase
     //Velocità di moviemento del laser
     [SerializeField]
     private float laserTrackSpeed;
+    //Durata del laser
+    [SerializeField]
+    private float laserDuration;
 
     /// <summary>
     /// Riferimento al GroupController
@@ -32,6 +35,10 @@ public class Boss2LaserState : Boss2StateBase
     /// Riferimento al Collision Controller
     /// </summary>
     private BossCollisionController collisionCtrl;
+    /// <summary>
+    /// Timer che conta quanto tempo dura lo stato
+    /// </summary>
+    private float laserTimer;
 
     public override void Enter()
     {
@@ -44,12 +51,17 @@ public class Boss2LaserState : Boss2StateBase
         lifeCtrl.OnBossDead += HandleOnBossDead;
         collisionCtrl.OnAgentHit += HandleOnAgentHit;
 
+        laserTimer = laserDuration;
         laserCtrl.StartLaser();
     }
 
     public override void Tick()
     {
         laserCtrl.RotateLaser(groupCtrl.GetGroupCenterPoint(), laserTrackSpeed);
+
+        laserTimer -= Time.deltaTime;
+        if (laserTimer <= 0)
+            Complete(2);
     }
 
     #region Handles

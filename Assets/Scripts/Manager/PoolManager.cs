@@ -10,6 +10,7 @@ public enum ObjectTypes
     Agent,
     PlayerBullet,
     Boss1Bullet,
+    Boss2Bullet,
 }
 
 /// <summary>

@@ -394,34 +394,6 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
---- !u!1102 &-7628257647838546408
-AnimatorState:
-  serializedVersion: 5
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: TentaclesResetState
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions:
-  - {fileID: -6432395856188935879}
-  m_StateMachineBehaviours:
-  - {fileID: 1596551339457649585}
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 0}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!1102 &-7612948175526968298
 AnimatorState:
   serializedVersion: 5
@@ -782,9 +754,6 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: 4648062280765505911}
     m_Position: {x: 570, y: 110, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 4627598232239419527}
-    m_Position: {x: 570, y: 40, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -1017,7 +986,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TentaclesStompState
+  m_Name: TourretShootState
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1104,31 +1073,6 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 8576231762431076518}
-  m_Solo: 0
-  m_Mute: 0
-  m_IsExit: 0
-  serializedVersion: 3
-  m_TransitionDuration: 0
-  m_TransitionOffset: 0
-  m_ExitTime: 0
-  m_HasExitTime: 0
-  m_HasFixedDuration: 1
-  m_InterruptionSource: 0
-  m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
---- !u!1101 &-6432395856188935879
-AnimatorStateTransition:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: GoToNext
-    m_EventTreshold: 0
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: -1158253663974921462}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
@@ -1233,10 +1177,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f003c4115fe7c644bae4f9c93c79221d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: TentaclesStomp
-  tentaclesStompIndex: 01000000020000000300000004000000
-  stompDuration: 1
-  delayBetweenTentacles: 0.2
+  id: TourretShoot
+  tourretShootIndex: 01000000020000000300000004000000
+  tourretShootDelay: 1
+  delayBetweenTourrets: 2
 --- !u!1102 &-6063996500804021868
 AnimatorState:
   serializedVersion: 5
@@ -2604,6 +2548,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Laser
   laserTrackSpeed: 10
+  laserDuration: 6
 --- !u!114 &-1586007688606000564
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -2812,34 +2757,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1102 &-1158253663974921462
-AnimatorState:
-  serializedVersion: 5
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: WaitingState 3
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions:
-  - {fileID: 1811164216253722771}
-  m_StateMachineBehaviours:
-  - {fileID: -60548256466071329}
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 0}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!1102 &-958880318477880378
 AnimatorState:
   serializedVersion: 5
@@ -2962,6 +2879,31 @@ MonoBehaviour:
   raisingSpeed: 50
   movementSpeed: 100
   landingSpeed: 70
+--- !u!1101 &-820666511375163260
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: GoToNext
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -6539042115770343934}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1101 &-794789231491180780
 AnimatorStateTransition:
   m_ObjectHideFlags: 3
@@ -3146,7 +3088,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: Phase3
-  canTakeDirectDamage: 1
+  canTakeDirectDamage: 0
 --- !u!1102 &-196254529921370845
 AnimatorState:
   serializedVersion: 5
@@ -3197,20 +3139,6 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
---- !u!114 &-60548256466071329
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 243677c3a7963634aba187c58a4339a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: Waiting
-  waitTimeRange: {x: 1, y: 1}
 --- !u!91 &9100000
 AnimatorController:
   m_ObjectHideFlags: 0
@@ -3225,37 +3153,37 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: GoToPhase1
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: GoToPhase2
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: GoToPhase3
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: GoToDeath
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: GoToEmpty
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -3706,22 +3634,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Shoot
   shootPointIndex: 2
---- !u!114 &1596551339457649585
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a41b904f783b63a46a3590900efb79cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: TentaclesReset
-  tentaclesResetIndex: 01000000020000000300000004000000
-  resetDuration: 2
-  delayBetweenTentacles: 0.2
 --- !u!1101 &1604269988717206913
 AnimatorStateTransition:
   m_ObjectHideFlags: 3
@@ -3774,31 +3686,6 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -648226329480635800}
-  m_Solo: 0
-  m_Mute: 0
-  m_IsExit: 0
-  serializedVersion: 3
-  m_TransitionDuration: 0
-  m_TransitionOffset: 0
-  m_ExitTime: 0
-  m_HasExitTime: 0
-  m_HasFixedDuration: 1
-  m_InterruptionSource: 0
-  m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
---- !u!1101 &1811164216253722771
-AnimatorStateTransition:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: GoToNext
-    m_EventTreshold: 0
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: -6539042115770343934}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
@@ -3920,13 +3807,7 @@ AnimatorStateMachine:
     m_Position: {x: 780, y: 110, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6827615625644361044}
-    m_Position: {x: 930, y: 10, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -1158253663974921462}
-    m_Position: {x: 930, y: 210, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -7628257647838546408}
-    m_Position: {x: 1120, y: 110, z: 0}
+    m_Position: {x: 780, y: 20, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2711068599339896738}
     m_Position: {x: 530, y: 110, z: 0}
@@ -4334,20 +4215,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Shoot
   shootPointIndex: 2
---- !u!114 &3541897610899964221
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 243677c3a7963634aba187c58a4339a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: Waiting
-  waitTimeRange: {x: 2, y: 2}
 --- !u!1101 &3582308490333211635
 AnimatorStateTransition:
   m_ObjectHideFlags: 3
@@ -4504,31 +4371,6 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
---- !u!1101 &4214921362646680730
-AnimatorStateTransition:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: GoToNext
-    m_EventTreshold: 0
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: 4648062280765505911}
-  m_Solo: 0
-  m_Mute: 0
-  m_IsExit: 0
-  serializedVersion: 3
-  m_TransitionDuration: 0
-  m_TransitionOffset: 0
-  m_ExitTime: 0
-  m_HasExitTime: 0
-  m_HasFixedDuration: 1
-  m_InterruptionSource: 0
-  m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
 --- !u!1101 &4250578614061941239
 AnimatorStateTransition:
   m_ObjectHideFlags: 3
@@ -4621,34 +4463,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Waiting
   waitTimeRange: {x: 0.8, y: 0.8}
---- !u!1102 &4627598232239419527
-AnimatorState:
-  serializedVersion: 5
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: WaitingState
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions:
-  - {fileID: 4214921362646680730}
-  m_StateMachineBehaviours:
-  - {fileID: 3541897610899964221}
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 0}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!1102 &4648062280765505911
 AnimatorState:
   serializedVersion: 5
@@ -4659,8 +4473,7 @@ AnimatorState:
   m_Name: SuckState
   m_Speed: 1
   m_CycleOffset: 0
-  m_Transitions:
-  - {fileID: 5889691334925488533}
+  m_Transitions: []
   m_StateMachineBehaviours:
   - {fileID: 7306880293937972229}
   m_Position: {x: 50, y: 50, z: 0}
@@ -4872,31 +4685,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1101 &5693364099981833692
-AnimatorStateTransition:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: GoToNext
-    m_EventTreshold: 0
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: -7628257647838546408}
-  m_Solo: 0
-  m_Mute: 0
-  m_IsExit: 0
-  serializedVersion: 3
-  m_TransitionDuration: 0
-  m_TransitionOffset: 0
-  m_ExitTime: 0
-  m_HasExitTime: 0
-  m_HasFixedDuration: 1
-  m_InterruptionSource: 0
-  m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
 --- !u!1101 &5794496068828455045
 AnimatorStateTransition:
   m_ObjectHideFlags: 3
@@ -4974,31 +4762,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Waiting
   waitTimeRange: {x: 0.2, y: 0.2}
---- !u!1101 &5889691334925488533
-AnimatorStateTransition:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: GoToNext
-    m_EventTreshold: 0
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: 4627598232239419527}
-  m_Solo: 0
-  m_Mute: 0
-  m_IsExit: 0
-  serializedVersion: 3
-  m_TransitionDuration: 0
-  m_TransitionOffset: 0
-  m_ExitTime: 0
-  m_HasExitTime: 0
-  m_HasFixedDuration: 1
-  m_InterruptionSource: 0
-  m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
 --- !u!114 &5916292009897102081
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -5371,7 +5134,7 @@ AnimatorState:
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
-  - {fileID: 5693364099981833692}
+  - {fileID: -820666511375163260}
   m_StateMachineBehaviours:
   - {fileID: -3266095811870105502}
   m_Position: {x: 50, y: 50, z: 0}

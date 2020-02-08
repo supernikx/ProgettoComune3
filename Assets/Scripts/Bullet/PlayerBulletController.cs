@@ -14,7 +14,7 @@ public class PlayerBulletController : BulletControllerBase
 
     private void OnTriggerEnter(Collider other)
     {
-        IBossDamageable bossDamageable = other.GetComponent<IBossDamageable>();
+        IBossDamageable bossDamageable = other.GetComponentInParent<IBossDamageable>();
         if (bossDamageable != null)
         {
             bossDamageable.TakeDamage(bulletDamage);

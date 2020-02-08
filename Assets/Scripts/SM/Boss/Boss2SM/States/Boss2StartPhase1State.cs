@@ -17,9 +17,13 @@ public class Boss2StartPhase1State : Boss2StateBase
     /// </summary>
     private Boss2Controller bossCtrl;
     /// <summary>
-    /// Riferiemtno al Boss Tentacle Controller
+    /// Riferimento al CoverBlockController
     /// </summary>
-    private Boss2TentaclesController bossTentacleCtrl;
+    private Boss2CoverBlocksController coverBlockCtrl;
+    /// <summary>
+    /// Riferiemtno al Boss Tourrets Controller
+    /// </summary>
+    private Boss2TourretsController bossTourretsCtrl;
     /// <summary>
     /// Riferimento al Life Controller
     /// </summary>
@@ -28,11 +32,14 @@ public class Boss2StartPhase1State : Boss2StateBase
     public override void Enter()
     {
         bossCtrl = context.GetBossController();
-        bossTentacleCtrl = bossCtrl.GetTentaclesController();
+        bossTourretsCtrl = bossCtrl.GetTourretsController();
+        coverBlockCtrl = bossCtrl.GetCoverBlocksController();
         lifeCtrl = bossCtrl.GetBossLifeController();
 
         lifeCtrl.SetCanTakeDamage(canTakeDirectDamage);
-        bossTentacleCtrl.TentaclesSetup();
+        coverBlockCtrl.EnableCoverBlocks(true);
+        bossTourretsCtrl.TourretsSetup();
+        bossTourretsCtrl.SetCanAim(true);
 
         Debug.Log("Phase 1 Iniziata");
         Complete();

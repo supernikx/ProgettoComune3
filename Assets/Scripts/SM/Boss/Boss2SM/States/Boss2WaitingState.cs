@@ -29,9 +29,9 @@ public class Boss2WaitingState : Boss2StateBase
     /// </summary>
     private BossLifeController lifeCtrl;
     /// <summary>
-    /// Riferimento al Tentacles Controller
+    /// Riferimento al Tourrets Controller
     /// </summary>
-    private Boss2TentaclesController tentaclesCtrl;
+    private Boss2TourretsController tourretsCtrl;
     /// <summary>
     /// Riferimento al phase controller
     /// </summary>
@@ -51,7 +51,7 @@ public class Boss2WaitingState : Boss2StateBase
         bossCtrl = context.GetBossController();
         lifeCtrl = bossCtrl.GetBossLifeController();
         collisionCtrl = bossCtrl.GetBossCollisionController();
-        tentaclesCtrl = bossCtrl.GetTentaclesController();
+        tourretsCtrl = bossCtrl.GetTourretsController();
         phaseCtrl = bossCtrl.GetPhaseController();
 
         timer = 0;
@@ -59,8 +59,8 @@ public class Boss2WaitingState : Boss2StateBase
 
         lifeCtrl.OnBossDead += HandleOnBossDead;
         collisionCtrl.OnAgentHit += HandleOnAgentHit;
-        tentaclesCtrl.OnTentacleDead += HandleOnTentacleDead;
-        tentaclesCtrl.OnAllTentaclesDead += HandleOnAllTentaclesDead;
+        tourretsCtrl.OnTourretDead += HandleOnTourretDead;
+        tourretsCtrl.OnAllTourretsDead += HandleOnAllTourretDead;
         phaseCtrl.OnThirdPhaseStart += HandleOnThirdPhaseStart;
     }
 
@@ -81,9 +81,9 @@ public class Boss2WaitingState : Boss2StateBase
     }
 
     /// <summary>
-    /// Funzione che gestisce l'evento di morte di un tentacolo
+    /// Funzione che gestisce l'evento di morte di una torretta
     /// </summary>
-    private void HandleOnTentacleDead(int _damage)
+    private void HandleOnTourretDead(int _damage)
     {
         bool canTakeDamage = lifeCtrl.GetCanTakeDamage();
         lifeCtrl.SetCanTakeDamage(true);
@@ -92,9 +92,9 @@ public class Boss2WaitingState : Boss2StateBase
     }
 
     /// <summary>
-    /// Funzione che gestisce l'evento di morte dei tantacoli
+    /// Funzione che gestisce l'evento di morte delle torrette
     /// </summary>
-    private void HandleOnAllTentaclesDead()
+    private void HandleOnAllTourretDead()
     {
         Complete(2);
     }
@@ -118,10 +118,10 @@ public class Boss2WaitingState : Boss2StateBase
 
     public override void Exit()
     {
-        if (tentaclesCtrl != null)
+        if (tourretsCtrl != null)
         {
-            tentaclesCtrl.OnTentacleDead -= HandleOnTentacleDead;
-            tentaclesCtrl.OnAllTentaclesDead -= HandleOnAllTentaclesDead;
+            tourretsCtrl.OnTourretDead -= HandleOnTourretDead;
+            tourretsCtrl.OnAllTourretsDead -= HandleOnAllTourretDead;
         }
 
         if (lifeCtrl != null)

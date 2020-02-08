@@ -12,9 +12,9 @@ public class Boss2Controller : BossControllerBase
     /// </summary>
     private Boss2SMController sm;
     /// <summary>
-    /// Riferimento al TentaclesController
+    /// Riferimento al TourretsController
     /// </summary>
-    private Boss2TentaclesController tentaclesCtrl;
+    private Boss2TourretsController tourretsCtrl;
     /// <summary>
     /// Riferimento al LaserController
     /// </summary>
@@ -37,7 +37,7 @@ public class Boss2Controller : BossControllerBase
         base.Setup(_lvlMng);
 
         sm = GetComponent<Boss2SMController>();
-        tentaclesCtrl = GetComponent<Boss2TentaclesController>();
+        tourretsCtrl = GetComponent<Boss2TourretsController>();
         laserCtrl = GetComponent<Boss2LaserController>();
         coverBlockCtrl = GetComponent<Boss2CoverBlocksController>();
         phaseCtrl = GetComponent<Boss2PhaseController>();
@@ -52,7 +52,7 @@ public class Boss2Controller : BossControllerBase
         base.StartBoss();
         Boss2SMController.Context context = new Boss2SMController.Context(this, sm, lvlMng);
         sm.Setup(context);
-        tentaclesCtrl.Setup(this);
+        tourretsCtrl.Setup(this);
         laserCtrl.Setup(this);
         lifeCtrl.Setup(this);
         collisionCtrl.Setup(this);
@@ -80,12 +80,12 @@ public class Boss2Controller : BossControllerBase
 
     #region Getter
     /// <summary>
-    /// Funzione che ritorna il TentaclesController
+    /// Funzione che ritorna il Tourrets
     /// </summary>
     /// <returns></returns>
-    public Boss2TentaclesController GetTentaclesController()
+    public Boss2TourretsController GetTourretsController()
     {
-        return tentaclesCtrl;
+        return tourretsCtrl;
     }
 
     /// <summary>

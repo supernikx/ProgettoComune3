@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// CLasse che gestisce lo stato di stomp dei tentacoli
+/// CLasse che gestisce lo stato di sparo della torretta
 /// </summary>
-public class Boss2TentaclesStompState : Boss2StateBase
+public class Boss2TourretShootState : Boss2StateBase
 {
     [Header("Jump Settings")]
-    //Tentacolo che deve cadere
+    //Torrette che devono sparare
     [SerializeField]
-    private List<int> tentaclesStompIndex;
-    //Velocità del tentacolo
+    private List<int> tourretShootIndex;
+    //Delay di sparo della torretta
     [SerializeField]
-    private float stompDuration;
-    //Delay tra i tentacoli
+    private float tourretShootDelay;
+    //Delay tra le torrette
     [SerializeField]
-    private float delayBetweenTentacles;
+    private float delayBetweenTourrets;
 
     /// <summary>
     /// Riferimento al GroupController
@@ -27,9 +27,9 @@ public class Boss2TentaclesStompState : Boss2StateBase
     /// </summary>
     private Boss2Controller bossCtrl;
     /// <summary>
-    /// Riferimento al Tentacles Controller
+    /// Riferimento al Tourrets Controller
     /// </summary>
-    private Boss2TentaclesController tentaclesCtrl;
+    private Boss2TourretsController tourretsCtrl;
     /// <summary>
     /// Riferimento al Collision Controller
     /// </summary>
@@ -39,42 +39,52 @@ public class Boss2TentaclesStompState : Boss2StateBase
     /// </summary>
     private BossLifeController lifeCtrl;
     /// <summary>
-    /// Riferimento alla coroutine che esegue il tentacles stomp
+    /// Riferimento alla coroutine che esegue il shoot delle torrette
     /// </summary>
-    private IEnumerator tentaclesStompRoutine;
+    private IEnumerator tourretsShootRoutine;
 
     public override void Enter()
     {
         groupCtrl = context.GetLevelManager().GetGroupController();
         bossCtrl = context.GetBossController();
-        tentaclesCtrl = bossCtrl.GetTentaclesController();
+        tourretsCtrl = bossCtrl.GetTourretsController();
         collisionCtrl = bossCtrl.GetBossCollisionController();
         lifeCtrl = bossCtrl.GetBossLifeController();
 
-        tentaclesCtrl.OnTentacleDead += HandleOnTentacleDead;
-        tentaclesCtrl.OnAllTentaclesDead += HandleOnAllTentaclesDead;
+        tourretsCtrl.OnTourretDead += HandleOnTourretDead;
+        tourretsCtrl.OnAllTourretsDead += HandleOnAllTourretsDead;
         collisionCtrl.OnAgentHit += HandleOnAgentHit;
         lifeCtrl.OnBossDead += HandleOnBossDead;
 
-        tentaclesStompRoutine = TentaclesStompCoroutine();
-        tentaclesCtrl.StartCoroutine(tentaclesStompRoutine);
+        tourretsShootRoutine = TourretsShootCoroutine();
+        tourretsCtrl.StartCoroutine(tourretsShootRoutine);
     }
 
     /// <summary>
-    /// Coroutine che esegue lo stomp dei tentacoli
+    /// Coroutine che esegue lo shoot delle torrette
     /// </summary>
     /// <returns></returns>
-    private IEnumerator TentaclesStompCoroutine()
+    private IEnumerator TourretsShootCoroutine()
     {
-        for (int i = 0; i < tentaclesStompIndex.Count; i++)
+        for (int i = 0; i < tourretShootIndex.Count; i++)
         {
-            yield return new WaitForSeconds(delayBetweenTentacles);
-
             //HACK: Così i designer possono partire a contare da 1
-            int tentacleIndex = tentaclesStompIndex[i] - 1;
-            Vector3 stompPosition = groupCtrl.GetGroupCenterPoint();
+            int tourretIndex = tourretShootIndex[i] - 1;
+            if (!tourretsCtrl.CheckTourretIndex(tourretIndex))
+                continue;
 
-            tentaclesCtrl.Stomp(tentacleIndex, stompPosition, stompDuration);
+            tourretsCtrl.LockAim(tourretIndex, true);
+            yield return new WaitForSeconds(tourretShootDelay);
+            tourretsCtrl.Shoot(tourretIndex);
+            yield return new WaitForSeconds(delayBetweenTourrets);
+        }
+
+        for (int i = 0; i < tourretShootIndex.Count; i++)
+        {
+            //HACK: Così i designer possono partire a contare da 1
+            int tourretIndex = tourretShootIndex[i] - 1;
+
+            tourretsCtrl.LockAim(tourretIndex, false);
         }
 
         Complete();
@@ -91,9 +101,9 @@ public class Boss2TentaclesStompState : Boss2StateBase
     }
 
     /// <summary>
-    /// Funzione che gestisce l'evento di morte di un tentacolo
+    /// Funzione che gestisce l'evento di morte di una torretta
     /// </summary>
-    private void HandleOnTentacleDead(int _damage)
+    private void HandleOnTourretDead(int _damage)
     {
         bool canTakeDamage = lifeCtrl.GetCanTakeDamage();
         lifeCtrl.SetCanTakeDamage(true);
@@ -102,9 +112,9 @@ public class Boss2TentaclesStompState : Boss2StateBase
     }
 
     /// <summary>
-    /// Funzione che gestisce l'evento di morte dei tantacoli
+    /// Funzione che gestisce l'evento di morte delle torrette
     /// </summary>
-    private void HandleOnAllTentaclesDead()
+    private void HandleOnAllTourretsDead()
     {
         Complete(2);
     }
@@ -120,13 +130,13 @@ public class Boss2TentaclesStompState : Boss2StateBase
 
     public override void Exit()
     {
-        if (tentaclesCtrl != null)
+        if (tourretsCtrl != null)
         {
-            tentaclesCtrl.OnTentacleDead -= HandleOnTentacleDead;
-            tentaclesCtrl.OnAllTentaclesDead -= HandleOnAllTentaclesDead;
+            tourretsCtrl.OnTourretDead -= HandleOnTourretDead;
+            tourretsCtrl.OnAllTourretsDead -= HandleOnAllTourretsDead;
 
-            if (tentaclesStompRoutine != null)
-                tentaclesCtrl.StopCoroutine(tentaclesStompRoutine);
+            if (tourretsShootRoutine != null)
+                tourretsCtrl.StopCoroutine(tourretsShootRoutine);
         }
 
         if (collisionCtrl != null)
