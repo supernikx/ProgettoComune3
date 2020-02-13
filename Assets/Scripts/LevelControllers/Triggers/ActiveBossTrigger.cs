@@ -96,6 +96,14 @@ public class ActiveBossTrigger : MonoBehaviour
     {
         inputSkipCutscene.performed += SkipStartBossCutscene;
         groupCtrl.Enable(false);
+
+        //Fixed  position
+        Vector3 groupPosition = groupCtrl.GetGroupCenterPoint();
+        groupPosition.x = expectedGroupStartPosition.position.x;
+        groupPosition.z = expectedGroupStartPosition.position.z;
+
+        //Raggruppo il gruppo sul punto scelto
+        groupCtrl.GetGroupSizeController().GroupOnPoint(groupPosition);
         startBossCutsceneDirector.Play();
     }
 
