@@ -1179,8 +1179,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: TourretShoot
   tourretShootIndex: 01000000020000000300000004000000
-  tourretShootDelay: 1
-  delayBetweenTourrets: 2
+  tourretShootDelay: 0.1
+  delayBetweenTourrets: 1
 --- !u!1102 &-6063996500804021868
 AnimatorState:
   serializedVersion: 5
@@ -2547,9 +2547,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: Laser
-  laserTrackSpeed: 10
+  laserTrackSpeed: 15
   laserDuration: 6
-  laserSpawnTime: 2
+  laserSpawnTime: 0.5
 --- !u!114 &-1586007688606000564
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -3818,7 +3818,7 @@ AnimatorStateMachine:
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
-  m_EntryPosition: {x: 50, y: 120, z: 0}
+  m_EntryPosition: {x: -20, y: 120, z: 0}
   m_ExitPosition: {x: 50, y: 70, z: 0}
   m_ParentStateMachinePosition: {x: 30, y: -30, z: 0}
   m_DefaultState: {fileID: 247286887869248744}
@@ -5296,8 +5296,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: Suck
-  suckForce: 0.3
-  suckDuration: 6
+  suckForce: 0.8
+  suckDuration: 4
 --- !u!1102 &7616758524413502661
 AnimatorState:
   serializedVersion: 5
