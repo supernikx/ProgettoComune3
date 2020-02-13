@@ -14,6 +14,9 @@ public class Boss2LaserState : Boss2StateBase
     //Durata del laser
     [SerializeField]
     private float laserDuration;
+    //Tempo di spawn del laser
+    [SerializeField]
+    private float laserSpawnTime;
 
     /// <summary>
     /// Riferimento al GroupController
@@ -52,19 +55,30 @@ public class Boss2LaserState : Boss2StateBase
         collisionCtrl.OnAgentHit += HandleOnAgentHit;
 
         laserTimer = laserDuration;
-        laserCtrl.StartLaser();
+        laserCtrl.SpawnLaser(laserSpawnTime, groupCtrl.GetGroupCenterPoint(), HandleOnLaserSpawn);
     }
 
     public override void Tick()
     {
-        laserCtrl.RotateLaser(groupCtrl.GetGroupCenterPoint(), laserTrackSpeed);
+        if (laserCtrl.IsEnable())
+        {
+            laserCtrl.RotateLaser(groupCtrl.GetGroupCenterPoint(), laserTrackSpeed);
 
-        laserTimer -= Time.deltaTime;
-        if (laserTimer <= 0)
-            Complete(2);
+            laserTimer -= Time.deltaTime;
+            if (laserTimer <= 0)
+                Complete(2);
+        }
     }
 
     #region Handles
+    /// <summary>
+    /// Funzione che gestisce la callback di spawn del laser
+    /// </summary>
+    private void HandleOnLaserSpawn()
+    {
+        laserCtrl.StartLaser();
+    }
+
     /// <summary>
     /// Funzione che gestisce l'evento di hit di un agent
     /// </summary>

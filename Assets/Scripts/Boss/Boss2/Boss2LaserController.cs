@@ -52,6 +52,16 @@ public class Boss2LaserController : MonoBehaviour
 
     #region API
     /// <summary>
+    /// Funzione che spawna il laser
+    /// </summary>
+    /// <param name="_spawnTime"></param>
+    /// <param name="_onSpawnCallback"></param>
+    public void SpawnLaser(float _spawnTime, Vector3 _spawnDirection, Action _onSpawnCallback)
+    {
+        laserCtrl.SpawnLaser(_spawnTime, _spawnDirection, _onSpawnCallback);
+    }
+
+    /// <summary>
     /// Funzione che fa partire il Laser
     /// </summary>
     public void StartLaser()
@@ -80,6 +90,17 @@ public class Boss2LaserController : MonoBehaviour
         Quaternion targetRotation = Quaternion.LookRotation((_targetPosition - laserCtrl.transform.position).normalized, Vector3.up);
         laserCtrl.transform.rotation = Quaternion.RotateTowards(laserCtrl.transform.rotation, targetRotation, _speed * Time.deltaTime);
     }
+
+    #region Getter
+    /// <summary>
+    /// Funzione che ritorna se il laser è attivo
+    /// </summary>
+    /// <returns></returns>
+    public bool IsEnable()
+    {
+        return laserCtrl.IsEnable();
+    }
+    #endregion
     #endregion
 
     private void OnDisable()

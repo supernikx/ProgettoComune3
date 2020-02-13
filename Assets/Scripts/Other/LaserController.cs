@@ -39,6 +39,10 @@ public class LaserController : MonoBehaviour
     /// Bool che identifica se il laser è attivo
     /// </summary>
     private bool enable;
+    /// <summary>
+    /// Riferimento alla coroutine di spawn del laser
+    /// </summary>
+    private IEnumerator spawnRoutine;
 
     /// <summary>
     /// Funzione di Setup
@@ -79,7 +83,7 @@ public class LaserController : MonoBehaviour
             {
                 nextLaserPoint = transform.position + (transform.forward * maxLaserRange);
             }
-            
+
             //Controllo se colpisco un agent al max range dell'ostacolo
             if (Physics.SphereCast(transform.position, laserRadius, transform.forward, out hit, checkAgentDistance, agentLayer))
             {
@@ -94,15 +98,27 @@ public class LaserController : MonoBehaviour
 
     #region API
     /// <summary>
+    /// Funzione che avvia la coroutine di spawn del laser
+    /// </summary>
+    /// <param name="_spawnTime"></param>
+    /// <param name="_spawnDirection"></param>
+    /// <param name="_onSpawnCallback"></param>
+    public void SpawnLaser(float _spawnTime, Vector3 _spawnDirection, Action _onSpawnCallback)
+    {
+        _spawnDirection.y = transform.position.y;
+        Quaternion targetRotation = Quaternion.LookRotation((_spawnDirection - transform.position).normalized, Vector3.up);
+        transform.rotation = targetRotation;
+
+        spawnRoutine = SpawnLaserCoroutine(_spawnTime, _onSpawnCallback);
+        StartCoroutine(spawnRoutine);
+    }
+
+    /// <summary>
     /// Funzione che esegue lo start del laser
     /// </summary>
     public void StartLaser()
     {
         enable = true;
-        lineRenderer.enabled = true;
-        lineRenderer.positionCount = 2;
-        lineRenderer.startWidth = lineRenderer.startWidth = laserRadius;
-        lineRenderer.SetPosition(0, transform.position);
     }
 
     /// <summary>
@@ -112,6 +128,84 @@ public class LaserController : MonoBehaviour
     {
         lineRenderer.enabled = false;
         enable = false;
+
+        if (spawnRoutine != null)
+            StopCoroutine(spawnRoutine);
+    }
+
+    #region Getter
+    /// <summary>
+    /// Funzione che ritorna se il laser è attivo
+    /// </summary>
+    /// <returns></returns>
+    public bool IsEnable()
+    {
+        return enable;
     }
     #endregion
+    #endregion
+
+    /// <summary>
+    /// Coroutine che fa spawnare il laser
+    /// </summary>
+    /// <param name="_spawnTime"></param>
+    /// <param name="_onSpawnCallback"></param>
+    /// <returns></returns>
+    private IEnumerator SpawnLaserCoroutine(float _spawnTime, Action _onSpawnCallback)
+    {
+        lineRenderer.enabled = true;
+        lineRenderer.positionCount = 2;
+        lineRenderer.SetPosition(0, transform.position);
+        lineRenderer.startWidth = lineRenderer.startWidth = laserRadius;
+
+        float laserRange = 0;
+        float rangeOffset;
+        WaitForFixedUpdate wffu = new WaitForFixedUpdate();
+
+        if (_spawnTime != 0)
+            rangeOffset = maxLaserRange / _spawnTime;
+        else
+            rangeOffset = maxLaserRange;
+
+
+        while (laserRange < maxLaserRange)
+        {
+            laserRange += rangeOffset * Time.deltaTime;
+
+            Vector3 nextLaserPoint;
+            float checkAgentDistance = laserRange;
+            RaycastHit hit;
+
+            //Controllo se colpisco un ostacolo
+            if (Physics.SphereCast(transform.position, laserRadius, transform.forward, out hit, laserRange, laserColliderLayer))
+            {
+                if (hit.collider)
+                {
+                    nextLaserPoint = hit.point;
+                    checkAgentDistance = hit.distance;
+                }
+                else
+                {
+                    nextLaserPoint = transform.position + (transform.forward * laserRange);
+                }
+            }
+            else
+            {
+                nextLaserPoint = transform.position + (transform.forward * laserRange);
+            }
+
+            //Controllo se colpisco un agent al max range dell'ostacolo
+            if (Physics.SphereCast(transform.position, laserRadius, transform.forward, out hit, checkAgentDistance, agentLayer))
+            {
+                AgentController agent = hit.transform.gameObject.GetComponent<AgentController>();
+                if (agent != null)
+                    OnAgentHit?.Invoke(agent);
+            }
+
+            lineRenderer.SetPosition(1, nextLaserPoint);
+            yield return wffu;
+        }
+
+        _onSpawnCallback?.Invoke();
+    }
 }
