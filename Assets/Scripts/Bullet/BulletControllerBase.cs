@@ -50,6 +50,22 @@ public abstract class BulletControllerBase : MonoBehaviour, IPoolObject
     }
 
     /// <summary>
+    /// Variabile che identifica il tipo dell'oggetto
+    /// </summary>
+    private ObjectTypes _objectType;
+    public ObjectTypes objectType
+    {
+        get
+        {
+            return _objectType;
+        }
+        set
+        {
+            _objectType = value;
+        }
+    }
+
+    /// <summary>
     /// Funzione chiamata allo spawn in Pool dell'oggetto
     /// </summary>
     public void PoolInit()
@@ -76,6 +92,11 @@ public abstract class BulletControllerBase : MonoBehaviour, IPoolObject
     //Range del proiettile
     [SerializeField]
     protected float bulletRange;
+
+    [Header("Graphic Settings")]
+    //Tipo del VFX del proiettile
+    [SerializeField]
+    private ObjectTypes bulletVFX;
 
     /// <summary>
     /// Punto di spawn del proiettile
@@ -119,6 +140,13 @@ public abstract class BulletControllerBase : MonoBehaviour, IPoolObject
     {
         collider.enabled = false;
         isSetupped = false;
+        if (bulletVFX != ObjectTypes.None)
+        {
+            GeneralVFXController vfx = PoolManager.instance.GetPooledObject(bulletVFX, gameObject).GetComponent<GeneralVFXController>();
+            if (vfx != null)
+                vfx.Spawn(transform.position);
+        }
+
         OnObjectDestroy?.Invoke(this);
     }
 }

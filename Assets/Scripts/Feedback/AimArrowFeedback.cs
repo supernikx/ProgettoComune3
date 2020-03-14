@@ -64,7 +64,7 @@ public class AimArrowFeedback : MonoBehaviour
         groupMinAgents = groupCtrl.GetGroupMinAgentCont();
 
         groupCtrl.OnAgentSpawn += HandleOnGroupSizeChange;
-        groupCtrl.OnAgentDead += HandleOnGroupSizeChange;
+        groupCtrl.OnAgentRemoved += HandleOnGroupSizeChange;
     }
 
     #region Handlers
@@ -144,7 +144,7 @@ public class AimArrowFeedback : MonoBehaviour
         if (groupCtrl != null)
         {
             groupCtrl.OnAgentSpawn -= HandleOnGroupSizeChange;
-            groupCtrl.OnAgentDead -= HandleOnGroupSizeChange;
+            groupCtrl.OnAgentRemoved -= HandleOnGroupSizeChange;
         }
     }
 }

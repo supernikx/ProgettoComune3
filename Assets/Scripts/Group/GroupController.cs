@@ -21,7 +21,7 @@ public class GroupController : MonoBehaviour
     /// <summary>
     /// Evento che notifica la morte di un agent
     /// </summary>
-    public Action<AgentController> OnAgentDead;
+    public Action<AgentController> OnAgentRemoved;
     #endregion
 
     [Header("Group Spawn Settings")]
@@ -293,7 +293,7 @@ public class GroupController : MonoBehaviour
         }
 
         AgentController agentToRemove = agents[UnityEngine.Random.Range(0, agents.Count)];
-        RemoveAgent(agentToRemove);
+        RemoveAgent(agentToRemove, false);
         return true;
     }
 
@@ -301,15 +301,16 @@ public class GroupController : MonoBehaviour
     /// Funzione che si occupa di rimuovere l'agent passato come parametro
     /// </summary>
     /// <param name="_agentToRemove"></param>
-    public void RemoveAgent(AgentController _agentToRemove)
+    /// <param name="_death"></param>
+    public void RemoveAgent(AgentController _agentToRemove, bool _death)
     {
         if (agents != null && agents.Count > 0)
         {
-            _agentToRemove.UnSetup();
+            _agentToRemove.UnSetup(_death);
             agents.Remove(_agentToRemove);
         }
 
-        OnAgentDead?.Invoke(_agentToRemove);
+        OnAgentRemoved?.Invoke(_agentToRemove);
         CheckGroupCount();
     }
 

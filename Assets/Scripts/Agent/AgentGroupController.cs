@@ -56,6 +56,6 @@ public class AgentGroupController : MonoBehaviour
         float groupY = groupCtrl.GetGroupCenterPoint().y;
 
         if (Mathf.Abs(transform.position.y - groupY) > maxYDistanceFromGroup)
-            groupCtrl.RemoveAgent(agentCtrl);
+            groupCtrl.RemoveAgent(agentCtrl, true);
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,10 @@ using UnityEngine;
 /// </summary>
 public class AgentGraphicController : MonoBehaviour
 {
+    [Header("Graphic Settings")]
+    [SerializeField]
+    private ObjectTypes deathVFX;
+
     /// <summary>
     /// Riferimento al group controller
     /// </summary>
@@ -74,4 +79,19 @@ public class AgentGraphicController : MonoBehaviour
         calculatedMovementSpeed = (transform.position - oldPosition).magnitude;
         anim.SetFloat("movementSpeed", calculatedMovementSpeed);
     }
+
+    #region API
+    /// <summary>
+    /// Funnzione che spawna il VFX di morte dell'agent
+    /// </summary>
+    public void SpawnDeathVFX()
+    {
+        if (deathVFX != ObjectTypes.None)
+        {
+            GeneralVFXController vfx = PoolManager.instance.GetPooledObject(deathVFX, gameObject).GetComponent<GeneralVFXController>();
+            if (vfx != null)
+                vfx.Spawn(transform.position);
+        }
+    }
+    #endregion
 }

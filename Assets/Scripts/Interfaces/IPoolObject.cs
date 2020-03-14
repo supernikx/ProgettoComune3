@@ -28,14 +28,25 @@ public interface IPoolObject
     /// Proprietaro dell'oggetto
     /// </summary>
     GameObject ownerObject { get; set; }
+
     /// <summary>
     /// L'oggetto
     /// </summary>
     GameObject gameObject { get; }
+
     /// <summary>
     /// Stato attuale dell'oggetto in relazione alla Pool
     /// </summary>
     State currentState
+    {
+        get;
+        set;
+    }
+
+    /// <summary>
+    /// Tipo di oggetto
+    /// </summary>
+    ObjectTypes objectType
     {
         get;
         set;

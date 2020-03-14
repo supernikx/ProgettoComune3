@@ -197,7 +197,7 @@ public class Boss1JumpState : Boss1StateBase
     /// <param name="obj"></param>
     private void HandleOnAgentHit(AgentController _agent)
     {
-        groupCtrl.RemoveAgent(_agent);
+        groupCtrl.RemoveAgent(_agent, true);
     }
 
     /// <summary>

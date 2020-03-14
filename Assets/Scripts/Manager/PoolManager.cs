@@ -7,10 +7,13 @@ using UnityEngine;
 /// </summary>
 public enum ObjectTypes
 {
+    None,
     Agent,
     PlayerBullet,
     Boss1Bullet,
     Boss2Bullet,
+    PlayerBulletHitVFX,
+    PlayerDeathVFX,
 }
 
 /// <summary>
@@ -58,6 +61,11 @@ public class PoolManager : MonoBehaviour
     private List<PoolObjects> poolObjects = new List<PoolObjects>();
 
     /// <summary>
+    /// Lista dei parent
+    /// </summary>
+    private List<Transform> parentList = new List<Transform>();
+
+    /// <summary>
     /// Posizione della Pool
     /// </summary>
     private Vector3 poolPosition = new Vector3(1000, 1000, 1000);
@@ -75,12 +83,17 @@ public class PoolManager : MonoBehaviour
         foreach (PoolObjects obj in poolObjects)
         {
             List<IPoolObject> objectsToAdd = new List<IPoolObject>();
+            Transform newParent = new GameObject(obj.objectType.ToString()).transform;
+            newParent.SetParent(transform);
+            parentList.Add(newParent);
+
             for (int i = 0; i < obj.ammount; i++)
             {
                 GameObject instantiateObject = Instantiate(obj.prefab, transform);
                 IPoolObject instantiateObjectInterface = instantiateObject.GetComponent<IPoolObject>();
                 if (instantiateObjectInterface != null)
                 {
+                    instantiateObjectInterface.objectType = obj.objectType;
                     instantiateObjectInterface.OnObjectDestroy += OnObjectDestroy;
                     instantiateObjectInterface.OnObjectSpawn += OnObjectSpawn;
                     OnObjectDestroy(instantiateObjectInterface);
@@ -105,7 +118,7 @@ public class PoolManager : MonoBehaviour
     {
         objectToDestroy.currentState = State.InPool;
         objectToDestroy.gameObject.transform.position = poolPosition;
-        objectToDestroy.gameObject.transform.SetParent(transform);
+        objectToDestroy.gameObject.transform.SetParent(GetParentByOjectType(objectToDestroy.objectType));
         objectToDestroy.ownerObject = null;
     }
 
@@ -116,6 +129,22 @@ public class PoolManager : MonoBehaviour
     private void OnObjectSpawn(IPoolObject objectToSpawn)
     {
         objectToSpawn.currentState = State.InUse;
+    }
+
+    /// <summary>
+    /// Funzione che ritorna il parent di una object type
+    /// </summary>
+    /// <param name="_objType"></param>
+    /// <returns></returns>
+    private Transform GetParentByOjectType(ObjectTypes _objType)
+    {
+        for (int i = 0; i < parentList.Count; i++)
+        {
+            if (parentList[i].name == _objType.ToString())
+                return parentList[i];
+        }
+
+        return null;
     }
 
     #region API

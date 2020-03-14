@@ -50,6 +50,22 @@ public class AgentController : MonoBehaviour, IPoolObject
     }
 
     /// <summary>
+    /// Variabile che identifica il tipo dell'oggetto
+    /// </summary>
+    private ObjectTypes _objectType;
+    public ObjectTypes objectType
+    {
+        get
+        {
+            return _objectType;
+        }
+        set
+        {
+            _objectType = value;
+        }
+    }
+
+    /// <summary>
     /// Funzione chiamata al reset forzato nella Pool dell'oggetto
     /// </summary>
     public void ResetPool()
@@ -123,9 +139,11 @@ public class AgentController : MonoBehaviour, IPoolObject
     /// <summary>
     /// Funzione che esegue l'UnSetup dell'agent
     /// </summary>
-    public void UnSetup()
+    public void UnSetup(bool _death)
     {
         groupCtrl = null;
+        if (_death)
+            graphicCtrl.SpawnDeathVFX();
 
         agentGravityCtrl.UnSetup();
         graphicCtrl.UnSetup();

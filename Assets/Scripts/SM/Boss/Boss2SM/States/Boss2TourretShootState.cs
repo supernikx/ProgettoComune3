@@ -97,7 +97,7 @@ public class Boss2TourretShootState : Boss2StateBase
     /// <param name="_agent"></param>
     private void HandleOnAgentHit(AgentController _agent)
     {
-        groupCtrl.RemoveAgent(_agent);
+        groupCtrl.RemoveAgent(_agent, true);
     }
 
     /// <summary>
