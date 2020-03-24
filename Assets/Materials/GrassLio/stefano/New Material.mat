@@ -11,7 +11,7 @@ Material:
   m_Shader: {fileID: -6465566751694194690, guid: 51e7f3710e6fbd14aa4c782f21a54b74,
     type: 3}
   m_ShaderKeywords: _ALPHATEST_ON _DOUBLESIDED_ON
-  m_LightmapFlags: 4
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
   m_CustomRenderQueue: 2450
@@ -34,6 +34,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - Texture2D_D7CDE123:
         m_Texture: {fileID: 2800000, guid: 78899c20336584f4cbf942b8f90ab26e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_E18E37C6:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _AnisotropyMap:
@@ -104,6 +108,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 8dab5e2c4f1bacc449b162cd4a4ce0f2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_9DA2A0BD_Texture_1:
+        m_Texture: {fileID: 2800000, guid: f9b07073741926e48a7588c76f7f0522, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SpecularColorMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -129,6 +137,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Boolean_451732D9: 0
     - Vector1_45C86990: 0.5
     - Vector1_89201050: 0.2
     - _AORemapMax: 1
@@ -253,6 +262,7 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
+    - Color_8329A795: {r: 0.31522748, g: 0.8027793, b: 0.40769422, a: 0}
     - Vector2_2A06E86: {r: 4, g: 0, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
