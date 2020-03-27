@@ -826,7 +826,7 @@ GameObject:
   - component: {fileID: 405920448}
   - component: {fileID: 405920447}
   - component: {fileID: 405920446}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Collider4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1540,7 +1540,7 @@ GameObject:
   - component: {fileID: 623716707}
   - component: {fileID: 623716706}
   - component: {fileID: 623716705}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Collider1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3586,6 +3586,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stump_Decimato_Mesh
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 535cdfeed54fe35488653db9c3265e01,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 535cdfeed54fe35488653db9c3265e01,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3772,7 +3777,7 @@ PrefabInstance:
     - target: {fileID: 1509385862683283898, guid: 5030c6febeb68034aafdf19582ed31b3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -24.1
+      value: -16.4
       objectReference: {fileID: 0}
     - target: {fileID: 1509385862683283898, guid: 5030c6febeb68034aafdf19582ed31b3,
         type: 3}
@@ -3823,6 +3828,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1509385862683283898, guid: 5030c6febeb68034aafdf19582ed31b3,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1509385862683283898, guid: 5030c6febeb68034aafdf19582ed31b3,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1509385862683283898, guid: 5030c6febeb68034aafdf19582ed31b3,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3410067592811352697, guid: 5030c6febeb68034aafdf19582ed31b3,
         type: 3}
@@ -4931,7 +4951,7 @@ GameObject:
   - component: {fileID: 1855051415}
   - component: {fileID: 1855051414}
   - component: {fileID: 1855051413}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Collider3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5524,12 +5544,12 @@ PrefabInstance:
     - target: {fileID: 159985606060970593, guid: 5030c6febeb68034aafdf19582ed31b3,
         type: 3}
       propertyPath: m_Name
-      value: RightExitTrigger
+      value: TopExitTrigger
       objectReference: {fileID: 0}
     - target: {fileID: 1509385862683283898, guid: 5030c6febeb68034aafdf19582ed31b3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 22.9
+      value: 0.24
       objectReference: {fileID: 0}
     - target: {fileID: 1509385862683283898, guid: 5030c6febeb68034aafdf19582ed31b3,
         type: 3}
@@ -5539,7 +5559,7 @@ PrefabInstance:
     - target: {fileID: 1509385862683283898, guid: 5030c6febeb68034aafdf19582ed31b3,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 14.17
       objectReference: {fileID: 0}
     - target: {fileID: 1509385862683283898, guid: 5030c6febeb68034aafdf19582ed31b3,
         type: 3}
@@ -5549,7 +5569,7 @@ PrefabInstance:
     - target: {fileID: 1509385862683283898, guid: 5030c6febeb68034aafdf19582ed31b3,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 1509385862683283898, guid: 5030c6febeb68034aafdf19582ed31b3,
         type: 3}
@@ -5559,7 +5579,7 @@ PrefabInstance:
     - target: {fileID: 1509385862683283898, guid: 5030c6febeb68034aafdf19582ed31b3,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 1509385862683283898, guid: 5030c6febeb68034aafdf19582ed31b3,
         type: 3}
@@ -5574,12 +5594,27 @@ PrefabInstance:
     - target: {fileID: 1509385862683283898, guid: 5030c6febeb68034aafdf19582ed31b3,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 1509385862683283898, guid: 5030c6febeb68034aafdf19582ed31b3,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1509385862683283898, guid: 5030c6febeb68034aafdf19582ed31b3,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1509385862683283898, guid: 5030c6febeb68034aafdf19582ed31b3,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1509385862683283898, guid: 5030c6febeb68034aafdf19582ed31b3,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3410067592811352697, guid: 5030c6febeb68034aafdf19582ed31b3,
         type: 3}
@@ -5606,7 +5641,7 @@ GameObject:
   - component: {fileID: 2045168516}
   - component: {fileID: 2045168515}
   - component: {fileID: 2045168514}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Collider2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5983,7 +6018,7 @@ PrefabInstance:
     - target: {fileID: 6230772815592049899, guid: 39eaa5bff06a24648a46d9e4ee59e9a0,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.9999695
+      value: 1.999939
       objectReference: {fileID: 0}
     - target: {fileID: 4370961761419874812, guid: 39eaa5bff06a24648a46d9e4ee59e9a0,
         type: 3}
