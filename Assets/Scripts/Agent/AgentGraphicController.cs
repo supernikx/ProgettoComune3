@@ -88,9 +88,13 @@ public class AgentGraphicController : MonoBehaviour
     {
         if (deathVFX != ObjectTypes.None)
         {
-            GeneralVFXController vfx = PoolManager.instance.GetPooledObject(deathVFX, gameObject).GetComponent<GeneralVFXController>();
-            if (vfx != null)
-                vfx.Spawn(transform.position);
+            GameObject pooledVFX = PoolManager.instance.GetPooledObject(deathVFX, gameObject);
+            if (pooledVFX != null)
+            {
+                GeneralVFXController vfx = pooledVFX.GetComponent<GeneralVFXController>();
+                if (vfx != null)
+                    vfx.Spawn(transform.position);
+            }
         }
     }
     #endregion

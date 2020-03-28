@@ -54,4 +54,12 @@ public class UIMenu_Pause : UIMenu_Base
     {
         MainMenuButtonPressed?.Invoke();
     }
+
+    /// <summary>
+    /// Funzione che gestisce il bottone di Quit del pannello
+    /// </summary>
+    public void QuitButton()
+    {
+        Application.Quit();
+    }
 }
