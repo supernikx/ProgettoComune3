@@ -6,25 +6,13 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// Classe che gestisce i dati persistenti fra le scene
 /// </summary>
-public class PersistentData : MonoBehaviour
+public static class PersistentData
 {
-    //Singleton
-    private static PersistentData instance;
-
     //Data
     public static int spawnPointID;
 
-    private void Awake()
+    static PersistentData()
     {
-        if (instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        instance = this;
-
-        DontDestroyOnLoad(gameObject);
         spawnPointID = -1;
     }
 }
