@@ -15,11 +15,15 @@ public class ChangeSceneTrigger : MonoBehaviour
     //Nome della scena in cui porta questa uscita
     [SerializeField]
     private string sceneName;
+    //ID dello spawn point su cui si vuole andare
+    [SerializeField]
+    private int spawnID;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Agent"))
         {
+            PersistentData.spawnPointID = spawnID;
             OnExitTriggered?.Invoke(sceneName);
         }
     }

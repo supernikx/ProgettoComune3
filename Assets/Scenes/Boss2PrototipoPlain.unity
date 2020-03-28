@@ -1092,6 +1092,16 @@ PrefabInstance:
       propertyPath: bossTrigger
       value: 
       objectReference: {fileID: 1136335999426270535}
+    - target: {fileID: 176246241041732257, guid: 51d94fd01363b6842a7161e655d1061a,
+        type: 3}
+      propertyPath: groupStartPositions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 176246241041732257, guid: 51d94fd01363b6842a7161e655d1061a,
+        type: 3}
+      propertyPath: groupStartPositions.Array.data[0].groupStartPosition
+      value: 
+      objectReference: {fileID: 369495108}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51d94fd01363b6842a7161e655d1061a, type: 3}
 --- !u!1 &1331642910
@@ -2363,6 +2373,11 @@ PrefabInstance:
         type: 3}
       propertyPath: sceneName
       value: SwarmHubTest002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3410067592811352697, guid: 5030c6febeb68034aafdf19582ed31b3,
+        type: 3}
+      propertyPath: spawnID
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5030c6febeb68034aafdf19582ed31b3, type: 3}

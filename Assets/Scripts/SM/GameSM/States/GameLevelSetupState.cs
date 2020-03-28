@@ -36,6 +36,7 @@ public class GameLevelSetupState : GameSMStateBase
         uiMng.SetDefaultController();
         uiMng.GetCurrentUIController().SetCurrentMenu<UIMenu_Loading>();
 
+        PersistentData.spawnPointID = 0;
         SceneManager.sceneLoaded += HandleSwarmSceneLoaded;
         SceneManager.LoadScene(swarmSceneName);
     }

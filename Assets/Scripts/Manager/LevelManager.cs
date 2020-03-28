@@ -10,7 +10,17 @@ public class LevelManager : MonoBehaviour
     [Header("Level Settings")]
     //Punto iniziale del gruppo
     [SerializeField]
-    private Transform groupStartPosition;
+    private List<GroupStartPosition> groupStartPositions;
+
+    /// <summary>
+    /// Classe che associa ad uno spawn point un ID
+    /// </summary>
+    [System.Serializable]
+    private class GroupStartPosition
+    {
+        public Transform groupStartPosition;
+        public int positionID;
+    }
 
     /// <summary>
     /// Riferimento al level scene controller
@@ -59,7 +69,17 @@ public class LevelManager : MonoBehaviour
         if (lvlTutorialCtrl != null)
             lvlTutorialCtrl.Setup(this);
 
-        groupCtrl.Move(groupStartPosition.position);
+        Vector3 startPositon = transform.position;
+        for (int i = 0; i < groupStartPositions.Count; i++)
+        {
+            if (groupStartPositions[i].positionID == PersistentData.spawnPointID)
+            {
+                startPositon = groupStartPositions[i].groupStartPosition.position;
+                break;
+            }
+        }
+
+        groupCtrl.Move(startPositon);
         groupCtrl.Enable(true);
     }
 

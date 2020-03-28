@@ -30,6 +30,7 @@ public class GameLevelUnsetupState : GameSMStateBase
         uiMng.GetCurrentUIController().SetCurrentMenu<UIMenu_Loading>();
 
         mainMenuSceneName = gm.GetSceneReferenceManager().GetMainMenuSceneName();
+        PersistentData.spawnPointID = -1;
 
         SceneManager.sceneLoaded += HandleOnSceneLoaded;
         SceneManager.LoadScene(mainMenuSceneName);
