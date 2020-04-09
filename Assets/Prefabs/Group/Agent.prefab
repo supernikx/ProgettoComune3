@@ -213,6 +213,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4898873884623623286}
     m_Modifications:
+    - target: {fileID: 6296511679264841612, guid: bafeb0a80864c7f44b1a6a9c528bb33a,
+        type: 3}
+      propertyPath: m_Name
+      value: Ground2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6296511679264841612, guid: bafeb0a80864c7f44b1a6a9c528bb33a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8946520656183808233, guid: bafeb0a80864c7f44b1a6a9c528bb33a,
         type: 3}
       propertyPath: m_Name
@@ -288,16 +298,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Particles
       objectReference: {fileID: 0}
-    - target: {fileID: 7138283580407992345, guid: bafeb0a80864c7f44b1a6a9c528bb33a,
-        type: 3}
-      propertyPath: EmissionModule.m_Bursts.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7138283580407992345, guid: bafeb0a80864c7f44b1a6a9c528bb33a,
-        type: 3}
-      propertyPath: EmissionModule.m_BurstCount
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1707535850595154807, guid: bafeb0a80864c7f44b1a6a9c528bb33a,
         type: 3}
       propertyPath: EmissionModule.m_Bursts.Array.size
@@ -312,6 +312,16 @@ PrefabInstance:
         type: 3}
       propertyPath: CollisionModule.collidesWith.m_Bits
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 7138283580407992345, guid: bafeb0a80864c7f44b1a6a9c528bb33a,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7138283580407992345, guid: bafeb0a80864c7f44b1a6a9c528bb33a,
+        type: 3}
+      propertyPath: EmissionModule.m_BurstCount
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bafeb0a80864c7f44b1a6a9c528bb33a, type: 3}
