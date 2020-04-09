@@ -8,16 +8,15 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_Flowerz
-  m_Shader: {fileID: -6465566751694194690, guid: e97a86a8756114643a39c26cd7049692,
+  m_Shader: {fileID: -6465566751694194690, guid: cd61ca731b0511d43ae03cff7502f617,
     type: 3}
   m_ShaderKeywords: _ALPHATEST_ON _BLENDMODE_ALPHA _DOUBLESIDED_ON _SURFACE_TYPE_TRANSPARENT
-  m_LightmapFlags: 0
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 1
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: -1
   stringTagMap:
     MotionVector: User
-    RenderType: Transparent
   disabledShaderPasses:
   - DBufferMesh_M
   - DBufferMesh_AO
@@ -34,8 +33,20 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_3A85AA26:
+        m_Texture: {fileID: 2800000, guid: 00c64969dceea8a489397f0b1bb70ec9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - Texture2D_5333DCC0:
         m_Texture: {fileID: 2800000, guid: 9113c53289ee21f4da6c143b43d091ec, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_5CFD057B:
+        m_Texture: {fileID: 2800000, guid: 00c64969dceea8a489397f0b1bb70ec9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_CB6A4EE6:
+        m_Texture: {fileID: 2800000, guid: 00c64969dceea8a489397f0b1bb70ec9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_D7CDE123:
@@ -166,6 +177,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_C7CC8200_Texture_1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SpecularColorMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -191,8 +206,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_65CC29DB: 0
-    - Vector1_6C5F5030: 0.1
+    - Vector1_65CC29DB: 0.21
+    - Vector1_6C5F5030: 0.23
+    - Vector1_C0C65DF9: -1
+    - Vector1_C9A01EFD: -1
+    - Vector1_FD9E811D: 0.1
     - _AORemapMax: 1
     - _AORemapMin: 0
     - _ATDistance: 1
@@ -230,7 +248,7 @@ Material:
     - _Cutoff: 0.5
     - _DecalBlend: 0.5
     - _DecalMaskMapBlueScale: 1
-    - _DecalMeshDepthBias: 0
+    - _DecalMeshDepthBias: -15.6
     - _DecalStencilRef: 8
     - _DecalStencilWriteMask: 8
     - _DepthOffsetEnable: 0
@@ -375,6 +393,11 @@ Material:
     m_Colors:
     - Color_2383645A: {r: 1, g: 1, b: 1, a: 0}
     - Color_25C4629F: {r: 0, g: 0, b: 0, a: 0}
+    - Color_53168BD5: {r: 0.5566038, g: 0.29142934, b: 0.29921824, a: 0}
+    - Color_9E3828D4: {r: 1, g: 1, b: 1, a: 0}
+    - Color_ED60BFD: {r: 0, g: 0, b: 0, a: 0}
+    - Vector2_3BEA13B6: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - Vector2_5631F9EB: {r: 0.5, g: 0.5, b: 0, a: 0}
     - Vector2_BC62FA5C: {r: 0.5, g: 0.5, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}

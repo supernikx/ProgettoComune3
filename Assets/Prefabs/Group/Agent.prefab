@@ -213,15 +213,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4898873884623623286}
     m_Modifications:
-    - target: {fileID: 6296511679264841612, guid: bafeb0a80864c7f44b1a6a9c528bb33a,
+    - target: {fileID: 1963365216576027600, guid: bafeb0a80864c7f44b1a6a9c528bb33a,
+        type: 3}
+      propertyPath: CollisionModule.collidesWith.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 1155922320735225835, guid: bafeb0a80864c7f44b1a6a9c528bb33a,
         type: 3}
       propertyPath: m_Name
-      value: Ground2
+      value: SubemitterTRY
       objectReference: {fileID: 0}
-    - target: {fileID: 6296511679264841612, guid: bafeb0a80864c7f44b1a6a9c528bb33a,
+    - target: {fileID: 1155922320735225835, guid: bafeb0a80864c7f44b1a6a9c528bb33a,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8946520656183808233, guid: bafeb0a80864c7f44b1a6a9c528bb33a,
         type: 3}
@@ -297,6 +302,41 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Particles
+      objectReference: {fileID: 0}
+    - target: {fileID: 6296511679264841612, guid: bafeb0a80864c7f44b1a6a9c528bb33a,
+        type: 3}
+      propertyPath: m_Name
+      value: Ground2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6296511679264841612, guid: bafeb0a80864c7f44b1a6a9c528bb33a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3792454706447542737, guid: bafeb0a80864c7f44b1a6a9c528bb33a,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3792454706447542737, guid: bafeb0a80864c7f44b1a6a9c528bb33a,
+        type: 3}
+      propertyPath: EmissionModule.m_BurstCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1253321260303811877, guid: bafeb0a80864c7f44b1a6a9c528bb33a,
+        type: 3}
+      propertyPath: m_Mesh3
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1253321260303811877, guid: bafeb0a80864c7f44b1a6a9c528bb33a,
+        type: 3}
+      propertyPath: m_Mesh2
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1253321260303811877, guid: bafeb0a80864c7f44b1a6a9c528bb33a,
+        type: 3}
+      propertyPath: m_Mesh1
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1707535850595154807, guid: bafeb0a80864c7f44b1a6a9c528bb33a,
         type: 3}
