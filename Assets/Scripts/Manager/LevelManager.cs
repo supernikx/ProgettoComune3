@@ -80,6 +80,7 @@ public class LevelManager : MonoBehaviour
         }
 
         groupCtrl.Move(startPositon);
+        groupCtrl.FillGroup();
         groupCtrl.Enable(true);
     }
 
