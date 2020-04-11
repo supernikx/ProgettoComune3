@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36c66ae55030bac49bdc39f8a34770d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orbOffset: {x: 0, y: 1, z: 0}
+  orbOffset: {x: 0, y: 0, z: 0}
   enableDelay: 1
   orbVFX: {fileID: 4740088483897767512}
   trailVFX: {fileID: 5360250102000074297}
@@ -100,16 +100,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 447634193155281717}
     m_Modifications:
-    - target: {fileID: 1083668711124119500, guid: b714e2f9be5977e4d8cca0787af808f5,
-        type: 3}
-      propertyPath: m_Name
-      value: VFX_Orb
-      objectReference: {fileID: 0}
-    - target: {fileID: 1083668711124119500, guid: b714e2f9be5977e4d8cca0787af808f5,
-        type: 3}
-      propertyPath: m_Layer
-      value: 17
-      objectReference: {fileID: 0}
     - target: {fileID: 7304427864578574139, guid: b714e2f9be5977e4d8cca0787af808f5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -118,7 +108,7 @@ PrefabInstance:
     - target: {fileID: 7304427864578574139, guid: b714e2f9be5977e4d8cca0787af808f5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.742
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7304427864578574139, guid: b714e2f9be5977e4d8cca0787af808f5,
         type: 3}
@@ -180,11 +170,6 @@ PrefabInstance:
       propertyPath: EmissionModule.enabled
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 9157004651695266870, guid: b714e2f9be5977e4d8cca0787af808f5,
-        type: 3}
-      propertyPath: m_Layer
-      value: 17
-      objectReference: {fileID: 0}
     - target: {fileID: 1415027711567667975, guid: b714e2f9be5977e4d8cca0787af808f5,
         type: 3}
       propertyPath: playOnAwake
@@ -194,6 +179,21 @@ PrefabInstance:
         type: 3}
       propertyPath: TrailModule.enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1083668711124119500, guid: b714e2f9be5977e4d8cca0787af808f5,
+        type: 3}
+      propertyPath: m_Name
+      value: VFX_Orb
+      objectReference: {fileID: 0}
+    - target: {fileID: 1083668711124119500, guid: b714e2f9be5977e4d8cca0787af808f5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 9157004651695266870, guid: b714e2f9be5977e4d8cca0787af808f5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 5117160640459210524, guid: b714e2f9be5977e4d8cca0787af808f5,
         type: 3}
