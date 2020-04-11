@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 2190637245553949393}
   - component: {fileID: 3033238116590861157}
   - component: {fileID: 7647136974110419292}
+  - component: {fileID: 1163998938357556922}
   - component: {fileID: 579055892110162551}
   - component: {fileID: 2190637245328243594}
   m_Layer: 0
@@ -80,7 +81,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groupStartAgents: 10
-  spawnRange: 0.5
+  spawnRange: 1
   agentPrefab: {fileID: 4898873885526971867, guid: 00c2b6c53e70ecf40a3f467609bd84cc,
     type: 3}
   groundLayer:
@@ -117,8 +118,10 @@ MonoBehaviour:
   bulletPrefab: {fileID: 2962134240799506771, guid: 5bdfefeea17b32846a56144c6a43ac9f,
     type: 3}
   shootHeight: 0.5
-  reloadingTime: 0.7
-  reloadingAgents: 9
+  reloadRange: 1
+  orbLayer:
+    serializedVersion: 2
+    m_Bits: 131072
   canBeInterruped: 1
 --- !u!114 &7647136974110419292
 MonoBehaviour:
@@ -132,8 +135,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6047f7d2ff8545c42a553a003a2d6e8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  expandSpeed: 1
   groupSpeed: 1
+  groupTime: 3
+--- !u!114 &1163998938357556922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2190637245553949407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2554ccf36eec8047ad1adb8998c271c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orbSpeed: 1
 --- !u!114 &579055892110162551
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -11,9 +11,6 @@ using TMPro;
 public class UIMenu_Gameplay : UIMenu_Base
 {
     [Header("General References")]
-    //Riferimento all'immagine che deve apparire nel momento della ricarica
-    [SerializeField]
-    private Image reloadingImage;
     //Riferimento al pannello del Boss
     [SerializeField]
     private UISubmenu_Boss bossPanel;
@@ -49,7 +46,6 @@ public class UIMenu_Gameplay : UIMenu_Base
         base.CustomSetup(_manage);
         ToggleBossPanel(false);
         ToggleWinPanel(false);
-        reloadingImage.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -66,10 +62,6 @@ public class UIMenu_Gameplay : UIMenu_Base
             groupCtrl = controller.GetGameManager().GetLevelManager().GetGroupController();
             groupShootCtrl = groupCtrl.GetGroupShootController();
 
-            groupShootCtrl.OnReloadingStart += HandleOnReloadingStart;
-            groupShootCtrl.OnReloadingInProgress += HandleOnReloading;
-            groupShootCtrl.OnReloadingEnd += HandleOnReloadingEnd;
-
             LevelBossController.OnBossFightStart += HandleOnBossFightStart;
             LevelBossController.OnBossFightEnd += HandleOnBossFightEnd;
 
@@ -81,12 +73,7 @@ public class UIMenu_Gameplay : UIMenu_Base
         else
         {
             if (groupCtrl != null)
-            {
-                groupShootCtrl.OnReloadingStart -= HandleOnReloadingStart;
-                groupShootCtrl.OnReloadingInProgress -= HandleOnReloading;
-                groupShootCtrl.OnReloadingEnd -= HandleOnReloadingEnd;
                 groupCtrl = null;
-            }
 
             if (lvlSceneCtrl != null)
                 lvlSceneCtrl.OnChangeLevelScene -= HandleOnChangeLevelScene;
@@ -127,35 +114,6 @@ public class UIMenu_Gameplay : UIMenu_Base
     }
 
     #region Handles
-    /// <summary>
-    /// Funzione che gestisce l'evento di inizio ricarica
-    /// </summary>
-    /// <param name="_reloadingTime"></param>
-    private void HandleOnReloadingStart(float _reloadingTime)
-    {
-        maxReloadingTime = _reloadingTime;
-        reloadingImage.fillAmount = 0;
-        reloadingImage.gameObject.SetActive(true);
-    }
-
-    /// <summary>
-    /// Funzione che gestisce l'evento di ricarica in corso
-    /// </summary>
-    /// <param name="_passReloadingTime"></param>
-    private void HandleOnReloading(float _passReloadingTime)
-    {
-        reloadingImage.fillAmount = _passReloadingTime / maxReloadingTime;
-    }
-
-    /// <summary>
-    /// Funzione che gestisce l'evento di fine ricarica
-    /// </summary>
-    private void HandleOnReloadingEnd()
-    {
-        maxReloadingTime = 0;
-        reloadingImage.gameObject.SetActive(false);
-    }
-
     /// <summary>
     /// Funzione che gestisce l'evento dell'inizio della bossfight
     /// </summary>

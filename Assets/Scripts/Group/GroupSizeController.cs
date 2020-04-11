@@ -17,6 +17,9 @@ public class GroupSizeController : MonoBehaviour
     //Velocità di raggruppamento
     [SerializeField]
     private float groupSpeed;
+    //Tempo della durata dell'abilità di raggruppamento
+    [SerializeField]
+    private float groupTime;
 
     /// <summary>
     /// Riferimento al group controller
@@ -107,6 +110,7 @@ public class GroupSizeController : MonoBehaviour
     /// <returns></returns>
     private IEnumerator GroupCoroutine()
     {
+        float timer = 0;
         while (grouping && groupCtrl.IsSetuppedAndEnabled())
         {
             //Prendo il riferimento agli agent
@@ -149,6 +153,13 @@ public class GroupSizeController : MonoBehaviour
                     }
                 }
 
+                timer += Time.deltaTime;
+                if (timer >= groupTime)
+                {
+                    grouping = false;
+                    OnGroupPressed?.Invoke(grouping);
+                    break;
+                }
                 yield return null;
             }
         }
@@ -206,8 +217,7 @@ public class GroupSizeController : MonoBehaviour
     /// <summary>
     /// Funzione che gestisce l'evento di inizio ricarica
     /// </summary>
-    /// <param name="_reloadingTime"></param>
-    private void HandleOnReloadingStart(float _reloadingTime)
+    private void HandleOnReloadingStart()
     {
         canChangeSize = false;
 

@@ -144,6 +144,6 @@ public class GroupMovementController : MonoBehaviour
     private void OnDisable()
     {
         if (sizeCtrl != null)
-            sizeCtrl.OnGroupPressed += HandleOnGroupPressed;
+            sizeCtrl.OnGroupPressed -= HandleOnGroupPressed;
     }
 }

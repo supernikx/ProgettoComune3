@@ -53,7 +53,9 @@ public class GameEndGameState : GameSMStateBase
         uiMng.GetCurrentUIController().SetCurrentMenu<UIMenu_Loading>();
 
         PoolManager.instance.ResetPoolObjects(ObjectTypes.Boss1Bullet);
+        PoolManager.instance.ResetPoolObjects(ObjectTypes.Boss2Bullet);
         PoolManager.instance.ResetPoolObjects(ObjectTypes.PlayerBullet);
+        PoolManager.instance.ResetPoolObjects(ObjectTypes.PlayerOrb);
 
         Scene sceneToReload = new Scene();
         for (int i = 0; i < SceneManager.sceneCount; i++)

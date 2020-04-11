@@ -70,6 +70,10 @@ public class GroupController : MonoBehaviour
     /// </summary>
     private GroupFeedbackController groupFeedbackCtrl;
     /// <summary>
+    /// Riferimento al group orb controller
+    /// </summary>
+    private GroupOrbController groupOrbCtrl;
+    /// <summary>
     /// Riferimento al PlayerInput
     /// </summary>
     private PlayerInput playerInput;
@@ -96,6 +100,7 @@ public class GroupController : MonoBehaviour
         groupSizeCtrl = GetComponent<GroupSizeController>();
         shootCtrl = GetComponent<GroupShootController>();
         groupFeedbackCtrl = GetComponent<GroupFeedbackController>();
+        groupOrbCtrl = GetComponent<GroupOrbController>();
         playerInput = GetComponent<PlayerInput>();
 
         //Feedback setup prima di tutti perchè deve gestire eventi di spawn degli agent
@@ -104,6 +109,7 @@ public class GroupController : MonoBehaviour
         AgentsSetup();
         groupMovementCtrl.Setup(this);
         groupSizeCtrl.Setup(this);
+        groupOrbCtrl.Setup(this);
         shootCtrl.Setup(this);
 
         isSetupped = true;
@@ -167,6 +173,15 @@ public class GroupController : MonoBehaviour
     public GroupFeedbackController GetGroupFeedbackController()
     {
         return groupFeedbackCtrl;
+    }
+
+    /// <summary>
+    /// Funzione che ritorna il group orb controller
+    /// </summary>
+    /// <returns></returns>
+    public GroupOrbController GetGroupOrbController()
+    {
+        return groupOrbCtrl;
     }
 
     /// <summary>

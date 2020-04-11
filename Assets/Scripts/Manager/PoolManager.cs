@@ -14,6 +14,7 @@ public enum ObjectTypes
     Boss2Bullet,
     PlayerBulletHitVFX,
     PlayerDeathVFX,
+    PlayerOrb,
 }
 
 /// <summary>

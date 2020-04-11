@@ -21,7 +21,30 @@ public class PlayerBulletController : BulletControllerBase
             BulletDestroy();
         }
 
-        if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle") || other.gameObject.layer == LayerMask.NameToLayer("ShootInteractable"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle") || other.gameObject.layer == LayerMask.NameToLayer("ShootInteractable"))        
             BulletDestroy();
+        
+    }
+
+    /// <summary>
+    /// Override funzione di destroy
+    /// </summary>
+    protected override void BulletDestroy()
+    {
+        SpawnOrb();
+        base.BulletDestroy();
+    }
+
+    /// <summary>
+    /// Funzione che spawna gli orb
+    /// </summary>
+    private void SpawnOrb() 
+    {
+        OrbController pooledOrb = PoolManager.instance.GetPooledObject(ObjectTypes.PlayerOrb, ownerObject).GetComponent<OrbController>();
+        if (pooledOrb != null)
+        {
+            pooledOrb.transform.position = transform.position;
+            pooledOrb.Setup();
+        }
     }
 }

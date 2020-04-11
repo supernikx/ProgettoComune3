@@ -212,6 +212,9 @@ MonoBehaviour:
       type: 3}
     ammount: 20
     objectType: 6
+  - prefab: {fileID: 447634192155538313, guid: e082dbc4aa88dc54488b589bbb2f0951, type: 3}
+    ammount: 20
+    objectType: 7
 --- !u!4 &1980247100
 Transform:
   m_ObjectHideFlags: 0
@@ -293,9 +296,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2190637245553949394, guid: 0b52ea222f620d44b999c68db1e37415,
+    - target: {fileID: 3033238116590861157, guid: 0b52ea222f620d44b999c68db1e37415,
         type: 3}
-      propertyPath: spawnRange
+      propertyPath: chargeTime
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
