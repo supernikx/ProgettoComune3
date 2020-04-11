@@ -100,6 +100,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 447634193155281717}
     m_Modifications:
+    - target: {fileID: 1083668711124119500, guid: b714e2f9be5977e4d8cca0787af808f5,
+        type: 3}
+      propertyPath: m_Name
+      value: VFX_Orb
+      objectReference: {fileID: 0}
+    - target: {fileID: 1083668711124119500, guid: b714e2f9be5977e4d8cca0787af808f5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 1415027711567667975, guid: b714e2f9be5977e4d8cca0787af808f5,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1415027711567667975, guid: b714e2f9be5977e4d8cca0787af808f5,
+        type: 3}
+      propertyPath: TrailModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9157004651695266870, guid: b714e2f9be5977e4d8cca0787af808f5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
     - target: {fileID: 7304427864578574139, guid: b714e2f9be5977e4d8cca0787af808f5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -155,55 +180,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1731759921092979558, guid: b714e2f9be5977e4d8cca0787af808f5,
-        type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1731759921092979558, guid: b714e2f9be5977e4d8cca0787af808f5,
-        type: 3}
-      propertyPath: VelocityModule.enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1731759921092979558, guid: b714e2f9be5977e4d8cca0787af808f5,
-        type: 3}
-      propertyPath: EmissionModule.enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1415027711567667975, guid: b714e2f9be5977e4d8cca0787af808f5,
-        type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1415027711567667975, guid: b714e2f9be5977e4d8cca0787af808f5,
-        type: 3}
-      propertyPath: TrailModule.enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1083668711124119500, guid: b714e2f9be5977e4d8cca0787af808f5,
-        type: 3}
-      propertyPath: m_Name
-      value: VFX_Orb
-      objectReference: {fileID: 0}
-    - target: {fileID: 1083668711124119500, guid: b714e2f9be5977e4d8cca0787af808f5,
-        type: 3}
-      propertyPath: m_Layer
-      value: 17
-      objectReference: {fileID: 0}
-    - target: {fileID: 9157004651695266870, guid: b714e2f9be5977e4d8cca0787af808f5,
-        type: 3}
-      propertyPath: m_Layer
-      value: 17
-      objectReference: {fileID: 0}
     - target: {fileID: 5117160640459210524, guid: b714e2f9be5977e4d8cca0787af808f5,
         type: 3}
       propertyPath: m_Layer
       value: 17
-      objectReference: {fileID: 0}
-    - target: {fileID: 4431832535518789531, guid: b714e2f9be5977e4d8cca0787af808f5,
-        type: 3}
-      propertyPath: playOnAwake
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4122003904885716563, guid: b714e2f9be5977e4d8cca0787af808f5,
         type: 3}
@@ -211,6 +191,11 @@ PrefabInstance:
       value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 9189046983935581019, guid: b714e2f9be5977e4d8cca0787af808f5,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4431832535518789531, guid: b714e2f9be5977e4d8cca0787af808f5,
         type: 3}
       propertyPath: playOnAwake
       value: 0
