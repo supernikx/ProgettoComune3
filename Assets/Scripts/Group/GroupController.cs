@@ -362,6 +362,17 @@ public class GroupController : MonoBehaviour
     }
 
     /// <summary>
+    /// Funzione che riempie il gruppo
+    /// </summary>
+    public void FillGroup()
+    {
+        while (!IsGroupFull())
+        {
+            InstantiateNewAgent();
+        }
+    }
+
+    /// <summary>
     /// Funzione che ritorna true se il gruppo è pieno, altrimenti false
     /// </summary>
     /// <returns></returns>
