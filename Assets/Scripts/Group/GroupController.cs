@@ -321,6 +321,9 @@ public class GroupController : MonoBehaviour
     {
         if (agents != null && agents.Count > 0)
         {
+            if (_death)
+                groupOrbCtrl.InstantiatedOrb(_agentToRemove.transform.position);
+
             _agentToRemove.UnSetup(_death);
             agents.Remove(_agentToRemove);
         }

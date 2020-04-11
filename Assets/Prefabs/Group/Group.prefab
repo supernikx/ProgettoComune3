@@ -118,6 +118,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 2962134240799506771, guid: 5bdfefeea17b32846a56144c6a43ac9f,
     type: 3}
   shootHeight: 0.5
+  chargeTime: 1
   reloadRange: 1
   orbLayer:
     serializedVersion: 2
@@ -149,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2554ccf36eec8047ad1adb8998c271c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orbSpeed: 1
+  orbSpeed: 3
 --- !u!114 &579055892110162551
 MonoBehaviour:
   m_ObjectHideFlags: 0

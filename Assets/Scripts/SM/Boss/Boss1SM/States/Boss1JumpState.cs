@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +8,11 @@ using UnityEngine;
 /// </summary>
 public class Boss1JumpState : Boss1StateBase
 {
-    [Header("State Settings")]
+	#region Actions
+
+	#endregion
+
+	[Header("State Settings")]
     //Altezza del salto
     [SerializeField]
     private float jumpHeight;

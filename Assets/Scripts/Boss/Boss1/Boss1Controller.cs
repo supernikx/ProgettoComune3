@@ -24,9 +24,9 @@ public class Boss1Controller : BossControllerBase
     /// </summary>
     private Boss1TrailController trailCtrl;
     /// <summary>
-    /// Riferimento al CubeExplosion
+    /// Riferimento al BossGraphicController
     /// </summary>
-    private CubeExplosion cubeExplosion;
+    private Boss1GraphicController graphicCtrl;
 
     /// <summary>
     /// Funzione di Setup
@@ -40,7 +40,7 @@ public class Boss1Controller : BossControllerBase
         shootCtrl = GetComponent<Boss1ShootController>();
         phaseCtrl = GetComponent<Boss1PhaseController>();
         trailCtrl = GetComponent<Boss1TrailController>();
-        cubeExplosion = GetComponent<CubeExplosion>();
+        graphicCtrl = GetComponentInChildren<Boss1GraphicController>();
     }
 
     #region API
@@ -57,6 +57,7 @@ public class Boss1Controller : BossControllerBase
         phaseCtrl.Setup(this);
         trailCtrl.Setup(this);
         shootCtrl.Setup(this);
+        graphicCtrl.Setup(sm);
     }
 
     /// <summary>
@@ -73,7 +74,6 @@ public class Boss1Controller : BossControllerBase
     /// </summary>
     public void KillBoss()
     {
-        cubeExplosion.Explode();
         OnBossDead?.Invoke(this);
     }
 
