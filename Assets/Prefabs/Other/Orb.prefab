@@ -48,7 +48,7 @@ MonoBehaviour:
   orbOffset: {x: 0, y: 0, z: 0}
   enableDelay: 1
   orbVFX: {fileID: 4740088483897767512}
-  trailVFX: {fileID: 5360250102000074297}
+  trailVFX: {fileID: 5379409311622393007}
 --- !u!135 &7097674104780252352
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -100,31 +100,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 447634193155281717}
     m_Modifications:
-    - target: {fileID: 1083668711124119500, guid: b714e2f9be5977e4d8cca0787af808f5,
-        type: 3}
-      propertyPath: m_Name
-      value: VFX_Orb
-      objectReference: {fileID: 0}
-    - target: {fileID: 1083668711124119500, guid: b714e2f9be5977e4d8cca0787af808f5,
-        type: 3}
-      propertyPath: m_Layer
-      value: 17
-      objectReference: {fileID: 0}
-    - target: {fileID: 1415027711567667975, guid: b714e2f9be5977e4d8cca0787af808f5,
-        type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1415027711567667975, guid: b714e2f9be5977e4d8cca0787af808f5,
-        type: 3}
-      propertyPath: TrailModule.enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9157004651695266870, guid: b714e2f9be5977e4d8cca0787af808f5,
-        type: 3}
-      propertyPath: m_Layer
-      value: 17
-      objectReference: {fileID: 0}
     - target: {fileID: 7304427864578574139, guid: b714e2f9be5977e4d8cca0787af808f5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -180,6 +155,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1415027711567667975, guid: b714e2f9be5977e4d8cca0787af808f5,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1415027711567667975, guid: b714e2f9be5977e4d8cca0787af808f5,
+        type: 3}
+      propertyPath: TrailModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1083668711124119500, guid: b714e2f9be5977e4d8cca0787af808f5,
+        type: 3}
+      propertyPath: m_Name
+      value: VFX_Orb
+      objectReference: {fileID: 0}
+    - target: {fileID: 1083668711124119500, guid: b714e2f9be5977e4d8cca0787af808f5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 9157004651695266870, guid: b714e2f9be5977e4d8cca0787af808f5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 9157004651695266870, guid: b714e2f9be5977e4d8cca0787af808f5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5117160640459210524, guid: b714e2f9be5977e4d8cca0787af808f5,
         type: 3}
       propertyPath: m_Layer
@@ -200,6 +205,11 @@ PrefabInstance:
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3008888499312677349, guid: b714e2f9be5977e4d8cca0787af808f5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b714e2f9be5977e4d8cca0787af808f5, type: 3}
 --- !u!4 &4368163247498451461 stripped
@@ -214,9 +224,9 @@ ParticleSystem:
     type: 3}
   m_PrefabInstance: {fileID: 6467273680570555710}
   m_PrefabAsset: {fileID: 0}
---- !u!198 &5360250102000074297 stripped
+--- !u!198 &5379409311622393007 stripped
 ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 1415027711567667975, guid: b714e2f9be5977e4d8cca0787af808f5,
+  m_CorrespondingSourceObject: {fileID: 1398331818017190289, guid: b714e2f9be5977e4d8cca0787af808f5,
     type: 3}
   m_PrefabInstance: {fileID: 6467273680570555710}
   m_PrefabAsset: {fileID: 0}

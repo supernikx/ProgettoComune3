@@ -64,6 +64,10 @@ public class GroupShootController : MonoBehaviour
 	/// </summary>
 	private GroupOrbController groupOrbCtrl;
 	/// <summary>
+	/// Riferimento al group ffeedback controller
+	/// </summary>
+	private GroupFeedbackController groupFeedbackCtrl;
+	/// <summary>
 	/// Riferimento al PlayerInput
 	/// </summary>
 	private PlayerInput playerInput;
@@ -98,7 +102,8 @@ public class GroupShootController : MonoBehaviour
 		groupSizeCtrl = groupCtrl.GetGroupSizeController();
 		groupOrbCtrl = groupCtrl.GetGroupOrbController();
 		playerInput = groupCtrl.GetPlayerInput();
-		aimFeedback = groupCtrl.GetGroupFeedbackController().GetAimArrow();
+		groupFeedbackCtrl = groupCtrl.GetGroupFeedbackController();
+		aimFeedback = groupFeedbackCtrl.GetAimArrow();
 
 		groupCtrl.OnGroupDead += EndReloading;
 		canShoot = true;
@@ -253,7 +258,10 @@ public class GroupShootController : MonoBehaviour
 	private void EndReloading()
 	{
 		if (reloadingRoutine != null)
+		{
 			StopCoroutine(reloadingRoutine);
+			groupFeedbackCtrl.SetReloadVFX(false);
+		}
 
 		if (!canBeInterruped)
 			groupCtrl.GetGroupMovementController().SetCanMove(true);
@@ -272,7 +280,7 @@ public class GroupShootController : MonoBehaviour
 	{
 		WaitForFixedUpdate wffu = new WaitForFixedUpdate();
 		Vector3 groupCenterPos;
-
+		groupFeedbackCtrl.SetReloadVFX(true);
 
 		while (groupOrbCtrl.CanReload() || !groupCtrl.IsGroupFull())
 		{
@@ -295,6 +303,7 @@ public class GroupShootController : MonoBehaviour
 			yield return wffu;
 		}
 
+		groupFeedbackCtrl.SetReloadVFX(false);
 		EndReloading();
 	}
 
