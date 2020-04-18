@@ -80,14 +80,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4173dce02cf9ff14ea3f2df3921dccff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groupStartAgents: 10
+  groupStartAgents: 16
   spawnRange: 1
   agentPrefab: {fileID: 4898873885526971867, guid: 00c2b6c53e70ecf40a3f467609bd84cc,
     type: 3}
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
-  groupMaxAgents: 10
+  groupMaxAgents: 16
   groupMinAgents: 1
   groupCenterObject: {fileID: 1843342660}
 --- !u!114 &2190637245553949393
@@ -137,7 +137,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groupSpeed: 1
-  groupTime: 3
+  groupCountdown: 1.5
+  groupTime: 4
 --- !u!114 &1163998938357556922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2554ccf36eec8047ad1adb8998c271c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orbSpeed: 3
+  orbSpeed: 12
 --- !u!114 &579055892110162551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,6 +164,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2e5fc894d60cb444bec87d32d75e43f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aimArrow: {fileID: 0}
+  reloadVFX: {fileID: 0}
 --- !u!114 &2190637245328243594
 MonoBehaviour:
   m_ObjectHideFlags: 0
