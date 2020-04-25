@@ -49,6 +49,8 @@ public class GroupSizeController : MonoBehaviour
 	/// </summary>
 	private bool canChangeSize;
 
+	private bool oldCanChangeSize;
+
 	/// <summary>
 	/// Funzione che esegue il Setup
 	/// </summary>
@@ -73,15 +75,6 @@ public class GroupSizeController : MonoBehaviour
 	{
 		grouping = (int)_value.Get<float>() == 1;
 
-		if (groupCtrl.IsSetuppedAndEnabled() && !grouping && canChangeSize)
-		{
-			if (sizeControllerRoutine != null)
-				StopCoroutine(sizeControllerRoutine);
-
-			groupCountdowRoutine = GroupCountdownCoroutine();
-			StartCoroutine(groupCountdowRoutine);
-		}
-
 		if (groupCtrl.IsSetuppedAndEnabled() && canChangeSize)
 		{
 			if (sizeControllerRoutine != null)
@@ -92,12 +85,19 @@ public class GroupSizeController : MonoBehaviour
 				sizeControllerRoutine = GroupCoroutine();
 				StartCoroutine(sizeControllerRoutine);
 			}
+			else if (!grouping && oldCanChangeSize)
+			{
+				groupCountdowRoutine = GroupCountdownCoroutine();
+				StartCoroutine(groupCountdowRoutine);
+			}
 		}
 
 		if (!canChangeSize)
 			OnGroupPressed?.Invoke(false);
 		else
 			OnGroupPressed?.Invoke(grouping);
+
+		oldCanChangeSize = canChangeSize;
 	}
 
 	/// <summary>
@@ -183,6 +183,8 @@ public class GroupSizeController : MonoBehaviour
 				}
 				yield return null;
 			}
+
+			yield return null;
 		}
 	}
 
