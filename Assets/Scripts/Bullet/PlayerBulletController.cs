@@ -12,6 +12,22 @@ public class PlayerBulletController : BulletControllerBase
     [SerializeField]
     protected int bulletDamage;
 
+    private Animator animatorCtrl;
+
+    public override void PoolInit()
+    {
+        animatorCtrl = GetComponentInChildren<Animator>();
+        base.PoolInit();
+    }
+
+    public override void Setup()
+    {
+        if (animatorCtrl != null)
+            animatorCtrl.SetTrigger("Reset");
+
+        base.Setup();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         IBossDamageable bossDamageable = other.GetComponentInParent<IBossDamageable>();

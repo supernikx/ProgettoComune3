@@ -39,7 +39,7 @@ public class AgentGraphicController : MonoBehaviour
     /// </summary>
     public void Init()
     {
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     /// <summary>

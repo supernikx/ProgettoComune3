@@ -17,12 +17,6 @@ public class GroupSizeController : MonoBehaviour
 	//Velocità di raggruppamento
 	[SerializeField]
 	private float groupSpeed;
-	//Tempo di ricarica dell'abilità di raggruppamento
-	[SerializeField]
-	private float groupCountdown;
-	//Tempo della durata dell'abilità di raggruppamento
-	[SerializeField]
-	private float groupTime;
 
 	/// <summary>
 	/// Riferimento al group controller
@@ -48,8 +42,6 @@ public class GroupSizeController : MonoBehaviour
 	/// Bool che identifica se il gruppo può espandersi/raggrupparsi
 	/// </summary>
 	private bool canChangeSize;
-
-	private bool oldCanChangeSize;
 
 	/// <summary>
 	/// Funzione che esegue il Setup
@@ -85,19 +77,9 @@ public class GroupSizeController : MonoBehaviour
 				sizeControllerRoutine = GroupCoroutine();
 				StartCoroutine(sizeControllerRoutine);
 			}
-			else if (!grouping && oldCanChangeSize)
-			{
-				groupCountdowRoutine = GroupCountdownCoroutine();
-				StartCoroutine(groupCountdowRoutine);
-			}
 		}
 
-		if (!canChangeSize)
-			OnGroupPressed?.Invoke(false);
-		else
-			OnGroupPressed?.Invoke(grouping);
-
-		oldCanChangeSize = canChangeSize;
+		OnGroupPressed?.Invoke(grouping);
 	}
 
 	/// <summary>
@@ -129,7 +111,6 @@ public class GroupSizeController : MonoBehaviour
 	/// <returns></returns>
 	private IEnumerator GroupCoroutine()
 	{
-		float timer = 0;
 		while (grouping && groupCtrl.IsSetuppedAndEnabled())
 		{
 			//Prendo il riferimento agli agent
@@ -172,15 +153,6 @@ public class GroupSizeController : MonoBehaviour
 					}
 				}
 
-				timer += Time.deltaTime;
-				if (timer >= groupTime)
-				{
-					grouping = false;
-					OnGroupPressed?.Invoke(grouping);
-					groupCountdowRoutine = GroupCountdownCoroutine();
-					StartCoroutine(groupCountdowRoutine);
-					break;
-				}
 				yield return null;
 			}
 
@@ -234,17 +206,6 @@ public class GroupSizeController : MonoBehaviour
 
 			yield return null;
 		}
-	}
-
-	/// <summary>
-	/// Coroutine che conta il countdown di ricarica del dash
-	/// </summary>
-	/// <returns></returns>
-	private IEnumerator GroupCountdownCoroutine()
-	{
-		canChangeSize = false;
-		yield return new WaitForSeconds(groupCountdown);
-		canChangeSize = true;
 	}
 
 	#region Handlers

@@ -163,7 +163,7 @@ public class ActiveBossTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Agent"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("PlayerBullet"))
         {
             if (disableAfterTrigger)
                 triggerCollider.enabled = false;

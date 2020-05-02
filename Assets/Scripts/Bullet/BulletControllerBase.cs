@@ -68,7 +68,7 @@ public abstract class BulletControllerBase : MonoBehaviour, IPoolObject
     /// <summary>
     /// Funzione chiamata allo spawn in Pool dell'oggetto
     /// </summary>
-    public void PoolInit()
+    public virtual void PoolInit()
     {
         collider = GetComponent<Collider>();
         collider.enabled = false;
@@ -78,7 +78,7 @@ public abstract class BulletControllerBase : MonoBehaviour, IPoolObject
     /// <summary>
     /// Funzione chiamata al reset forzato nella Pool dell'oggetto
     /// </summary>
-    public void ResetPool()
+    public virtual void ResetPool()
     {
         collider.enabled = false;
         isSetupped = false;
