@@ -136,7 +136,7 @@ public abstract class BulletControllerBase : MonoBehaviour, IPoolObject
     /// <summary>
     /// Funzione che rimanda in Pool il Bullet
     /// </summary>
-    protected virtual void BulletDestroy()
+    public virtual void BulletDestroy()
     {
         collider.enabled = false;
         isSetupped = false;

@@ -72,7 +72,7 @@ public class AgentController : MonoBehaviour, IPoolObject
     {
         groupCtrl = null;
 
-        agentGravityCtrl.UnSetup();
+        agentGroupCtrl.UnSetup();
         graphicCtrl.UnSetup();
     }
     #endregion
@@ -94,10 +94,6 @@ public class AgentController : MonoBehaviour, IPoolObject
     /// </summary>
     private AgentGraphicController graphicCtrl;
     /// <summary>
-    /// Riferimento all'agent gravity controller
-    /// </summary>
-    private AgentGravityController agentGravityCtrl;
-    /// <summary>
     /// Riferimento all'agent distance controller
     /// </summary>
     private AgentDistanceController agentDistanceCtrl;
@@ -109,13 +105,11 @@ public class AgentController : MonoBehaviour, IPoolObject
     public void PoolInit()
     {
         movementCtrl = GetComponent<AgentMovementController>();
-        agentGravityCtrl = GetComponent<AgentGravityController>();
         agentDistanceCtrl = GetComponent<AgentDistanceController>();
         agentGroupCtrl = GetComponent<AgentGroupController>();
         graphicCtrl = GetComponentInChildren<AgentGraphicController>();
 
         graphicCtrl.Init();
-        agentGravityCtrl.Init();
         agentGroupCtrl.Init(this);
     }
 
@@ -129,7 +123,6 @@ public class AgentController : MonoBehaviour, IPoolObject
 
         movementCtrl.Setup();
         agentDistanceCtrl.Setup();
-        agentGravityCtrl.Setup(groupCtrl);
         graphicCtrl.Setup(groupCtrl);
         agentGroupCtrl.Setup(groupCtrl);
 
@@ -145,7 +138,6 @@ public class AgentController : MonoBehaviour, IPoolObject
         if (_death)
             graphicCtrl.SpawnDeathVFX();
 
-        agentGravityCtrl.UnSetup();
         graphicCtrl.UnSetup();
         agentGroupCtrl.UnSetup();
 

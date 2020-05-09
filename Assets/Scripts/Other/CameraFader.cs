@@ -31,7 +31,7 @@ public class CameraFader : MonoBehaviour
 
 		if (Physics.Linecast(transform.position, groupCenterTransform.position, out rayInfo, fadeLayer))
 		{
-			MeshRenderer hitRenderer = rayInfo.transform.gameObject.GetComponent<MeshRenderer>();
+			MeshRenderer hitRenderer = rayInfo.transform.parent.gameObject.GetComponent<MeshRenderer>();
 			hitRenderer.sharedMaterial.SetColor("_BaseColor", new Color(hitRenderer.sharedMaterial.color.r, hitRenderer.sharedMaterial.color.g, hitRenderer.sharedMaterial.color.b, (fadeValue > 1) ? fadeValue / 255f : fadeValue));
 
 			if (oldRenderer != null)

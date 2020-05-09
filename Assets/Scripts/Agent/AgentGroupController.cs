@@ -21,13 +21,20 @@ public class AgentGroupController : MonoBehaviour
     /// </summary>
     private GroupController groupCtrl;
     /// <summary>
+    /// Riferimento al RigidBody
+    /// </summary>
+    private Rigidbody rb;
+    /// <summary>
     /// Identifica se lo script è setuppato
     /// </summary>
     private bool isSetupped = false;
 
     public void Init(AgentController _agentCtrl)
     {
+        rb = GetComponent<Rigidbody>();
         agentCtrl = _agentCtrl;
+
+        UnSetup();
     }
 
     /// <summary>
@@ -37,6 +44,8 @@ public class AgentGroupController : MonoBehaviour
     public void Setup(GroupController _groupCtrl)
     {
         groupCtrl = _groupCtrl;
+        rb.useGravity = true;
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
         isSetupped = true;
     }
 
@@ -45,17 +54,20 @@ public class AgentGroupController : MonoBehaviour
     /// </summary>
     public void UnSetup()
     {
+        rb.useGravity = false;
+        rb.constraints = RigidbodyConstraints.FreezeAll;
         isSetupped = false;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (!isSetupped || !groupCtrl.IsSetuppedAndEnabled())
             return;
 
         float groupY = groupCtrl.GetGroupCenterPoint().y;
+        float yOffset = Mathf.Abs(transform.position.y - groupY);
 
-        if (Mathf.Abs(transform.position.y - groupY) > maxYDistanceFromGroup)
+        if (yOffset > maxYDistanceFromGroup)
             groupCtrl.RemoveAgent(agentCtrl, true);
     }
 }

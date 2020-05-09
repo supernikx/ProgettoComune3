@@ -168,6 +168,9 @@ public class ActiveBossTrigger : MonoBehaviour
             if (disableAfterTrigger)
                 triggerCollider.enabled = false;
 
+            PlayerBulletController bullet = other.GetComponent<PlayerBulletController>();
+            bullet.BulletDestroy();
+
             if (startBossCutsceneDirector != null)
                 StartBossCutscene();
             else

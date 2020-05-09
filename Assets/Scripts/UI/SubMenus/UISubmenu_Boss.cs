@@ -12,10 +12,7 @@ public class UISubmenu_Boss : MonoBehaviour
     [Header("Reference Settings")]
     //Slider che mostra la vita del Boss
     [SerializeField]
-    private Image bossLifeImageTest1;
-    //Slider che mostra la vita del Boss
-    [SerializeField]
-    private Image bossLifeImageTest2;
+    private Image bossLifeImage;
 
     /// <summary>
     /// Riferimento al BossLife Controller
@@ -40,8 +37,7 @@ public class UISubmenu_Boss : MonoBehaviour
     {
         bossLifeCtrl = _bossCtrl.GetBossLifeController();
         bossMaxLife = bossLifeCtrl.GetMaxBossLife();
-        bossLifeImageTest1.fillAmount = 1;
-        bossLifeImageTest2.fillAmount = 1;
+        bossLifeImage.fillAmount = 1;
 
         bossLifeCtrl.OnBossTakeDamage += HandleOnBossTakeDamage;
     }
@@ -52,8 +48,7 @@ public class UISubmenu_Boss : MonoBehaviour
     /// <param name="_currentLife"></param>
     private void HandleOnBossTakeDamage(int _currentLife)
     {
-        bossLifeImageTest1.fillAmount = (float)_currentLife / bossMaxLife;
-        bossLifeImageTest2.fillAmount = (float)_currentLife / bossMaxLife;
+        bossLifeImage.fillAmount = (float)_currentLife / bossMaxLife;
     }
 
     private void OnDisable()
