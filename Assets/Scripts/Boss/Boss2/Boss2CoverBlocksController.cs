@@ -38,6 +38,15 @@ public class Boss2CoverBlocksController : MonoBehaviour
 
     #region API
     /// <summary>
+    /// Funzione che ritorna i coverblock
+    /// </summary>
+    /// <returns></returns>
+    public List<CoverBlockController> GetCoverBlocks()
+    {
+        return coverBlocks;
+    }
+
+    /// <summary>
     /// Funzione che attiva/disattiva i coverblock
     /// </summary>
     /// <param name="_enable"></param>

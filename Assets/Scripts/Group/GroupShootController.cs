@@ -282,7 +282,7 @@ public class GroupShootController : MonoBehaviour
 		Vector3 groupCenterPos;
 		groupFeedbackCtrl.SetReloadVFX(true);
 
-		while (groupOrbCtrl.CanReload() || !groupCtrl.IsGroupFull())
+		while (groupOrbCtrl.CanReload() && !groupCtrl.IsGroupFull())
 		{
 			groupCenterPos = groupCtrl.GetGroupCenterPoint();
 			groupOrbCtrl.MoveOrbs(groupCenterPos);
@@ -302,6 +302,8 @@ public class GroupShootController : MonoBehaviour
 			OnReloadingInProgress?.Invoke();
 			yield return wffu;
 		}
+
+		groupOrbCtrl.DestroyOrbs();
 
 		groupFeedbackCtrl.SetReloadVFX(false);
 		EndReloading();

@@ -12,6 +12,16 @@ public class PlayerBulletController : BulletControllerBase
     [SerializeField]
     protected int bulletDamage;
 
+    private GroupController groupCtrl;
+    private GroupOrbController groupOrbCtrl;
+
+    public override void Setup()
+    {
+        base.Setup();
+        groupCtrl = GameManager.instance.GetLevelManager().GetGroupController();
+        groupOrbCtrl = groupCtrl.GetGroupOrbController();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         IBossDamageable bossDamageable = other.GetComponentInParent<IBossDamageable>();
@@ -30,20 +40,7 @@ public class PlayerBulletController : BulletControllerBase
     /// </summary>
     public override void BulletDestroy()
     {
-        SpawnOrb();
+        groupOrbCtrl.InstantiatedOrb(transform.position);
         base.BulletDestroy();
-    }
-
-    /// <summary>
-    /// Funzione che spawna gli orb
-    /// </summary>
-    private void SpawnOrb() 
-    {
-        OrbController pooledOrb = PoolManager.instance.GetPooledObject(ObjectTypes.PlayerOrb, ownerObject).GetComponent<OrbController>();
-        if (pooledOrb != null)
-        {
-            pooledOrb.transform.position = transform.position;
-            pooledOrb.Setup();
-        }
     }
 }

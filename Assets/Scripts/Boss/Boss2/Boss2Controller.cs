@@ -64,6 +64,15 @@ public class Boss2Controller : BossControllerBase
     }
 
     /// <summary>
+    /// Funzione di Debug che cambia il colore del boss
+    /// </summary>
+    /// <param name="_color"></param>
+    public void ChangeColor(Color _color)
+    {
+        GetComponentInChildren<MeshRenderer>().material.color = _color;
+    }
+
+    /// <summary>
     /// Funzione che uccide il Boss
     /// </summary>
     public void KillBoss()

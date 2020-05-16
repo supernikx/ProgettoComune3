@@ -92,12 +92,29 @@ public class GroupOrbController : MonoBehaviour
 	/// <param name="_spawnPosition"></param>
 	public void InstantiatedOrb(Vector3 _spawnPosition)
 	{
-		OrbController pooledOrb = PoolManager.instance.GetPooledObject(ObjectTypes.PlayerOrb, gameObject).GetComponent<OrbController>();
+		GameObject pooledObj = PoolManager.instance.GetPooledObject(ObjectTypes.PlayerOrb, gameObject);
+		if (pooledObj == null)
+			return;
+
+		OrbController pooledOrb = pooledObj.GetComponent<OrbController>();
 		if (pooledOrb != null)
 		{
 			pooledOrb.transform.position = _spawnPosition;
 			pooledOrb.Setup();
 		}
+	}
+
+	/// <summary>
+	/// Funzione che distrugge tutti gli orbs
+	/// </summary>
+	public void DestroyOrbs()
+	{
+		for (int i = 0; i < droppedOrbs.Count; i++)
+		{
+			droppedOrbs[i].Destroy();
+		}
+
+		droppedOrbs.Clear();
 	}
 	#endregion
 

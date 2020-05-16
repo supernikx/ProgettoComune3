@@ -142,6 +142,7 @@ public class OrbController : MonoBehaviour, IPoolObject
     /// </summary>
     public void Setup()
     {
+        currentState = State.InUse;
         OnObjectSpawn?.Invoke(this);
 
         transform.position += orbOffset;
@@ -195,6 +196,8 @@ public class OrbController : MonoBehaviour, IPoolObject
             StopCoroutine(enableDelayRoutine);
 
         isActive = false;
+        currentState = State.InPool;
+
         OnOrbDestroy?.Invoke(this);
         OnObjectDestroy?.Invoke(this);
     }

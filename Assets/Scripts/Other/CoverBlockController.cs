@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 /// <summary>
 /// Classe che gestisce il cover block
@@ -12,6 +14,10 @@ public class CoverBlockController : MonoBehaviour
 	//Riferimento alla barrier che attiva il coverblock
 	[SerializeField]
 	private GameObject coverBlockBarrier;
+	[SerializeField]
+	private Image fillImage;
+	[SerializeField]
+	private TextMeshProUGUI barrierAgentText;
 
 	/// <summary>
 	/// Identifica se il cover block è attivo
@@ -30,13 +36,13 @@ public class CoverBlockController : MonoBehaviour
 	/// </summary>
 	private float coverBlockResetSpeed;
 	/// <summary>
-	/// Aegent necessari ad attivare il cover block
+	/// Agent necessari ad attivare il cover block
 	/// </summary>
 	private int coverBlockNeedAgents;
 	/// <summary>
-	/// Aegent attuali sul cover block
+	/// Current agents
 	/// </summary>
-	private int coverBlockCurrentAgents;
+	private List<AgentController> currentAgents = new List<AgentController>();
 	/// <summary>
 	/// Riferimento alla coroutine del cover block
 	/// </summary>
@@ -66,6 +72,7 @@ public class CoverBlockController : MonoBehaviour
 		coverBlockHeatSpeed = _coverBlockHeatSpeed;
 		coverBlockResetSpeed = _coverBlockResetSpeed;
 
+		SetText();
 		isCooldown = false;
 	}
 
@@ -73,12 +80,18 @@ public class CoverBlockController : MonoBehaviour
 	{
 		if (other.gameObject.layer == LayerMask.NameToLayer("Agent"))
 		{
-			coverBlockCurrentAgents++;
-			if (coverBlockCurrentAgents >= coverBlockNeedAgents)
+			AgentController agentCtrl = other.GetComponent<AgentController>();
+			if (!currentAgents.Contains(agentCtrl))
+				currentAgents.Add(agentCtrl);
+
+			if (currentAgents.Count >= coverBlockNeedAgents)
 			{
 				isTriggered = true;
 			}
 		}
+
+		if (enable)
+			SetText();
 	}
 
 	private void Update()
@@ -110,35 +123,66 @@ public class CoverBlockController : MonoBehaviour
 				isCooldown = false;
 			}
 		}
+
+		if (currentAgents.Count == 0)
+			isTriggered = false;
+
+		fillImage.fillAmount = coverBlockTimer / coverBlockDuration;
 	}
 
 	private void OnTriggerStay(Collider other)
 	{
-		if (coverBlockCurrentAgents >= coverBlockNeedAgents)
+		if (currentAgents.Count >= coverBlockNeedAgents)
 		{
 			isTriggered = true;
 		}
-		if (coverBlockCurrentAgents < coverBlockNeedAgents)
+		if (currentAgents.Count < coverBlockNeedAgents)
 		{
 			isTriggered = false;
 			isCooldown = true;
 		}
+
+		if (enable)
+			SetText();
 	}
 
 	private void OnTriggerExit(Collider other)
 	{
 		if (other.gameObject.layer == LayerMask.NameToLayer("Agent"))
 		{
-			coverBlockCurrentAgents--;
-			if (coverBlockCurrentAgents < coverBlockNeedAgents)
+			AgentController agentCtrl = other.GetComponent<AgentController>();
+			currentAgents.Remove(agentCtrl);
+
+			if (currentAgents.Count < coverBlockNeedAgents)
 			{
 				isTriggered = false;
 				isCooldown = true;
 			}
 		}
+
+		if (enable)
+			SetText();
+	}
+
+	/// <summary>
+	/// Funzione che imposta il testo
+	/// </summary>
+	/// <param name="_currentAgents"></param>
+	private void SetText()
+	{
+		barrierAgentText.text = currentAgents.Count + "/" + coverBlockNeedAgents;
 	}
 
 	#region API
+	/// <summary>
+	/// Funzione che ritorna se il cover block sta coperendo
+	/// </summary>
+	/// <returns></returns>
+	public bool IsCovering()
+	{
+		return coverBlockBarrier.activeInHierarchy;
+	}
+
 	/// <summary>
 	/// Funzione che attiva/disattiva il cover block
 	/// </summary>
@@ -158,6 +202,15 @@ public class CoverBlockController : MonoBehaviour
 
 			gameObject.SetActive(false);
 		}
+	}
+
+	/// <summary>
+	/// Funzione che ritorna la lista degli agent
+	/// </summary>
+	/// <returns></returns>
+	public List<AgentController> GetAgentList()
+	{
+		return currentAgents;
 	}
 	#endregion
 }

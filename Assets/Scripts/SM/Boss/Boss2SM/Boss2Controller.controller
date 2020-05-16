@@ -1268,6 +1268,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: SuperAttack
+  chargeTime: 5
+  attackDuration: 2
 --- !u!1102 &-6781289885298739170
 AnimatorState:
   serializedVersion: 5
@@ -4146,43 +4148,43 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: GoToPhase1
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: GoToPhase2
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: GoToPhase3
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: GoToPhase4
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: GoToDeath
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: GoToEmpty
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -5107,6 +5109,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: SuperAttack
+  chargeTime: 1
+  attackDuration: 1
 --- !u!114 &2469476872174160391
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -5836,7 +5840,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 661ce9e0dc39b4542b3abab60088fdc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 
+  id: SuperAttack
+  chargeTime: 1
+  attackDuration: 1
 --- !u!114 &4648855766664790681
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -6838,6 +6844,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: SuperAttack
+  chargeTime: 1
+  attackDuration: 1
 --- !u!1102 &7616758524413502661
 AnimatorState:
   serializedVersion: 5
