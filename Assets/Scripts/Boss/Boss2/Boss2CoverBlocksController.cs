@@ -11,12 +11,18 @@ public class Boss2CoverBlocksController : MonoBehaviour
     //Lista di coverblock
     [SerializeField]
     private List<CoverBlockController> coverBlocks;
-    //Hit necessari per attivare un cover block
+    //Numero di agent necessari per attivare i coverblock
     [SerializeField]
-    private int coverBlockHit;
+    private int coverBlockAgentAmmount;
     //Durata dei cover block
     [SerializeField]
     private float coverBlockDuration;
+    //Velocità di Heat del coverblock
+    [SerializeField]
+    private float coverBlockHeatSpeed;
+    //Velocità di reset del coverblock
+    [SerializeField]
+    private float coverBlockResetSpeed;
 
     /// <summary>
     /// Funzione di Setup
@@ -25,8 +31,8 @@ public class Boss2CoverBlocksController : MonoBehaviour
     {
         for (int i = 0; i < coverBlocks.Count; i++)
         {
-            coverBlocks[i].Setup(coverBlockHit, coverBlockDuration);
-            coverBlocks[i].Enable(false);
+            coverBlocks[i].Setup(coverBlockAgentAmmount, coverBlockDuration, coverBlockHeatSpeed, coverBlockResetSpeed);
+            coverBlocks[i].Enable(true);
         }
     }
 

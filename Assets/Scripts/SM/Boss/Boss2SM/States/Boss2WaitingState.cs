@@ -29,10 +29,6 @@ public class Boss2WaitingState : Boss2StateBase
     /// </summary>
     private BossLifeController lifeCtrl;
     /// <summary>
-    /// Riferimento al Tourrets Controller
-    /// </summary>
-    private Boss2TourretsController tourretsCtrl;
-    /// <summary>
     /// Riferimento al phase controller
     /// </summary>
     private Boss2PhaseController phaseCtrl;
@@ -51,7 +47,6 @@ public class Boss2WaitingState : Boss2StateBase
         bossCtrl = context.GetBossController();
         lifeCtrl = bossCtrl.GetBossLifeController();
         collisionCtrl = bossCtrl.GetBossCollisionController();
-        tourretsCtrl = bossCtrl.GetTourretsController();
         phaseCtrl = bossCtrl.GetPhaseController();
 
         timer = 0;
@@ -59,8 +54,6 @@ public class Boss2WaitingState : Boss2StateBase
 
         lifeCtrl.OnBossDead += HandleOnBossDead;
         collisionCtrl.OnAgentHit += HandleOnAgentHit;
-        tourretsCtrl.OnTourretDead += HandleOnTourretDead;
-        tourretsCtrl.OnAllTourretsDead += HandleOnAllTourretDead;
         phaseCtrl.OnThirdPhaseStart += HandleOnThirdPhaseStart;
     }
 
@@ -78,25 +71,6 @@ public class Boss2WaitingState : Boss2StateBase
     private void HandleOnThirdPhaseStart()
     {
         Complete(3);
-    }
-
-    /// <summary>
-    /// Funzione che gestisce l'evento di morte di una torretta
-    /// </summary>
-    private void HandleOnTourretDead(int _damage)
-    {
-        bool canTakeDamage = lifeCtrl.GetCanTakeDamage();
-        lifeCtrl.SetCanTakeDamage(true);
-        lifeCtrl.TakeDamage(_damage);
-        lifeCtrl.SetCanTakeDamage(canTakeDamage);
-    }
-
-    /// <summary>
-    /// Funzione che gestisce l'evento di morte delle torrette
-    /// </summary>
-    private void HandleOnAllTourretDead()
-    {
-        Complete(2);
     }
 
     /// <summary>
@@ -118,12 +92,6 @@ public class Boss2WaitingState : Boss2StateBase
 
     public override void Exit()
     {
-        if (tourretsCtrl != null)
-        {
-            tourretsCtrl.OnTourretDead -= HandleOnTourretDead;
-            tourretsCtrl.OnAllTourretsDead -= HandleOnAllTourretDead;
-        }
-
         if (lifeCtrl != null)
             lifeCtrl.OnBossDead -= HandleOnBossDead;
 

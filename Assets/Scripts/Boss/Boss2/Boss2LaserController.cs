@@ -8,104 +8,131 @@ using UnityEngine;
 /// </summary>
 public class Boss2LaserController : MonoBehaviour
 {
-    [Header("Reference Laser Settings")]
-    //Larghezza del laser
-    [SerializeField]
-    private float laserRadius;
-    //Range massimo del laser
-    [SerializeField]
-    private float maxLaserRange;
-    //Riferimento al laser controller
-    [SerializeField]
-    private LaserController laserCtrl;
+	[Header("Reference Laser Settings")]
+	//Larghezza del laser
+	[SerializeField]
+	private float laserRadius;
+	//Range massimo del laser
+	[SerializeField]
+	private float maxLaserRange;
+	//Riferimento al laser controller
+	[SerializeField]
+	private LaserController laserCtrl1;
+	//Riferimento al laser controller
+	[SerializeField]
+	private LaserController laserCtrl2;
 
-    /// <summary>
-    /// Riferimento al Boss Controller
-    /// </summary>
-    private Boss2Controller bossCtrl;
-    /// <summary>
-    /// Riferimento al collision Controller
-    /// </summary>
-    private BossCollisionController collisionCtrl;
+	/// <summary>
+	/// Riferimento al Boss Controller
+	/// </summary>
+	private Boss2Controller bossCtrl;
+	/// <summary>
+	/// Riferimento al collision Controller
+	/// </summary>
+	private BossCollisionController collisionCtrl;
 
-    /// <summary>
-    /// Funzione di Setup
-    /// </summary>
-    /// <param name="_bossCtrl"></param>
-    public void Setup(Boss2Controller _bossCtrl)
-    {
-        bossCtrl = _bossCtrl;
-        collisionCtrl = bossCtrl.GetBossCollisionController();
-        laserCtrl.Setup(maxLaserRange, laserRadius);
-    }
+	/// <summary>
+	/// Funzione di Setup
+	/// </summary>
+	/// <param name="_bossCtrl"></param>
+	public void Setup(Boss2Controller _bossCtrl)
+	{
+		bossCtrl = _bossCtrl;
+		collisionCtrl = bossCtrl.GetBossCollisionController();
+		laserCtrl1.Setup(maxLaserRange, laserRadius);
+		laserCtrl2.Setup(maxLaserRange, laserRadius);
+	}
 
-    #region Handlers
-    /// <summary>
-    /// Funzione che gestisce l'evento di agent colpito
-    /// </summary>
-    /// <param name="obj"></param>
-    private void HandleOnAgentHit(AgentController _agent)
-    {
-        collisionCtrl.OnAgentHit?.Invoke(_agent);
-    }
-    #endregion
+	/// <summary>
+	/// Funzione che ritorna il laser controller in base all'id
+	/// </summary>
+	/// <param name="_id"></param>
+	/// <returns></returns>
+	private LaserController GetLaserControllerByID(int _id)
+	{
+		if (_id == 1)
+			return laserCtrl1;
+		else
+			return laserCtrl2;
+	}
 
-    #region API
-    /// <summary>
-    /// Funzione che spawna il laser
-    /// </summary>
-    /// <param name="_spawnTime"></param>
-    /// <param name="_onSpawnCallback"></param>
-    public void SpawnLaser(float _spawnTime, Vector3 _spawnDirection, Action _onSpawnCallback)
-    {
-        laserCtrl.SpawnLaser(_spawnTime, _spawnDirection, _onSpawnCallback);
-    }
+	#region Handlers
+	/// <summary>
+	/// Funzione che gestisce l'evento di agent colpito
+	/// </summary>
+	/// <param name="obj"></param>
+	private void HandleOnAgentHit(AgentController _agent)
+	{
+		collisionCtrl.OnAgentHit?.Invoke(_agent);
+	}
+	#endregion
 
-    /// <summary>
-    /// Funzione che fa partire il Laser
-    /// </summary>
-    public void StartLaser()
-    {
-        laserCtrl.OnAgentHit += HandleOnAgentHit;
-        laserCtrl.StartLaser();
-    }
+	#region API
+	/// <summary>
+	/// Funzione che spawna il laser
+	/// </summary>
+	/// <param name="_spawnTime"></param>
+	/// <param name="_onSpawnCallback"></param>
+	public void SpawnLaser(float _spawnTime, float _spawnAngle, int _laserID, Action _onSpawnCallback)
+	{
+		GetLaserControllerByID(_laserID).SpawnLaser(_spawnTime, _spawnAngle, _onSpawnCallback);
+	}
 
-    /// <summary>
-    /// Funzione che stoppa il laser
-    /// </summary>
-    public void StopLaser()
-    {
-        laserCtrl.OnAgentHit -= HandleOnAgentHit;
-        laserCtrl.StopLaser();
-    }
+	/// <summary>
+	/// Funzione che spawna il laser
+	/// </summary>
+	/// <param name="_spawnTime"></param>
+	/// <param name="_onSpawnCallback"></param>
+	public void SpawnLaser(float _spawnTime, float _spawnDelay, Vector3 _targetPosition, int _laserID, Action _onSpawnCallback)
+	{
+		GetLaserControllerByID(_laserID).SpawnLaser(_spawnTime, _spawnDelay, _targetPosition, _onSpawnCallback);
+	}
 
-    /// <summary>
-    /// Funzionne che ruota il laser verso la posizione passata come parametro
-    /// </summary>
-    /// <param name="_targetPosition"></param>
-    /// <param name="_speed"></param>
-    public void RotateLaser(Vector3 _targetPosition, float _speed)
-    {
-        _targetPosition.y = laserCtrl.transform.position.y;
-        Quaternion targetRotation = Quaternion.LookRotation((_targetPosition - laserCtrl.transform.position).normalized, Vector3.up);
-        laserCtrl.transform.rotation = Quaternion.RotateTowards(laserCtrl.transform.rotation, targetRotation, _speed * Time.deltaTime);
-    }
+	/// <summary>
+	/// Funzione che fa partire il Laser
+	/// </summary>
+	public void StartLaser(int _laserID, float _laserEndAngle, float _laserSpeed, Action _onRotateCallback)
+	{
+		GetLaserControllerByID(_laserID).OnAgentHit += HandleOnAgentHit;
+		GetLaserControllerByID(_laserID).StartLaser(_laserEndAngle, _laserSpeed, _onRotateCallback);
+	}
 
-    #region Getter
-    /// <summary>
-    /// Funzione che ritorna se il laser è attivo
-    /// </summary>
-    /// <returns></returns>
-    public bool IsEnable()
-    {
-        return laserCtrl.IsEnable();
-    }
-    #endregion
-    #endregion
+	/// <summary>
+	/// Funzione che fa partire il Laser
+	/// </summary>
+	public void StartLaser(int _laserID, Transform _targetTransform, float _laserDuration, float _laserSpeed, Action _onRotateCallback)
+	{
+		GetLaserControllerByID(_laserID).OnAgentHit += HandleOnAgentHit;
+		GetLaserControllerByID(_laserID).StartLaser(_targetTransform, _laserDuration, _laserSpeed, _onRotateCallback);
+	}
 
-    private void OnDisable()
-    {
-        if (laserCtrl != null)
-            laserCtrl.OnAgentHit -= HandleOnAgentHit;
-    }
+	/// <summary>
+	/// Funzione che stoppa il laser
+	/// </summary>
+	public void StopLaser(int _laserID)
+	{
+		GetLaserControllerByID(_laserID).OnAgentHit -= HandleOnAgentHit;
+		GetLaserControllerByID(_laserID).StopLaser();
+	}
+
+	#region Getter
+	/// <summary>
+	/// Funzione che ritorna se il laser è attivo
+	/// </summary>
+	/// <returns></returns>
+	public bool IsEnable(int _laserID)
+	{
+		return GetLaserControllerByID(_laserID).IsEnable();
+	}
+	#endregion
+	#endregion
+
+	private void OnDisable()
+	{
+		if (laserCtrl1 != null)
+			laserCtrl1.OnAgentHit -= HandleOnAgentHit;
+
+		if (laserCtrl2 != null)
+			laserCtrl2.OnAgentHit -= HandleOnAgentHit;
+	}
 }

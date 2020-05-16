@@ -8,100 +8,156 @@ using UnityEngine;
 /// </summary>
 public class CoverBlockController : MonoBehaviour
 {
-    [Header("CoverBlock Reference")]
-    //Riferimento al collider che attiva la barriera
-    [SerializeField]
-    private GameObject coverBlockButton;
-    //Riferimento alla barrier che attiva il coverblock
-    [SerializeField]
-    private GameObject coverBlockBarrier;
+	[Header("CoverBlock Reference")]
+	//Riferimento alla barrier che attiva il coverblock
+	[SerializeField]
+	private GameObject coverBlockBarrier;
 
-    /// <summary>
-    /// Colpi necessari ad attivare il cover block
-    /// </summary>
-    private int coverBlockNeedHits;
-    /// <summary>
-    /// Durata del cover block una volta attivato
-    /// </summary>
-    private float coverBlockDuration;
-    /// <summary>
-    /// Identifica se il cover block è attivo
-    /// </summary>
-    private bool enable;
-    /// <summary>
-    /// Colpi ricevuti dal cover block
-    /// </summary>
-    private int coverBlockDoneHits;
-    /// <summary>
-    /// Riferimento alla coroutine del cover block
-    /// </summary>
-    private IEnumerator coverBlockRoutine;
+	/// <summary>
+	/// Identifica se il cover block è attivo
+	/// </summary>
+	private bool enable;
+	/// <summary>
+	/// Durata del cover block una volta attivato
+	/// </summary>
+	private float coverBlockDuration;
+	/// <summary>
+	/// Velocità di surriscaldamento del cover block
+	/// </summary>
+	private float coverBlockHeatSpeed;
+	/// <summary>
+	/// Velocità di reset del cover block
+	/// </summary>
+	private float coverBlockResetSpeed;
+	/// <summary>
+	/// Aegent necessari ad attivare il cover block
+	/// </summary>
+	private int coverBlockNeedAgents;
+	/// <summary>
+	/// Aegent attuali sul cover block
+	/// </summary>
+	private int coverBlockCurrentAgents;
+	/// <summary>
+	/// Riferimento alla coroutine del cover block
+	/// </summary>
+	private IEnumerator coverBlockRoutine;
+	/// <summary>
+	/// Bool che identifica se il coverblock è stato triggerato
+	/// </summary>
+	private bool isTriggered;
+	/// <summary>
+	/// Bool che identifica se il coverblock è in cooldown
+	/// </summary>
+	private bool isCooldown;
+	/// <summary>
+	/// Timer del coverblock
+	/// </summary>
+	private float coverBlockTimer;
 
-    /// <summary>
-    /// Funzione di Setup
-    /// </summary>
-    /// <param name="_coverBlockHit"></param>
-    /// <param name="_coverBlockDuration"></param>
-    public void Setup(int _coverBlockHit, float _coverBlockDuration)
-    {
-        coverBlockNeedHits = _coverBlockHit;
-        coverBlockDuration = _coverBlockDuration;
-    }
+	/// <summary>
+	/// Funzione di Setup
+	/// </summary>
+	/// <param name="_coverBlockNeedAgents"></param>
+	/// <param name="_coverBlockDuration"></param>
+	public void Setup(int _coverBlockNeedAgents, float _coverBlockDuration, float _coverBlockHeatSpeed, float _coverBlockResetSpeed)
+	{
+		coverBlockNeedAgents = _coverBlockNeedAgents;
+		coverBlockDuration = _coverBlockDuration;
+		coverBlockHeatSpeed = _coverBlockHeatSpeed;
+		coverBlockResetSpeed = _coverBlockResetSpeed;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!enable)
-            return;
+		isCooldown = false;
+	}
 
-        if (other.gameObject.layer == LayerMask.NameToLayer("PlayerBullet"))
-        {
-            coverBlockDoneHits++;
-            if (coverBlockDoneHits == coverBlockNeedHits)
-            {
-                coverBlockRoutine = CoverBlockCoroutine();
-                StartCoroutine(coverBlockRoutine);
-            }
-        }
-    }
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.gameObject.layer == LayerMask.NameToLayer("Agent"))
+		{
+			coverBlockCurrentAgents++;
+			if (coverBlockCurrentAgents >= coverBlockNeedAgents)
+			{
+				isTriggered = true;
+			}
+		}
+	}
 
-    /// <summary>
-    /// Coroutine che gestisce il coverblock attivato
-    /// </summary>
-    /// <returns></returns>
-    private IEnumerator CoverBlockCoroutine()
-    {
-        coverBlockButton.SetActive(false);
-        coverBlockBarrier.SetActive(true);
+	private void Update()
+	{
+		if (!enable)
+			return;
 
-        yield return new WaitForSeconds(coverBlockDuration);
+		if (isTriggered && !isCooldown)
+		{
+			coverBlockBarrier.SetActive(true);
+			coverBlockTimer += Time.deltaTime;
+			if (coverBlockTimer >= coverBlockDuration)
+			{
+				isCooldown = true;
+			}
+		}
+		else
+		{
+			coverBlockBarrier.SetActive(false);
 
-        coverBlockBarrier.SetActive(false);
-        coverBlockButton.SetActive(true);
-        coverBlockDoneHits = 0;
-    }
+			if (coverBlockTimer > 0)
+			{
+				coverBlockTimer = Mathf.Clamp(coverBlockTimer - Time.deltaTime, 0, coverBlockDuration);
+				if (coverBlockTimer == 0)
+					isCooldown = false;
+			}
+			else
+			{
+				isCooldown = false;
+			}
+		}
+	}
 
-    #region API
-    /// <summary>
-    /// Funzione che attiva/disattiva il cover block
-    /// </summary>
-    /// <param name="_enable"></param>
-    public void Enable(bool _enable)
-    {
-        enable = _enable;
-        if (enable)
-        {
-            coverBlockDoneHits = 0;
-            coverBlockButton.SetActive(true);
-            coverBlockBarrier.SetActive(false);
-        }
-        else
-        {
-            if (coverBlockRoutine != null)
-                StopCoroutine(coverBlockRoutine);
+	private void OnTriggerStay(Collider other)
+	{
+		if (coverBlockCurrentAgents >= coverBlockNeedAgents)
+		{
+			isTriggered = true;
+		}
+		if (coverBlockCurrentAgents < coverBlockNeedAgents)
+		{
+			isTriggered = false;
+			isCooldown = true;
+		}
+	}
 
-            coverBlockButton.SetActive(false);
-            coverBlockBarrier.SetActive(false);
-        }
-    }
-    #endregion
+	private void OnTriggerExit(Collider other)
+	{
+		if (other.gameObject.layer == LayerMask.NameToLayer("Agent"))
+		{
+			coverBlockCurrentAgents--;
+			if (coverBlockCurrentAgents < coverBlockNeedAgents)
+			{
+				isTriggered = false;
+				isCooldown = true;
+			}
+		}
+	}
+
+	#region API
+	/// <summary>
+	/// Funzione che attiva/disattiva il cover block
+	/// </summary>
+	/// <param name="_enable"></param>
+	public void Enable(bool _enable)
+	{
+		enable = _enable;
+		if (enable)
+		{
+			coverBlockBarrier.SetActive(false);
+			isCooldown = false;
+		}
+		else
+		{
+			if (coverBlockRoutine != null)
+				StopCoroutine(coverBlockRoutine);
+
+			gameObject.SetActive(false);
+		}
+	}
+	#endregion
 }

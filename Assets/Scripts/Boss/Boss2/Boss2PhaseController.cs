@@ -10,15 +10,29 @@ public class Boss2PhaseController : MonoBehaviour
 {
     #region Actions
     /// <summary>
+    /// Evento che notifica l'inizio della seconda fase
+    /// </summary>
+    public Action OnSecondPhaseStart;
+    /// <summary>
     /// Evento che notifica l'inizio della terza fase
     /// </summary>
     public Action OnThirdPhaseStart;
+    /// <summary>
+    /// Evento che notifica l'inizio della quarta fase
+    /// </summary>
+    public Action OnFourthPhaseStart;
     #endregion
 
     [Header("Phases Settings")]
+    //Percentuale di vita per attivare la seconda fase
+    [SerializeField]
+    private float secondPhaseLifePercentage;
     //Percentuale di vita per attivare la terza fase
     [SerializeField]
     private float thirdPhaseLifePercentage;
+    //Percentuale di vita per attivare la quarta fase
+    [SerializeField]
+    private float fourthPhaseLifePercentage;
 
     /// <summary>
     /// Riferimento al BossController
@@ -33,9 +47,9 @@ public class Boss2PhaseController : MonoBehaviour
     /// </summary>
     private int maxBossLife;
     /// <summary>
-    /// identifica se il Boss si trova nella terza fase
+    /// identifica la fase del boss
     /// </summary>
-    private bool thirdPhase;
+    private int currentFase;
 
     /// <summary>
     /// Funzione di Setup
@@ -46,7 +60,7 @@ public class Boss2PhaseController : MonoBehaviour
         bossCtrl = _bossCtrl;
         bossLifeCtrl = bossCtrl.GetBossLifeController();
         maxBossLife = bossLifeCtrl.GetMaxBossLife();
-        thirdPhase = false;
+        currentFase = 1;
 
         bossLifeCtrl.OnBossTakeDamage += HandleOnBossTakeDamage;
     }
@@ -59,10 +73,20 @@ public class Boss2PhaseController : MonoBehaviour
     {
         float currentBossLifePercentage = (_currentLife * 100) / maxBossLife;
 
-        if (!thirdPhase && thirdPhaseLifePercentage > currentBossLifePercentage)
+        if (currentFase == 1 && secondPhaseLifePercentage > currentBossLifePercentage)
         {
-            thirdPhase = true;
+            currentFase = 2;
+            OnSecondPhaseStart?.Invoke();
+        }
+        else if (currentFase == 2 && thirdPhaseLifePercentage > currentBossLifePercentage)
+        {
+            currentFase = 3;
             OnThirdPhaseStart?.Invoke();
+        }
+        else if (currentFase == 3 && fourthPhaseLifePercentage > currentBossLifePercentage)
+        {
+            currentFase = 4;
+            OnFourthPhaseStart?.Invoke();
         }
     }
 

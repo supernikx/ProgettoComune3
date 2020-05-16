@@ -12,10 +12,6 @@ public class Boss2Controller : BossControllerBase
     /// </summary>
     private Boss2SMController sm;
     /// <summary>
-    /// Riferimento al TourretsController
-    /// </summary>
-    private Boss2TourretsController tourretsCtrl;
-    /// <summary>
     /// Riferimento al LaserController
     /// </summary>
     private Boss2LaserController laserCtrl;
@@ -37,7 +33,6 @@ public class Boss2Controller : BossControllerBase
         base.Setup(_lvlMng);
 
         sm = GetComponent<Boss2SMController>();
-        tourretsCtrl = GetComponent<Boss2TourretsController>();
         laserCtrl = GetComponent<Boss2LaserController>();
         coverBlockCtrl = GetComponent<Boss2CoverBlocksController>();
         phaseCtrl = GetComponent<Boss2PhaseController>();
@@ -52,7 +47,6 @@ public class Boss2Controller : BossControllerBase
         base.StartBoss();
         Boss2SMController.Context context = new Boss2SMController.Context(this, sm, lvlMng);
         sm.Setup(context);
-        tourretsCtrl.Setup(this);
         laserCtrl.Setup(this);
         lifeCtrl.Setup(this);
         collisionCtrl.Setup(this);
@@ -79,15 +73,6 @@ public class Boss2Controller : BossControllerBase
     }
 
     #region Getter
-    /// <summary>
-    /// Funzione che ritorna il Tourrets
-    /// </summary>
-    /// <returns></returns>
-    public Boss2TourretsController GetTourretsController()
-    {
-        return tourretsCtrl;
-    }
-
     /// <summary>
     /// Funzione che ritorna il LaserController
     /// </summary>
