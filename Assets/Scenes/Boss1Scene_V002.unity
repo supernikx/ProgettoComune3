@@ -38,8 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.000016177317, g: 0.00048467226, b: 0.0012401207,
-    a: 1}
+  m_IndirectSpecularColor: {r: 0.000016177783, g: 0.0004846797, b: 0.0012401245, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -97,7 +96,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
-  m_LightingDataAsset: {fileID: 112000000, guid: f0a2e6503d465c14cbc06d9903b93227,
+  m_LightingDataAsset: {fileID: 112000002, guid: f0a2e6503d465c14cbc06d9903b93227,
     type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -2018,6 +2017,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Offset.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 238.7324
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4995a13d2bd6ab941b780c54d8fb4d6e, type: 3}
@@ -4162,7 +4166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Profile: {fileID: 11400000, guid: 5b6f9b2d43c09a54f98062bcddb4a9c4, type: 2}
   m_StaticLightingSkyUniqueID: 2
-  m_SkySettings: {fileID: 483447112}
+  m_SkySettings: {fileID: 348750286}
   m_SkySettingsFromProfile: {fileID: 5477425487804655695, guid: 5b6f9b2d43c09a54f98062bcddb4a9c4,
     type: 2}
 --- !u!114 &250750149
@@ -6353,8 +6357,94 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 238.7324
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: -3.357329
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4995a13d2bd6ab941b780c54d8fb4d6e, type: 3}
+--- !u!114 &348750286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3df29e7cc05fbec4aa43e06ea875565d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  active: 1
+  m_AdvancedMode: 0
+  rotation:
+    m_OverrideState: 0
+    m_Value: 0
+    min: 0
+    max: 360
+  skyIntensityMode:
+    m_OverrideState: 0
+    m_Value: 0
+  exposure:
+    m_OverrideState: 0
+    m_Value: 1
+  multiplier:
+    m_OverrideState: 0
+    m_Value: 0
+    min: 0
+  upperHemisphereLuxValue:
+    m_OverrideState: 0
+    m_Value: 1
+    min: 0
+  desiredLuxValue:
+    m_OverrideState: 0
+    m_Value: 20000
+  updateMode:
+    m_OverrideState: 0
+    m_Value: 0
+  updatePeriod:
+    m_OverrideState: 0
+    m_Value: 0
+    min: 0
+  includeSunInBaking:
+    m_OverrideState: 0
+    m_Value: 0
+  sunSize:
+    m_OverrideState: 0
+    m_Value: 0.04
+    min: 0
+    max: 1
+  sunSizeConvergence:
+    m_OverrideState: 0
+    m_Value: 5
+    min: 1
+    max: 10
+  atmosphereThickness:
+    m_OverrideState: 0
+    m_Value: 1
+    min: 0
+    max: 5
+  skyTint:
+    m_OverrideState: 0
+    m_Value: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    hdr: 0
+    showAlpha: 1
+    showEyeDropper: 1
+  groundColor:
+    m_OverrideState: 0
+    m_Value: {r: 0.369, g: 0.349, b: 0.341, a: 1}
+    hdr: 0
+    showAlpha: 1
+    showEyeDropper: 1
+  enableSunDisk:
+    m_OverrideState: 0
+    m_Value: 1
 --- !u!1 &352688618
 GameObject:
   m_ObjectHideFlags: 0
@@ -8567,82 +8657,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 458542462}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &483447112
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3df29e7cc05fbec4aa43e06ea875565d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  active: 1
-  m_AdvancedMode: 0
-  rotation:
-    m_OverrideState: 0
-    m_Value: 0
-    min: 0
-    max: 360
-  skyIntensityMode:
-    m_OverrideState: 0
-    m_Value: 0
-  exposure:
-    m_OverrideState: 0
-    m_Value: 1
-  multiplier:
-    m_OverrideState: 0
-    m_Value: 0
-    min: 0
-  upperHemisphereLuxValue:
-    m_OverrideState: 0
-    m_Value: 1
-    min: 0
-  desiredLuxValue:
-    m_OverrideState: 0
-    m_Value: 20000
-  updateMode:
-    m_OverrideState: 0
-    m_Value: 0
-  updatePeriod:
-    m_OverrideState: 0
-    m_Value: 0
-    min: 0
-  includeSunInBaking:
-    m_OverrideState: 0
-    m_Value: 0
-  sunSize:
-    m_OverrideState: 0
-    m_Value: 0.04
-    min: 0
-    max: 1
-  sunSizeConvergence:
-    m_OverrideState: 0
-    m_Value: 5
-    min: 1
-    max: 10
-  atmosphereThickness:
-    m_OverrideState: 0
-    m_Value: 1
-    min: 0
-    max: 5
-  skyTint:
-    m_OverrideState: 0
-    m_Value: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    hdr: 0
-    showAlpha: 1
-    showEyeDropper: 1
-  groundColor:
-    m_OverrideState: 0
-    m_Value: {r: 0.369, g: 0.349, b: 0.341, a: 1}
-    hdr: 0
-    showAlpha: 1
-    showEyeDropper: 1
-  enableSunDisk:
-    m_OverrideState: 0
-    m_Value: 1
 --- !u!1001 &490231945
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9997,6 +10011,16 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 3.48
       objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 238.7324
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4995a13d2bd6ab941b780c54d8fb4d6e, type: 3}
 --- !u!1001 &545587713
@@ -10612,6 +10636,31 @@ PrefabInstance:
       propertyPath: m_Size.x
       value: 2.3967793
       objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 238.7324
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: -0.0000000033927021
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: 255.73248
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 1.0527153e+17
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: -2.4698312e+19
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4995a13d2bd6ab941b780c54d8fb4d6e, type: 3}
 --- !u!4 &598161040 stripped
@@ -10721,6 +10770,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Size.y
       value: 2.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 238.7324
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 6.75e-43
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 1.4205e-41
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: 1.5e-44
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4995a13d2bd6ab941b780c54d8fb4d6e, type: 3}
@@ -12662,6 +12731,16 @@ PrefabInstance:
       propertyPath: m_Offset.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 238.7324
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4995a13d2bd6ab941b780c54d8fb4d6e, type: 3}
 --- !u!1 &694834254
@@ -13457,6 +13536,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Offset.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 238.7324
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 7.905334e+23
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: 7.32049e+35
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: -2.5100773e-23
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: -1.7432528e-28
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4995a13d2bd6ab941b780c54d8fb4d6e, type: 3}
@@ -15651,6 +15755,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Size.z
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 238.7324
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 2.2e-44
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: -8.4867255e+24
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 1.9465617e+26
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: 4.2178472e+24
+      objectReference: {fileID: 0}
+    - target: {fileID: 6658640270280250025, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: useVolumetric
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4995a13d2bd6ab941b780c54d8fb4d6e, type: 3}
@@ -20764,6 +20898,16 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 4.46
       objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 238.7324
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4995a13d2bd6ab941b780c54d8fb4d6e, type: 3}
 --- !u!1001 &1089835974
@@ -21128,8 +21272,109 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 238.7324
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 0.00390625
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: 0.99305713
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 0.3877814
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: 3.59e-43
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4995a13d2bd6ab941b780c54d8fb4d6e, type: 3}
+--- !u!114 &1114210180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3df29e7cc05fbec4aa43e06ea875565d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  active: 1
+  m_AdvancedMode: 0
+  rotation:
+    m_OverrideState: 0
+    m_Value: 0
+    min: 0
+    max: 360
+  skyIntensityMode:
+    m_OverrideState: 0
+    m_Value: 0
+  exposure:
+    m_OverrideState: 0
+    m_Value: 1
+  multiplier:
+    m_OverrideState: 0
+    m_Value: 0
+    min: 0
+  upperHemisphereLuxValue:
+    m_OverrideState: 0
+    m_Value: 1
+    min: 0
+  desiredLuxValue:
+    m_OverrideState: 0
+    m_Value: 20000
+  updateMode:
+    m_OverrideState: 0
+    m_Value: 0
+  updatePeriod:
+    m_OverrideState: 0
+    m_Value: 0
+    min: 0
+  includeSunInBaking:
+    m_OverrideState: 0
+    m_Value: 0
+  sunSize:
+    m_OverrideState: 0
+    m_Value: 0.04
+    min: 0
+    max: 1
+  sunSizeConvergence:
+    m_OverrideState: 0
+    m_Value: 5
+    min: 1
+    max: 10
+  atmosphereThickness:
+    m_OverrideState: 0
+    m_Value: 1
+    min: 0
+    max: 5
+  skyTint:
+    m_OverrideState: 0
+    m_Value: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    hdr: 0
+    showAlpha: 1
+    showEyeDropper: 1
+  groundColor:
+    m_OverrideState: 0
+    m_Value: {r: 0.369, g: 0.349, b: 0.341, a: 1}
+    hdr: 0
+    showAlpha: 1
+    showEyeDropper: 1
+  enableSunDisk:
+    m_OverrideState: 0
+    m_Value: 1
 --- !u!1 &1120444707
 GameObject:
   m_ObjectHideFlags: 0
@@ -21562,6 +21807,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Offset.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 238.7324
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 1.8251557e-26
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: 1.1218244e+32
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 6.75e-43
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4995a13d2bd6ab941b780c54d8fb4d6e, type: 3}
@@ -24061,6 +24326,31 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 238.7324
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 0.00390625
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: 0.9925598
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 0.93688875
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: 3.59e-43
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4995a13d2bd6ab941b780c54d8fb4d6e, type: 3}
 --- !u!1001 &1271911190
@@ -25200,7 +25490,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Profile: {fileID: 11400000, guid: 5b6f9b2d43c09a54f98062bcddb4a9c4, type: 2}
   m_StaticLightingSkyUniqueID: 2
-  m_SkySettings: {fileID: 1642264401}
+  m_SkySettings: {fileID: 1114210180}
   m_SkySettingsFromProfile: {fileID: 5477425487804655695, guid: 5b6f9b2d43c09a54f98062bcddb4a9c4,
     type: 2}
 --- !u!114 &1351029800
@@ -26753,7 +27043,7 @@ PrefabInstance:
     - target: {fileID: 8989913747921955171, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.1700001
+      value: -0.091
       objectReference: {fileID: 0}
     - target: {fileID: 8989913747921955171, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
         type: 3}
@@ -26844,6 +27134,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Size.x
       value: 3.3071878
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 238.7324
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: 1e-45
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4995a13d2bd6ab941b780c54d8fb4d6e, type: 3}
@@ -29176,6 +29476,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Offset.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 238.7324
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 1.0860574e-15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: 1.1472702e+32
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 6.75e-43
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4995a13d2bd6ab941b780c54d8fb4d6e, type: 3}
@@ -31755,82 +32075,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1639534450}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1642264401
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3df29e7cc05fbec4aa43e06ea875565d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  active: 1
-  m_AdvancedMode: 0
-  rotation:
-    m_OverrideState: 0
-    m_Value: 0
-    min: 0
-    max: 360
-  skyIntensityMode:
-    m_OverrideState: 0
-    m_Value: 0
-  exposure:
-    m_OverrideState: 0
-    m_Value: 1
-  multiplier:
-    m_OverrideState: 0
-    m_Value: 0
-    min: 0
-  upperHemisphereLuxValue:
-    m_OverrideState: 0
-    m_Value: 1
-    min: 0
-  desiredLuxValue:
-    m_OverrideState: 0
-    m_Value: 20000
-  updateMode:
-    m_OverrideState: 0
-    m_Value: 0
-  updatePeriod:
-    m_OverrideState: 0
-    m_Value: 0
-    min: 0
-  includeSunInBaking:
-    m_OverrideState: 0
-    m_Value: 0
-  sunSize:
-    m_OverrideState: 0
-    m_Value: 0.04
-    min: 0
-    max: 1
-  sunSizeConvergence:
-    m_OverrideState: 0
-    m_Value: 5
-    min: 1
-    max: 10
-  atmosphereThickness:
-    m_OverrideState: 0
-    m_Value: 1
-    min: 0
-    max: 5
-  skyTint:
-    m_OverrideState: 0
-    m_Value: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    hdr: 0
-    showAlpha: 1
-    showEyeDropper: 1
-  groundColor:
-    m_OverrideState: 0
-    m_Value: {r: 0.369, g: 0.349, b: 0.341, a: 1}
-    hdr: 0
-    showAlpha: 1
-    showEyeDropper: 1
-  enableSunDisk:
-    m_OverrideState: 0
-    m_Value: 1
 --- !u!1001 &1644151647
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36436,6 +36680,31 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 238.7324
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 2.939786e+30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: 6.9610474e-36
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 5.27794e+35
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: -2.3564688e-11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4995a13d2bd6ab941b780c54d8fb4d6e, type: 3}
 --- !u!4 &1900603844 stripped
@@ -36677,6 +36946,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Offset.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 238.7324
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010449203368589698, guid: 4995a13d2bd6ab941b780c54d8fb4d6e,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4995a13d2bd6ab941b780c54d8fb4d6e, type: 3}
