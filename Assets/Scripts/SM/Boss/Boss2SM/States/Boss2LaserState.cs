@@ -64,6 +64,10 @@ public class Boss2LaserState : Boss2StateBase
 	/// </summary>
 	private Boss2Controller bossCtrl;
 	/// <summary>
+	/// Riferimento al LifeController
+	/// </summary>
+	private BossLifeController lifeCtrl;
+	/// <summary>
 	/// Riferimento al LaserController del Boss2
 	/// </summary>
 	private Boss2LaserController laserCtrl;
@@ -72,19 +76,36 @@ public class Boss2LaserState : Boss2StateBase
 	/// </summary>
 	private BossCollisionController collisionCtrl;
 	/// <summary>
+	/// Riferimento al phase controller
+	/// </summary>
+	private Boss2PhaseController phaseCtrl;
+	/// <summary>
 	/// Bool che identifica se bisogna aspettare altri laser
 	/// </summary>
 	private bool waitForOtherLaser;
+	/// <summary>
+	/// Int che identifica la next phase
+	/// </summary>
+	private int nextPhase;
 
 	public override void Enter()
 	{
 		groupCtrl = context.GetLevelManager().GetGroupController();
 		bossCtrl = context.GetBossController();
+		lifeCtrl = bossCtrl.GetBossLifeController();
 		laserCtrl = bossCtrl.GetLaserController();
 		collisionCtrl = bossCtrl.GetBossCollisionController();
+		phaseCtrl = bossCtrl.GetPhaseController();
 
+		lifeCtrl.SetCanTakeDamage(canTakeDirectDamage);
+
+		lifeCtrl.OnBossDead += HandleOnBossDead;
 		collisionCtrl.OnAgentHit += HandleOnAgentHit;
+		phaseCtrl.OnSecondPhaseStart += HandleOnSecondPhaseStart;
+		phaseCtrl.OnThirdPhaseStart += HandleOnThirdPhaseStart;
+		phaseCtrl.OnFourthPhaseStart += HandleOnFourthPhaseStart;
 
+		nextPhase = -1;
 		waitForOtherLaser = true;
 
 		if (trackPlayer)
@@ -101,6 +122,46 @@ public class Boss2LaserState : Boss2StateBase
 	}
 
 	#region Handles
+	#region Phase
+	/// <summary>
+	/// Funzione che gestisce l'evento di inizio della seconda fase
+	/// </summary>
+	private void HandleOnSecondPhaseStart()
+	{
+		nextPhase = 2;
+		lifeCtrl.SetCanTakeDamage(false);
+		bossCtrl.ChangeColor(Color.cyan);
+	}
+
+	/// <summary>
+	/// Funzione che gestisce l'evento di inizio della seconda fase
+	/// </summary>
+	private void HandleOnThirdPhaseStart()
+	{
+		nextPhase = 3;
+		lifeCtrl.SetCanTakeDamage(false);
+		bossCtrl.ChangeColor(Color.cyan);
+	}
+
+	/// <summary>
+	/// Funzione che gestisce l'evento di inizio della seconda fase
+	/// </summary>
+	private void HandleOnFourthPhaseStart()
+	{
+		nextPhase = 4;
+		lifeCtrl.SetCanTakeDamage(false);
+		bossCtrl.ChangeColor(Color.cyan);
+	}
+	#endregion
+
+	/// <summary>
+	/// Funzione che gestisce l'evento di morte del Boss
+	/// </summary>
+	private void HandleOnBossDead()
+	{
+		Complete(1);
+	}
+
 	/// <summary>
 	/// Funzione che gestisce la callback di spawn del laser 1
 	/// </summary>
@@ -133,7 +194,12 @@ public class Boss2LaserState : Boss2StateBase
 		if (!trackPlayer && waitForOtherLaser && useSecondLaser)
 			waitForOtherLaser = false;
 		else
-			Complete();
+		{
+			if (nextPhase != -1)
+				Complete(nextPhase);
+			else
+				Complete();
+		}
 	}
 
 	/// <summary>
@@ -144,7 +210,12 @@ public class Boss2LaserState : Boss2StateBase
 		if (!trackPlayer && waitForOtherLaser && useSecondLaser)
 			waitForOtherLaser = false;
 		else
-			Complete();
+		{
+			if (nextPhase != -1)
+				Complete(nextPhase);
+			else
+				Complete();
+		}
 	}
 
 	/// <summary>
@@ -159,6 +230,9 @@ public class Boss2LaserState : Boss2StateBase
 
 	public override void Exit()
 	{
+		if (lifeCtrl != null)
+			lifeCtrl.OnBossDead -= HandleOnBossDead;
+
 		if (collisionCtrl != null)
 			collisionCtrl.OnAgentHit -= HandleOnAgentHit;
 
@@ -167,5 +241,12 @@ public class Boss2LaserState : Boss2StateBase
 
 		if (laserCtrl != null)
 			laserCtrl.StopLaser(2);
+
+		if (phaseCtrl != null)
+		{
+			phaseCtrl.OnSecondPhaseStart -= HandleOnSecondPhaseStart;
+			phaseCtrl.OnThirdPhaseStart -= HandleOnThirdPhaseStart;
+			phaseCtrl.OnFourthPhaseStart -= HandleOnFourthPhaseStart;
+		}
 	}
 }

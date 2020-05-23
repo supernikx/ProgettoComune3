@@ -40,6 +40,10 @@ public class Boss2WaitingState : Boss2StateBase
     /// Timer che conta il tempo passato
     /// </summary>
     private float timer;
+    /// <summary>
+    /// Int che identifica la next phase
+    /// </summary>
+    private int nextPhase;
 
     public override void Enter()
     {
@@ -49,29 +53,62 @@ public class Boss2WaitingState : Boss2StateBase
         collisionCtrl = bossCtrl.GetBossCollisionController();
         phaseCtrl = bossCtrl.GetPhaseController();
 
+        nextPhase = -1;
         timer = 0;
         waitTime = Random.Range(waitTimeRange.x, waitTimeRange.y);
+        lifeCtrl.SetCanTakeDamage(canTakeDirectDamage);
 
         lifeCtrl.OnBossDead += HandleOnBossDead;
         collisionCtrl.OnAgentHit += HandleOnAgentHit;
+        phaseCtrl.OnSecondPhaseStart += HandleOnSecondPhaseStart;
         phaseCtrl.OnThirdPhaseStart += HandleOnThirdPhaseStart;
+        phaseCtrl.OnFourthPhaseStart += HandleOnFourthPhaseStart;        
     }
 
     public override void Tick()
     {
         timer += Time.deltaTime;
         if (timer >= waitTime)
-            Complete();
+        {
+            if (nextPhase != -1)
+                Complete(nextPhase);
+            else
+                Complete();
+        }
     }
 
-    #region Handlers
+	#region Handlers
+	#region Phase
+	/// <summary>
+	/// Funzione che gestisce l'evento di inizio della seconda fase
+	/// </summary>
+	private void HandleOnSecondPhaseStart()
+    {
+        nextPhase = 2;
+        lifeCtrl.SetCanTakeDamage(false);
+        bossCtrl.ChangeColor(Color.cyan);
+    }
+
     /// <summary>
     /// Funzione che gestisce l'evento di inizio della seconda fase
     /// </summary>
     private void HandleOnThirdPhaseStart()
     {
-        Complete(3);
+        nextPhase = 3;
+        lifeCtrl.SetCanTakeDamage(false);
+        bossCtrl.ChangeColor(Color.cyan);
     }
+
+	/// <summary>
+	/// Funzione che gestisce l'evento di inizio della seconda fase
+	/// </summary>
+	private void HandleOnFourthPhaseStart()
+    {
+        nextPhase = 4;
+        lifeCtrl.SetCanTakeDamage(false);
+        bossCtrl.ChangeColor(Color.cyan);
+    }
+	#endregion
 
     /// <summary>
     /// Funzione che gestisce l'evento collisionCtrl.OnAgentHit
@@ -99,6 +136,10 @@ public class Boss2WaitingState : Boss2StateBase
             collisionCtrl.OnAgentHit -= HandleOnAgentHit;
 
         if (phaseCtrl != null)
+        {
+            phaseCtrl.OnSecondPhaseStart -= HandleOnSecondPhaseStart;
             phaseCtrl.OnThirdPhaseStart -= HandleOnThirdPhaseStart;
+            phaseCtrl.OnFourthPhaseStart -= HandleOnFourthPhaseStart;
+        }
     }
 }

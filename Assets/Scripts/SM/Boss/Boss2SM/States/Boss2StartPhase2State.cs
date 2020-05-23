@@ -7,11 +7,6 @@ using UnityEngine;
 /// </summary>
 public class Boss2StartPhase2State : Boss2StateBase
 {
-    [Header("Phase Settings")]
-    //Se il boss può prendere danno diretto
-    [SerializeField]
-    private bool canTakeDirectDamage;
-
     /// <summary>
     /// Riferiemtno al Boss Controller
     /// </summary>
@@ -26,7 +21,8 @@ public class Boss2StartPhase2State : Boss2StateBase
         bossCtrl = context.GetBossController();
         lifeCtrl = bossCtrl.GetBossLifeController();        
 
-        lifeCtrl.SetCanTakeDamage(canTakeDirectDamage);        
+        lifeCtrl.SetCanTakeDamage(canTakeDirectDamage);
+        bossCtrl.ChangeColor(Color.white);
 
         Debug.Log("Phase 2 Iniziata");
         Complete();

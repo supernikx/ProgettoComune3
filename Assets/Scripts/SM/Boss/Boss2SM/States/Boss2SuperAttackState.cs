@@ -22,6 +22,10 @@ public class Boss2SuperAttackState : Boss2StateBase
 	/// </summary>
 	private Boss2Controller bossCtrl;
 	/// <summary>
+	/// Riferimento al LifeController
+	/// </summary>
+	private BossLifeController lifeCtrl;
+	/// <summary>
 	/// Riferimento al Blocks Controller
 	/// </summary>
 	private Boss2CoverBlocksController coverBlockCtrl;
@@ -29,6 +33,10 @@ public class Boss2SuperAttackState : Boss2StateBase
 	/// Riferimento al Collision Controller
 	/// </summary>
 	private BossCollisionController collisionCtrl;
+	/// <summary>
+	/// Riferimento al phase controller
+	/// </summary>
+	private Boss2PhaseController phaseCtrl;
 	/// <summary>
 	/// Riferiemento al coverblock da disabilitare
 	/// </summary>
@@ -38,6 +46,10 @@ public class Boss2SuperAttackState : Boss2StateBase
 	/// </summary>
 	private float attackTimer;
 	/// <summary>
+	/// Int che identifica la next phase
+	/// </summary>
+	private int nextPhase;
+	/// <summary>
 	/// Riferimento alla coroutine dell'attacco
 	/// </summary>
 	private IEnumerator attackRoutine;
@@ -46,10 +58,20 @@ public class Boss2SuperAttackState : Boss2StateBase
 	{
 		groupCtrl = context.GetLevelManager().GetGroupController();
 		bossCtrl = context.GetBossController();
+		lifeCtrl = bossCtrl.GetBossLifeController();
 		coverBlockCtrl = bossCtrl.GetCoverBlocksController();
 		collisionCtrl = bossCtrl.GetBossCollisionController();
-		collisionCtrl.OnAgentHit += HandleOnAgentHit;
+		phaseCtrl = bossCtrl.GetPhaseController();
 
+		lifeCtrl.SetCanTakeDamage(canTakeDirectDamage);
+
+		lifeCtrl.OnBossDead += HandleOnBossDead;
+		collisionCtrl.OnAgentHit += HandleOnAgentHit;
+		phaseCtrl.OnSecondPhaseStart += HandleOnSecondPhaseStart;
+		phaseCtrl.OnThirdPhaseStart += HandleOnThirdPhaseStart;
+		phaseCtrl.OnFourthPhaseStart += HandleOnFourthPhaseStart;
+
+		nextPhase = -1;
 		attackTimer = 0;
 
 		attackRoutine = AttackCoroutine();
@@ -57,6 +79,43 @@ public class Boss2SuperAttackState : Boss2StateBase
 	}
 
 	#region Handlers
+	#region Phase
+	/// <summary>
+	/// Funzione che gestisce l'evento di inizio della seconda fase
+	/// </summary>
+	private void HandleOnSecondPhaseStart()
+	{
+		nextPhase = 2;
+		lifeCtrl.SetCanTakeDamage(false);
+	}
+
+	/// <summary>
+	/// Funzione che gestisce l'evento di inizio della seconda fase
+	/// </summary>
+	private void HandleOnThirdPhaseStart()
+	{
+		nextPhase = 3;
+		lifeCtrl.SetCanTakeDamage(false);
+	}
+
+	/// <summary>
+	/// Funzione che gestisce l'evento di inizio della seconda fase
+	/// </summary>
+	private void HandleOnFourthPhaseStart()
+	{
+		nextPhase = 4;
+		lifeCtrl.SetCanTakeDamage(false);
+	}
+	#endregion
+
+	/// <summary>
+	/// Funzione che gestisce l'evento di morte del Boss
+	/// </summary>
+	private void HandleOnBossDead()
+	{
+		Complete(1);
+	}
+
 	/// <summary>
 	/// Funzione che gestisce l'evento di hit di un agent
 	/// </summary>
@@ -120,15 +179,28 @@ public class Boss2SuperAttackState : Boss2StateBase
 		if (coverBlockToDisable != null)
 			coverBlockToDisable.Enable(false);
 
-		Complete();
+		if (nextPhase != -1)
+			Complete(nextPhase);
+		else
+			Complete();
 	}
 
 	public override void Exit()
 	{
+		if (lifeCtrl != null)
+			lifeCtrl.OnBossDead -= HandleOnBossDead;
+
 		if (collisionCtrl != null)
 			collisionCtrl.OnAgentHit -= HandleOnAgentHit;
 
 		if (attackRoutine != null && bossCtrl != null)
 			bossCtrl.StopCoroutine(attackRoutine);
+
+		if (phaseCtrl != null)
+		{
+			phaseCtrl.OnSecondPhaseStart -= HandleOnSecondPhaseStart;
+			phaseCtrl.OnThirdPhaseStart -= HandleOnThirdPhaseStart;
+			phaseCtrl.OnFourthPhaseStart -= HandleOnFourthPhaseStart;
+		}
 	}
 }

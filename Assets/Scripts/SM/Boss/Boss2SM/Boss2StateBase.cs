@@ -8,6 +8,11 @@ using UnityEngine;
 /// </summary>
 public class Boss2StateBase : StateBase
 {
+    [Header("General Settings")]
+    //Se il boss può prendere danno diretto
+    [SerializeField]
+    protected bool canTakeDirectDamage;
+
     /// <summary>
     /// Riferimento sovrascritto del context
     /// </summary>
