@@ -9,15 +9,6 @@ public class AgentController : MonoBehaviour, IPoolObject
 {
     #region Pool Interface
     /// <summary>
-    /// Evento che toglie dalla Pool l'agent
-    /// </summary>
-    public event PoolManagerEvets.Events OnObjectSpawn;
-    /// <summary>
-    /// Evento che rimette in Pool l'agent
-    /// </summary>
-    public event PoolManagerEvets.Events OnObjectDestroy;
-
-    /// <summary>
     /// Variabile che identifica l'owner dell'agent
     /// </summary>
     private GameObject _ownerObject;
@@ -126,7 +117,7 @@ public class AgentController : MonoBehaviour, IPoolObject
         graphicCtrl.Setup(groupCtrl);
         agentGroupCtrl.Setup(groupCtrl);
 
-        OnObjectSpawn?.Invoke(this);
+        PoolManager.OnObjectSpawnEvent?.Invoke(this);
     }
 
     /// <summary>
@@ -141,7 +132,7 @@ public class AgentController : MonoBehaviour, IPoolObject
         graphicCtrl.UnSetup();
         agentGroupCtrl.UnSetup();
 
-        OnObjectDestroy?.Invoke(this);
+        PoolManager.OnObjectDestroyEvent?.Invoke(this);
     }
     #endregion
 

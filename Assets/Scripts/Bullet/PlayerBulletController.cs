@@ -7,40 +7,67 @@ using UnityEngine;
 /// </summary>
 public class PlayerBulletController : BulletControllerBase
 {
-    [Header("Player Bullet Settings")]
-    //Danno del proiettile
-    [SerializeField]
-    protected int bulletDamage;
+	[Header("Graphic Settings")]
 
-    private GroupController groupCtrl;
-    private GroupOrbController groupOrbCtrl;
 
-    public override void Setup()
-    {
-        base.Setup();
-        groupCtrl = GameManager.instance.GetLevelManager().GetGroupController();
-        groupOrbCtrl = groupCtrl.GetGroupOrbController();
-    }
+	[Header("Player Bullet Settings")]
+	//Danno del proiettile
+	[SerializeField]
+	protected int bulletDamage;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        IBossDamageable bossDamageable = other.GetComponentInParent<IBossDamageable>();
-        if (bossDamageable != null)
-        {
-            bossDamageable.TakeDamage(bulletDamage);
-            BulletDestroy();
-        }
+	private GroupController groupCtrl;
+	private GroupOrbController groupOrbCtrl;
 
-        if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle") || other.gameObject.layer == LayerMask.NameToLayer("ShootInteractable"))        
-            BulletDestroy();       
-    }
+	public override void PoolInit()
+	{
+		if (trailVFX != null)
+			trailVFX.SetActive(false);
 
-    /// <summary>
-    /// Override funzione di destroy
-    /// </summary>
-    public override void BulletDestroy()
-    {
-        groupOrbCtrl.InstantiatedOrb(transform.position);
-        base.BulletDestroy();
-    }
+		base.PoolInit();
+	}
+
+	public override void ResetPool()
+	{
+		if (trailVFX != null)
+			trailVFX.SetActive(false);
+
+		base.ResetPool();
+	}
+
+	public override void Setup()
+	{
+		base.Setup();
+		groupCtrl = GameManager.instance.GetLevelManager().GetGroupController();
+		groupOrbCtrl = groupCtrl.GetGroupOrbController();
+
+		if (trailVFX != null)
+			trailVFX.SetActive(true);
+	}
+
+	private void OnTriggerEnter(Collider other)
+	{
+		if (!isSetupped)
+			return;
+
+		IBossDamageable bossDamageable = other.GetComponentInParent<IBossDamageable>();
+		if (bossDamageable != null)
+		{
+			bossDamageable.TakeDamage(bulletDamage);
+			BulletDestroy();
+		}
+		else if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle") || other.gameObject.layer == LayerMask.NameToLayer("ShootInteractable"))
+			BulletDestroy();
+	}
+
+	/// <summary>
+	/// Override funzione di destroy
+	/// </summary>
+	public override void BulletDestroy()
+	{
+		if (trailVFX != null)
+			trailVFX.SetActive(false);
+
+		groupOrbCtrl.InstantiatedOrb(transform.position);
+		base.BulletDestroy();
+	}
 }

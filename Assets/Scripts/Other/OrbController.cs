@@ -20,15 +20,6 @@ public class OrbController : MonoBehaviour, IPoolObject
 	#endregion
 
 	#region Pool Interface
-	/// <summary>
-	/// Evento che toglie dalla Pool il bullet
-	/// </summary>
-	public event PoolManagerEvets.Events OnObjectSpawn;
-    /// <summary>
-    /// Evento che rimette in Pool il bullet
-    /// </summary>
-    public event PoolManagerEvets.Events OnObjectDestroy;
-
     /// <summary>
     /// Variabile che identifica l'owner del bullet
     /// </summary>
@@ -90,8 +81,6 @@ public class OrbController : MonoBehaviour, IPoolObject
 
         if (enableDelayRoutine != null)
             StopCoroutine(enableDelayRoutine);
-
-        isActive = false;
     }
 
     /// <summary>
@@ -108,7 +97,7 @@ public class OrbController : MonoBehaviour, IPoolObject
         if (enableDelayRoutine != null)
             StopCoroutine(enableDelayRoutine);
 
-        isActive = false;
+        OnOrbDestroy?.Invoke(this);
     }
     #endregion
 
@@ -132,24 +121,18 @@ public class OrbController : MonoBehaviour, IPoolObject
     /// Riferimento alla coroutine di delay activation
     /// </summary>
     private IEnumerator enableDelayRoutine;
-    /// <summary>
-    /// Bool che identifica se l'orb è attivo
-    /// </summary>
-    private bool isActive;
 
     /// <summary>
     /// Funzione di Setup
     /// </summary>
     public void Setup()
     {
-        currentState = State.InUse;
-        OnObjectSpawn?.Invoke(this);
+        PoolManager.OnObjectSpawnEvent?.Invoke(this);
 
         transform.position += orbOffset;
         if (orbVFX != null)
             orbVFX.Play();
 
-        isActive = false;
         enableDelayRoutine = EnableDelayCoroutine();
         StartCoroutine(enableDelayRoutine);
     }
@@ -164,7 +147,6 @@ public class OrbController : MonoBehaviour, IPoolObject
         if (trailVFX != null)
             EnableTrail(true);
 
-        isActive = true;
         OnOrbSpawn?.Invoke(this);
     }
 
@@ -183,9 +165,6 @@ public class OrbController : MonoBehaviour, IPoolObject
     /// </summary>
     public void Destroy()
     {
-        if (!isActive)
-            return;
-
         if (orbVFX != null)
             orbVFX.Stop();
 
@@ -195,10 +174,7 @@ public class OrbController : MonoBehaviour, IPoolObject
         if (enableDelayRoutine != null)
             StopCoroutine(enableDelayRoutine);
 
-        isActive = false;
-        currentState = State.InPool;
-
         OnOrbDestroy?.Invoke(this);
-        OnObjectDestroy?.Invoke(this);
+        PoolManager.OnObjectDestroyEvent?.Invoke(this);
     }
 }

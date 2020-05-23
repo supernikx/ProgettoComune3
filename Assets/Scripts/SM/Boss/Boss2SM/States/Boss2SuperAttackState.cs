@@ -34,10 +34,6 @@ public class Boss2SuperAttackState : Boss2StateBase
 	/// </summary>
 	private CoverBlockController coverBlockToDisable;
 	/// <summary>
-	/// Timer che conta il tempo di carica
-	/// </summary>
-	private float chargeTimer;
-	/// <summary>
 	/// Timer che conta il tempo di attacco
 	/// </summary>
 	private float attackTimer;
@@ -54,7 +50,6 @@ public class Boss2SuperAttackState : Boss2StateBase
 		collisionCtrl = bossCtrl.GetBossCollisionController();
 		collisionCtrl.OnAgentHit += HandleOnAgentHit;
 
-		chargeTimer = 0;
 		attackTimer = 0;
 
 		attackRoutine = AttackCoroutine();
@@ -80,7 +75,7 @@ public class Boss2SuperAttackState : Boss2StateBase
 	{
 		//bossCtrl.ChangeColor(new Color(255, 127, 80));
 		bossCtrl.ChangeColor(Color.yellow);
-		yield return new WaitForSeconds(chargeTimer);
+		yield return new WaitForSeconds(chargeTime);
 		bossCtrl.ChangeColor(Color.red);
 		float waitTime = attackTimer / 10;
 		for (int k = 0; k < 10; k++)

@@ -22,7 +22,6 @@ public class QuickSceneReset : MonoBehaviour
     {
         groupCtrl.Enable(false);
         PoolManager.instance.ResetPoolObjects(ObjectTypes.Boss1Bullet);
-        PoolManager.instance.ResetPoolObjects(ObjectTypes.Boss2Bullet);
         PoolManager.instance.ResetPoolObjects(ObjectTypes.PlayerBullet);
         PoolManager.instance.ResetPoolObjects(ObjectTypes.PlayerOrb);
 
@@ -42,7 +41,6 @@ public class QuickSceneReset : MonoBehaviour
     private void HandleOnRetry()
     {
         PoolManager.instance.ResetPoolObjects(ObjectTypes.Boss1Bullet);
-        PoolManager.instance.ResetPoolObjects(ObjectTypes.Boss2Bullet);
         PoolManager.instance.ResetPoolObjects(ObjectTypes.PlayerBullet);
         PoolManager.instance.ResetPoolObjects(ObjectTypes.PlayerOrb);
 

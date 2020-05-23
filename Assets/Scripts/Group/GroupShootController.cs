@@ -290,6 +290,9 @@ public class GroupShootController : MonoBehaviour
 			htiOrbs = Physics.OverlapSphere(groupCenterPos, reloadRange, orbLayer);
 			for (int i = 0; i < htiOrbs.Length; i++)
 			{
+				if (htiOrbs[i] == null)
+					continue;
+
 				OrbController orbCtrl = htiOrbs[i].GetComponent<OrbController>();
 				if (orbCtrl != null)
 				{
@@ -302,8 +305,6 @@ public class GroupShootController : MonoBehaviour
 			OnReloadingInProgress?.Invoke();
 			yield return wffu;
 		}
-
-		groupOrbCtrl.DestroyOrbs();
 
 		groupFeedbackCtrl.SetReloadVFX(false);
 		EndReloading();

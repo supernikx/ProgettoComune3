@@ -9,15 +9,6 @@ public class GeneralVFXController : MonoBehaviour, IPoolObject
 {
     #region Pool Interface
     /// <summary>
-    /// Evento che toglie dalla Pool il bullet
-    /// </summary>
-    public event PoolManagerEvets.Events OnObjectSpawn;
-    /// <summary>
-    /// Evento che rimette in Pool il bullet
-    /// </summary>
-    public event PoolManagerEvets.Events OnObjectDestroy;
-
-    /// <summary>
     /// Variabile che identifica l'owner del bullet
     /// </summary>
     private GameObject _ownerObject;
@@ -96,7 +87,7 @@ public class GeneralVFXController : MonoBehaviour, IPoolObject
     {
         transform.position = _spawnPosition;
         particles.Play();
-        OnObjectSpawn?.Invoke(this);
+        PoolManager.OnObjectSpawnEvent?.Invoke(this);
     }
 
     /// <summary>
@@ -105,6 +96,6 @@ public class GeneralVFXController : MonoBehaviour, IPoolObject
     public void OnParticleSystemStopped()
     {
         particles.Stop();
-        OnObjectDestroy?.Invoke(this);
+        PoolManager.OnObjectDestroyEvent?.Invoke(this);
     }
 }

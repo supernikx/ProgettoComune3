@@ -3,13 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Classe che contiene gli eventi della Pool
-/// </summary>
-public class PoolManagerEvets{
-    public delegate void Events(IPoolObject _gameObject);
-}
-
-/// <summary>
 /// Enumeratore che identifica gli sati degli oggetti in Pool
 /// </summary>
 public enum State
@@ -61,13 +54,4 @@ public interface IPoolObject
     /// Funzione chiamata al ritorno forzato in Pool dell'oggetto
     /// </summary>
     void ResetPool();
-
-    /// <summary>
-    /// Evento che gestisce l'uscita dell'oggetto dalla Pool
-    /// </summary>
-    event PoolManagerEvets.Events OnObjectSpawn;
-    /// <summary>
-    /// Evento che gestisce il ritorno dell'oggetto dalla Pool
-    /// </summary>
-    event PoolManagerEvets.Events OnObjectDestroy;
 }

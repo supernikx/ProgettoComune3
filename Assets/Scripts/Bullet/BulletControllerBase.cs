@@ -9,15 +9,6 @@ public abstract class BulletControllerBase : MonoBehaviour, IPoolObject
 {
     #region Pool Interface
     /// <summary>
-    /// Evento che toglie dalla Pool il bullet
-    /// </summary>
-    public event PoolManagerEvets.Events OnObjectSpawn;
-    /// <summary>
-    /// Evento che rimette in Pool il bullet
-    /// </summary>
-    public event PoolManagerEvets.Events OnObjectDestroy;
-
-    /// <summary>
     /// Variabile che identifica l'owner del bullet
     /// </summary>
     private GameObject _ownerObject;
@@ -94,9 +85,12 @@ public abstract class BulletControllerBase : MonoBehaviour, IPoolObject
     protected float bulletRange;
 
     [Header("Graphic Settings")]
-    //Tipo del VFX del proiettile
+    //VFX del trail del proiettile
     [SerializeField]
-    private ObjectTypes bulletVFX;
+    protected GameObject trailVFX;
+    //VFX del destroy del proiettile
+    [SerializeField]
+    protected ObjectTypes destroyBulletVFX;
 
     /// <summary>
     /// Punto di spawn del proiettile
@@ -119,7 +113,7 @@ public abstract class BulletControllerBase : MonoBehaviour, IPoolObject
         spawnPosition = transform.position;
         collider.enabled = true;
         isSetupped = true;
-        OnObjectSpawn?.Invoke(this);
+        PoolManager.OnObjectSpawnEvent?.Invoke(this);
     }
 
     private void FixedUpdate()
@@ -140,13 +134,13 @@ public abstract class BulletControllerBase : MonoBehaviour, IPoolObject
     {
         collider.enabled = false;
         isSetupped = false;
-        if (bulletVFX != ObjectTypes.None)
+        if (destroyBulletVFX != ObjectTypes.None)
         {
-            GeneralVFXController vfx = PoolManager.instance.GetPooledObject(bulletVFX, gameObject).GetComponent<GeneralVFXController>();
+            GeneralVFXController vfx = PoolManager.instance.GetPooledObject(destroyBulletVFX, gameObject).GetComponent<GeneralVFXController>();
             if (vfx != null)
                 vfx.Spawn(transform.position);
         }
 
-        OnObjectDestroy?.Invoke(this);
+        PoolManager.OnObjectDestroyEvent?.Invoke(this);
     }
 }

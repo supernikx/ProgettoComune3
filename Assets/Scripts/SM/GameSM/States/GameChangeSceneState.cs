@@ -40,7 +40,6 @@ public class GameChangeSceneState : GameSMStateBase
         lvlMng = gm.GetLevelManager();
         lvlMng.GetGroupController().Enable(false);
         PoolManager.instance.ResetPoolObjects(ObjectTypes.Boss1Bullet);
-        PoolManager.instance.ResetPoolObjects(ObjectTypes.Boss2Bullet);
         PoolManager.instance.ResetPoolObjects(ObjectTypes.PlayerBullet);
         PoolManager.instance.ResetPoolObjects(ObjectTypes.PlayerOrb);
 

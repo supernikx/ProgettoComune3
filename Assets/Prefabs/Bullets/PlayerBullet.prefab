@@ -80,7 +80,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletSpeed: 0.5
   bulletRange: 25
-  bulletVFX: 6
+  trailVFX: {fileID: 6106079629609840276}
+  destroyBulletVFX: 5
   bulletDamage: 1
 --- !u!65 &8605217651677807922
 BoxCollider:
@@ -524,6 +525,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: VFX_TravelPitottino
       objectReference: {fileID: 0}
+    - target: {fileID: 1932409219013677060, guid: 3fcb6339ca8253a4090cfbd36b350104,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1490435053132997892, guid: 3fcb6339ca8253a4090cfbd36b350104,
         type: 3}
       propertyPath: m_RootOrder
@@ -544,8 +550,19 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1490435053132997892, guid: 3fcb6339ca8253a4090cfbd36b350104,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3fcb6339ca8253a4090cfbd36b350104, type: 3}
+--- !u!1 &6106079629609840276 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1932409219013677060, guid: 3fcb6339ca8253a4090cfbd36b350104,
+    type: 3}
+  m_PrefabInstance: {fileID: 5651011342193442448}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6540205398906690452 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1490435053132997892, guid: 3fcb6339ca8253a4090cfbd36b350104,

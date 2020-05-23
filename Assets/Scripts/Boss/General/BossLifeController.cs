@@ -52,7 +52,7 @@ public class BossLifeController : MonoBehaviour, IBossDamageable
     /// <param name="_damage"></param>
     public void TakeDamage(int _damage)
     {
-        if (!bossCtrl.IsSetuppedAndEnabled() || !canTakeDamage)
+        if (bossCtrl == null || !bossCtrl.IsSetuppedAndEnabled() || !canTakeDamage)
             return;
 
         currentLife = Mathf.Clamp(currentLife - _damage, 0, bossStartLife);
