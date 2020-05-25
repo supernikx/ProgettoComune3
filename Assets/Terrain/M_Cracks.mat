@@ -29,7 +29,6 @@ Material:
   - DBufferMesh_MAOS
   - DBufferMesh_MS
   - DBufferMesh_AOS
-  - Mesh_Emissive
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -136,7 +135,7 @@ Material:
     - _CullMode: 2
     - _CullModeForward: 2
     - _Cutoff: 0.5
-    - _DecalBlend: 0.5
+    - _DecalBlend: 0.678
     - _DecalMaskMapBlueScale: 1
     - _DecalMeshDepthBias: 0
     - _DecalStencilRef: 8
@@ -168,7 +167,7 @@ Material:
     - _DoubleSidedNormalMode: 1
     - _DrawOrder: 0
     - _DstBlend: 10
-    - _Emissive: 0
+    - _Emissive: 1
     - _EmissiveColorMode: 1
     - _EmissiveExposureWeight: 1
     - _EmissiveIntensity: 1
@@ -194,7 +193,7 @@ Material:
     - _IridescenceThickness: 1
     - _LinkDetailsWithBase: 1
     - _MaskBlendMode: 4
-    - _MaskBlendSrc: 0
+    - _MaskBlendSrc: 1
     - _MaskmapAO: 0
     - _MaskmapMetal: 0
     - _MaskmapSmoothness: 1
@@ -259,8 +258,8 @@ Material:
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissiveColor: {r: 23.968628, g: 0.1254902, b: 6.0235295, a: 1}
-    - _EmissiveColorHDR: {r: 23.968628, g: 0.1254902, b: 6.0235295, a: 1}
+    - _EmissiveColor: {r: 42.722507, g: 18.338436, b: 24.724737, a: 1}
+    - _EmissiveColorHDR: {r: 42.722507, g: 18.338436, b: 24.724737, a: 1}
     - _EmissiveColorLDR: {r: 0, g: 0, b: 0, a: 1}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
