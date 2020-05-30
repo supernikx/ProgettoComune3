@@ -327,6 +327,9 @@ public class GroupController : MonoBehaviour
 					groupOrbCtrl.InstantiatedOrb(_agentToRemove.transform.position);
 
 				_agentToRemove.UnSetup(_death);
+				if (shootCtrl.IsReloading())
+					shootCtrl.EndReloading();
+
 				OnAgentRemoved?.Invoke(_agentToRemove);				
 			}
 		}

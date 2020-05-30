@@ -163,7 +163,9 @@ public class GroupShootController : MonoBehaviour
 		if (!CanShoot())
 			return;
 
-		bool buttonPressed = (int)_value.Get<float>() == 1;
+		bool buttonPressed = _value.Get<float>() > 0;
+		Debug.Log(buttonPressed);
+
 		if (isShootButtonDown && !buttonPressed)
 		{
 			if (shootButtonUpDownDelay > chargeTime)
