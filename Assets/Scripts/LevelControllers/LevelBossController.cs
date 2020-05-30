@@ -22,6 +22,8 @@ public class LevelBossController : MonoBehaviour
     [Header("Boss Settings")]
     [SerializeField]
     private ActiveBossTrigger bossTrigger;
+    [SerializeField]
+    private GameObject closeArenaObj;
 
     /// <summary>
     /// Riferimento al level manager
@@ -46,6 +48,7 @@ public class LevelBossController : MonoBehaviour
         groupCtrl = lvlMng.GetGroupController();
         bossTrigger.Setup(lvlMng);
 
+        closeArenaObj.SetActive(false);
         groupCtrl.OnGroupDead += HandleOnGroupDead;
         ActiveBossTrigger.OnBossTriggered += HandleOnBossTriggered;
     }
@@ -59,6 +62,7 @@ public class LevelBossController : MonoBehaviour
     {
         if (_bossToEnable != null)
         {
+            closeArenaObj.SetActive(true);
             currentBoss = _bossToEnable;
 
             currentBoss.OnBossDead += HandleOnBossDead;
@@ -75,6 +79,7 @@ public class LevelBossController : MonoBehaviour
     {
         if (currentBoss != null && _deadBoss == currentBoss)
         {
+            closeArenaObj.SetActive(false);
             currentBoss.OnBossDead -= HandleOnBossDead;
             OnBossFightEnd?.Invoke(currentBoss, true);
             currentBoss = null;
@@ -92,6 +97,7 @@ public class LevelBossController : MonoBehaviour
         if (groupCtrl != null)
             groupCtrl.OnGroupDead -= HandleOnGroupDead;
 
+        closeArenaObj.SetActive(false);
         OnBossFightEnd?.Invoke(currentBoss, false);
         currentBoss = null;
     }

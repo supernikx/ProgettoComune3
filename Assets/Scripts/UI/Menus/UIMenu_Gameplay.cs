@@ -14,6 +14,9 @@ public class UIMenu_Gameplay : UIMenu_Base
     //Riferimento al pannello del Boss
     [SerializeField]
     private UISubmenu_Boss bossPanel;
+    //Riferimento al pannello di agent
+    [SerializeField]
+    private UISubmenu_AgentCounter agentPanel;
     //Riferimento al pannello di vittoria
     [SerializeField]
     private UISubmenu_Win winPanel;
@@ -45,7 +48,7 @@ public class UIMenu_Gameplay : UIMenu_Base
     {
         base.CustomSetup(_manage);
         ToggleBossPanel(false);
-        ToggleWinPanel(false);
+        ToggleWinPanel(false);        
     }
 
     /// <summary>
@@ -61,6 +64,8 @@ public class UIMenu_Gameplay : UIMenu_Base
             lvlSceneCtrl = controller.GetGameManager().GetLevelManager().GetLevelSceneController();
             groupCtrl = controller.GetGameManager().GetLevelManager().GetGroupController();
             groupShootCtrl = groupCtrl.GetGroupShootController();
+
+            agentPanel.Setup(groupCtrl);
 
             LevelBossController.OnBossFightStart += HandleOnBossFightStart;
             LevelBossController.OnBossFightEnd += HandleOnBossFightEnd;

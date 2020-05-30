@@ -19,6 +19,9 @@ public class TutorialTrigger : MonoBehaviour
     //Immagine del tutorial
     [SerializeField]
     private Sprite tutorialImage;
+    //Canvas che mostra il tasto da premere
+    [SerializeField]
+    private GameObject interactableCanvas;
     //Input per aprire il pannello di tutorial
     [SerializeField]
     private InputAction inputOpenTutorialPanel;
@@ -49,6 +52,7 @@ public class TutorialTrigger : MonoBehaviour
     {
         lvlTutorialCtrl = _tutorialCtrl;
         inRange = false;
+        interactableCanvas.SetActive(false);
     }
 
     /// <summary>
@@ -62,11 +66,13 @@ public class TutorialTrigger : MonoBehaviour
         {
             inRange = true;
             inputOpenTutorialPanel.started += HandleOnGroupPanelOpen;
+            interactableCanvas.SetActive(true);
         }
         else if (groupDistance > triggerRange && inRange)
         {
             inRange = false;
             inputOpenTutorialPanel.started -= HandleOnGroupPanelOpen;
+            interactableCanvas.SetActive(false);
         }
     }
 
@@ -79,6 +85,7 @@ public class TutorialTrigger : MonoBehaviour
     {
         inputOpenTutorialPanel.started -= HandleOnGroupPanelOpen;
         inputOpenTutorialPanel.canceled += HandleOnGroupPanelOpenCancelled;
+        interactableCanvas.SetActive(false);
 
         lvlTutorialCtrl.TutorialTriggerOpen(this);
     }
@@ -102,6 +109,7 @@ public class TutorialTrigger : MonoBehaviour
         inputCloseTutorialPanel.started -= HandleOnGroupPanelClosed;
         inputCloseTutorialPanel.canceled += HandleOnGroupPanelClosedCancelled;
 
+        interactableCanvas.SetActive(true);
         lvlTutorialCtrl.TutorialTriggerClose(this);
     }
 
@@ -115,7 +123,6 @@ public class TutorialTrigger : MonoBehaviour
         inputOpenTutorialPanel.started += HandleOnGroupPanelOpen;
     }
     #endregion
-
 
     #region API
     #region Getter

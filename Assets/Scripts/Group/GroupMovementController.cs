@@ -17,6 +17,9 @@ public class GroupMovementController : MonoBehaviour
 	#endregion
 
 	[Header("Group Movement Settings")]
+	//Variabile che identifica il moltiplicatore della velocità se è rimsato solo 1 agent
+	[SerializeField]
+	private float singleAgentSpeedMultipiler;
 	//Variabile che identifica il moltiplicatore della velocità se il gruppo è in raggruppamento
 	[SerializeField]
 	private float groupSpeedMultiplier;
@@ -106,7 +109,8 @@ public class GroupMovementController : MonoBehaviour
 		if (movementVector == Vector3.zero)
 			return;
 
-		float speedMultiplier = (grouping && canDash) ? groupSpeedMultiplier : 1;
+		float speedMultiplier = (agents.Count == 1) ? singleAgentSpeedMultipiler : ((grouping && canDash) ? groupSpeedMultiplier : 1);
+
 		foreach (AgentController agent in agents)
 			agent.GetAgentMovementController().Move(movementVector.normalized, true, speedMultiplier);
 

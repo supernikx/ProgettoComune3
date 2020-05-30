@@ -253,26 +253,6 @@ public class GroupShootController : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Funzione che reimposta i valori come prima la ricarica
-	/// </summary>
-	private void EndReloading()
-	{
-		if (reloadingRoutine != null)
-		{
-			StopCoroutine(reloadingRoutine);
-			groupFeedbackCtrl.SetReloadVFX(false);
-		}
-
-		if (!canBeInterruped)
-			groupCtrl.GetGroupMovementController().SetCanMove(true);
-		else
-			groupMovementCtrl.OnGroupMove -= EndReloading;
-
-		canShoot = true;
-		OnReloadingEnd?.Invoke();
-	}
-
-	/// <summary>
 	/// Coroutine che gestisce la ricarica
 	/// </summary>
 	/// <returns></returns>
@@ -318,6 +298,37 @@ public class GroupShootController : MonoBehaviour
 	{
 		return (groupCtrl.IsSetuppedAndEnabled() && canShoot && !groupSizeCtrl.IsGrouping());
 	}
+
+	#region API
+	/// <summary>
+	/// Funzione che ritorna se si sta caricando
+	/// </summary>
+	/// <returns></returns>
+	public bool IsReloading()
+	{
+		return !canShoot;
+	}
+
+	/// <summary>
+	/// Funzione che reimposta i valori come prima la ricarica
+	/// </summary>
+	public void EndReloading()
+	{
+		if (reloadingRoutine != null)
+		{
+			StopCoroutine(reloadingRoutine);
+			groupFeedbackCtrl.SetReloadVFX(false);
+		}
+
+		if (!canBeInterruped)
+			groupCtrl.GetGroupMovementController().SetCanMove(true);
+		else
+			groupMovementCtrl.OnGroupMove -= EndReloading;
+
+		canShoot = true;
+		OnReloadingEnd?.Invoke();
+	}
+	#endregion
 
 	private void OnDisable()
 	{

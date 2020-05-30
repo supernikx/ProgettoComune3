@@ -1,12 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 /// <summary>
 /// Classe che gestisce tutte le referenze del Boss 2
 /// </summary>
 public class Boss2Controller : BossControllerBase
 {
+	[Header("Debug")]
+	public GameObject canvasDebug;
+	public TextMeshProUGUI boss2TimerDebug;
+
 	/// <summary>
 	/// Riferimento alla StateMachine
 	/// </summary>
@@ -24,6 +29,11 @@ public class Boss2Controller : BossControllerBase
 	/// </summary>
 	private Boss2PhaseController phaseCtrl;
 
+	private void Start()
+	{
+		canvasDebug.SetActive(false);
+	}
+
 	/// <summary>
 	/// Funzione di Setup
 	/// </summary>
@@ -36,6 +46,8 @@ public class Boss2Controller : BossControllerBase
 		laserCtrl = GetComponent<Boss2LaserController>();
 		coverBlockCtrl = GetComponent<Boss2CoverBlocksController>();
 		phaseCtrl = GetComponent<Boss2PhaseController>();
+
+		coverBlockCtrl.Setup();
 	}
 
 	#region API
@@ -50,8 +62,7 @@ public class Boss2Controller : BossControllerBase
 		laserCtrl.Setup(this);
 		lifeCtrl.Setup(this);
 		collisionCtrl.Setup(this);
-		phaseCtrl.Setup(this);
-		coverBlockCtrl.Setup();
+		phaseCtrl.Setup(this);		
 	}
 
 	/// <summary>
@@ -70,7 +81,7 @@ public class Boss2Controller : BossControllerBase
 	public void ChangeColor(Color _color)
 	{
 		MeshRenderer mr = GetComponentInChildren<MeshRenderer>();
-		mr.material.SetColor("_BaseColor", _color);
+		mr.material.SetColor("Color_A9F326B", _color);
 	}
 
 	/// <summary>

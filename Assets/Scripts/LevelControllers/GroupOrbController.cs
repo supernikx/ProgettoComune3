@@ -9,9 +9,18 @@ using UnityEngine;
 public class GroupOrbController : MonoBehaviour
 {
 	[Header("Orbs Settings")]
-	//Velocità degli orb
+	//Velocità minima degli orb
 	[SerializeField]
-	private float orbSpeed;
+	private float orbMinDistance;
+	//Distanza minima degli orb
+	[SerializeField]
+	private float orbMinSpeed;
+	//Distanza massima degli orb
+	[SerializeField]
+	private float orbMaxDistance;
+	//Velocità masssima degli orb
+	[SerializeField]
+	private float orbMaxSpeed;
 
 	/// <summary>
 	/// Riferimento al group controller
@@ -70,10 +79,30 @@ public class GroupOrbController : MonoBehaviour
 	/// <param name="_targetPosition"></param>
 	public void MoveOrbs(Vector3 _targetPosition)
 	{
+		Vector3 orbPos = Vector3.zero;
+		Vector3 orbDirection = Vector3.zero;
+		float orbDisatnce = 0f;
+		float orbSpeed = 0f;
+
 		for (int i = 0; i < droppedOrbs.Count; i++)
 		{
-			Vector3 direction = (_targetPosition - droppedOrbs[i].transform.position).normalized;
-			droppedOrbs[i].transform.Translate(direction * orbSpeed * Time.deltaTime, Space.World);
+			orbDisatnce = Vector3.Distance(_targetPosition, orbPos);
+
+			if (orbDisatnce > orbMaxDistance)
+				orbSpeed = orbMaxSpeed;
+			else if (orbDisatnce < orbMinDistance)
+				orbSpeed = orbMinSpeed;
+			else
+			{
+				float disatnceOffset = (orbDisatnce - orbMinDistance) / (orbMaxDistance - orbMinDistance);
+				float speedOffset = orbMaxDistance - orbMinSpeed;
+				orbSpeed = (disatnceOffset * speedOffset) + orbMinSpeed;
+			}
+
+			orbPos = droppedOrbs[i].transform.position;
+			orbDirection = (_targetPosition - orbPos).normalized;
+
+			droppedOrbs[i].transform.Translate(orbDirection * orbSpeed * Time.deltaTime, Space.World);
 		}
 	}
 

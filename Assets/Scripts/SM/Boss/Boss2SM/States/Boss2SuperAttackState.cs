@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 /// <summary>
 /// Classe che gestisce lo stato di super attack del Boss 2
@@ -132,9 +133,16 @@ public class Boss2SuperAttackState : Boss2StateBase
 	/// <returns></returns>
 	private IEnumerator AttackCoroutine()
 	{
-		//bossCtrl.ChangeColor(new Color(255, 127, 80));
+		bossCtrl.canvasDebug.SetActive(true);
 		bossCtrl.ChangeColor(Color.yellow);
-		yield return new WaitForSeconds(chargeTime);
+		float timer = 0f;
+		while (timer < chargeTime)
+		{
+			bossCtrl.boss2TimerDebug.text = (chargeTime - timer).ToString("0.00");
+			timer += Time.deltaTime;
+			yield return null;
+		}
+		bossCtrl.canvasDebug.SetActive(false);
 		bossCtrl.ChangeColor(Color.red);
 		float waitTime = attackTimer / 10;
 		for (int k = 0; k < 10; k++)
