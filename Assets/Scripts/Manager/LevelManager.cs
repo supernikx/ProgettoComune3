@@ -79,8 +79,8 @@ public class LevelManager : MonoBehaviour
             }
         }
 
-        groupCtrl.Move(startPositon);
         groupCtrl.FillGroup();
+        groupCtrl.Move(startPositon);
         groupCtrl.Enable(true);
     }
 
