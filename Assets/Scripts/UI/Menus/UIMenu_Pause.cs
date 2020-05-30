@@ -17,6 +17,10 @@ public class UIMenu_Pause : UIMenu_Base
     public Action MainMenuButtonPressed;
     #endregion
 
+    [Header("Panel References")]
+    [SerializeField]
+    private UISubmenu_Options optionsPanel;
+
     /// <summary>
     /// Riferimento al level pause controller
     /// </summary>
@@ -45,6 +49,14 @@ public class UIMenu_Pause : UIMenu_Base
             pauseCtrl.SetPause(false);
 
         ResumeButtonPressed?.Invoke();
+    }
+
+    /// <summary>
+    /// Funzione che gestisce il bottone di options del pannello
+    /// </summary>
+    public void OptionnsButton()
+    {
+        optionsPanel.Enable(true);
     }
 
     /// <summary>
