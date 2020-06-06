@@ -89,9 +89,11 @@ public class LaserController : MonoBehaviour
 			}
 
 			//Controllo se colpisco un agent al max range dell'ostacolo
-			if (Physics.SphereCast(transform.position, laserRadius, transform.forward, out hit, checkAgentDistance, agentLayer))
+			RaycastHit[] agentHit = Physics.SphereCastAll(transform.position, laserRadius, transform.forward, checkAgentDistance, agentLayer);
+
+			for (int i = 0; i < agentHit.Length; i++)
 			{
-				AgentController agent = hit.transform.gameObject.GetComponent<AgentController>();
+				AgentController agent = agentHit[i].transform.gameObject.GetComponent<AgentController>();
 				if (agent != null)
 					OnAgentHit?.Invoke(agent);
 			}
@@ -231,9 +233,11 @@ public class LaserController : MonoBehaviour
 			}
 
 			//Controllo se colpisco un agent al max range dell'ostacolo
-			if (Physics.SphereCast(transform.position, laserRadius, transform.forward, out hit, checkAgentDistance, agentLayer))
+			RaycastHit[] agentHit = Physics.SphereCastAll(transform.position, laserRadius, transform.forward, checkAgentDistance, agentLayer);
+
+			for (int i = 0; i < agentHit.Length; i++)
 			{
-				AgentController agent = hit.transform.gameObject.GetComponent<AgentController>();
+				AgentController agent = agentHit[i].transform.gameObject.GetComponent<AgentController>();
 				if (agent != null)
 					OnAgentHit?.Invoke(agent);
 			}
