@@ -300,9 +300,9 @@ public class GroupShootController : MonoBehaviour
 
 			OnReloadingInProgress?.Invoke();
 			yield return wffu;
-		}
+		}		
 		
-		soundCtrl.StopClipLoop(reloadingSoundID);
+		groupFeedbackCtrl.SetReloadVFX(false);
 		EndReloading();
 	}
 
@@ -341,7 +341,7 @@ public class GroupShootController : MonoBehaviour
 		else
 			groupMovementCtrl.OnGroupMove -= EndReloading;
 
-		groupFeedbackCtrl.SetReloadVFX(false);
+		soundCtrl.StopClipLoop(reloadingSoundID);
 		canShoot = true;
 		OnReloadingEnd?.Invoke();
 	}
