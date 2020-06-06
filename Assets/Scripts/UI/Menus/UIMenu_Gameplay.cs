@@ -148,7 +148,7 @@ public class UIMenu_Gameplay : UIMenu_Base
     /// <param name="_trigger"></param>
     private void HandleOnTutorialPanelOpen(TutorialTrigger _trigger)
     {
-        tutorialPanel.SetupTutorialPanel(_trigger.GetTutorialSprite(), _trigger.GetTutorialText());
+        tutorialPanel.SetupTutorialPanel(_trigger.GetTutorialSprite(), _trigger.GetTutorialTitleText(), _trigger.GetTutorialText());
         ToggleTutorialPanel(true);
     }
 

@@ -12,6 +12,11 @@ public class Boss1StartPhase3State : Boss1StateBase
     [SerializeField]
     private bool canTakeDirectDamage;
 
+    [Header("Feedback")]
+    //suono di attivazione del boss
+    [SerializeField]
+    private string startPhaseSoundID = "phase3";
+
     /// <summary>
     /// Riferiemtno al Boss Controller
     /// </summary>
@@ -27,6 +32,7 @@ public class Boss1StartPhase3State : Boss1StateBase
         lifeCtrl = bossCltr.GetBossLifeController();
 
         lifeCtrl.SetCanTakeDamage(canTakeDirectDamage);
+        bossCltr.GetSoundController().PlayAudioClipOnTime(startPhaseSoundID);
 
         Debug.Log("Phase 3 Iniziata");
         Complete();

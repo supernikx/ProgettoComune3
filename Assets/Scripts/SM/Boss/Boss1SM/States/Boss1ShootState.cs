@@ -12,6 +12,11 @@ public class Boss1ShootState : Boss1StateBase
     [SerializeField]
     private int shootPointIndex;
 
+    [Header("Feedback")]
+    //suono di sparo del boss
+    [SerializeField]
+    private string shootSoundID = "shoot";
+
     /// <summary>
     /// Riferimento al GroupController
     /// </summary>
@@ -32,11 +37,16 @@ public class Boss1ShootState : Boss1StateBase
     /// Riferimento al BossPhaseController
     /// </summary>
     private Boss1PhaseController bossPhaseCtrl;
+    /// <summary>
+    /// Riferimento al sound controller
+    /// </summary>
+    private SoundController soundCtrl;
 
     public override void Enter()
     {
         bossCtrl = context.GetBossController();
         lifeCtrl = bossCtrl.GetBossLifeController();
+        soundCtrl = bossCtrl.GetSoundController();
         collisionCtrl = bossCtrl.GetBossCollisionController();
         bossPhaseCtrl = bossCtrl.GetBossPhaseController();
         groupCtrl = context.GetLevelManager().GetGroupController();
@@ -44,6 +54,7 @@ public class Boss1ShootState : Boss1StateBase
         Boss1ShootController shootCtrl = context.GetBossController().GetBossShootController();
 
         //HACK: Così i designer possono partire a contare da 1
+        soundCtrl.PlayAudioClipOnTime(shootSoundID);
         shootCtrl.Shoot(shootPointIndex - 1);
 
         bossPhaseCtrl.OnSecondPhaseStart += HandleOnSecondPhaseStart;

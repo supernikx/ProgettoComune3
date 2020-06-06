@@ -74,6 +74,10 @@ public class GroupController : MonoBehaviour
 	/// </summary>
 	private GroupOrbController groupOrbCtrl;
 	/// <summary>
+	/// Riferiemento al sound controller
+	/// </summary>
+	private SoundController soundCtrl;
+	/// <summary>
 	/// Riferimento al PlayerInput
 	/// </summary>
 	private PlayerInput playerInput;
@@ -101,6 +105,7 @@ public class GroupController : MonoBehaviour
 		shootCtrl = GetComponent<GroupShootController>();
 		groupFeedbackCtrl = GetComponent<GroupFeedbackController>();
 		groupOrbCtrl = GetComponent<GroupOrbController>();
+		soundCtrl = GetComponent<SoundController>();
 		playerInput = GetComponent<PlayerInput>();
 
 		//Feedback setup prima di tutti perchè deve gestire eventi di spawn degli agent
@@ -182,6 +187,15 @@ public class GroupController : MonoBehaviour
 	public GroupOrbController GetGroupOrbController()
 	{
 		return groupOrbCtrl;
+	}
+
+	/// <summary>
+	/// Funzione che ritorna il sound controller
+	/// </summary>
+	/// <returns></returns>
+	public SoundController GetSoundController()
+	{
+		return soundCtrl;
 	}
 
 	/// <summary>

@@ -7,6 +7,11 @@ using UnityEngine;
 /// </summary>
 public class Boss2StartPhase4State : Boss2StateBase
 {
+    [Header("Feedback")]
+    //suono di attivazione del boss
+    [SerializeField]
+    protected string startPhaseSoundID;
+
     /// <summary>
     /// Riferiemtno al Boss Controller
     /// </summary>
@@ -22,6 +27,7 @@ public class Boss2StartPhase4State : Boss2StateBase
         lifeCtrl = bossCtrl.GetBossLifeController();
 
         lifeCtrl.SetCanTakeDamage(canTakeDirectDamage);
+        bossCtrl.GetSoundController().PlayAudioClipOnTime(startPhaseSoundID);
         bossCtrl.ChangeColor(Color.white);
 
         Debug.Log("Phase 4 Iniziata");

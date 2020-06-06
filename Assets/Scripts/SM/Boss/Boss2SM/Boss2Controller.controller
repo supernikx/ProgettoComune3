@@ -71,16 +71,19 @@ MonoBehaviour:
   laser1Speed: 25
   laser1StartAngle: -90
   laser1EndAngle: 90
+  laser1SoundID: laser
   useSecondLaser: 0
   laser2SpawnTime: 0
   laser2Speed: 0
   laser2StartAngle: 0
   laser2EndAngle: 0
+  laser2SoundID: laser
   trackPlayer: 0
   trackLaserSpawnDelay: 0
   trackLaserSpawnTime: 0
   trackLaserDuration: 0
   trackLaserSpeed: 0
+  laserTrackerSoundID: laser
 --- !u!1102 &-8594931855303012850
 AnimatorState:
   serializedVersion: 5
@@ -267,6 +270,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Shoot
   shootPointIndex: 2
+  shootSoundID: shoot
 --- !u!1101 &-8394897863306793756
 AnimatorStateTransition:
   m_ObjectHideFlags: 3
@@ -352,6 +356,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Shoot
   shootPointIndex: 2
+  shootSoundID: shoot
 --- !u!114 &-8175788821992807822
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -442,6 +447,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Shoot
   shootPointIndex: 2
+  shootSoundID: shoot
 --- !u!1101 &-7788981123643188470
 AnimatorStateTransition:
   m_ObjectHideFlags: 3
@@ -481,6 +487,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Shoot
   shootPointIndex: 1
+  shootSoundID: shoot
 --- !u!114 &-7752651126118165859
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -498,6 +505,8 @@ MonoBehaviour:
   raisingSpeed: 50
   movementSpeed: 100
   landingSpeed: 70
+  jumpSoundID: jump
+  landingSoundID: landing
 --- !u!1101 &-7693783161740060105
 AnimatorStateTransition:
   m_ObjectHideFlags: 3
@@ -566,6 +575,7 @@ MonoBehaviour:
   id: Waiting
   canTakeDirectDamage: 1
   waitTimeRange: {x: 1, y: 1}
+  waitingSoundID: laserCharge
 --- !u!1102 &-7516401128901717761
 AnimatorState:
   serializedVersion: 5
@@ -632,6 +642,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Shoot
   shootPointIndex: 2
+  shootSoundID: shoot
 --- !u!114 &-7367805693536905235
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -647,6 +658,7 @@ MonoBehaviour:
   id: Waiting
   canTakeDirectDamage: 1
   waitTimeRange: {x: 2, y: 2}
+  waitingSoundID: laserCharge
 --- !u!114 &-7332893067877633740
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -661,6 +673,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Phase4
   canTakeDirectDamage: 1
+  startPhaseSoundID: 
 --- !u!1101 &-7310863673686447647
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -778,6 +791,8 @@ MonoBehaviour:
   raisingSpeed: 50
   movementSpeed: 100
   landingSpeed: 70
+  jumpSoundID: jump
+  landingSoundID: landing
 --- !u!1101 &-7239148200220726813
 AnimatorStateTransition:
   m_ObjectHideFlags: 3
@@ -1166,6 +1181,8 @@ MonoBehaviour:
   canTakeDirectDamage: 1
   chargeTime: 6
   attackDuration: 2
+  attackChargeSoundID: attackCharge
+  attackSoundID: attack
 --- !u!1102 &-6781289885298739170
 AnimatorState:
   serializedVersion: 5
@@ -1237,6 +1254,8 @@ MonoBehaviour:
   raisingSpeed: 50
   movementSpeed: 100
   landingSpeed: 70
+  jumpSoundID: jump
+  landingSoundID: landing
 --- !u!114 &-6555934867233095187
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1597,6 +1616,8 @@ MonoBehaviour:
   raisingSpeed: 50
   movementSpeed: 100
   landingSpeed: 70
+  jumpSoundID: jump
+  landingSoundID: landing
 --- !u!114 &-5803416642957420797
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1611,6 +1632,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Phase1
   canTakeDirectDamage: 1
+  startPhaseSoundID: phase1
 --- !u!114 &-5787946548216159725
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1628,6 +1650,8 @@ MonoBehaviour:
   raisingSpeed: 50
   movementSpeed: 100
   landingSpeed: 70
+  jumpSoundID: jump
+  landingSoundID: landing
 --- !u!1101 &-5750144350233134221
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1724,16 +1748,19 @@ MonoBehaviour:
   laser1Speed: 25
   laser1StartAngle: 90
   laser1EndAngle: -90
+  laser1SoundID: laser
   useSecondLaser: 0
   laser2SpawnTime: 0
   laser2Speed: 0
   laser2StartAngle: 0
   laser2EndAngle: 0
+  laser2SoundID: laser
   trackPlayer: 0
   trackLaserSpawnDelay: 0
   trackLaserSpawnTime: 0
   trackLaserDuration: 0
   trackLaserSpeed: 0
+  laserTrackerSoundID: laser
 --- !u!1101 &-5476684188291585844
 AnimatorStateTransition:
   m_ObjectHideFlags: 3
@@ -2007,6 +2034,8 @@ MonoBehaviour:
   raisingSpeed: 50
   movementSpeed: 100
   landingSpeed: 70
+  jumpSoundID: jump
+  landingSoundID: landing
 --- !u!1107 &-4458812568555651516
 AnimatorStateMachine:
   serializedVersion: 5
@@ -2244,16 +2273,19 @@ MonoBehaviour:
   laser1Speed: 0
   laser1StartAngle: 0
   laser1EndAngle: 0
+  laser1SoundID: laser
   useSecondLaser: 0
   laser2SpawnTime: 0
   laser2Speed: 0
   laser2StartAngle: 0
   laser2EndAngle: 0
+  laser2SoundID: laser
   trackPlayer: 1
   trackLaserSpawnDelay: 1.5
   trackLaserSpawnTime: 0.5
   trackLaserDuration: 5
   trackLaserSpeed: 20
+  laserTrackerSoundID: laser
 --- !u!114 &-3805996187906865311
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -2531,6 +2563,7 @@ MonoBehaviour:
   id: Waiting
   canTakeDirectDamage: 1
   waitTimeRange: {x: 2, y: 2}
+  waitingSoundID: laserCharge
 --- !u!1102 &-3227110304953967295
 AnimatorState:
   serializedVersion: 5
@@ -2623,6 +2656,8 @@ MonoBehaviour:
   raisingSpeed: 50
   movementSpeed: 100
   landingSpeed: 70
+  jumpSoundID: jump
+  landingSoundID: landing
 --- !u!1101 &-2955995994236628784
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -2688,6 +2723,7 @@ MonoBehaviour:
   id: Waiting
   canTakeDirectDamage: 1
   waitTimeRange: {x: 2, y: 2}
+  waitingSoundID: laserCharge
 --- !u!1101 &-2928522157505469287
 AnimatorStateTransition:
   m_ObjectHideFlags: 3
@@ -2880,6 +2916,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Shoot
   shootPointIndex: 1
+  shootSoundID: shoot
 --- !u!1101 &-2715834183371417540
 AnimatorStateTransition:
   m_ObjectHideFlags: 3
@@ -2951,16 +2988,19 @@ MonoBehaviour:
   laser1Speed: 25
   laser1StartAngle: 0
   laser1EndAngle: 90
+  laser1SoundID: laser
   useSecondLaser: 1
   laser2SpawnTime: 0.5
   laser2Speed: 25
   laser2StartAngle: 0
   laser2EndAngle: -90
+  laser2SoundID: laser
   trackPlayer: 0
   trackLaserSpawnDelay: 0
   trackLaserSpawnTime: 0
   trackLaserDuration: 0
   trackLaserSpeed: 0
+  laserTrackerSoundID: laser
 --- !u!114 &-2445668678704358489
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -2991,6 +3031,8 @@ MonoBehaviour:
   canTakeDirectDamage: 0
   chargeTime: 5
   attackDuration: 2
+  attackChargeSoundID: attackCharge
+  attackSoundID: attack
 --- !u!1101 &-2405161954225584721
 AnimatorStateTransition:
   m_ObjectHideFlags: 3
@@ -3177,6 +3219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Shoot
   shootPointIndex: 1
+  shootSoundID: shoot
 --- !u!1101 &-2039345677950157289
 AnimatorStateTransition:
   m_ObjectHideFlags: 3
@@ -3215,6 +3258,7 @@ MonoBehaviour:
   movementSpeed: 40
   maxMoveDistance: 40
   leaveTrail: 1
+  dashSoundID: dash
 --- !u!1101 &-1894828344223372604
 AnimatorStateTransition:
   m_ObjectHideFlags: 3
@@ -3306,6 +3350,8 @@ MonoBehaviour:
   canTakeDirectDamage: 0
   chargeTime: 5
   attackDuration: 2
+  attackChargeSoundID: attackCharge
+  attackSoundID: attack
 --- !u!114 &-1586007688606000564
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -3388,16 +3434,19 @@ MonoBehaviour:
   laser1Speed: 25
   laser1StartAngle: -90
   laser1EndAngle: 0
+  laser1SoundID: laser
   useSecondLaser: 1
   laser2SpawnTime: 0.5
   laser2Speed: 25
   laser2StartAngle: 90
   laser2EndAngle: 0
+  laser2SoundID: laser
   trackPlayer: 0
   trackLaserSpawnDelay: 0
   trackLaserSpawnTime: 0
   trackLaserDuration: 0
   trackLaserSpeed: 0
+  laserTrackerSoundID: laser
 --- !u!114 &-1474878763220115184
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -3412,6 +3461,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Shoot
   shootPointIndex: 2
+  shootSoundID: shoot
 --- !u!1101 &-1460090393800824376
 AnimatorStateTransition:
   m_ObjectHideFlags: 3
@@ -3515,6 +3565,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Shoot
   shootPointIndex: 1
+  shootSoundID: shoot
 --- !u!1102 &-1168030075580629591
 AnimatorState:
   serializedVersion: 5
@@ -3739,6 +3790,8 @@ MonoBehaviour:
   raisingSpeed: 50
   movementSpeed: 100
   landingSpeed: 70
+  jumpSoundID: jump
+  landingSoundID: landing
 --- !u!1101 &-794789231491180780
 AnimatorStateTransition:
   m_ObjectHideFlags: 3
@@ -3803,6 +3856,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Shoot
   shootPointIndex: 1
+  shootSoundID: shoot
 --- !u!1102 &-648226329480635800
 AnimatorState:
   serializedVersion: 5
@@ -3874,6 +3928,8 @@ MonoBehaviour:
   raisingSpeed: 50
   movementSpeed: 100
   landingSpeed: 70
+  jumpSoundID: jump
+  landingSoundID: landing
 --- !u!114 &-577914368566801287
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -3888,6 +3944,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Shoot
   shootPointIndex: 1
+  shootSoundID: shoot
 --- !u!1101 &-373520353671449273
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -3949,6 +4006,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Phase3
   canTakeDirectDamage: 0
+  startPhaseSoundID: 
 --- !u!1101 &-319219166510650629
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -4320,6 +4378,8 @@ MonoBehaviour:
   raisingSpeed: 50
   movementSpeed: 100
   landingSpeed: 70
+  jumpSoundID: jump
+  landingSoundID: landing
 --- !u!1101 &543509279080996230
 AnimatorStateTransition:
   m_ObjectHideFlags: 3
@@ -4381,6 +4441,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Shoot
   shootPointIndex: 2
+  shootSoundID: shoot
 --- !u!1101 &670618363553788189
 AnimatorStateTransition:
   m_ObjectHideFlags: 3
@@ -4573,6 +4634,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Shoot
   shootPointIndex: 1
+  shootSoundID: shoot
 --- !u!1101 &1143108279865972828
 AnimatorStateTransition:
   m_ObjectHideFlags: 3
@@ -4662,6 +4724,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Shoot
   shootPointIndex: 2
+  shootSoundID: shoot
 --- !u!1102 &1474052350607954482
 AnimatorState:
   serializedVersion: 5
@@ -4754,6 +4817,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Shoot
   shootPointIndex: 2
+  shootSoundID: shoot
 --- !u!1101 &1760474589116347493
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -4818,6 +4882,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Shoot
   shootPointIndex: 2
+  shootSoundID: shoot
 --- !u!1101 &2133954629979698837
 AnimatorStateTransition:
   m_ObjectHideFlags: 3
@@ -4972,6 +5037,8 @@ MonoBehaviour:
   raisingSpeed: 70
   movementSpeed: 100
   landingSpeed: 80
+  jumpSoundID: jump
+  landingSoundID: landing
 --- !u!114 &2491421103641492779
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -4986,6 +5053,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Shoot
   shootPointIndex: 1
+  shootSoundID: shoot
 --- !u!114 &2616532993719014120
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -5003,6 +5071,8 @@ MonoBehaviour:
   raisingSpeed: 50
   movementSpeed: 100
   landingSpeed: 70
+  jumpSoundID: jump
+  landingSoundID: landing
 --- !u!1101 &2637485462122892234
 AnimatorStateTransition:
   m_ObjectHideFlags: 3
@@ -5043,6 +5113,7 @@ MonoBehaviour:
   id: Waiting
   canTakeDirectDamage: 1
   waitTimeRange: {x: 2, y: 2}
+  waitingSoundID: laserCharge
 --- !u!114 &2672444739540560130
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -5198,6 +5269,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Phase2
   canTakeDirectDamage: 0
+  startPhaseSoundID: 
 --- !u!114 &2987997741501686986
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -5216,16 +5288,19 @@ MonoBehaviour:
   laser1Speed: 0
   laser1StartAngle: 0
   laser1EndAngle: 0
+  laser1SoundID: laser
   useSecondLaser: 0
   laser2SpawnTime: 0
   laser2Speed: 0
   laser2StartAngle: 0
   laser2EndAngle: 0
+  laser2SoundID: laser
   trackPlayer: 1
   trackLaserSpawnDelay: 1.5
   trackLaserSpawnTime: 0.5
   trackLaserDuration: 5
   trackLaserSpeed: 15
+  laserTrackerSoundID: laser
 --- !u!1102 &3295834832145003343
 AnimatorState:
   serializedVersion: 5
@@ -5345,6 +5420,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Shoot
   shootPointIndex: 2
+  shootSoundID: shoot
 --- !u!1101 &3582308490333211635
 AnimatorStateTransition:
   m_ObjectHideFlags: 3
@@ -5385,6 +5461,7 @@ MonoBehaviour:
   id: Waiting
   canTakeDirectDamage: 1
   waitTimeRange: {x: 0, y: 0}
+  waitingSoundID: laserCharge
 --- !u!1102 &3684248431892440434
 AnimatorState:
   serializedVersion: 5
@@ -5491,6 +5568,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Shoot
   shootPointIndex: 2
+  shootSoundID: shoot
 --- !u!1101 &4184779587071707686
 AnimatorStateTransition:
   m_ObjectHideFlags: 3
@@ -5595,6 +5673,7 @@ MonoBehaviour:
   id: Waiting
   canTakeDirectDamage: 1
   waitTimeRange: {x: 2, y: 2}
+  waitingSoundID: laserCharge
 --- !u!1101 &4595242153556680842
 AnimatorStateTransition:
   m_ObjectHideFlags: 3
@@ -5954,6 +6033,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Shoot
   shootPointIndex: 1
+  shootSoundID: shoot
 --- !u!1102 &5921015631616563118
 AnimatorState:
   serializedVersion: 5
@@ -6213,16 +6293,19 @@ MonoBehaviour:
   laser1Speed: 25
   laser1StartAngle: 0
   laser1EndAngle: 90
+  laser1SoundID: laser
   useSecondLaser: 1
   laser2SpawnTime: 1
   laser2Speed: 25
   laser2StartAngle: 0
   laser2EndAngle: -90
+  laser2SoundID: laser
   trackPlayer: 0
   trackLaserSpawnDelay: 0
   trackLaserSpawnTime: 0
   trackLaserDuration: 0
   trackLaserSpeed: 0
+  laserTrackerSoundID: laser
 --- !u!1101 &6517934580871880135
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -6615,6 +6698,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Shoot
   shootPointIndex: 1
+  shootSoundID: shoot
 --- !u!1102 &7265528690725005830
 AnimatorState:
   serializedVersion: 5
@@ -6875,6 +6959,7 @@ MonoBehaviour:
   id: Waiting
   canTakeDirectDamage: 1
   waitTimeRange: {x: 0, y: 0}
+  waitingSoundID: laserCharge
 --- !u!1101 &7988756154738385499
 AnimatorStateTransition:
   m_ObjectHideFlags: 3
@@ -7312,6 +7397,8 @@ MonoBehaviour:
   raisingSpeed: 50
   movementSpeed: 100
   landingSpeed: 70
+  jumpSoundID: jump
+  landingSoundID: landing
 --- !u!114 &8889401957892203993
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -7327,6 +7414,7 @@ MonoBehaviour:
   id: Waiting
   canTakeDirectDamage: 1
   waitTimeRange: {x: 2, y: 2}
+  waitingSoundID: laserCharge
 --- !u!1102 &8917299671717402516
 AnimatorState:
   serializedVersion: 5
@@ -7415,6 +7503,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Shoot
   shootPointIndex: 1
+  shootSoundID: shoot
 --- !u!1102 &9211114146356496092
 AnimatorState:
   serializedVersion: 5

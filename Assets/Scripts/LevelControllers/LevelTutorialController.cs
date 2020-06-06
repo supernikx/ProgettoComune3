@@ -80,9 +80,8 @@ public class LevelTutorialController : MonoBehaviour
     /// </summary>
     private void CheckTriggers()
     {
-        Vector3 groupCenter = groupCtrl.GetGroupCenterPoint();
         for (int i = 0; i < triggersList.Count; i++)
-            triggersList[i].CheckGroupDistance(groupCenter);
+            triggersList[i].CheckGroupDistance(groupCtrl);
     }
 
     #region API

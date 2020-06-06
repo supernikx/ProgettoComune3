@@ -47,6 +47,14 @@ public class GroupShootController : MonoBehaviour
 	[SerializeField]
 	private bool canBeInterruped;
 
+	[Header("Feedback")]
+	//suono di ricarica dei pitottini
+	[SerializeField]
+	private string reloadingSoundID = "reloading";
+	//suono di sparo dei pitottini
+	[SerializeField]
+	private string shootSoundID = "shoot";
+
 	/// <summary>
 	/// Riferimento al group controller
 	/// </summary>
@@ -67,6 +75,10 @@ public class GroupShootController : MonoBehaviour
 	/// Riferimento al group ffeedback controller
 	/// </summary>
 	private GroupFeedbackController groupFeedbackCtrl;
+	/// <summary>
+	/// Riferimento al sound controller
+	/// </summary>
+	private SoundController soundCtrl;
 	/// <summary>
 	/// Riferimento al PlayerInput
 	/// </summary>
@@ -101,6 +113,7 @@ public class GroupShootController : MonoBehaviour
 		groupMovementCtrl = groupCtrl.GetGroupMovementController();
 		groupSizeCtrl = groupCtrl.GetGroupSizeController();
 		groupOrbCtrl = groupCtrl.GetGroupOrbController();
+		soundCtrl = groupCtrl.GetSoundController();
 		playerInput = groupCtrl.GetPlayerInput();
 		groupFeedbackCtrl = groupCtrl.GetGroupFeedbackController();
 		aimFeedback = groupFeedbackCtrl.GetAimArrow();
@@ -164,7 +177,6 @@ public class GroupShootController : MonoBehaviour
 			return;
 
 		bool buttonPressed = _value.Get<float>() > 0;
-		Debug.Log(buttonPressed);
 
 		if (isShootButtonDown && !buttonPressed)
 		{
@@ -200,6 +212,7 @@ public class GroupShootController : MonoBehaviour
 			PlayerBulletController newBullet = PoolManager.instance.GetPooledObject(ObjectTypes.PlayerBullet, gameObject).GetComponent<PlayerBulletController>();
 			if (newBullet != null)
 			{
+				soundCtrl.PlayAudioClipOnTime(shootSoundID);
 				newBullet.transform.SetPositionAndRotation(shootPoint, Quaternion.LookRotation(shootVector.normalized));
 				newBullet.Setup();
 			}
@@ -263,6 +276,7 @@ public class GroupShootController : MonoBehaviour
 		WaitForFixedUpdate wffu = new WaitForFixedUpdate();
 		Vector3 groupCenterPos;
 		groupFeedbackCtrl.SetReloadVFX(true);
+		soundCtrl.PlayClipLoop(reloadingSoundID);
 
 		while (groupOrbCtrl.CanReload() && !groupCtrl.IsGroupFull())
 		{
@@ -287,8 +301,8 @@ public class GroupShootController : MonoBehaviour
 			OnReloadingInProgress?.Invoke();
 			yield return wffu;
 		}
-
-		groupFeedbackCtrl.SetReloadVFX(false);
+		
+		soundCtrl.StopClipLoop(reloadingSoundID);
 		EndReloading();
 	}
 
@@ -327,6 +341,7 @@ public class GroupShootController : MonoBehaviour
 		else
 			groupMovementCtrl.OnGroupMove -= EndReloading;
 
+		groupFeedbackCtrl.SetReloadVFX(false);
 		canShoot = true;
 		OnReloadingEnd?.Invoke();
 	}

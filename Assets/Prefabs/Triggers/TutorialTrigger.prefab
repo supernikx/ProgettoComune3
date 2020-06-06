@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 8287418567773754347}
   - component: {fileID: 7758953003459254559}
   m_Layer: 0
-  m_Name: AgentsCounter
+  m_Name: InteractableKey
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -302,12 +302,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggerRange: 3
-  tutorialText: "Help will be always given to those who needs it\u2026\nPressing the
-    \"E\" key will *Call* other members to join the group. If the group is complete
-    you\u2019ll not be able to *Call* other members.  \nBut Don\u2019t move, otherwise
-    your *Call* will be cancelled! \""
+  tutorialTitleText: Title
+  tutorialText: "Sacrifice yourself for what you believe in!\nPress the left mouse
+    button to shoot. \nThe more you attack, the more your group will decrease. If
+    there are no more members of the group but one, you won\u2019t be able to shoot
+    anymore unless you\u2019ll start reloading. "
   tutorialImage: {fileID: 21300000, guid: d83e24f26a30db3468e659141e3ade99, type: 3}
   interactableCanvas: {fileID: 1654383831846196686}
+  interactableKeyText: {fileID: 7758953003459254559}
   inputOpenTutorialPanel:
     m_Name: Input Open Tutorial Panel
     m_Type: 0

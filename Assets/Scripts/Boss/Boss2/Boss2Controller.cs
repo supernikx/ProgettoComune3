@@ -28,6 +28,10 @@ public class Boss2Controller : BossControllerBase
 	/// Riferimento al phase controller
 	/// </summary>
 	private Boss2PhaseController phaseCtrl;
+	/// <summary>
+	/// Riferiemento al sound controller
+	/// </summary>
+	private SoundController soundCtrl;
 
 	private void Start()
 	{
@@ -46,6 +50,7 @@ public class Boss2Controller : BossControllerBase
 		laserCtrl = GetComponent<Boss2LaserController>();
 		coverBlockCtrl = GetComponent<Boss2CoverBlocksController>();
 		phaseCtrl = GetComponent<Boss2PhaseController>();
+		soundCtrl = GetComponent<SoundController>();
 
 		coverBlockCtrl.Setup();
 	}
@@ -119,6 +124,15 @@ public class Boss2Controller : BossControllerBase
 	public Boss2PhaseController GetPhaseController()
 	{
 		return phaseCtrl;
+	}
+
+	/// <summary>
+	/// Funzione che ritorna il sound controlelr
+	/// </summary>
+	/// <returns></returns>
+	public SoundController GetSoundController()
+	{
+		return soundCtrl;
 	}
 	#endregion
 	#endregion

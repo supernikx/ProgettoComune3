@@ -26,6 +26,14 @@ public class Boss1JumpState : Boss1StateBase
     [SerializeField]
     private float landingSpeed;
 
+    [Header("Feedback")]
+    //suono di salto del boss
+    [SerializeField]
+    private string jumpSoundID = "jump";
+    //suono di atterraggio del boss
+    [SerializeField]
+    private string landingSoundID = "landing";
+
     /// <summary>
     /// Enumeratore delle 3 fasi dello stato
     /// </summary>
@@ -55,6 +63,10 @@ public class Boss1JumpState : Boss1StateBase
     /// Riferimento al BossPhaseController
     /// </summary>
     private Boss1PhaseController bossPhaseCtrl;
+    /// <summary>
+    /// Riferiemento al sound controller
+    /// </summary>
+    private SoundController soundCtrl;
     /// <summary>
     /// Riferimento al RigidBody
     /// </summary>
@@ -89,6 +101,7 @@ public class Boss1JumpState : Boss1StateBase
         groupCtrl = context.GetLevelManager().GetGroupController();
         bossCtrl = context.GetBossController();
         lifeCtrl = bossCtrl.GetBossLifeController();
+        soundCtrl = bossCtrl.GetSoundController();
         collisionCtrl = bossCtrl.GetBossCollisionController();
         rb = collisionCtrl.GetRigidBody();
         bossPhaseCtrl = bossCtrl.GetBossPhaseController();
@@ -105,6 +118,8 @@ public class Boss1JumpState : Boss1StateBase
         lifeCtrl.OnBossDead += HandleOnBossDead;
         collisionCtrl.OnObstacleHit += HandleOnObstacleHit;
         collisionCtrl.OnAgentHit += HandleOnAgentHit;
+
+        soundCtrl.PlayAudioClipOnTime(jumpSoundID);
     }
 
     public override void Tick()
@@ -180,6 +195,7 @@ public class Boss1JumpState : Boss1StateBase
             Vector3 fiexdBossPosition = bossCtrl.transform.position;
             fiexdBossPosition.y = startHeigth;
             bossCtrl.transform.position = fiexdBossPosition;
+            soundCtrl.PlayAudioClipOnTime(landingSoundID);
             Complete();
         }
         else

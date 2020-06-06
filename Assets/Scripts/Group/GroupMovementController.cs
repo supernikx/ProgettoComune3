@@ -30,6 +30,11 @@ public class GroupMovementController : MonoBehaviour
 	[SerializeField]
 	private float groupTime;
 
+	[Header("Feedback")]
+	//suono di corsa dei pitottini
+	[SerializeField]
+	private string runSoundID = "run";
+
 	/// <summary>
 	/// Rifeirmento al Group controller
 	/// </summary>
@@ -38,6 +43,10 @@ public class GroupMovementController : MonoBehaviour
 	/// Rifeirmento al Group Size Controller
 	/// </summary>
 	private GroupSizeController sizeCtrl;
+	/// <summary>
+	/// Riferimento al sound controller
+	/// </summary>
+	private SoundController soundCtrl;
 	/// <summary>
 	/// Riferimento al vettore di movimento
 	/// </summary>
@@ -71,6 +80,7 @@ public class GroupMovementController : MonoBehaviour
 	{
 		groupCtrl = _groupCtrl;
 		sizeCtrl = groupCtrl.GetGroupSizeController();
+		soundCtrl = groupCtrl.GetSoundController();
 
 		sizeCtrl.OnGroupPressed += HandleOnGroupPressed;
 		canMove = true;
@@ -130,7 +140,7 @@ public class GroupMovementController : MonoBehaviour
 			{
 				if (groupBoostCoroutine != null)
 					StopCoroutine(groupBoostCoroutine);
-
+				
 				groupBoostCoroutine = GroupDashCoroutine();
 				StartCoroutine(groupBoostCoroutine);
 			}
@@ -154,6 +164,7 @@ public class GroupMovementController : MonoBehaviour
 	/// <returns></returns>
 	private IEnumerator GroupDashCoroutine()
 	{
+		soundCtrl.PlayClipLoop(runSoundID);
 		float timer = 0f;
 		while (groupTime > timer)
 		{
@@ -173,6 +184,7 @@ public class GroupMovementController : MonoBehaviour
 	/// <returns></returns>
 	private IEnumerator GroupDashCoolDownCoroutine()
 	{
+		soundCtrl.StopClipLoop(runSoundID);
 		canDash = false;
 		yield return new WaitForSeconds(groupCountdown);
 		canDash = true;

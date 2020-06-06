@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
@@ -22,10 +23,14 @@ public class UISubmenu_Options : MonoBehaviour
 	[SerializeField]
 	private TMP_Dropdown qualityDropDown;
 
+	[Header("Mixer References")]
+	[SerializeField]
+	private AudioMixer audioMixer;
+
 	private GameObject oldButtonSelected;
 	private bool isEnable;
 	private int currentQuality;
-	private float curretnMusicVolume;
+	private float currentMusicVolume;
 	private float currentEffectVolume;
 
 	/// <summary>
@@ -65,7 +70,7 @@ public class UISubmenu_Options : MonoBehaviour
 	/// </summary>
 	private void GetData()
 	{
-		curretnMusicVolume = UserData.GetMusicVolume();
+		currentMusicVolume = UserData.GetMusicVolume();
 		currentEffectVolume = UserData.GetEffectVolume();
 		currentQuality = UserData.GetGraphicQuality();
 	}
@@ -75,7 +80,8 @@ public class UISubmenu_Options : MonoBehaviour
 	/// </summary>
 	private void SetData()
 	{
-		//Impostare i mixzer
+		audioMixer.SetFloat("EffectsVolume", currentEffectVolume);
+		audioMixer.SetFloat("MusicVolume", currentMusicVolume);
 		QualitySettings.SetQualityLevel(currentQuality);
 	}
 
@@ -84,7 +90,7 @@ public class UISubmenu_Options : MonoBehaviour
 	/// </summary>
 	private void UpdateMenuGraphic()
 	{
-		musicSlider.value = curretnMusicVolume;
+		musicSlider.value = currentMusicVolume;
 		effectSlider.value = currentEffectVolume;
 		qualityDropDown.value = currentQuality;
 	}
@@ -104,7 +110,7 @@ public class UISubmenu_Options : MonoBehaviour
 	/// <param name="_value"></param>
 	public void MusicSliderChange(float _value)
 	{
-		curretnMusicVolume = _value;
+		currentMusicVolume = _value;
 		SetData();
 	}
 
@@ -133,7 +139,7 @@ public class UISubmenu_Options : MonoBehaviour
 	/// </summary>
 	public void SaveButton()
 	{
-		UserData.SetMusicVolume(curretnMusicVolume);
+		UserData.SetMusicVolume(currentMusicVolume);
 		UserData.SetEffectVolume(currentEffectVolume);
 		UserData.SetGraphicQuality(currentQuality);
 	}

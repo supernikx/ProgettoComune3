@@ -14,6 +14,15 @@ public class Boss2SuperAttackState : Boss2StateBase
 	[SerializeField]
 	private float attackDuration;
 
+
+	[Header("Feedback")]
+	//suono di charge del boss
+	[SerializeField]
+	private string attackChargeSoundID = "attackCharge";
+	//suono di attack del boss
+	[SerializeField]
+	private string attackSoundID = "attack";
+
 	/// <summary>
 	/// Riferimento al GroupController
 	/// </summary>
@@ -39,13 +48,13 @@ public class Boss2SuperAttackState : Boss2StateBase
 	/// </summary>
 	private Boss2PhaseController phaseCtrl;
 	/// <summary>
+	/// Riferimento al sound controller
+	/// </summary>
+	private SoundController soundCtrl;
+	/// <summary>
 	/// Riferiemento al coverblock da disabilitare
 	/// </summary>
 	private CoverBlockController coverBlockToDisable;
-	/// <summary>
-	/// Timer che conta il tempo di attacco
-	/// </summary>
-	private float attackTimer;
 	/// <summary>
 	/// Int che identifica la next phase
 	/// </summary>
@@ -63,6 +72,7 @@ public class Boss2SuperAttackState : Boss2StateBase
 		coverBlockCtrl = bossCtrl.GetCoverBlocksController();
 		collisionCtrl = bossCtrl.GetBossCollisionController();
 		phaseCtrl = bossCtrl.GetPhaseController();
+		soundCtrl = bossCtrl.GetSoundController();
 
 		lifeCtrl.SetCanTakeDamage(canTakeDirectDamage);
 
@@ -73,7 +83,6 @@ public class Boss2SuperAttackState : Boss2StateBase
 		phaseCtrl.OnFourthPhaseStart += HandleOnFourthPhaseStart;
 
 		nextPhase = -1;
-		attackTimer = 0;
 
 		attackRoutine = AttackCoroutine();
 		bossCtrl.StartCoroutine(attackRoutine);
@@ -133,6 +142,7 @@ public class Boss2SuperAttackState : Boss2StateBase
 	/// <returns></returns>
 	private IEnumerator AttackCoroutine()
 	{
+		soundCtrl.PlayClipLoop(attackChargeSoundID);
 		bossCtrl.canvasDebug.SetActive(true);
 		bossCtrl.ChangeColor(Color.yellow);
 		float timer = 0f;
@@ -142,9 +152,11 @@ public class Boss2SuperAttackState : Boss2StateBase
 			timer += Time.deltaTime;
 			yield return null;
 		}
+		soundCtrl.StopClipLoop(attackChargeSoundID);
+		soundCtrl.PlayClipLoop(attackSoundID);
 		bossCtrl.canvasDebug.SetActive(false);
 		bossCtrl.ChangeColor(Color.red);
-		float waitTime = attackTimer / 10;
+		float waitTime = attackDuration / 10f;
 		for (int k = 0; k < 10; k++)
 		{
 			List<AgentController> coverAgents = new List<AgentController>();
@@ -182,6 +194,7 @@ public class Boss2SuperAttackState : Boss2StateBase
 			yield return new WaitForSeconds(waitTime);
 		}
 
+		soundCtrl.StopClipLoop(attackSoundID);
 		bossCtrl.ChangeColor(Color.white);
 
 		if (coverBlockToDisable != null)

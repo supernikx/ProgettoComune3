@@ -21,6 +21,11 @@ public class Boss2LaserState : Boss2StateBase
 	[SerializeField]
 	private float laser1EndAngle;
 
+	[Header("Feedback")]
+	//suono di laser del boss
+	[SerializeField]
+	private string laser1SoundID = "laser";
+
 	[Header("Second Laser Settings (can be empty)")]
 	//Se c'è il laser 2
 	[SerializeField]
@@ -38,6 +43,12 @@ public class Boss2LaserState : Boss2StateBase
 	[SerializeField]
 	private float laser2EndAngle;
 
+	[Header("Feedback")]
+	//suono di laser del boss
+	[SerializeField]
+	private string laser2SoundID = "laser";
+
+
 	[Header("Tracker Laser Settings (this override other settings)")]
 	//Se il laser deve trackare il player
 	[SerializeField]
@@ -54,6 +65,12 @@ public class Boss2LaserState : Boss2StateBase
 	//Velocità del track laser
 	[SerializeField]
 	private float trackLaserSpeed;
+
+	[Header("Feedback")]
+	//suono di laser del boss
+	[SerializeField]
+	private string laserTrackerSoundID = "laser";
+
 
 	/// <summary>
 	/// Riferimento al GroupController
@@ -80,6 +97,10 @@ public class Boss2LaserState : Boss2StateBase
 	/// </summary>
 	private Boss2PhaseController phaseCtrl;
 	/// <summary>
+	/// Riferimento al sound controller
+	/// </summary>
+	private SoundController soundCtrl;
+	/// <summary>
 	/// Bool che identifica se bisogna aspettare altri laser
 	/// </summary>
 	private bool waitForOtherLaser;
@@ -96,6 +117,7 @@ public class Boss2LaserState : Boss2StateBase
 		laserCtrl = bossCtrl.GetLaserController();
 		collisionCtrl = bossCtrl.GetBossCollisionController();
 		phaseCtrl = bossCtrl.GetPhaseController();
+		soundCtrl = bossCtrl.GetSoundController();
 
 		lifeCtrl.SetCanTakeDamage(canTakeDirectDamage);
 
@@ -169,10 +191,12 @@ public class Boss2LaserState : Boss2StateBase
 	{
 		if (trackPlayer)
 		{
+			soundCtrl.PlayClipLoop(laserTrackerSoundID);
 			laserCtrl.StartLaser(1, groupCtrl.GetGroupCenterTransform(), trackLaserDuration, trackLaserSpeed, HandleOnLaser1Rotate);
 		}
 		else
 		{
+			soundCtrl.PlayClipLoop(laser1SoundID);
 			laserCtrl.StartLaser(1, laser1EndAngle, laser1Speed, HandleOnLaser1Rotate);
 		}
 	}
@@ -183,14 +207,20 @@ public class Boss2LaserState : Boss2StateBase
 	private void HandleOnLaser2Spawn()
 	{
 		if (useSecondLaser && !trackPlayer)
+		{
+			soundCtrl.PlayClipLoop(laser2SoundID);
 			laserCtrl.StartLaser(2, laser2EndAngle, laser2Speed, HandleOnLaser2Rotate);
+		}
 	}
 
 	/// <summary>
-	/// Funzione che gestisce la callback di spawn del laser 1
+	/// Funzione che gestisce la callback di fine del laser 1
 	/// </summary>
 	private void HandleOnLaser1Rotate()
 	{
+		soundCtrl.StopClipLoop(laser1SoundID);
+		soundCtrl.StopClipLoop(laserTrackerSoundID);
+
 		if (!trackPlayer && waitForOtherLaser && useSecondLaser)
 			waitForOtherLaser = false;
 		else
@@ -203,10 +233,12 @@ public class Boss2LaserState : Boss2StateBase
 	}
 
 	/// <summary>
-	/// Funzione che gestisce la callback di spawn del laser 2
+	/// Funzione che gestisce la callback di fine del laser 2
 	/// </summary>
 	private void HandleOnLaser2Rotate()
 	{
+		soundCtrl.StopClipLoop(laser2SoundID);
+
 		if (!trackPlayer && waitForOtherLaser && useSecondLaser)
 			waitForOtherLaser = false;
 		else

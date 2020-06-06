@@ -19,6 +19,11 @@ public class Boss1DashState : Boss1StateBase
     [SerializeField]
     private bool leaveTrail = true;
 
+    [Header("Feedback")]
+    //suono di dash del boss
+    [SerializeField]
+    private string dashSoundID = "dash";
+
     /// <summary>
     /// Riferimento al GroupController
     /// </summary>
@@ -44,6 +49,10 @@ public class Boss1DashState : Boss1StateBase
     /// </summary>
     private Boss1TrailController trailController;
     /// <summary>
+    /// Riferimento al sound controller
+    /// </summary>
+    private SoundController soundCtrl;
+    /// <summary>
     /// Distanza percorsa
     /// </summary>
     private float distanceTraveled;
@@ -57,12 +66,14 @@ public class Boss1DashState : Boss1StateBase
         groupCtrl = context.GetLevelManager().GetGroupController();
         bossCtrl = context.GetBossController();
         lifeCtrl = bossCtrl.GetBossLifeController();
+        soundCtrl = bossCtrl.GetSoundController();
         collisionCtrl = bossCtrl.GetBossCollisionController();
         bossPhaseCtrl = bossCtrl.GetBossPhaseController();
         trailController = bossCtrl.GetBossTrailController();
 
         distanceTraveled = 0;
         LookAtPosition(groupCtrl.GetGroupCenterPoint());
+        soundCtrl.PlayAudioClipOnTime(dashSoundID);
 
         if (leaveTrail)
             trailController.InstantiateNewTrail();

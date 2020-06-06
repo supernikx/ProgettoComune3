@@ -3,163 +3,190 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 /// <summary>
 /// Classe che gestisce il trigger del tutorial
 /// </summary>
 public class TutorialTrigger : MonoBehaviour
 {
-    [Header("Trigger Settings")]
-    //Range del trigger
-    [SerializeField]
-    private float triggerRange;
-    //Testo del tutorial
-    [SerializeField][Multiline]
-    private string tutorialText;
-    //Immagine del tutorial
-    [SerializeField]
-    private Sprite tutorialImage;
-    //Canvas che mostra il tasto da premere
-    [SerializeField]
-    private GameObject interactableCanvas;
-    //Input per aprire il pannello di tutorial
-    [SerializeField]
-    private InputAction inputOpenTutorialPanel;
-    //Input per chiudere il pannello di tutorial
-    [SerializeField]
-    private InputAction inputCloseTutorialPanel;
+	[Header("Trigger Settings")]
+	//Range del trigger
+	[SerializeField]
+	private float triggerRange;
+	//Titolo del tutorial
+	[SerializeField]
+	private string tutorialTitleText;
+	//Testo del tutorial
+	[SerializeField]
+	[Multiline]
+	private string tutorialText;
+	//Immagine del tutorial
+	[SerializeField]
+	private Sprite tutorialImage;
+	//Canvas che mostra il tasto da premere
+	[SerializeField]
+	private GameObject interactableCanvas;
+	//Testo del tasto di interazione
+	[SerializeField]
+	private TextMeshProUGUI interactableKeyText;
+	//Input per aprire il pannello di tutorial
+	[SerializeField]
+	private InputAction inputOpenTutorialPanel;
+	//Input per chiudere il pannello di tutorial
+	[SerializeField]
+	private InputAction inputCloseTutorialPanel;
 
-    /// <summary>
-    /// Riferimento al LevelTutorialController
-    /// </summary>
-    private LevelTutorialController lvlTutorialCtrl;
-    /// <summary>
-    /// Indica se il gruppo è nel range del trigger
-    /// </summary>
-    private bool inRange;
+	/// <summary>
+	/// Riferimento al LevelTutorialController
+	/// </summary>
+	private LevelTutorialController lvlTutorialCtrl;
+	/// <summary>
+	/// Indica se il gruppo è nel range del trigger
+	/// </summary>
+	private bool inRange;
 
-    private void OnEnable()
-    {
-        inputOpenTutorialPanel.Enable();
-        inputCloseTutorialPanel.Enable();
-    }
+	private void OnEnable()
+	{
+		inputOpenTutorialPanel.Enable();
+		inputCloseTutorialPanel.Enable();
+	}
 
-    /// <summary>
-    /// Funzione di Setup
-    /// </summary>
-    /// <param name="_lvlMng"></param>
-    public void Setup(LevelTutorialController _tutorialCtrl)
-    {
-        lvlTutorialCtrl = _tutorialCtrl;
-        inRange = false;
-        interactableCanvas.SetActive(false);
-    }
+	/// <summary>
+	/// Funzione di Setup
+	/// </summary>
+	/// <param name="_lvlMng"></param>
+	public void Setup(LevelTutorialController _tutorialCtrl)
+	{
+		lvlTutorialCtrl = _tutorialCtrl;
+		inRange = false;
+		interactableCanvas.SetActive(false);
+	}
 
-    /// <summary>
-    /// Funzione che controlla la distanza del gruppo
-    /// </summary>
-    /// <param name="_groupPosition"></param>
-    public void CheckGroupDistance(Vector3 _groupPosition)
-    {
-        float groupDistance = Vector3.Distance(transform.position, _groupPosition);
-        if (groupDistance <= triggerRange && !inRange)
-        {
-            inRange = true;
-            inputOpenTutorialPanel.started += HandleOnGroupPanelOpen;
-            interactableCanvas.SetActive(true);
-        }
-        else if (groupDistance > triggerRange && inRange)
-        {
-            inRange = false;
-            inputOpenTutorialPanel.started -= HandleOnGroupPanelOpen;
-            interactableCanvas.SetActive(false);
-        }
-    }
+	/// <summary>
+	/// Funzione che controlla la distanza del gruppo
+	/// </summary>
+	/// <param name="_groupPosition"></param>
+	public void CheckGroupDistance(GroupController _groupCtrl)
+	{
+		Vector3 groupPos = _groupCtrl.GetGroupCenterPoint();
+		float groupDistance = Vector3.Distance(transform.position, groupPos);
+		if (groupDistance <= triggerRange)
+		{
+			if (!inRange)
+			{
+				inRange = true;
+				inputOpenTutorialPanel.started += HandleOnGroupPanelOpen;
+				interactableCanvas.SetActive(true);
+			}
 
-    #region Handlers
-    /// <summary>
-    /// Funzione che gestisce l'evento del tasto di apertura pannello premuto
-    /// </summary>
-    /// <param name="_context"></param>
-    private void HandleOnGroupPanelOpen(InputAction.CallbackContext _context)
-    {
-        inputOpenTutorialPanel.started -= HandleOnGroupPanelOpen;
-        inputOpenTutorialPanel.canceled += HandleOnGroupPanelOpenCancelled;
-        interactableCanvas.SetActive(false);
+			string currentInput = _groupCtrl.GetPlayerInput().currentControlScheme;
+			if (currentInput == "Gamepad")
+				interactableKeyText.text = "A";
+			else
+				interactableKeyText.text = "F";
 
-        lvlTutorialCtrl.TutorialTriggerOpen(this);
-    }
+		}
+		else if (groupDistance > triggerRange && inRange)
+		{
+			inRange = false;
+			inputOpenTutorialPanel.started -= HandleOnGroupPanelOpen;
+			interactableCanvas.SetActive(false);
+		}
+	}
 
-    /// <summary>
-    /// Funzione che gestisce l'evento di tasto di apertura pannello rilasciato
-    /// </summary>
-    /// <param name="_context"></param>
-    private void HandleOnGroupPanelOpenCancelled(InputAction.CallbackContext _context) 
-    {
-        inputOpenTutorialPanel.canceled -= HandleOnGroupPanelOpenCancelled;
-        inputCloseTutorialPanel.started += HandleOnGroupPanelClosed;
-    }
+	#region Handlers
+	/// <summary>
+	/// Funzione che gestisce l'evento del tasto di apertura pannello premuto
+	/// </summary>
+	/// <param name="_context"></param>
+	private void HandleOnGroupPanelOpen(InputAction.CallbackContext _context)
+	{
+		inputOpenTutorialPanel.started -= HandleOnGroupPanelOpen;
+		inputOpenTutorialPanel.canceled += HandleOnGroupPanelOpenCancelled;
+		interactableCanvas.SetActive(false);
 
-    /// <summary>
-    /// Funzione che gestisce l'evento del tasto di chiusura pannello premuto
-    /// </summary>
-    /// <param name="_context"></param>
-    private void HandleOnGroupPanelClosed(InputAction.CallbackContext _context)
-    {
-        inputCloseTutorialPanel.started -= HandleOnGroupPanelClosed;
-        inputCloseTutorialPanel.canceled += HandleOnGroupPanelClosedCancelled;
+		lvlTutorialCtrl.TutorialTriggerOpen(this);
+	}
 
-        interactableCanvas.SetActive(true);
-        lvlTutorialCtrl.TutorialTriggerClose(this);
-    }
+	/// <summary>
+	/// Funzione che gestisce l'evento di tasto di apertura pannello rilasciato
+	/// </summary>
+	/// <param name="_context"></param>
+	private void HandleOnGroupPanelOpenCancelled(InputAction.CallbackContext _context)
+	{
+		inputOpenTutorialPanel.canceled -= HandleOnGroupPanelOpenCancelled;
+		inputCloseTutorialPanel.started += HandleOnGroupPanelClosed;
+	}
 
-    /// <summary>
-    /// Funzione che gestisce l'evento di tasto di chiusura pannello rilasciato
-    /// </summary>
-    /// <param name="_context"></param>
-    private void HandleOnGroupPanelClosedCancelled(InputAction.CallbackContext _context)
-    {
-        inputCloseTutorialPanel.canceled -= HandleOnGroupPanelClosedCancelled;
-        inputOpenTutorialPanel.started += HandleOnGroupPanelOpen;
-    }
-    #endregion
+	/// <summary>
+	/// Funzione che gestisce l'evento del tasto di chiusura pannello premuto
+	/// </summary>
+	/// <param name="_context"></param>
+	private void HandleOnGroupPanelClosed(InputAction.CallbackContext _context)
+	{
+		inputCloseTutorialPanel.started -= HandleOnGroupPanelClosed;
+		inputCloseTutorialPanel.canceled += HandleOnGroupPanelClosedCancelled;
 
-    #region API
-    #region Getter
-    /// <summary>
-    /// Funzione che ritorna lo sprite del tutorial
-    /// </summary>
-    /// <returns></returns>
-    public Sprite GetTutorialSprite()
-    {
-        return tutorialImage;
-    }
+		interactableCanvas.SetActive(true);
+		lvlTutorialCtrl.TutorialTriggerClose(this);
+	}
 
-    /// <summary>
-    /// Funzione che ritorna il testo del tutorial
-    /// </summary>
-    /// <returns></returns>
-    public string GetTutorialText()
-    {
-        return tutorialText;
-    }
-    #endregion
-    #endregion
+	/// <summary>
+	/// Funzione che gestisce l'evento di tasto di chiusura pannello rilasciato
+	/// </summary>
+	/// <param name="_context"></param>
+	private void HandleOnGroupPanelClosedCancelled(InputAction.CallbackContext _context)
+	{
+		inputCloseTutorialPanel.canceled -= HandleOnGroupPanelClosedCancelled;
+		inputOpenTutorialPanel.started += HandleOnGroupPanelOpen;
+	}
+	#endregion
 
-    #region Debug
-    /// <summary>
-    /// Gizmo
-    /// </summary>
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(transform.position, triggerRange);
-    }
-    #endregion
+	#region API
+	#region Getter
+	/// <summary>
+	/// Funzione che ritorna lo sprite del tutorial
+	/// </summary>
+	/// <returns></returns>
+	public Sprite GetTutorialSprite()
+	{
+		return tutorialImage;
+	}
 
-    private void OnDisable()
-    {
-        inputOpenTutorialPanel.Disable();
-        inputCloseTutorialPanel.Disable();
-    }
+	/// <summary>
+	/// Funzione che ritorna il testo del tutorial
+	/// </summary>
+	/// <returns></returns>
+	public string GetTutorialText()
+	{
+		return tutorialText;
+	}
 
+	/// <summary>
+	/// Funzione che ritorna il testo del titolo del tutorial
+	/// </summary>
+	/// <returns></returns>
+	public string GetTutorialTitleText()
+	{
+		return tutorialTitleText;
+	}
+	#endregion
+	#endregion
+
+	#region Debug
+	/// <summary>
+	/// Gizmo
+	/// </summary>
+	private void OnDrawGizmos()
+	{
+		Gizmos.DrawWireSphere(transform.position, triggerRange);
+	}
+	#endregion
+
+	private void OnDisable()
+	{
+		inputOpenTutorialPanel.Disable();
+		inputCloseTutorialPanel.Disable();
+	}
 }

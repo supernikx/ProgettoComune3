@@ -27,6 +27,10 @@ public class Boss1Controller : BossControllerBase
     /// Riferimento al BossGraphicController
     /// </summary>
     private Boss1GraphicController graphicCtrl;
+    /// <summary>
+    /// Riferimento al sound controller
+    /// </summary>
+    private SoundController soundCtrl;
 
     /// <summary>
     /// Funzione di Setup
@@ -40,6 +44,7 @@ public class Boss1Controller : BossControllerBase
         shootCtrl = GetComponent<Boss1ShootController>();
         phaseCtrl = GetComponent<Boss1PhaseController>();
         trailCtrl = GetComponent<Boss1TrailController>();
+        soundCtrl = GetComponent<SoundController>();
         graphicCtrl = GetComponentInChildren<Boss1GraphicController>();
     }
 
@@ -75,6 +80,7 @@ public class Boss1Controller : BossControllerBase
     public void KillBoss()
     {
         OnBossDead?.Invoke(this);
+        gameObject.SetActive(false);
     }
 
     #region Getter
@@ -103,6 +109,15 @@ public class Boss1Controller : BossControllerBase
     public Boss1TrailController GetBossTrailController()
     {
         return trailCtrl;
+    }
+
+    /// <summary>
+    /// Funzione che ritorna il sound controller
+    /// </summary>
+    /// <returns></returns>
+    public SoundController GetSoundController()
+    {
+        return soundCtrl;
     }
     #endregion
     #endregion

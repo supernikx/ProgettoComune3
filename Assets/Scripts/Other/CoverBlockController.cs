@@ -19,6 +19,14 @@ public class CoverBlockController : MonoBehaviour
 	[SerializeField]
 	private TextMeshProUGUI barrierAgentText;
 
+	[Header("Feedback")]
+	//suono di coverblock up
+	[SerializeField]
+	private string coverblocSoundIDkUP = "coverUP";
+	//suono di coverblock down
+	[SerializeField]
+	private string coverblockSoundIDDown = "coverDown";
+
 	/// <summary>
 	/// Identifica se il cover block è attivo
 	/// </summary>
@@ -59,6 +67,10 @@ public class CoverBlockController : MonoBehaviour
 	/// Timer del coverblock
 	/// </summary>
 	private float coverBlockTimer;
+	/// <summary>
+	/// Riferiemento al sound controller
+	/// </summary>
+	private SoundController soundCtrl;
 
 	/// <summary>
 	/// Funzione di Setup
@@ -67,6 +79,7 @@ public class CoverBlockController : MonoBehaviour
 	/// <param name="_coverBlockDuration"></param>
 	public void Setup(int _coverBlockNeedAgents, float _coverBlockDuration, float _coverBlockHeatSpeed, float _coverBlockResetSpeed)
 	{
+		soundCtrl = GetComponent<SoundController>();
 		coverBlockNeedAgents = _coverBlockNeedAgents;
 		coverBlockDuration = _coverBlockDuration;
 		coverBlockHeatSpeed = _coverBlockHeatSpeed;
@@ -86,6 +99,8 @@ public class CoverBlockController : MonoBehaviour
 
 			if (currentAgents.Count >= coverBlockNeedAgents)
 			{
+				if (!isTriggered && !isCooldown)
+					soundCtrl.PlayAudioClipOnTime(coverblocSoundIDkUP);
 				isTriggered = true;
 			}
 		}
@@ -105,6 +120,7 @@ public class CoverBlockController : MonoBehaviour
 			coverBlockTimer += Time.deltaTime;
 			if (coverBlockTimer >= coverBlockDuration)
 			{
+				soundCtrl.PlayAudioClipOnTime(coverblockSoundIDDown);
 				isCooldown = true;
 			}
 		}
@@ -115,12 +131,13 @@ public class CoverBlockController : MonoBehaviour
 			if (coverBlockTimer > 0)
 			{
 				coverBlockTimer = Mathf.Clamp(coverBlockTimer - Time.deltaTime, 0, coverBlockDuration);
-				if (coverBlockTimer == 0)
-					isCooldown = false;
 			}
 			else
 			{
 				isCooldown = false;
+
+				if (isTriggered)
+					soundCtrl.PlayAudioClipOnTime(coverblocSoundIDkUP);
 			}
 		}
 
@@ -134,10 +151,12 @@ public class CoverBlockController : MonoBehaviour
 	{
 		if (currentAgents.Count >= coverBlockNeedAgents)
 		{
+			//
 			isTriggered = true;
 		}
 		if (currentAgents.Count < coverBlockNeedAgents)
 		{
+			//soundCtrl.PlayAudioClipOnTime(coverblockDown);
 			isTriggered = false;
 			isCooldown = true;
 		}
@@ -155,6 +174,8 @@ public class CoverBlockController : MonoBehaviour
 
 			if (currentAgents.Count < coverBlockNeedAgents)
 			{
+				if (isTriggered)
+					soundCtrl.PlayAudioClipOnTime(coverblockSoundIDDown);
 				isTriggered = false;
 				isCooldown = true;
 			}
