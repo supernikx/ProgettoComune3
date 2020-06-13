@@ -11,6 +11,9 @@ public class LevelManager : MonoBehaviour
     //Punto iniziale del gruppo
     [SerializeField]
     private List<GroupStartPosition> groupStartPositions;
+    //Blocco del boss 2
+    [SerializeField]
+    private GameObject boss2Block;
 
     /// <summary>
     /// Classe che associa ad uno spawn point un ID
@@ -68,6 +71,15 @@ public class LevelManager : MonoBehaviour
 
         if (lvlTutorialCtrl != null)
             lvlTutorialCtrl.Setup(this);
+
+        if (boss2Block != null)
+        {
+            int bossDefeated = UserData.GetBossDefeated();
+            if (bossDefeated == 0)
+                boss2Block.SetActive(true);
+            else
+                boss2Block.SetActive(false);
+        }
 
         Vector3 startPositon = transform.position;
         for (int i = 0; i < groupStartPositions.Count; i++)

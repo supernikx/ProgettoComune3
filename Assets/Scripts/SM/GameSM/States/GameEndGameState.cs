@@ -26,6 +26,10 @@ public class GameEndGameState : GameSMStateBase
     /// </summary>
     private UI_Controller currentUICtrl;
     /// <summary>
+    /// Riferimento al pannello di gameplay
+    /// </summary>
+    private UIMenu_Gameplay gameplayPanel;
+    /// <summary>
     /// Riferiemento al pannello di endgame
     /// </summary>
     private UIMenu_EndGame endGamePanel;
@@ -37,8 +41,10 @@ public class GameEndGameState : GameSMStateBase
         uiMng = context.GetGameManager().GetUIManager();
         currentUICtrl = uiMng.GetCurrentUIController();
         endGamePanel = currentUICtrl.GetMenu<UIMenu_EndGame>();
+        gameplayPanel = currentUICtrl.GetMenu<UIMenu_Gameplay>();
 
         endGamePanel.RetryButtonPressed += HandleRetryButtonPressed;
+        endGamePanel.QuitButtonPressed += HandleQuitButtonPressed;
 
         groupCtrl.Enable(false);
         currentUICtrl.SetCurrentMenu<UIMenu_EndGame>();
@@ -69,6 +75,18 @@ public class GameEndGameState : GameSMStateBase
 
         SceneManager.sceneUnloaded += HandleOnSceneUnloaded;
         SceneManager.UnloadSceneAsync(sceneToReload);
+    }
+
+
+    /// <summary>
+    /// Funzione che gestisce l'evento di quit button
+    /// </summary>
+    private void HandleQuitButtonPressed()
+    {
+        endGamePanel.ToggleMenu(false);
+        gameplayPanel.ToggleBossPanel(false);
+        gameplayPanel.ToggleWinPanel(false);
+        Complete(1);
     }
 
     /// <summary>
@@ -111,7 +129,10 @@ public class GameEndGameState : GameSMStateBase
     public override void Exit()
     {
         if (endGamePanel != null)
+        {
             endGamePanel.RetryButtonPressed -= HandleRetryButtonPressed;
+            endGamePanel.QuitButtonPressed -= HandleQuitButtonPressed;
+        }
 
         if (uiMng != null)
             uiMng.Init();

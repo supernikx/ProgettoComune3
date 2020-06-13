@@ -79,6 +79,12 @@ public class GameSMController : StateMachineBase
                 else if (_exitCondition == 1)
                     GoToState("LevelUnsetup");
                 break;
+            case "EndGame":
+                if (_exitCondition == 0)
+                    GoToState("Gameplay");
+                else if (_exitCondition == 1)
+                    GoToState("LevelUnsetup");
+                break;
             default:
                 GoToNext();
                 break;

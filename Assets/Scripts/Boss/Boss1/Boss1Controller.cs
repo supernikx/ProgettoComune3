@@ -46,6 +46,10 @@ public class Boss1Controller : BossControllerBase
         trailCtrl = GetComponent<Boss1TrailController>();
         soundCtrl = GetComponent<SoundController>();
         graphicCtrl = GetComponentInChildren<Boss1GraphicController>();
+
+        int bossDefeated = UserData.GetBossDefeated();
+        if (bossDefeated == 1)
+            gameObject.SetActive(false);
     }
 
     #region API
@@ -62,7 +66,7 @@ public class Boss1Controller : BossControllerBase
         phaseCtrl.Setup(this);
         trailCtrl.Setup(this);
         shootCtrl.Setup(this);
-        graphicCtrl.Setup(sm);
+        graphicCtrl.Setup(this, sm);
     }
 
     /// <summary>
@@ -80,6 +84,13 @@ public class Boss1Controller : BossControllerBase
     public void KillBoss()
     {
         OnBossDead?.Invoke(this);
+    }
+
+    /// <summary>
+    /// Funzione che disabilita il boss
+    /// </summary>
+    public void DisableBoss()
+    {
         gameObject.SetActive(false);
     }
 

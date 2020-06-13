@@ -620,6 +620,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5b58c53a5aa6654f8cce58c4747788b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tutorialTitleText: {fileID: 0}
   tutorialText: {fileID: 7841794552709716490}
   tutorialImage: {fileID: 4310746324494793406}
 --- !u!1 &6948101378314500962
@@ -1019,6 +1020,7 @@ MonoBehaviour:
   bossPanel: {fileID: 7091130250602722628}
   agentPanel: {fileID: 2984562736897820343}
   winPanel: {fileID: 4635594451015573742}
+  endDemoPanel: {fileID: 0}
   tutorialPanel: {fileID: 2633337286397382415}
 --- !u!1 &6948101379292084365
 GameObject:
@@ -1769,6 +1771,16 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7662681335780155431, guid: 5baeba3bd639cb4458d27fdc8c301812,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.38006592
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662681335780155431, guid: 5baeba3bd639cb4458d27fdc8c301812,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.0780029
+      objectReference: {fileID: 0}
     - target: {fileID: 2566309658348357700, guid: 5baeba3bd639cb4458d27fdc8c301812,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1794,30 +1806,20 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0.89990234
       objectReference: {fileID: 0}
-    - target: {fileID: 7662681335780155431, guid: 5baeba3bd639cb4458d27fdc8c301812,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -0.38006592
-      objectReference: {fileID: 0}
-    - target: {fileID: 7662681335780155431, guid: 5baeba3bd639cb4458d27fdc8c301812,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 1.0780029
-      objectReference: {fileID: 0}
     - target: {fileID: 2264913577470136316, guid: 5baeba3bd639cb4458d27fdc8c301812,
         type: 3}
       propertyPath: m_fontSize
       value: 98.6
       objectReference: {fileID: 0}
-    - target: {fileID: 5318281381579787019, guid: 5baeba3bd639cb4458d27fdc8c301812,
-        type: 3}
-      propertyPath: m_fontSize
-      value: 44
-      objectReference: {fileID: 0}
     - target: {fileID: 8812217454779729769, guid: 5baeba3bd639cb4458d27fdc8c301812,
         type: 3}
       propertyPath: m_fontSize
       value: 50.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 5318281381579787019, guid: 5baeba3bd639cb4458d27fdc8c301812,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 44
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5baeba3bd639cb4458d27fdc8c301812, type: 3}

@@ -13,6 +13,10 @@ public class Boss1GraphicController : MonoBehaviour
 	/// </summary>
 	private Animator anim;
 	/// <summary>
+	/// Riferiemento al boss controller
+	/// </summary>
+	private Boss1Controller bossCtrl;
+	/// <summary>
 	/// Riferiemento allo state machine controller del boss 1
 	/// </summary>
 	private Boss1SMController smCtrl;
@@ -20,8 +24,9 @@ public class Boss1GraphicController : MonoBehaviour
 	/// <summary>
 	/// Funzione di Setup
 	/// </summary>
-	public void Setup(Boss1SMController _smCtrl)
+	public void Setup(Boss1Controller _bossCtrl, Boss1SMController _smCtrl)
 	{
+		bossCtrl = _bossCtrl;
 		smCtrl = _smCtrl;
 		anim = GetComponent<Animator>();
 
@@ -49,6 +54,9 @@ public class Boss1GraphicController : MonoBehaviour
 				anim.ResetTrigger("Idle");
 				anim.SetTrigger("Dash");
 				break;
+			case "Death":
+				anim.SetTrigger("Death");
+				break;
 			default:
 				anim.SetTrigger("Idle");
 				break;
@@ -72,6 +80,14 @@ public class Boss1GraphicController : MonoBehaviour
 		//		anim.SetTrigger("Idle");
 		//		break;
 		//}
+	}
+
+	/// <summary>
+	/// Funzione che gestisce l'evento di fine dell'animazione di morte del boss
+	/// </summary>
+	private void HandlOnDeathAnimationEnd()
+	{
+		bossCtrl.DisableBoss();
 	}
 
 	private void OnDisable()

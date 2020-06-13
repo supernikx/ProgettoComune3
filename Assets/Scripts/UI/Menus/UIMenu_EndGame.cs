@@ -14,6 +14,10 @@ public class UIMenu_EndGame : UIMenu_Base
     /// Evento che notifica la pressione del pulsante di Retry
     /// </summary>
     public Action RetryButtonPressed;
+    /// <summary>
+    /// Evento che notifica la pressione del pulsante di Quit
+    /// </summary>
+    public Action QuitButtonPressed;
     #endregion
 
     [Header("Panel Settings")]
@@ -52,6 +56,14 @@ public class UIMenu_EndGame : UIMenu_Base
     public void RetryButton()
     {
         RetryButtonPressed?.Invoke();
+    }
+
+    /// <summary>
+    /// Funzione che gestisce il pulsante di Retry del pannello
+    /// </summary>
+    public void QuitButton()
+    {
+        QuitButtonPressed?.Invoke();
     }
 
     /// <summary>

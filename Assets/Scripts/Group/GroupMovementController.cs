@@ -35,6 +35,8 @@ public class GroupMovementController : MonoBehaviour
 	[SerializeField]
 	private string runSoundID = "run";
 
+	private bool isReloading;
+
 	/// <summary>
 	/// Rifeirmento al Group controller
 	/// </summary>
@@ -83,9 +85,10 @@ public class GroupMovementController : MonoBehaviour
 		soundCtrl = groupCtrl.GetSoundController();
 
 		sizeCtrl.OnGroupPressed += HandleOnGroupPressed;
-		canMove = true;
 		canDash = true;
 		grouping = false;
+		SetCanMove(true);
+		SetIsReloading(false);
 	}
 
 	private void Update()
@@ -102,6 +105,14 @@ public class GroupMovementController : MonoBehaviour
 	public void OnMove(InputValue _value)
 	{
 		Vector2 newMove = _value.Get<Vector2>();
+		if (isReloading)
+		{
+			if (newMove == Vector2.zero)
+				SetIsReloading(false);
+			else
+				return;
+		}
+
 		movementVector.x = newMove.x;
 		movementVector.z = newMove.y;
 	}
@@ -140,10 +151,12 @@ public class GroupMovementController : MonoBehaviour
 			{
 				if (groupBoostCoroutine != null)
 					StopCoroutine(groupBoostCoroutine);
-				
+
 				groupBoostCoroutine = GroupDashCoroutine();
 				StartCoroutine(groupBoostCoroutine);
 			}
+
+			OnGroupMove?.Invoke();
 		}
 		else
 		{
@@ -223,6 +236,8 @@ public class GroupMovementController : MonoBehaviour
 	/// </summary>
 	public void ResetMovementVelocity()
 	{
+		if (movementVector != Vector3.zero)
+			SetIsReloading(true);
 		movementVector = Vector3.zero;
 	}
 
@@ -234,6 +249,15 @@ public class GroupMovementController : MonoBehaviour
 	public void SetCanMove(bool _canMove)
 	{
 		canMove = _canMove;
+	}
+
+	/// <summary>
+	/// Funzione che imposta la variabile is reloading
+	/// </summary>
+	/// <param name="_canMove"></param>
+	public void SetIsReloading(bool _isReloading)
+	{
+		isReloading = _isReloading;
 	}
 	#endregion
 	#endregion

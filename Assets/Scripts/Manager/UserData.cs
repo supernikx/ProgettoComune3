@@ -12,11 +12,20 @@ public class UserData : MonoBehaviour
 	private float musicVolume;
 	private float effectVolume;
 	private int graphicQuality;
+	private int bossDefeated;
 
 	private void Awake()
 	{
 		instance = this;
 		LoadData();
+	}
+
+	private void Update()
+	{
+#if UNITY_EDITOR
+		if (Input.GetKeyDown(KeyCode.B))
+			PlayerPrefs.DeleteKey("boss");
+#endif
 	}
 
 	#region API
@@ -25,9 +34,13 @@ public class UserData : MonoBehaviour
 	/// </summary>
 	public static void LoadData()
 	{
-		instance.musicVolume = PlayerPrefs.GetFloat("music", 0);
-		instance.effectVolume = PlayerPrefs.GetFloat("effect", 0);
-		instance.graphicQuality = PlayerPrefs.GetInt("quality", 2);
+		if (instance != null)
+		{
+			instance.musicVolume = PlayerPrefs.GetFloat("music", 0);
+			instance.effectVolume = PlayerPrefs.GetFloat("effect", 0);
+			instance.graphicQuality = PlayerPrefs.GetInt("quality", 2);
+			instance.bossDefeated = PlayerPrefs.GetInt("boss", 0);
+		}
 	}
 
 	/// <summary>
@@ -35,9 +48,13 @@ public class UserData : MonoBehaviour
 	/// </summary>
 	public void SaveData()
 	{
-		PlayerPrefs.SetFloat("music", instance.musicVolume);
-		PlayerPrefs.SetFloat("effect", instance.effectVolume);
-		PlayerPrefs.SetInt("quality", instance.graphicQuality);
+		if (instance != null)
+		{
+			PlayerPrefs.SetFloat("music", instance.musicVolume);
+			PlayerPrefs.SetFloat("effect", instance.effectVolume);
+			PlayerPrefs.SetInt("quality", instance.graphicQuality);
+			PlayerPrefs.SetInt("boss", instance.bossDefeated);
+		}
 	}
 
 	#region Setter
@@ -48,8 +65,11 @@ public class UserData : MonoBehaviour
 	/// <returns></returns>
 	public static void SetMusicVolume(float _volume)
 	{
-		instance.musicVolume = _volume;
-		PlayerPrefs.SetFloat("music", instance.musicVolume);
+		if (instance != null)
+		{
+			instance.musicVolume = _volume;
+			PlayerPrefs.SetFloat("music", instance.musicVolume);
+		}
 	}
 
 	/// <summary>
@@ -58,8 +78,11 @@ public class UserData : MonoBehaviour
 	/// <returns></returns>
 	public static void SetEffectVolume(float _volume)
 	{
-		instance.effectVolume = _volume;
-		PlayerPrefs.SetFloat("effect", instance.effectVolume);
+		if (instance != null)
+		{
+			instance.effectVolume = _volume;
+			PlayerPrefs.SetFloat("effect", instance.effectVolume);
+		}
 	}
 
 	/// <summary>
@@ -68,8 +91,24 @@ public class UserData : MonoBehaviour
 	/// <returns></returns>
 	public static void SetGraphicQuality(int _quality)
 	{
-		instance.graphicQuality = _quality;
-		PlayerPrefs.SetInt("quality", instance.graphicQuality);
+		if (instance != null)
+		{
+			instance.graphicQuality = _quality;
+			PlayerPrefs.SetInt("quality", instance.graphicQuality);
+		}
+	}
+
+	/// <summary>
+	/// Funzione che imposta il numero di boss sconfitti
+	/// </summary>
+	/// <returns></returns>
+	public static void SetBossDefeated(int _boss)
+	{
+		if (instance != null)
+		{
+			instance.bossDefeated = _boss;
+			PlayerPrefs.SetInt("boss", instance.bossDefeated);
+		}
 	}
 	#endregion
 	#endregion
@@ -81,7 +120,10 @@ public class UserData : MonoBehaviour
 	/// <returns></returns>
 	public static float GetMusicVolume()
 	{
-		return instance.musicVolume = PlayerPrefs.GetFloat("music", 0);
+		if (instance != null)
+			return instance.musicVolume = PlayerPrefs.GetFloat("music", 0);
+		else
+			return PlayerPrefs.GetFloat("music", 0);
 	}
 
 	/// <summary>
@@ -90,7 +132,10 @@ public class UserData : MonoBehaviour
 	/// <returns></returns>
 	public static float GetEffectVolume()
 	{
-		return instance.effectVolume = PlayerPrefs.GetFloat("effect", 0);
+		if (instance != null)
+			return instance.effectVolume = PlayerPrefs.GetFloat("effect", 0);
+		else
+			return PlayerPrefs.GetFloat("effect", 0);
 	}
 
 	/// <summary>
@@ -99,7 +144,22 @@ public class UserData : MonoBehaviour
 	/// <returns></returns>
 	public static int GetGraphicQuality()
 	{
-		return instance.graphicQuality = PlayerPrefs.GetInt("quality", 2);
+		if (instance != null)
+			return instance.graphicQuality = PlayerPrefs.GetInt("quality", 2);
+		else
+			return PlayerPrefs.GetInt("quality", 2);
+	}
+
+	/// <summary>
+	/// Funzione che ritorna l'id dellq qualità grafica
+	/// </summary>
+	/// <returns></returns>
+	public static int GetBossDefeated()
+	{
+		if (instance != null)
+			return instance.bossDefeated = PlayerPrefs.GetInt("boss", 0);
+		else
+			return PlayerPrefs.GetInt("boss", 0); ;
 	}
 	#endregion
 	#endregion

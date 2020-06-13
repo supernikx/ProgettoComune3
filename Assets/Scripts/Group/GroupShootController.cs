@@ -32,10 +32,6 @@ public class GroupShootController : MonoBehaviour
 	[SerializeField]
 	private float shootHeight;
 
-	[Header("Charge Settings")]
-	[SerializeField]
-	private float chargeTime;
-
 	[Header("Reloading Settings")]
 	//Range in cui deve entrare l'orb per risultare ricaricato
 	[SerializeField]
@@ -101,7 +97,6 @@ public class GroupShootController : MonoBehaviour
 	private IEnumerator reloadingRoutine;
 
 	private bool isShootButtonDown;
-	private float shootButtonUpDownDelay;
 
 	/// <summary>
 	/// Funzione che esegue il Setup
@@ -127,15 +122,9 @@ public class GroupShootController : MonoBehaviour
 		if (!groupCtrl.IsSetuppedAndEnabled() || !canShoot)
 		{
 			aimFeedback.DisableArrow();
-			shootButtonUpDownDelay = 0f;
 			isShootButtonDown = false;
 			return;
 		}
-
-		if (isShootButtonDown)
-			shootButtonUpDownDelay += Time.deltaTime;
-		else
-			shootButtonUpDownDelay = 0;
 
 		aimFeedback.EnableArrow();
 		aimFeedback.UpdateArrow(groupCtrl.GetGroupCenterPoint(), shootVector);
@@ -180,10 +169,7 @@ public class GroupShootController : MonoBehaviour
 
 		if (isShootButtonDown && !buttonPressed)
 		{
-			if (shootButtonUpDownDelay > chargeTime)
-				ShootCharge();
-			else
-				ShootAgent();
+			ShootAgent();
 		}
 
 		isShootButtonDown = buttonPressed;
@@ -215,31 +201,6 @@ public class GroupShootController : MonoBehaviour
 				soundCtrl.PlayAudioClipOnTime(shootSoundID);
 				newBullet.transform.SetPositionAndRotation(shootPoint, Quaternion.LookRotation(shootVector.normalized));
 				newBullet.Setup();
-			}
-		}
-	}
-
-	/// <summary>
-	/// Funzione che si occupa di sparare il colpo caricato
-	/// </summary>
-	private void ShootCharge()
-	{
-		Vector3 shootPoint = groupCtrl.GetGroupCenterPoint();
-		shootPoint.y = shootPoint.y + shootHeight;
-
-		Quaternion shootPointRotation = Quaternion.LookRotation(shootVector.normalized);
-
-		for (int i = 0, rot = -15; i < 3; i++, rot += 15)
-		{
-			if (groupCtrl.RemoveRandomAgent())
-			{
-				PlayerBulletController newBullet = PoolManager.instance.GetPooledObject(ObjectTypes.PlayerBullet, gameObject).GetComponent<PlayerBulletController>();
-				if (newBullet != null)
-				{
-					Quaternion shootRotation = shootPointRotation * Quaternion.Euler(0, rot, 0);
-					newBullet.transform.SetPositionAndRotation(shootPoint, shootRotation);
-					newBullet.Setup();
-				}
 			}
 		}
 	}
@@ -300,8 +261,8 @@ public class GroupShootController : MonoBehaviour
 
 			OnReloadingInProgress?.Invoke();
 			yield return wffu;
-		}		
-		
+		}
+
 		groupFeedbackCtrl.SetReloadVFX(false);
 		EndReloading();
 	}
@@ -341,6 +302,7 @@ public class GroupShootController : MonoBehaviour
 		else
 			groupMovementCtrl.OnGroupMove -= EndReloading;
 
+		groupCtrl.GetGroupMovementController().SetIsReloading(false);
 		soundCtrl.StopClipLoop(reloadingSoundID);
 		canShoot = true;
 		OnReloadingEnd?.Invoke();
