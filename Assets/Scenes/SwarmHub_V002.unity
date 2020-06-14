@@ -7733,14 +7733,26 @@ PrefabInstance:
     - target: {fileID: 5217095513368535301, guid: d1fc32dcbbef29b4292ed067212f4cff,
         type: 3}
       propertyPath: tutorialTitleText
-      value: RELOAD
+      value: DON'T GET DISCOURAGED!
       objectReference: {fileID: 0}
     - target: {fileID: 5217095513368535301, guid: d1fc32dcbbef29b4292ed067212f4cff,
         type: 3}
       propertyPath: tutorialImage
       value: 
-      objectReference: {fileID: 21300000, guid: e865c29349b10e24595d7da1d6a4d348,
+      objectReference: {fileID: 21300000, guid: 81f264bff08eb984e97ce85e5049a1b1,
         type: 3}
+    - target: {fileID: 5217095513368535301, guid: d1fc32dcbbef29b4292ed067212f4cff,
+        type: 3}
+      propertyPath: tutorialText
+      value: "\u201CPressing the \"E\" key will *Call* other members to join the group.
+        If the group is complete you\u2019ll not be able to *Call* other members.
+        \r\nBut Don\u2019t move, otherwise your *Call* will be cancelled!\u201D\r\n"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217095513368535301, guid: d1fc32dcbbef29b4292ed067212f4cff,
+        type: 3}
+      propertyPath: triggerRange
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1fc32dcbbef29b4292ed067212f4cff, type: 3}
 --- !u!4 &489230670 stripped
@@ -10129,14 +10141,13 @@ PrefabInstance:
     - target: {fileID: 5217095513368535301, guid: d1fc32dcbbef29b4292ed067212f4cff,
         type: 3}
       propertyPath: tutorialText
-      value: "Unity is strength!\nHold the \"space\" key to bring the group together
-        and go faster\u201D "
+      value: "Hold the \"space\" key to bring the group together and go faster\u201D "
       objectReference: {fileID: 0}
     - target: {fileID: 5217095513368535301, guid: d1fc32dcbbef29b4292ed067212f4cff,
         type: 3}
       propertyPath: tutorialImage
       value: 
-      objectReference: {fileID: 21300000, guid: 33dc950cef865e345acfa2ac1e3f7e86,
+      objectReference: {fileID: 21300000, guid: 3424ddcaea599bb418fc643f0f80ec32,
         type: 3}
     - target: {fileID: 5217095513368535301, guid: d1fc32dcbbef29b4292ed067212f4cff,
         type: 3}
@@ -10151,7 +10162,12 @@ PrefabInstance:
     - target: {fileID: 5217095513368535301, guid: d1fc32dcbbef29b4292ed067212f4cff,
         type: 3}
       propertyPath: tutorialTitleText
-      value: RE-GROUP
+      value: UNITY IS STRENGHT!
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217095513368535301, guid: d1fc32dcbbef29b4292ed067212f4cff,
+        type: 3}
+      propertyPath: triggerRange
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5217095512234734923, guid: d1fc32dcbbef29b4292ed067212f4cff,
         type: 3}
@@ -23783,30 +23799,30 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6122058134731196757, guid: 5baeba3bd639cb4458d27fdc8c301812,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -2.3000488
+      objectReference: {fileID: 0}
     - target: {fileID: 7662681335780155431, guid: 5baeba3bd639cb4458d27fdc8c301812,
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -0.38006592
-      objectReference: {fileID: 0}
-    - target: {fileID: 1101004829883438113, guid: 5baeba3bd639cb4458d27fdc8c301812,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -0.000061035156
       objectReference: {fileID: 0}
     - target: {fileID: 2566309658348357700, guid: 5baeba3bd639cb4458d27fdc8c301812,
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 1.4988098
       objectReference: {fileID: 0}
-    - target: {fileID: 6122058134731196757, guid: 5baeba3bd639cb4458d27fdc8c301812,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -2.3000488
-      objectReference: {fileID: 0}
     - target: {fileID: 7878456428897402141, guid: 5baeba3bd639cb4458d27fdc8c301812,
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1101004829883438113, guid: 5baeba3bd639cb4458d27fdc8c301812,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.000061035156
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5baeba3bd639cb4458d27fdc8c301812, type: 3}
@@ -23954,12 +23970,24 @@ PrefabInstance:
         type: 3}
       propertyPath: tutorialImage
       value: 
-      objectReference: {fileID: 21300000, guid: c01e191f972b7ff4aba3a65d2badcf05,
+      objectReference: {fileID: 21300000, guid: b5e30c180693a4b479e1e5a7f3e21c02,
         type: 3}
     - target: {fileID: 5217095513368535301, guid: d1fc32dcbbef29b4292ed067212f4cff,
         type: 3}
       propertyPath: tutorialTitleText
-      value: ATTACK
+      value: SACRIFICE IS THE KEY!
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217095513368535301, guid: d1fc32dcbbef29b4292ed067212f4cff,
+        type: 3}
+      propertyPath: triggerRange
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217095513368535301, guid: d1fc32dcbbef29b4292ed067212f4cff,
+        type: 3}
+      propertyPath: tutorialText
+      value: "Press the left mouse button to shoot. \nThe more you attack, the more
+        your group will decrease. If there are no more members of the group but one,
+        you won\u2019t be able to shoot anymore unless you\u2019ll start reloading. "
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1fc32dcbbef29b4292ed067212f4cff, type: 3}
@@ -24803,7 +24831,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.9411765}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.9607843}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

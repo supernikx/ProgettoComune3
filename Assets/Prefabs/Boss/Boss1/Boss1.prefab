@@ -1005,7 +1005,7 @@ MonoBehaviour:
   - id: lannding
     audioClip: {fileID: 8300000, guid: 1d17b8ebc21c9634b9ec2c9429bf8fdb, type: 3}
   - id: phase1
-    audioClip: {fileID: 8300000, guid: 6c5fa398db2981e41bf6ce468231bec6, type: 3}
+    audioClip: {fileID: 8300000, guid: c19ca59f85660574d9f7249a5affdfea, type: 3}
   - id: dash
     audioClip: {fileID: 8300000, guid: 040a73f0bf8429349a3bf73594555d8c, type: 3}
   - id: jump
@@ -1013,9 +1013,9 @@ MonoBehaviour:
   - id: shoot
     audioClip: {fileID: 8300000, guid: 3777ad642a6c27a408b1ef244657d178, type: 3}
   - id: phase2
-    audioClip: {fileID: 8300000, guid: 151a4f4842e55524eb4443bbdf4475eb, type: 3}
+    audioClip: {fileID: 8300000, guid: 488674968bbd1a44ab8104b436350b3c, type: 3}
   - id: phase3
-    audioClip: {fileID: 8300000, guid: fbfc37c1954311c49a907cacb0a4cafe, type: 3}
+    audioClip: {fileID: 8300000, guid: 4af798afa38a5be468f6db3c18692e90, type: 3}
 --- !u!1 &1826444727390405244
 GameObject:
   m_ObjectHideFlags: 0
@@ -1690,6 +1690,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -1.7599968
+      objectReference: {fileID: 0}
+    - target: {fileID: 3465635868767164207, guid: 44f4e686a4abcb946bb8ce778fe31ed6,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44f4e686a4abcb946bb8ce778fe31ed6, type: 3}
