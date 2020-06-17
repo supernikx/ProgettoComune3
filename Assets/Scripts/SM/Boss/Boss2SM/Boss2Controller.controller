@@ -68,7 +68,7 @@ MonoBehaviour:
   id: Laser
   canTakeDirectDamage: 1
   laser1SpawnTime: 0.5
-  laser1Speed: 25
+  laser1Speed: 20
   laser1StartAngle: -90
   laser1EndAngle: 90
   laser1SoundID: laser
@@ -574,7 +574,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Waiting
   canTakeDirectDamage: 1
-  waitTimeRange: {x: 1, y: 1}
+  waitTimeRange: {x: 1.5, y: 1.5}
   waitingSoundID: laserCharge
 --- !u!1102 &-7516401128901717761
 AnimatorState:
@@ -657,7 +657,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Waiting
   canTakeDirectDamage: 1
-  waitTimeRange: {x: 2, y: 2}
+  waitTimeRange: {x: 1.5, y: 1.5}
   waitingSoundID: laserCharge
 --- !u!114 &-7332893067877633740
 MonoBehaviour:
@@ -933,7 +933,7 @@ AnimatorStateMachine:
     m_Position: {x: 1140, y: 110, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6336885408062266441}
-    m_Position: {x: 1400, y: 110, z: 0}
+    m_Position: {x: 1410, y: 110, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3293334390596486397}
     m_Position: {x: 1410, y: 0, z: 0}
@@ -1745,7 +1745,7 @@ MonoBehaviour:
   id: Laser
   canTakeDirectDamage: 1
   laser1SpawnTime: 0.5
-  laser1Speed: 25
+  laser1Speed: 20
   laser1StartAngle: 90
   laser1EndAngle: -90
   laser1SoundID: laser
@@ -2562,7 +2562,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Waiting
   canTakeDirectDamage: 1
-  waitTimeRange: {x: 2, y: 2}
+  waitTimeRange: {x: 1.5, y: 1.5}
   waitingSoundID: laserCharge
 --- !u!1102 &-3227110304953967295
 AnimatorState:
@@ -2722,7 +2722,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Waiting
   canTakeDirectDamage: 1
-  waitTimeRange: {x: 2, y: 2}
+  waitTimeRange: {x: 1.5, y: 1.5}
   waitingSoundID: laserCharge
 --- !u!1101 &-2928522157505469287
 AnimatorStateTransition:
@@ -2985,13 +2985,13 @@ MonoBehaviour:
   id: Laser
   canTakeDirectDamage: 1
   laser1SpawnTime: 0.5
-  laser1Speed: 25
-  laser1StartAngle: 0
-  laser1EndAngle: 90
+  laser1Speed: 18
+  laser1StartAngle: 90
+  laser1EndAngle: -90
   laser1SoundID: laser
-  useSecondLaser: 1
+  useSecondLaser: 0
   laser2SpawnTime: 0.5
-  laser2Speed: 25
+  laser2Speed: 15
   laser2StartAngle: 0
   laser2EndAngle: -90
   laser2SoundID: laser
@@ -3431,13 +3431,13 @@ MonoBehaviour:
   id: Laser
   canTakeDirectDamage: 1
   laser1SpawnTime: 0.5
-  laser1Speed: 25
+  laser1Speed: 20
   laser1StartAngle: -90
   laser1EndAngle: 0
   laser1SoundID: laser
   useSecondLaser: 1
   laser2SpawnTime: 0.5
-  laser2Speed: 25
+  laser2Speed: 20
   laser2StartAngle: 90
   laser2EndAngle: 0
   laser2SoundID: laser
@@ -4975,7 +4975,7 @@ AnimatorStateMachine:
     m_Position: {x: 280, y: 110, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6539042115770343934}
-    m_Position: {x: 780, y: 110, z: 0}
+    m_Position: {x: 790, y: 110, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6827615625644361044}
     m_Position: {x: 1060, y: 110, z: 0}
@@ -5112,7 +5112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Waiting
   canTakeDirectDamage: 1
-  waitTimeRange: {x: 2, y: 2}
+  waitTimeRange: {x: 1.5, y: 1.5}
   waitingSoundID: laserCharge
 --- !u!114 &2672444739540560130
 MonoBehaviour:
@@ -5460,7 +5460,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Waiting
   canTakeDirectDamage: 1
-  waitTimeRange: {x: 0, y: 0}
+  waitTimeRange: {x: 2, y: 2}
   waitingSoundID: laserCharge
 --- !u!1102 &3684248431892440434
 AnimatorState:
@@ -6289,14 +6289,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Laser
   canTakeDirectDamage: 1
-  laser1SpawnTime: 1
-  laser1Speed: 25
+  laser1SpawnTime: 0.5
+  laser1Speed: 20
   laser1StartAngle: 0
   laser1EndAngle: 90
   laser1SoundID: laser
   useSecondLaser: 1
-  laser2SpawnTime: 1
-  laser2Speed: 25
+  laser2SpawnTime: 0.5
+  laser2Speed: 20
   laser2StartAngle: 0
   laser2EndAngle: -90
   laser2SoundID: laser
@@ -6958,7 +6958,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Waiting
   canTakeDirectDamage: 1
-  waitTimeRange: {x: 0, y: 0}
+  waitTimeRange: {x: 1.5, y: 1.5}
   waitingSoundID: laserCharge
 --- !u!1101 &7988756154738385499
 AnimatorStateTransition:
@@ -7413,7 +7413,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Waiting
   canTakeDirectDamage: 1
-  waitTimeRange: {x: 2, y: 2}
+  waitTimeRange: {x: 1.5, y: 1.5}
   waitingSoundID: laserCharge
 --- !u!1102 &8917299671717402516
 AnimatorState:
