@@ -158,7 +158,7 @@ public class CoverBlockController : MonoBehaviour
 		{
 			//soundCtrl.PlayAudioClipOnTime(coverblockDown);
 			isTriggered = false;
-			isCooldown = true;
+			//isCooldown = true;
 		}
 
 		if (enable)
@@ -177,7 +177,7 @@ public class CoverBlockController : MonoBehaviour
 				if (isTriggered)
 					soundCtrl.PlayAudioClipOnTime(coverblockSoundIDDown);
 				isTriggered = false;
-				isCooldown = true;
+				//isCooldown = true;
 			}
 		}
 

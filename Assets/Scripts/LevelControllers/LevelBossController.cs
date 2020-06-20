@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -37,6 +38,10 @@ public class LevelBossController : MonoBehaviour
 	/// Riferimento al boss attuale
 	/// </summary>
 	private BossControllerBase currentBoss;
+	/// <summary>
+	/// Riferimento all'audio source del boss
+	/// </summary>
+	private AudioSource bossOts;
 
 	/// <summary>
 	/// Funzione di Setup
@@ -46,6 +51,7 @@ public class LevelBossController : MonoBehaviour
 	{
 		lvlMng = _lvlMng;
 		groupCtrl = lvlMng.GetGroupController();
+		bossOts = GetComponentInChildren<AudioSource>();
 		bossTrigger.Setup(lvlMng);
 
 		closeArenaObj.SetActive(false);
@@ -67,6 +73,8 @@ public class LevelBossController : MonoBehaviour
 
 			currentBoss.OnBossDead += HandleOnBossDead;
 			currentBoss.StartBoss();
+			bossOts.Play();
+			bossOts.DOFade(1, 1f);
 			OnBossFightStart?.Invoke(currentBoss);
 		}
 	}
@@ -87,6 +95,7 @@ public class LevelBossController : MonoBehaviour
 
 			OnBossFightEnd?.Invoke(currentBoss, true);
 			currentBoss = null;
+			bossOts.DOFade(0, 1f).OnComplete(() => bossOts.Stop());
 		}
 	}
 
@@ -104,6 +113,7 @@ public class LevelBossController : MonoBehaviour
 		closeArenaObj.SetActive(false);
 		OnBossFightEnd?.Invoke(currentBoss, false);
 		currentBoss = null;
+		bossOts.DOFade(0, 1f).OnComplete(() => bossOts.Stop());
 	}
 	#endregion
 

@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.InputSystem;
+using DG.Tweening;
 
 /// <summary>
 /// Classe che gestisce l'attivazione dei Boss
@@ -84,7 +85,7 @@ public class ActiveBossTrigger : MonoBehaviour
         {
             if (endBossCutsceneDirector != null)
                 EndBossCutscene();
-        }
+        }        
     }
     #endregion
 
