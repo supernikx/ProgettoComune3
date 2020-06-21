@@ -7,6 +7,10 @@ using UnityEngine;
 /// </summary>
 public class Boss2LaserState : Boss2StateBase
 {
+	[Header("General Settings")]
+	[SerializeField]
+	private float laserChargeTime;
+
 	[Header("First Laser Settings")]
 	//Tempo di spawn del laser 1
 	[SerializeField]
@@ -48,7 +52,6 @@ public class Boss2LaserState : Boss2StateBase
 	[SerializeField]
 	private string laser2SoundID = "laser";
 
-
 	[Header("Tracker Laser Settings (this override other settings)")]
 	//Se il laser deve trackare il player
 	[SerializeField]
@@ -67,10 +70,12 @@ public class Boss2LaserState : Boss2StateBase
 	private float trackLaserSpeed;
 
 	[Header("Feedback")]
+	//suono di waiting del boss
+	[SerializeField]
+	protected string chargingSoundID = "laserCharge";
 	//suono di laser del boss
 	[SerializeField]
 	private string laserTrackerSoundID = "laser";
-
 
 	/// <summary>
 	/// Riferimento al GroupController
@@ -108,6 +113,10 @@ public class Boss2LaserState : Boss2StateBase
 	/// Int che identifica la next phase
 	/// </summary>
 	private int nextPhase;
+	/// <summary>
+	/// Riferimento alla routine di charge del laser
+	/// </summary>
+	private IEnumerator laserChargeRoutine;
 
 	public override void Enter()
 	{
@@ -130,6 +139,35 @@ public class Boss2LaserState : Boss2StateBase
 		nextPhase = -1;
 		waitForOtherLaser = true;
 
+		laserChargeRoutine = LaserChargeCoroutine();
+		laserCtrl.StartCoroutine(laserChargeRoutine);
+	}
+
+	/// <summary>
+	/// Coroutine che esegue lo start del laser
+	/// </summary>
+	/// <returns></returns>
+	private IEnumerator LaserChargeCoroutine()
+	{
+		Vector3 laser1SpawnPos = Quaternion.Euler(new Vector3(0, laser1StartAngle, 0)) * laserCtrl.transform.position;
+		laser1SpawnPos += (laser1SpawnPos.normalized * 2f + Vector3.up * 2f);
+		laserCtrl.SpawnLaserChargeVFX(laser1SpawnPos, 1, true);
+
+		if (useSecondLaser)
+		{
+			Vector3 laser2SpawnPos = Quaternion.Euler(new Vector3(0, laser2StartAngle, 0)) * laserCtrl.transform.position;
+			laser2SpawnPos += (laser2SpawnPos.normalized * 2f + Vector3.up * 2f);
+			laserCtrl.SpawnLaserChargeVFX(laser2SpawnPos, 2, true);
+		}
+
+		soundCtrl.PlayClipLoop(chargingSoundID);
+
+		yield return new WaitForSeconds(laserChargeTime);
+
+		soundCtrl.StopClipLoop(chargingSoundID);
+
+		laserCtrl.SpawnLaserChargeVFX(laser1SpawnPos, 1, false);
+		laserCtrl.SpawnLaserChargeVFX(laser1SpawnPos, 2, false);
 		if (trackPlayer)
 		{
 			laserCtrl.SpawnLaser(trackLaserSpawnTime, trackLaserSpawnDelay, groupCtrl.GetGroupCenterPoint(), 1, HandleOnLaser1Spawn);
@@ -269,10 +307,13 @@ public class Boss2LaserState : Boss2StateBase
 			collisionCtrl.OnAgentHit -= HandleOnAgentHit;
 
 		if (laserCtrl != null)
+		{
 			laserCtrl.StopLaser(1);
-
-		if (laserCtrl != null)
 			laserCtrl.StopLaser(2);
+
+			if (laserChargeRoutine != null)
+				laserCtrl.StopCoroutine(laserChargeRoutine);
+		}
 
 		if (phaseCtrl != null)
 		{

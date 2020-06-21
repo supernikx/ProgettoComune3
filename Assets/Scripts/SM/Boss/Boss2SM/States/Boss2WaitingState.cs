@@ -12,11 +12,6 @@ public class Boss2WaitingState : Boss2StateBase
 	[SerializeField]
 	private Vector2 waitTimeRange;
 
-	[Header("Feedback")]
-	//suono di waiting del boss
-	[SerializeField]
-	protected string waitingSoundID;
-
 	/// <summary>
 	/// Riferimento al GroupController
 	/// </summary>
@@ -38,10 +33,6 @@ public class Boss2WaitingState : Boss2StateBase
 	/// </summary>
 	private Boss2PhaseController phaseCtrl;
 	/// <summary>
-	/// Riferiemento al sound controller
-	/// </summary>
-	private SoundController soundCtrl;
-	/// <summary>
 	/// Tempo che il boss deve aspettare
 	/// </summary>
 	private float waitTime;
@@ -61,7 +52,6 @@ public class Boss2WaitingState : Boss2StateBase
 		lifeCtrl = bossCtrl.GetBossLifeController();
 		collisionCtrl = bossCtrl.GetBossCollisionController();
 		phaseCtrl = bossCtrl.GetPhaseController();
-		soundCtrl = bossCtrl.GetSoundController();
 
 		nextPhase = -1;
 		timer = 0;
@@ -73,8 +63,6 @@ public class Boss2WaitingState : Boss2StateBase
 		phaseCtrl.OnSecondPhaseStart += HandleOnSecondPhaseStart;
 		phaseCtrl.OnThirdPhaseStart += HandleOnThirdPhaseStart;
 		phaseCtrl.OnFourthPhaseStart += HandleOnFourthPhaseStart;
-
-		soundCtrl.PlayClipLoop(waitingSoundID);
 	}
 
 	public override void Tick()
@@ -141,9 +129,6 @@ public class Boss2WaitingState : Boss2StateBase
 
 	public override void Exit()
 	{
-		if (soundCtrl != null)
-			soundCtrl.StopClipLoop(waitingSoundID);
-
 		if (lifeCtrl != null)
 			lifeCtrl.OnBossDead -= HandleOnBossDead;
 

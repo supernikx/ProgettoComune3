@@ -22,6 +22,12 @@ public class Boss2LaserController : MonoBehaviour
 	[SerializeField]
 	private LaserController laserCtrl2;
 
+	[Header("Graphic Settings")]
+	[SerializeField]
+	private ParticleSystem laser1chargeVFX;
+	[SerializeField]
+	private ParticleSystem laser2chargeVFX;
+
 	/// <summary>
 	/// Riferimento al Boss Controller
 	/// </summary>
@@ -68,6 +74,39 @@ public class Boss2LaserController : MonoBehaviour
 	#endregion
 
 	#region API
+	/// <summary>
+	/// Funzione che spawna il vfx di carica del laser
+	/// </summary>
+	/// <param name="_targetPosition"></param>
+	/// <param name="_laserID"></param>
+	public void SpawnLaserChargeVFX(Vector3 _targetPosition, int _laserID, bool _enable)
+	{
+		if (_laserID == 1)
+		{
+			if (_enable)
+			{
+				laser1chargeVFX.transform.position = _targetPosition;
+				laser1chargeVFX.Play();
+			}
+			else
+			{
+				laser1chargeVFX.Stop(); 
+			}
+		}
+		else if (_laserID == 2)
+		{
+			if (_enable)
+			{
+				laser2chargeVFX.transform.position = _targetPosition;
+				laser2chargeVFX.Play();
+			}
+			else
+			{
+				laser2chargeVFX.Stop();
+			}
+		}
+	}
+
 	/// <summary>
 	/// Funzione che spawna il laser
 	/// </summary>

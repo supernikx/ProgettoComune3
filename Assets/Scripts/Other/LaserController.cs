@@ -25,7 +25,11 @@ public class LaserController : MonoBehaviour
 	private LayerMask agentLayer;
 	//Riferimento al LineRenderer
 	[SerializeField]
-	private LineRenderer lineRenderer;
+	private LineRenderer[] lineRenderer;
+
+	[Header("Graphic References")]
+	[SerializeField]
+	private ParticleSystem shootLaserVFX;
 
 	/// <summary>
 	/// Raggio del laser
@@ -98,7 +102,13 @@ public class LaserController : MonoBehaviour
 					OnAgentHit?.Invoke(agent);
 			}
 
-			lineRenderer.SetPosition(1, nextLaserPoint);
+			for (int i = 0; i < lineRenderer.Length; i++)
+			{
+				lineRenderer[i].SetPosition(1, nextLaserPoint);
+			}
+
+			shootLaserVFX.transform.position = lineRenderer[0].GetPosition(0) + shootLaserVFX.transform.forward * 3f;
+			shootLaserVFX.transform.rotation = Quaternion.LookRotation(lineRenderer[0].GetPosition(1));
 		}
 	}
 
@@ -140,6 +150,7 @@ public class LaserController : MonoBehaviour
 	{
 		rotateRoutine = RotateLaserCoroutine(_targetAngle, _speed, _onRotateCallback);
 		StartCoroutine(rotateRoutine);
+		shootLaserVFX.Play();
 		enable = true;
 	}
 
@@ -150,6 +161,7 @@ public class LaserController : MonoBehaviour
 	{
 		rotateRoutine = RotateLaserCoroutine(_targetTransform, _duaration, _speed, _onRotateCallback);
 		StartCoroutine(rotateRoutine);
+		shootLaserVFX.Play();
 		enable = true;
 	}
 
@@ -158,7 +170,8 @@ public class LaserController : MonoBehaviour
 	/// </summary>
 	public void StopLaser()
 	{
-		lineRenderer.enabled = false;
+		for (int i = 0; i < lineRenderer.Length; i++)
+			lineRenderer[i].enabled = false;
 		enable = false;
 
 		if (rotateRoutine != null)
@@ -166,6 +179,8 @@ public class LaserController : MonoBehaviour
 
 		if (spawnRoutine != null)
 			StopCoroutine(spawnRoutine);
+
+		shootLaserVFX.Stop();
 	}
 
 	#region Getter
@@ -191,10 +206,13 @@ public class LaserController : MonoBehaviour
 		if (_spawnDelay != 0)
 			yield return new WaitForSeconds(_spawnDelay);
 
-		lineRenderer.enabled = true;
-		lineRenderer.positionCount = 2;
-		lineRenderer.SetPosition(0, transform.position);
-		lineRenderer.startWidth = lineRenderer.startWidth = laserRadius;
+		for (int i = 0; i < lineRenderer.Length; i++)
+		{
+			lineRenderer[i].enabled = true;
+			lineRenderer[i].positionCount = 2;
+			lineRenderer[i].SetPosition(0, transform.position);
+			lineRenderer[i].startWidth = lineRenderer[i].startWidth = laserRadius;
+		}
 
 		float laserRange = 0;
 		float rangeOffset;
@@ -242,7 +260,8 @@ public class LaserController : MonoBehaviour
 					OnAgentHit?.Invoke(agent);
 			}
 
-			lineRenderer.SetPosition(1, nextLaserPoint);
+			for (int i = 0; i < lineRenderer.Length; i++)
+				lineRenderer[i].SetPosition(1, nextLaserPoint);
 			yield return wffu;
 		}
 
@@ -258,7 +277,8 @@ public class LaserController : MonoBehaviour
 	/// <returns></returns>
 	private IEnumerator RotateLaserCoroutine(float _targetAngle, float _speed, Action _onRotateCallback)
 	{
-		lineRenderer.enabled = true;
+		for (int i = 0; i < lineRenderer.Length; i++)
+			lineRenderer[i].enabled = true;
 		WaitForFixedUpdate wffu = new WaitForFixedUpdate();
 		Quaternion targetRotation = Quaternion.Euler(new Vector3(0, _targetAngle, 0));
 
@@ -280,7 +300,8 @@ public class LaserController : MonoBehaviour
 	/// <returns></returns>
 	private IEnumerator RotateLaserCoroutine(Transform _targetTransform, float _duration, float _speed, Action _onRotateCallback)
 	{
-		lineRenderer.enabled = true;
+		for (int i = 0; i < lineRenderer.Length; i++)
+			lineRenderer[i].enabled = true;
 		WaitForFixedUpdate wffu = new WaitForFixedUpdate();
 		Quaternion targetRotation = Quaternion.LookRotation((transform.position - _targetTransform.position).normalized, Vector3.up);
 		float timer = 0f;
