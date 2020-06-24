@@ -67,7 +67,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Laser
   canTakeDirectDamage: 1
-  laserChargeTime: 0
+  laserChargeTime: 2
   laser1SpawnTime: 0.5
   laser1Speed: 20
   laser1StartAngle: -90
@@ -84,6 +84,7 @@ MonoBehaviour:
   trackLaserSpawnTime: 0
   trackLaserDuration: 0
   trackLaserSpeed: 0
+  chargingSoundID: laserCharge
   laserTrackerSoundID: laser
 --- !u!1102 &-8594931855303012850
 AnimatorState:
@@ -576,7 +577,6 @@ MonoBehaviour:
   id: Waiting
   canTakeDirectDamage: 1
   waitTimeRange: {x: 1.5, y: 1.5}
-  waitingSoundID: laserCharge
 --- !u!1102 &-7516401128901717761
 AnimatorState:
   serializedVersion: 5
@@ -659,7 +659,6 @@ MonoBehaviour:
   id: Waiting
   canTakeDirectDamage: 1
   waitTimeRange: {x: 1.5, y: 1.5}
-  waitingSoundID: laserCharge
 --- !u!114 &-7332893067877633740
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1745,7 +1744,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Laser
   canTakeDirectDamage: 1
-  laserChargeTime: 0
+  laserChargeTime: 2
   laser1SpawnTime: 0.5
   laser1Speed: 20
   laser1StartAngle: 90
@@ -1762,6 +1761,7 @@ MonoBehaviour:
   trackLaserSpawnTime: 0
   trackLaserDuration: 0
   trackLaserSpeed: 0
+  chargingSoundID: laserCharge
   laserTrackerSoundID: laser
 --- !u!1101 &-5476684188291585844
 AnimatorStateTransition:
@@ -2271,7 +2271,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Laser
   canTakeDirectDamage: 1
-  laserChargeTime: 0
+  laserChargeTime: 2
   laser1SpawnTime: 0
   laser1Speed: 0
   laser1StartAngle: 0
@@ -2288,6 +2288,7 @@ MonoBehaviour:
   trackLaserSpawnTime: 0.5
   trackLaserDuration: 5
   trackLaserSpeed: 20
+  chargingSoundID: laserCharge
   laserTrackerSoundID: laser
 --- !u!114 &-3805996187906865311
 MonoBehaviour:
@@ -2566,7 +2567,6 @@ MonoBehaviour:
   id: Waiting
   canTakeDirectDamage: 1
   waitTimeRange: {x: 1.5, y: 1.5}
-  waitingSoundID: laserCharge
 --- !u!1102 &-3227110304953967295
 AnimatorState:
   serializedVersion: 5
@@ -2726,7 +2726,6 @@ MonoBehaviour:
   id: Waiting
   canTakeDirectDamage: 1
   waitTimeRange: {x: 1.5, y: 1.5}
-  waitingSoundID: laserCharge
 --- !u!1101 &-2928522157505469287
 AnimatorStateTransition:
   m_ObjectHideFlags: 3
@@ -2987,7 +2986,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Laser
   canTakeDirectDamage: 1
-  laserChargeTime: 0
+  laserChargeTime: 2
   laser1SpawnTime: 0.5
   laser1Speed: 18
   laser1StartAngle: 90
@@ -3004,6 +3003,7 @@ MonoBehaviour:
   trackLaserSpawnTime: 0
   trackLaserDuration: 0
   trackLaserSpeed: 0
+  chargingSoundID: laserCharge
   laserTrackerSoundID: laser
 --- !u!114 &-2445668678704358489
 MonoBehaviour:
@@ -3434,7 +3434,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Laser
   canTakeDirectDamage: 1
-  laserChargeTime: 3
+  laserChargeTime: 2
   laser1SpawnTime: 0.5
   laser1Speed: 20
   laser1StartAngle: -90
@@ -3451,6 +3451,7 @@ MonoBehaviour:
   trackLaserSpawnTime: 0
   trackLaserDuration: 0
   trackLaserSpeed: 0
+  chargingSoundID: laserCharge
   laserTrackerSoundID: laser
 --- !u!114 &-1474878763220115184
 MonoBehaviour:
@@ -5118,7 +5119,6 @@ MonoBehaviour:
   id: Waiting
   canTakeDirectDamage: 1
   waitTimeRange: {x: 1.5, y: 1.5}
-  waitingSoundID: laserCharge
 --- !u!114 &2672444739540560130
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -5289,7 +5289,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Laser
   canTakeDirectDamage: 1
-  laserChargeTime: 0
+  laserChargeTime: 2
   laser1SpawnTime: 0
   laser1Speed: 0
   laser1StartAngle: 0
@@ -5306,6 +5306,7 @@ MonoBehaviour:
   trackLaserSpawnTime: 0.5
   trackLaserDuration: 5
   trackLaserSpeed: 15
+  chargingSoundID: laserCharge
   laserTrackerSoundID: laser
 --- !u!1102 &3295834832145003343
 AnimatorState:
@@ -5467,7 +5468,6 @@ MonoBehaviour:
   id: Waiting
   canTakeDirectDamage: 1
   waitTimeRange: {x: 2, y: 2}
-  waitingSoundID: laserCharge
 --- !u!1102 &3684248431892440434
 AnimatorState:
   serializedVersion: 5
@@ -5679,7 +5679,6 @@ MonoBehaviour:
   id: Waiting
   canTakeDirectDamage: 1
   waitTimeRange: {x: 2, y: 2}
-  waitingSoundID: laserCharge
 --- !u!1101 &4595242153556680842
 AnimatorStateTransition:
   m_ObjectHideFlags: 3
@@ -6295,7 +6294,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Laser
   canTakeDirectDamage: 1
-  laserChargeTime: 0
+  laserChargeTime: 2
   laser1SpawnTime: 0.5
   laser1Speed: 20
   laser1StartAngle: 0
@@ -6312,6 +6311,7 @@ MonoBehaviour:
   trackLaserSpawnTime: 0
   trackLaserDuration: 0
   trackLaserSpeed: 0
+  chargingSoundID: laserCharge
   laserTrackerSoundID: laser
 --- !u!1101 &6517934580871880135
 AnimatorStateTransition:
@@ -6966,7 +6966,6 @@ MonoBehaviour:
   id: Waiting
   canTakeDirectDamage: 1
   waitTimeRange: {x: 1.5, y: 1.5}
-  waitingSoundID: laserCharge
 --- !u!1101 &7988756154738385499
 AnimatorStateTransition:
   m_ObjectHideFlags: 3
@@ -7421,7 +7420,6 @@ MonoBehaviour:
   id: Waiting
   canTakeDirectDamage: 1
   waitTimeRange: {x: 1.5, y: 1.5}
-  waitingSoundID: laserCharge
 --- !u!1102 &8917299671717402516
 AnimatorState:
   serializedVersion: 5

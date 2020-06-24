@@ -7678,7 +7678,7 @@ PrefabInstance:
     - target: {fileID: 5217095513368535300, guid: d1fc32dcbbef29b4292ed067212f4cff,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.74
+      value: -13.36
       objectReference: {fileID: 0}
     - target: {fileID: 5217095513368535300, guid: d1fc32dcbbef29b4292ed067212f4cff,
         type: 3}
@@ -7688,7 +7688,7 @@ PrefabInstance:
     - target: {fileID: 5217095513368535300, guid: d1fc32dcbbef29b4292ed067212f4cff,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.18
+      value: 6.68
       objectReference: {fileID: 0}
     - target: {fileID: 5217095513368535300, guid: d1fc32dcbbef29b4292ed067212f4cff,
         type: 3}
@@ -7744,9 +7744,10 @@ PrefabInstance:
     - target: {fileID: 5217095513368535301, guid: d1fc32dcbbef29b4292ed067212f4cff,
         type: 3}
       propertyPath: tutorialText
-      value: "\u201CHolding the \"Left Click\" will recall other members to join the
-        group. If the group is complete you\u2019ll not be able to recall other members.
-        \r\nDuring the recall you won't be able to move.\n"
+      value: "<voffset=1.8em>Holding the </voffset><size=300%><sprite=\"Input\" index=0></size><voffset=1.8em>/</voffset><voffset=-0.5em><size=400%><sprite=\"Input\"
+        index=4></size><voffset=1.8em>will recall other members to join the group.</voffset>\r\n<voffset=1.8em>If
+        the group is complete you\u2019ll not be able to recall other members.</voffset>\r\n<voffset=1.8em>During
+        the recall, you won't be able to move.</voffset>\r"
       objectReference: {fileID: 0}
     - target: {fileID: 5217095513368535301, guid: d1fc32dcbbef29b4292ed067212f4cff,
         type: 3}
@@ -10141,9 +10142,9 @@ PrefabInstance:
     - target: {fileID: 5217095513368535301, guid: d1fc32dcbbef29b4292ed067212f4cff,
         type: 3}
       propertyPath: tutorialText
-      value: "Hold the \"space\" key to bring the group together and go faster\u201D
-        \nYou can only do this for a certain amount of time, so plan carefully your
-        positioning."
+      value: "<voffset=1.8em>Hold the</voffset><size=300%><sprite=\"Input\" index=1></size><voffset=1.8em>/</voffset><voffset=-0.5em><size=400%><sprite=\"Input\"
+        index=5></size><voffset=1.8em>to bring the group together and go faster.</voffset>\r\n<voffset=1.8em>You
+        can only do this for a certain amount of time, so plan carefully your positioning.</voffset>\r\n"
       objectReference: {fileID: 0}
     - target: {fileID: 5217095513368535301, guid: d1fc32dcbbef29b4292ed067212f4cff,
         type: 3}
@@ -16387,23 +16388,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 448880, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.95
+      value: -1.13
       objectReference: {fileID: 0}
     - target: {fileID: 448880, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 448880, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.0013861179
       objectReference: {fileID: 0}
     - target: {fileID: 448880, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 448880, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.99999905
       objectReference: {fileID: 0}
     - target: {fileID: 448880, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
       propertyPath: m_RootOrder
@@ -16415,7 +16416,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 448880, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 0.15900001
       objectReference: {fileID: 0}
     - target: {fileID: 448880, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -16509,6 +16510,22 @@ PrefabInstance:
       propertyPath: InitialModule.startSizeZ.minMaxState
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 19812016, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 419
+      objectReference: {fileID: 0}
+    - target: {fileID: 19812016, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 68.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 19812016, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 51.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 19812016, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 14.68
+      objectReference: {fileID: 0}
     - target: {fileID: 19812736, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
       propertyPath: InitialModule.startSizeY.minMaxState
       value: 3
@@ -16524,6 +16541,58 @@ PrefabInstance:
     - target: {fileID: 19812736, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
       propertyPath: InitialModule.startRotationY.minMaxState
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19812736, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 9.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 19812736, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 20.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 19812736, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 13.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 19812736, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
+      propertyPath: InitialModule.startSpeed.minScalar
+      value: 1.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 19812736, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 1.89
+      objectReference: {fileID: 0}
+    - target: {fileID: 19812736, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 3.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19812736, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
+      propertyPath: ShapeModule.type
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 19812736, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
+      propertyPath: InitialModule.startColor.minColor.r
+      value: 0.88631475
+      objectReference: {fileID: 0}
+    - target: {fileID: 19812736, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
+      propertyPath: InitialModule.startColor.minColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19812736, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
+      propertyPath: InitialModule.startColor.minColor.b
+      value: 0.88235295
+      objectReference: {fileID: 0}
+    - target: {fileID: 19812736, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
+      propertyPath: InitialModule.startColor.minColor.a
+      value: 0.46666667
+      objectReference: {fileID: 0}
+    - target: {fileID: 19812736, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.a
+      value: 0.25882354
+      objectReference: {fileID: 0}
+    - target: {fileID: 19812736, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
       objectReference: {fileID: 0}
     - target: {fileID: 19814518, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
       propertyPath: InitialModule.startSizeY.minMaxState
@@ -16676,6 +16745,86 @@ PrefabInstance:
     - target: {fileID: 19831298, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
       propertyPath: InitialModule.startSpeed.scalar
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19831298, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
+      propertyPath: InitialModule.startColor.minColor.r
+      value: 0.07450981
+      objectReference: {fileID: 0}
+    - target: {fileID: 19831298, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
+      propertyPath: InitialModule.startColor.minColor.g
+      value: 0.90588236
+      objectReference: {fileID: 0}
+    - target: {fileID: 19831298, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
+      propertyPath: InitialModule.startColor.minColor.b
+      value: 0.15294118
+      objectReference: {fileID: 0}
+    - target: {fileID: 441118, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 19.409178
+      objectReference: {fileID: 0}
+    - target: {fileID: 441118, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5.34
+      objectReference: {fileID: 0}
+    - target: {fileID: 441118, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 6.4539895
+      objectReference: {fileID: 0}
+    - target: {fileID: 441118, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 4.7055593
+      objectReference: {fileID: 0}
+    - target: {fileID: 441118, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 441118, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 491490, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.70710194
+      objectReference: {fileID: 0}
+    - target: {fileID: 491490, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 6.984919e-10
+      objectReference: {fileID: 0}
+    - target: {fileID: 491490, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.001960262
+      objectReference: {fileID: 0}
+    - target: {fileID: 491490, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.707109
+      objectReference: {fileID: 0}
+    - target: {fileID: 491490, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -89.843
+      objectReference: {fileID: 0}
+    - target: {fileID: 491490, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 89.715004
+      objectReference: {fileID: 0}
+    - target: {fileID: 491490, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -89.874
+      objectReference: {fileID: 0}
+    - target: {fileID: 491490, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3.2657795
+      objectReference: {fileID: 0}
+    - target: {fileID: 491490, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3.2657795
+      objectReference: {fileID: 0}
+    - target: {fileID: 491490, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3.2657795
+      objectReference: {fileID: 0}
+    - target: {fileID: 491490, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -9.06
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
@@ -24022,9 +24171,11 @@ PrefabInstance:
     - target: {fileID: 5217095513368535301, guid: d1fc32dcbbef29b4292ed067212f4cff,
         type: 3}
       propertyPath: tutorialText
-      value: "Press the \"left mouse\" to shoot. \nThe more you attack, the more your
-        group will decrease. If there are no more members of the group but one, you
-        won\u2019t be able to shoot anymore unless you\u2019ll start recalling. "
+      value: "<voffset=1.8em>Press the </voffset><size=300%><sprite=\"Input\" index=2></size><voffset=1.8em>
+        /</voffset><voffset=-0.5em><size=400%><sprite=\"Input\" index=3></size><voffset=1.8em>to
+        shoot.</voffset>\r\n<voffset=1.8em>The more you attack, the more your group
+        will decrease.</voffset>\r\n<voffset=1.8em>If there are no more members of
+        the group but one, you wont be able to shoot anymore unless youll start recalling.</voffset>\r\n"
       objectReference: {fileID: 0}
     - target: {fileID: 7758953003459254559, guid: d1fc32dcbbef29b4292ed067212f4cff,
         type: 3}
