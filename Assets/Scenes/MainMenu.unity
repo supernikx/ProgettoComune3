@@ -396,7 +396,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 2.4e-44, y: 1e-45, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 7.459e-42, y: 1.02e-43, z: 4.484e-42, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -2795,11 +2795,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3385269660812466515}
     m_Modifications:
-    - target: {fileID: 5126978676238256144, guid: 4fb8b0dcdf9dc2e4aaed29c5b7d48b75,
-        type: 3}
-      propertyPath: m_Name
-      value: OptionsPanel
-      objectReference: {fileID: 0}
     - target: {fileID: 8680948397035598090, guid: 4fb8b0dcdf9dc2e4aaed29c5b7d48b75,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2904,6 +2899,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5126978676238256144, guid: 4fb8b0dcdf9dc2e4aaed29c5b7d48b75,
+        type: 3}
+      propertyPath: m_Name
+      value: OptionsPanel
       objectReference: {fileID: 0}
     - target: {fileID: 3823373888315450032, guid: 4fb8b0dcdf9dc2e4aaed29c5b7d48b75,
         type: 3}
