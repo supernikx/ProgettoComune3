@@ -1182,6 +1182,21 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.06
       objectReference: {fileID: 0}
+    - target: {fileID: 5490870052100550915, guid: 21b0a0f8cdb28da4382287a8db2a4b0b,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1323765397811007978, guid: 21b0a0f8cdb28da4382287a8db2a4b0b,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 608615394619914483, guid: 21b0a0f8cdb28da4382287a8db2a4b0b,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21b0a0f8cdb28da4382287a8db2a4b0b, type: 3}
 --- !u!1001 &107694013
@@ -1706,7 +1721,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 376873739}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -6958,7 +6973,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 739446336}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -31956,46 +31971,6 @@ PrefabInstance:
       propertyPath: shootLaserVFX
       value: 
       objectReference: {fileID: 1475723525}
-    - target: {fileID: 6775328934345164367, guid: 284f654423432864db1e0431565ff29d,
-        type: 3}
-      propertyPath: m_UseWorldSpace
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6775328934345164367, guid: 284f654423432864db1e0431565ff29d,
-        type: 3}
-      propertyPath: m_Positions.Array.data[1].z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6775328934345164367, guid: 284f654423432864db1e0431565ff29d,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6775328934345164367, guid: 284f654423432864db1e0431565ff29d,
-        type: 3}
-      propertyPath: m_RenderingLayerMask
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6775328933324633736, guid: 284f654423432864db1e0431565ff29d,
-        type: 3}
-      propertyPath: m_UseWorldSpace
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6775328933324633736, guid: 284f654423432864db1e0431565ff29d,
-        type: 3}
-      propertyPath: m_Positions.Array.data[1].z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6775328933324633736, guid: 284f654423432864db1e0431565ff29d,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6775328933324633736, guid: 284f654423432864db1e0431565ff29d,
-        type: 3}
-      propertyPath: m_RenderingLayerMask
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1176641304957278019, guid: 284f654423432864db1e0431565ff29d,
         type: 3}
       propertyPath: shootLaserVFX
@@ -32020,6 +31995,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6775328934345164367, guid: 284f654423432864db1e0431565ff29d,
+        type: 3}
+      propertyPath: m_UseWorldSpace
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6775328934345164367, guid: 284f654423432864db1e0431565ff29d,
+        type: 3}
+      propertyPath: m_Positions.Array.data[1].z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6775328934345164367, guid: 284f654423432864db1e0431565ff29d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6775328934345164367, guid: 284f654423432864db1e0431565ff29d,
+        type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6775328933324633736, guid: 284f654423432864db1e0431565ff29d,
+        type: 3}
+      propertyPath: m_UseWorldSpace
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6775328933324633736, guid: 284f654423432864db1e0431565ff29d,
+        type: 3}
+      propertyPath: m_Positions.Array.data[1].z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6775328933324633736, guid: 284f654423432864db1e0431565ff29d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6775328933324633736, guid: 284f654423432864db1e0431565ff29d,
+        type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 284f654423432864db1e0431565ff29d, type: 3}
