@@ -32,6 +32,10 @@ public class Boss2SuperAttackState : Boss2StateBase
 	/// </summary>
 	private Boss2Controller bossCtrl;
 	/// <summary>
+	/// Riferiemento al graphic controller
+	/// </summary>
+	private Boss2GraphicController graphicCtrl;
+	/// <summary>
 	/// Riferimento al LifeController
 	/// </summary>
 	private BossLifeController lifeCtrl;
@@ -68,6 +72,7 @@ public class Boss2SuperAttackState : Boss2StateBase
 	{
 		groupCtrl = context.GetLevelManager().GetGroupController();
 		bossCtrl = context.GetBossController();
+		graphicCtrl = bossCtrl.GetGraphicController();
 		lifeCtrl = bossCtrl.GetBossLifeController();
 		coverBlockCtrl = bossCtrl.GetCoverBlocksController();
 		collisionCtrl = bossCtrl.GetBossCollisionController();
@@ -144,7 +149,8 @@ public class Boss2SuperAttackState : Boss2StateBase
 	{
 		soundCtrl.PlayClipLoop(attackChargeSoundID);
 		bossCtrl.canvasDebug.SetActive(true);
-		bossCtrl.ChangeColor(Color.yellow);
+		Color startColor = bossCtrl.GetComponentInChildren<MeshRenderer>().material.GetColor("Color_A9F326B");
+		graphicCtrl.ChangeColor(Color.yellow);
 		float timer = 0f;
 		while (timer < chargeTime)
 		{
@@ -155,7 +161,7 @@ public class Boss2SuperAttackState : Boss2StateBase
 		soundCtrl.StopClipLoop(attackChargeSoundID);
 		soundCtrl.PlayClipLoop(attackSoundID);
 		bossCtrl.canvasDebug.SetActive(false);
-		bossCtrl.ChangeColor(Color.red);
+		graphicCtrl.ChangeColor(Color.red);
 		float waitTime = attackDuration / 10f;
 		for (int k = 0; k < 10; k++)
 		{
@@ -195,7 +201,7 @@ public class Boss2SuperAttackState : Boss2StateBase
 		}
 
 		soundCtrl.StopClipLoop(attackSoundID);
-		bossCtrl.ChangeColor(Color.white);
+		graphicCtrl.ResetColor();
 
 		if (coverBlockToDisable != null)
 			coverBlockToDisable.Enable(false);

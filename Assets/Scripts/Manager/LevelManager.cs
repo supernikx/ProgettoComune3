@@ -133,6 +133,15 @@ public class LevelManager : MonoBehaviour
     {
         return lvlBossCtrl;
     }
+
+    /// <summary>
+    /// Funzione che ritorna il camera controller del livello
+    /// </summary>
+    /// <returns></returns>
+    public LevelCameraController GetLevelCameraController()
+	{
+        return lvlCamCtrl;
+	}
     #endregion
     #endregion
 }

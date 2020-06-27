@@ -21,6 +21,10 @@ public class Boss2WaitingState : Boss2StateBase
 	/// </summary>
 	private Boss2Controller bossCtrl;
 	/// <summary>
+	/// Riferimento al graphic controller
+	/// </summary>
+	private Boss2GraphicController graphicCtrl;
+	/// <summary>
 	/// Riferimento al BossCollisionController
 	/// </summary>
 	private BossCollisionController collisionCtrl;
@@ -49,6 +53,7 @@ public class Boss2WaitingState : Boss2StateBase
 	{
 		groupCtrl = context.GetLevelManager().GetGroupController();
 		bossCtrl = context.GetBossController();
+		graphicCtrl = bossCtrl.GetGraphicController();
 		lifeCtrl = bossCtrl.GetBossLifeController();
 		collisionCtrl = bossCtrl.GetBossCollisionController();
 		phaseCtrl = bossCtrl.GetPhaseController();
@@ -86,7 +91,7 @@ public class Boss2WaitingState : Boss2StateBase
 	{
 		nextPhase = 2;
 		lifeCtrl.SetCanTakeDamage(false);
-		bossCtrl.ChangeColor(Color.cyan);
+		graphicCtrl.ChangeColor(Color.cyan);
 	}
 
 	/// <summary>
@@ -96,7 +101,7 @@ public class Boss2WaitingState : Boss2StateBase
 	{
 		nextPhase = 3;
 		lifeCtrl.SetCanTakeDamage(false);
-		bossCtrl.ChangeColor(Color.cyan);
+		graphicCtrl.ChangeColor(Color.cyan);
 	}
 
 	/// <summary>
@@ -106,7 +111,7 @@ public class Boss2WaitingState : Boss2StateBase
 	{
 		nextPhase = 4;
 		lifeCtrl.SetCanTakeDamage(false);
-		bossCtrl.ChangeColor(Color.cyan);
+		graphicCtrl.ChangeColor(Color.cyan);
 	}
 	#endregion
 

@@ -25,14 +25,21 @@ public class Boss1StartPhase3State : Boss1StateBase
     /// Riferimento al Life Controller
     /// </summary>
     private BossLifeController lifeCtrl;
+    /// <summary>
+    /// Riferiemento all'event camera controller
+    /// </summary>
+    private LevelCameraController cameraCtrl;
 
     public override void Enter()
     {
+        cameraCtrl = context.GetLevelManager().GetLevelCameraController();
         bossCltr = context.GetBossController();
         lifeCtrl = bossCltr.GetBossLifeController();
 
         lifeCtrl.SetCanTakeDamage(canTakeDirectDamage);
         bossCltr.GetSoundController().PlayAudioClipOnTime(startPhaseSoundID);
+
+        cameraCtrl.DoCameraShake(0.5f);
 
         Debug.Log("Phase 3 Iniziata");
         Complete();

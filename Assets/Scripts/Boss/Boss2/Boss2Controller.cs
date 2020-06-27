@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 /// <summary>
 /// Classe che gestisce tutte le referenze del Boss 2
@@ -29,6 +30,10 @@ public class Boss2Controller : BossControllerBase
 	/// </summary>
 	private Boss2PhaseController phaseCtrl;
 	/// <summary>
+	/// Riferiemento al graphic controller
+	/// </summary>
+	private Boss2GraphicController graphicCtrl;
+	/// <summary>
 	/// Riferiemento al sound controller
 	/// </summary>
 	private SoundController soundCtrl;
@@ -51,6 +56,7 @@ public class Boss2Controller : BossControllerBase
 		coverBlockCtrl = GetComponent<Boss2CoverBlocksController>();
 		phaseCtrl = GetComponent<Boss2PhaseController>();
 		soundCtrl = GetComponent<SoundController>();
+		graphicCtrl = GetComponentInChildren<Boss2GraphicController>();
 
 		coverBlockCtrl.Setup();
 	}
@@ -67,7 +73,8 @@ public class Boss2Controller : BossControllerBase
 		laserCtrl.Setup(this);
 		lifeCtrl.Setup(this);
 		collisionCtrl.Setup(this);
-		phaseCtrl.Setup(this);		
+		phaseCtrl.Setup(this);
+		graphicCtrl.Setup(this);
 	}
 
 	/// <summary>
@@ -77,16 +84,6 @@ public class Boss2Controller : BossControllerBase
 	{
 		sm.GoToState("Empty");
 		base.StopBoss();
-	}
-
-	/// <summary>
-	/// Funzione di Debug che cambia il colore del boss
-	/// </summary>
-	/// <param name="_color"></param>
-	public void ChangeColor(Color _color)
-	{
-		MeshRenderer mr = GetComponentInChildren<MeshRenderer>();
-		mr.material.SetColor("Color_A9F326B", _color);
 	}
 
 	/// <summary>
@@ -133,6 +130,15 @@ public class Boss2Controller : BossControllerBase
 	public SoundController GetSoundController()
 	{
 		return soundCtrl;
+	}
+
+	/// <summary>
+	/// Funzione che ritorna il graphic controller
+	/// </summary>
+	/// <returns></returns>
+	public Boss2GraphicController GetGraphicController()
+	{
+		return graphicCtrl;
 	}
 	#endregion
 	#endregion

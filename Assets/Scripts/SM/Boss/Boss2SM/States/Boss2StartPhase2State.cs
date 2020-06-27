@@ -20,15 +20,21 @@ public class Boss2StartPhase2State : Boss2StateBase
     /// Riferimento al Life Controller
     /// </summary>
     private BossLifeController lifeCtrl;
+    /// <summary>
+    /// Riferiemento all'event camera controller
+    /// </summary>
+    private LevelCameraController cameraCtrl;
 
     public override void Enter()
     {
+        cameraCtrl = context.GetLevelManager().GetLevelCameraController();
         bossCtrl = context.GetBossController();
         lifeCtrl = bossCtrl.GetBossLifeController();        
 
         lifeCtrl.SetCanTakeDamage(canTakeDirectDamage);
         bossCtrl.GetSoundController().PlayAudioClipOnTime(startPhaseSoundID);
-        bossCtrl.ChangeColor(Color.white);
+
+        cameraCtrl.DoCameraShake(0.5f);
 
         Debug.Log("Phase 2 Iniziata");
         Complete();
