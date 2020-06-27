@@ -3455,7 +3455,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Laser
   canTakeDirectDamage: 1
-  laserChargeTime: 1
+  laserChargeTime: 2
   laser1SpawnTime: 0
   laser1Speed: 0
   laser1StartAngle: 0
@@ -3503,7 +3503,7 @@ MonoBehaviour:
   id: SuperAttack
   canTakeDirectDamage: 0
   chargeTime: 5
-  attackDuration: 0.1
+  attackDuration: 0.5
   attackChargeSoundID: attackCharge
   attackSoundID: attack
 --- !u!1101 &-2405161954225584721
@@ -3908,7 +3908,7 @@ MonoBehaviour:
   id: SuperAttack
   canTakeDirectDamage: 0
   chargeTime: 5
-  attackDuration: 0.1
+  attackDuration: 0.5
   attackChargeSoundID: attackCharge
   attackSoundID: attack
 --- !u!114 &-1586007688606000564
@@ -4688,20 +4688,20 @@ MonoBehaviour:
   laserChargeTime: 1
   laser1SpawnTime: 0.5
   laser1Speed: 20
-  laser1StartAngle: 45
+  laser1StartAngle: 35
   laser1EndAngle: 90
   laser1SoundID: laser
   useSecondLaser: 1
   laser2SpawnTime: 0.5
   laser2Speed: 20
-  laser2StartAngle: -45
+  laser2StartAngle: -35
   laser2EndAngle: -90
   laser2SoundID: laser
   trackPlayer: 0
-  trackLaserSpawnDelay: 1.5
-  trackLaserSpawnTime: 0.5
-  trackLaserDuration: 5
-  trackLaserSpeed: 20
+  trackLaserSpawnDelay: 0
+  trackLaserSpawnTime: 0
+  trackLaserDuration: 0
+  trackLaserSpeed: 0
   chargingSoundID: laserCharge
   laserTrackerSoundID: laser
 --- !u!1101 &-99269355887378164
@@ -5371,7 +5371,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Laser
   canTakeDirectDamage: 1
-  laserChargeTime: 1
+  laserChargeTime: 2
   laser1SpawnTime: 0
   laser1Speed: 0
   laser1StartAngle: 0
@@ -6187,7 +6187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Waiting
   canTakeDirectDamage: 1
-  waitTimeRange: {x: 1, y: 1}
+  waitTimeRange: {x: 1.5, y: 1.5}
 --- !u!1102 &3684248431892440434
 AnimatorState:
   serializedVersion: 5
@@ -6692,7 +6692,7 @@ MonoBehaviour:
   laser2StartAngle: -45
   laser2EndAngle: 90
   laser2SoundID: laser
-  trackPlayer: 1
+  trackPlayer: 0
   trackLaserSpawnDelay: 1.5
   trackLaserSpawnTime: 0.5
   trackLaserDuration: 5
@@ -8752,17 +8752,20 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions: []
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: GoToNext
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 8870761101539498193}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
-  m_ExitTime: 0.75
-  m_HasExitTime: 1
+  m_ExitTime: 0
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
