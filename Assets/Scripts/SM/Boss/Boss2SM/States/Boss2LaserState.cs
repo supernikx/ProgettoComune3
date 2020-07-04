@@ -154,15 +154,12 @@ public class Boss2LaserState : Boss2StateBase
 	/// <returns></returns>
 	private IEnumerator LaserChargeCoroutine()
 	{
-		Vector3 laser1SpawnPos = Quaternion.Euler(new Vector3(0, laser1StartAngle, 0)) * laserCtrl.transform.position;
-		laser1SpawnPos += (laser1SpawnPos.normalized * 2f + Vector3.up * 2f);
-		laserCtrl.SpawnLaserChargeVFX(laser1SpawnPos, 1, true);
+		laserCtrl.SpawnLaserChargeVFX(laser1StartAngle, 1, true);
 
+		Vector3 laser2SpawnPos = Vector3.zero;
 		if (useSecondLaser)
 		{
-			Vector3 laser2SpawnPos = Quaternion.Euler(new Vector3(0, laser2StartAngle, 0)) * laserCtrl.transform.position;
-			laser2SpawnPos += (laser2SpawnPos.normalized * 2f + Vector3.up * 2f);
-			laserCtrl.SpawnLaserChargeVFX(laser2SpawnPos, 2, true);
+			laserCtrl.SpawnLaserChargeVFX(laser2StartAngle, 2, true);
 		}
 
 		soundCtrl.PlayClipLoop(chargingSoundID);
@@ -171,8 +168,8 @@ public class Boss2LaserState : Boss2StateBase
 
 		soundCtrl.StopClipLoop(chargingSoundID);
 
-		laserCtrl.SpawnLaserChargeVFX(laser1SpawnPos, 1, false);
-		laserCtrl.SpawnLaserChargeVFX(laser1SpawnPos, 2, false);
+		laserCtrl.SpawnLaserChargeVFX(0, 1, false);
+		laserCtrl.SpawnLaserChargeVFX(0, 2, false);
 		if (trackPlayer)
 		{
 			laserCtrl.SpawnLaser(trackLaserSpawnTime, trackLaserSpawnDelay, groupCtrl.GetGroupCenterPoint(), 1, HandleOnLaser1Spawn);

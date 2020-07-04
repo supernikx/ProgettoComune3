@@ -58,7 +58,11 @@ public class Boss2Controller : BossControllerBase
 		soundCtrl = GetComponent<SoundController>();
 		graphicCtrl = GetComponentInChildren<Boss2GraphicController>();
 
-		coverBlockCtrl.Setup();
+		int bossDefeated = UserData.GetBossDefeated();
+		if (bossDefeated > 0 && bossDefeated < 3)
+			gameObject.SetActive(false);
+		else
+			coverBlockCtrl.Setup();
 	}
 
 	#region API

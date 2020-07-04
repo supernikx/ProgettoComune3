@@ -32,6 +32,10 @@ public class Boss1GraphicController : MonoBehaviour
 	/// </summary>
 	private Boss1SMController smCtrl;
 	/// <summary>
+	/// Colore iniziale del boss
+	/// </summary>
+	private Color startColor;
+	/// <summary>
 	/// Riferimento alla coroutine dell'effetto di flash
 	/// </summary>
 	private IEnumerator flashEffectRoutine;
@@ -45,6 +49,7 @@ public class Boss1GraphicController : MonoBehaviour
 		smCtrl = _smCtrl;
 		lifeCtrl = bossCtrl.GetBossLifeController();
 		anim = GetComponent<Animator>();
+		startColor = bossGraphic.material.GetColor("Color_A9F326B");
 
 		smCtrl.OnStateEnter += HandleOnStateEnter;
 		smCtrl.OnStateExit += HandlOnStateExit;
@@ -58,14 +63,13 @@ public class Boss1GraphicController : MonoBehaviour
 	/// <param name="_damage"></param>
 	private void HandleOnBossTakeDamage(int _damage)
 	{
-		Color startColor = bossGraphic.material.GetColor("Color_A9F326B");
 		if (flashEffectRoutine != null)
 		{
 			StopCoroutine(flashEffectRoutine);
 			bossGraphic.material.SetColor("Color_A9F326B", startColor);
 		}
 
-		flashEffectRoutine = FlashEffectCoroutine(startColor);
+		flashEffectRoutine = FlashEffectCoroutine();
 		StartCoroutine(flashEffectRoutine);
 	}
 
@@ -131,11 +135,11 @@ public class Boss1GraphicController : MonoBehaviour
 	/// </summary>
 	/// <param name="_startColor"></param>
 	/// <returns></returns>
-	private IEnumerator FlashEffectCoroutine(Color _startColor)
+	private IEnumerator FlashEffectCoroutine()
 	{
 		bossGraphic.material.SetColor("Color_A9F326B", hitFlashColor);
-		yield return new WaitForSeconds(0.05f);
-		bossGraphic.material.SetColor("Color_A9F326B", _startColor);
+		yield return new WaitForSecondsRealtime(0.05f);
+		bossGraphic.material.SetColor("Color_A9F326B", startColor);
 	}
 
 	private void OnDisable()

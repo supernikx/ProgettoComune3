@@ -152,14 +152,7 @@ public class UIMenu_Gameplay : UIMenu_Base
 
 		if (_win)
 		{
-			int bossdefeated = UserData.GetBossDefeated();
-			if (bossdefeated == 2)
-			{
-				ToggleEndDemoPanel(true);
-				UserData.SetBossDefeated(bossdefeated + 1);
-			}
-			else
-				ToggleWinPanel(true);
+			ToggleWinPanel(true);
 		}
 	}
 

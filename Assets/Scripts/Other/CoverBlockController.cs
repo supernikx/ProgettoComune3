@@ -17,6 +17,8 @@ public class CoverBlockController : MonoBehaviour
 	[SerializeField]
 	private Image fillImage;
 	[SerializeField]
+	private Gradient gradingColor;
+	[SerializeField]
 	private TextMeshProUGUI barrierAgentText;
 
 	[Header("Feedback")]
@@ -71,6 +73,10 @@ public class CoverBlockController : MonoBehaviour
 	/// Riferiemento al sound controller
 	/// </summary>
 	private SoundController soundCtrl;
+	/// <summary>
+	/// Riferiemento al material del coverblock
+	/// </summary>
+	private Material coverblockMaterial;
 
 	/// <summary>
 	/// Funzione di Setup
@@ -84,6 +90,8 @@ public class CoverBlockController : MonoBehaviour
 		coverBlockDuration = _coverBlockDuration;
 		coverBlockHeatSpeed = _coverBlockHeatSpeed;
 		coverBlockResetSpeed = _coverBlockResetSpeed;
+
+		coverblockMaterial = coverBlockBarrier.GetComponent<MeshRenderer>().material;
 
 		SetText();
 		isCooldown = false;
@@ -144,7 +152,8 @@ public class CoverBlockController : MonoBehaviour
 		if (currentAgents.Count == 0)
 			isTriggered = false;
 
-		fillImage.fillAmount = coverBlockTimer / coverBlockDuration;
+		coverblockMaterial.SetColor("Color_A9F326B", gradingColor.Evaluate(coverBlockTimer / coverBlockDuration));
+		//fillImage.fillAmount = coverBlockTimer / coverBlockDuration;
 	}
 
 	private void OnTriggerStay(Collider other)
