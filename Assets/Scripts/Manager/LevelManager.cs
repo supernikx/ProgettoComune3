@@ -84,12 +84,12 @@ public class LevelManager : MonoBehaviour
 				boss2Block.SetActive(false);
 		}
 
-		if (boss2Block != null)
+		if (boss3Block != null)
 		{
 			if (bossDefeated < 2)
-				boss2Block.SetActive(true);
+				boss3Block.SetActive(true);
 			else
-				boss2Block.SetActive(false);
+				boss3Block.SetActive(false);
 		}
 
 		Vector3 startPositon = transform.position;
