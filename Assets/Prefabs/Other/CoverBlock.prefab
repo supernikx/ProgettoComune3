@@ -478,7 +478,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &304668172378229174
 RectTransform:
   m_ObjectHideFlags: 0
@@ -795,6 +795,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coverBlockBarrier: {fileID: 6376594598156448346}
+  pilastro: {fileID: 5233534338533794386}
   fillImage: {fileID: 6329482358372169917}
   gradingColor:
     serializedVersion: 2
@@ -1064,6 +1065,12 @@ PrefabInstance:
 --- !u!4 &9149737847556362305 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 1770f6a45a0399d4e8403a6dcbe7b35c,
+    type: 3}
+  m_PrefabInstance: {fileID: 4287658665278896987}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5233534338533794386 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 1770f6a45a0399d4e8403a6dcbe7b35c,
     type: 3}
   m_PrefabInstance: {fileID: 4287658665278896987}
   m_PrefabAsset: {fileID: 0}

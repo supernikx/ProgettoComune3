@@ -13,6 +13,10 @@ public class Boss2GraphicController : MonoBehaviour
 	[SerializeField]
 	private Color hitFlashColor;
 
+	[Header("VFX References")]
+	[SerializeField]
+	private ParticleSystem superattackVFX;
+
 	/// <summary>
 	/// Riferiemento al boss controller
 	/// </summary>
@@ -74,6 +78,21 @@ public class Boss2GraphicController : MonoBehaviour
 	}
 
 	#region API
+	#region VFX
+	/// <summary>
+	/// Funzione che gestisce il vfx del superattack
+	/// </summary>
+	/// <param name="_play"></param>
+	public void SuperAttackVFX(bool _play)
+	{
+		if (_play)
+			superattackVFX.Play();
+		else
+			superattackVFX.Stop();
+	}
+	#endregion
+
+	#region Color
 	/// <summary>
 	/// Funzione di Debug che cambia il colore del boss
 	/// </summary>
@@ -90,6 +109,7 @@ public class Boss2GraphicController : MonoBehaviour
 	{
 		bossGraphic.material.SetColor("Color_A9F326B", defaultColor);
 	}
+	#endregion
 	#endregion
 
 	private void OnDisable()

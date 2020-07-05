@@ -15,6 +15,8 @@ public class CoverBlockController : MonoBehaviour
 	[SerializeField]
 	private GameObject coverBlockBarrier;
 	[SerializeField]
+	private GameObject pilastro;
+	[SerializeField]
 	private Image fillImage;
 	[SerializeField]
 	private Gradient gradingColor;
@@ -77,6 +79,10 @@ public class CoverBlockController : MonoBehaviour
 	/// Riferiemento al material del coverblock
 	/// </summary>
 	private Material coverblockMaterial;
+	/// <summary>
+	/// Riferiemento al material del coverblock
+	/// </summary>
+	private Material pilastroMaterial;
 
 	/// <summary>
 	/// Funzione di Setup
@@ -92,6 +98,7 @@ public class CoverBlockController : MonoBehaviour
 		coverBlockResetSpeed = _coverBlockResetSpeed;
 
 		coverblockMaterial = coverBlockBarrier.GetComponent<MeshRenderer>().material;
+		pilastroMaterial = pilastro.GetComponent<MeshRenderer>().material;
 
 		SetText();
 		isCooldown = false;
@@ -200,7 +207,12 @@ public class CoverBlockController : MonoBehaviour
 	/// <param name="_currentAgents"></param>
 	private void SetText()
 	{
-		barrierAgentText.text = currentAgents.Count + "/" + coverBlockNeedAgents;
+		if (currentAgents.Count >= coverBlockNeedAgents)
+			pilastroMaterial.SetColor("_EmissiveColor", Color.green);
+		else
+			pilastroMaterial.SetColor("_EmissiveColor", Color.red);
+
+		//barrierAgentText.text = currentAgents.Count + "/" + coverBlockNeedAgents;
 	}
 
 	#region API

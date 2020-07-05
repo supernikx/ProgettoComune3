@@ -161,6 +161,7 @@ public class Boss2SuperAttackState : Boss2StateBase
 		soundCtrl.StopClipLoop(attackChargeSoundID);
 		soundCtrl.PlayClipLoop(attackSoundID);
 		bossCtrl.canvasDebug.SetActive(false);
+		graphicCtrl.SuperAttackVFX(true);
 		graphicCtrl.ChangeColor(Color.red);
 		float waitTime = attackDuration / 10f;
 		for (int k = 0; k < 10; k++)
@@ -201,6 +202,7 @@ public class Boss2SuperAttackState : Boss2StateBase
 		}
 
 		soundCtrl.StopClipLoop(attackSoundID);
+		graphicCtrl.SuperAttackVFX(false);
 		graphicCtrl.ResetColor();
 
 		if (coverBlockToDisable != null)
