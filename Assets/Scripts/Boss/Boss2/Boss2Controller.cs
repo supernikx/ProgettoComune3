@@ -59,7 +59,7 @@ public class Boss2Controller : BossControllerBase
 		graphicCtrl = GetComponentInChildren<Boss2GraphicController>();
 
 		int bossDefeated = UserData.GetBossDefeated();
-		if (bossDefeated > 0 && bossDefeated < 3)
+		if (bossDefeated > 0 && bossDefeated < 3 && bossDefeated != 1)
 			gameObject.SetActive(false);
 		else
 			coverBlockCtrl.Setup();
