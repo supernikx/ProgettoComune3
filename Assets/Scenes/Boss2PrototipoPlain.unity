@@ -26447,15 +26447,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4526685338817289565, guid: 284f654423432864db1e0431565ff29d,
-        type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1142149463609591416, guid: 284f654423432864db1e0431565ff29d,
         type: 3}
       propertyPath: m_Name
       value: Boss2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4526685338817289565, guid: 284f654423432864db1e0431565ff29d,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1142149463609591423, guid: 284f654423432864db1e0431565ff29d,
         type: 3}
@@ -26532,6 +26532,11 @@ PrefabInstance:
       propertyPath: superattackVFX
       value: 
       objectReference: {fileID: 3644099147198429389}
+    - target: {fileID: 4115993593278448571, guid: 284f654423432864db1e0431565ff29d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4d3184f62cd15ff488d99a99959fc800, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 284f654423432864db1e0431565ff29d, type: 3}
 --- !u!198 &3644099147198429389 stripped
