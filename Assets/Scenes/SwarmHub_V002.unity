@@ -96,7 +96,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
-  m_LightingDataAsset: {fileID: 112000002, guid: 419ebe2f9be66aa4796443bbccca8d40,
+  m_LightingDataAsset: {fileID: 112000000, guid: 419ebe2f9be66aa4796443bbccca8d40,
     type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -5815,6 +5815,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_BoundingSphereOverride.y
       value: 1.02e-43
+      objectReference: {fileID: 0}
+    - target: {fileID: 2621341499516428276, guid: 4b7633d0ea1cda644bae985591072e51,
+        type: 3}
+      propertyPath: useVolumetric
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b7633d0ea1cda644bae985591072e51, type: 3}
@@ -15266,6 +15271,11 @@ PrefabInstance:
       propertyPath: m_Intensity
       value: 119.3662
       objectReference: {fileID: 0}
+    - target: {fileID: 2621341499516428276, guid: 4b7633d0ea1cda644bae985591072e51,
+        type: 3}
+      propertyPath: useVolumetric
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b7633d0ea1cda644bae985591072e51, type: 3}
 --- !u!4 &1208168225 stripped
@@ -16295,6 +16305,11 @@ PrefabInstance:
       propertyPath: m_InnerSpotPercent
       value: 49
       objectReference: {fileID: 0}
+    - target: {fileID: 2621341499516428276, guid: 4b7633d0ea1cda644bae985591072e51,
+        type: 3}
+      propertyPath: useVolumetric
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b7633d0ea1cda644bae985591072e51, type: 3}
 --- !u!4 &1270935058 stripped
@@ -17101,14 +17116,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 117386, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
-      propertyPath: m_Name
-      value: pf_vfx-ult_demo_psys_loop_serenity
-      objectReference: {fileID: 0}
-    - target: {fileID: 117386, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 448880, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.1447697
@@ -17152,6 +17159,14 @@ PrefabInstance:
     - target: {fileID: 448880, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 117386, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
+      propertyPath: m_Name
+      value: pf_vfx-ult_demo_psys_loop_serenity
+      objectReference: {fileID: 0}
+    - target: {fileID: 117386, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 457110, guid: 3f8f2ca3d1d77bb43821a273508e179b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -24968,22 +24983,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7878456429308506080, guid: 5baeba3bd639cb4458d27fdc8c301812,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -0.000061035156
-      objectReference: {fileID: 0}
-    - target: {fileID: 7878456428084440377, guid: 5baeba3bd639cb4458d27fdc8c301812,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1618010940011530014, guid: 5baeba3bd639cb4458d27fdc8c301812,
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -0.000061035156
       objectReference: {fileID: 0}
+    - target: {fileID: 7878456429308506080, guid: 5baeba3bd639cb4458d27fdc8c301812,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.000061035156
+      objectReference: {fileID: 0}
     - target: {fileID: 8882263487789850819, guid: 5baeba3bd639cb4458d27fdc8c301812,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7878456428084440377, guid: 5baeba3bd639cb4458d27fdc8c301812,
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
