@@ -243,6 +243,7 @@ public class CoverBlockController : MonoBehaviour
 				StopCoroutine(coverBlockRoutine);
 
 			gameObject.SetActive(false);
+			currentAgents.Clear();
 		}
 	}
 

@@ -22,7 +22,7 @@ public class UIMenu_Gameplay : UIMenu_Base
 	private UISubmenu_Win winPanel;
 	//Riferimento al pannello di end demo
 	[SerializeField]
-	private UISubmenu_Win endDemoPanel;
+	private UISubmenu_EndDemo endDemoPanel;
 	//Riferimento al pannello di tutorial
 	[SerializeField]
 	private UISubmenu_Tutorial tutorialPanel;
@@ -118,7 +118,8 @@ public class UIMenu_Gameplay : UIMenu_Base
 	/// <param name="_toggle"></param>
 	public void ToggleEndDemoPanel(bool _toggle)
 	{
-		endDemoPanel.gameObject.SetActive(_toggle);
+		if (endDemoPanel != null)
+			endDemoPanel.gameObject.SetActive(_toggle);
 	}
 
 	/// <summary>

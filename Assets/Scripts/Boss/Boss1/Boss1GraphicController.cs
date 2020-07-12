@@ -126,6 +126,7 @@ public class Boss1GraphicController : MonoBehaviour
 	/// </summary>
 	private void HandlOnDeathAnimationEnd()
 	{
+		transform.parent = null;
 		bossCtrl.DisableBoss();
 	}
 	#endregion

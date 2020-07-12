@@ -113,6 +113,44 @@ public class Boss2LaserController : MonoBehaviour
 	}
 
 	/// <summary>
+	/// Funzione che spawna il vfx di carica del laser
+	/// </summary>
+	/// <param name="_targetPosition"></param>
+	/// <param name="_laserID"></param>
+	public void SpawnLaserChargeVFX(Vector3 _target, int _laserID, bool _enable)
+	{
+		if (_laserID == 1)
+		{
+			if (_enable)
+			{
+				laser1chargeVFX.transform.position = transform.position;
+				laser1chargeVFX.transform.localRotation = Quaternion.LookRotation((transform.position - _target).normalized);
+				laser1chargeVFX.transform.position = laser1chargeVFX.transform.forward * 5f + Vector3.up;
+				laser1chargeVFX.Play();
+			}
+			else
+			{
+				laser1chargeVFX.Stop();
+			}
+		}
+		else if (_laserID == 2)
+		{
+			if (_enable)
+			{
+				laser2chargeVFX.transform.position = transform.position;
+				laser2chargeVFX.transform.localRotation = Quaternion.LookRotation((transform.position - _target).normalized);
+				laser2chargeVFX.transform.position = laser2chargeVFX.transform.forward * 5f + Vector3.up;
+
+				laser2chargeVFX.Play();
+			}
+			else
+			{
+				laser2chargeVFX.Stop();
+			}
+		}
+	}
+
+	/// <summary>
 	/// Funzione che spawna il laser
 	/// </summary>
 	/// <param name="_spawnTime"></param>

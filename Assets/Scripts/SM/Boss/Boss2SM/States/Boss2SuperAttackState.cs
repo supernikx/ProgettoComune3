@@ -149,8 +149,8 @@ public class Boss2SuperAttackState : Boss2StateBase
 	{
 		soundCtrl.PlayClipLoop(attackChargeSoundID);
 		bossCtrl.canvasDebug.SetActive(true);
-		Color startColor = bossCtrl.GetComponentInChildren<MeshRenderer>().material.GetColor("Color_A9F326B");
 		graphicCtrl.ChangeColor(Color.yellow);
+		graphicCtrl.SuperAttackChargeVFX(true);
 		float timer = 0f;
 		while (timer < chargeTime)
 		{
@@ -158,11 +158,12 @@ public class Boss2SuperAttackState : Boss2StateBase
 			timer += Time.deltaTime;
 			yield return null;
 		}
+		graphicCtrl.SuperAttackChargeVFX(false);
 		soundCtrl.StopClipLoop(attackChargeSoundID);
 		soundCtrl.PlayClipLoop(attackSoundID);
 		bossCtrl.canvasDebug.SetActive(false);
 		graphicCtrl.SuperAttackVFX(true);
-		graphicCtrl.ChangeColor(Color.red);
+		graphicCtrl.ResetColor();
 		float waitTime = attackDuration / 10f;
 		for (int k = 0; k < 10; k++)
 		{
@@ -203,10 +204,12 @@ public class Boss2SuperAttackState : Boss2StateBase
 
 		soundCtrl.StopClipLoop(attackSoundID);
 		graphicCtrl.SuperAttackVFX(false);
-		graphicCtrl.ResetColor();
 
 		if (coverBlockToDisable != null)
+		{
 			coverBlockToDisable.Enable(false);
+			coverBlockToDisable = null;
+		}
 
 		if (nextPhase != -1)
 			Complete(nextPhase);

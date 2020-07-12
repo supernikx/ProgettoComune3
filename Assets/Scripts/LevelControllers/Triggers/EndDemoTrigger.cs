@@ -13,7 +13,7 @@ public class EndDemoTrigger : MonoBehaviour
 	private void Start()
 	{
 		uiMng = GameManager.instance.GetUIManager();
-		gameplayPanel = uiMng.GetCurrentUIController().GetMenu<UIMenu_Gameplay>();
+		gameplayPanel = FindObjectOfType<UIMenu_Gameplay>();
 	}
 
 	private void OnTriggerEnter(Collider other)

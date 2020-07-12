@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 /// <summary>
 /// Classe che si occupa di gestire la grafica dell'agent
@@ -9,6 +10,8 @@ using UnityEngine;
 public class AgentGraphicController : MonoBehaviour
 {
     [Header("Graphic Settings")]
+    [SerializeField]
+    private List<Material> materials;
     [SerializeField]
     private ObjectTypes deathVFX;
 
@@ -32,6 +35,10 @@ public class AgentGraphicController : MonoBehaviour
     /// Bool che identifica se è stato eseguito il setup della classe
     /// </summary>
     private bool isSetupped = false;
+    /// <summary>
+    /// Riferiemento ai renderer
+    /// </summary>
+    private SkinnedMeshRenderer[] rends;
 
     #region Setup
     /// <summary>
@@ -40,6 +47,7 @@ public class AgentGraphicController : MonoBehaviour
     public void Init()
     {
         anim = GetComponentInChildren<Animator>();
+        rends = GetComponentsInChildren<SkinnedMeshRenderer>();
     }
 
     /// <summary>
@@ -50,6 +58,7 @@ public class AgentGraphicController : MonoBehaviour
     {
         groupCtrl = _groupCtrl;
         calculatedMovementSpeed = 0f;
+        SetMaterial(materials[Random.Range(0, materials.Count)]);
         isSetupped = true;
     }
 
@@ -97,5 +106,17 @@ public class AgentGraphicController : MonoBehaviour
             }
         }
     }
+
+    /// <summary>
+    /// Funzione che imposta un material random
+    /// </summary>
+    /// <param name="_mat"></param>
+    public void SetMaterial(Material _mat)
+	{
+		for (int i = 0; i < rends.Length; i++)
+		{
+            rends[i].material = _mat;
+        }
+	}
     #endregion
 }

@@ -154,7 +154,15 @@ public class Boss2LaserState : Boss2StateBase
 	/// <returns></returns>
 	private IEnumerator LaserChargeCoroutine()
 	{
-		laserCtrl.SpawnLaserChargeVFX(laser1StartAngle, 1, true);
+		Vector3 targetPos = groupCtrl.GetGroupCenterPoint();
+		if (trackPlayer)
+		{
+			laserCtrl.SpawnLaserChargeVFX(targetPos, 1, true);
+		}
+		else
+		{			
+			laserCtrl.SpawnLaserChargeVFX(laser1StartAngle, 1, true);
+		}
 
 		Vector3 laser2SpawnPos = Vector3.zero;
 		if (useSecondLaser)
@@ -172,7 +180,7 @@ public class Boss2LaserState : Boss2StateBase
 		laserCtrl.SpawnLaserChargeVFX(0, 2, false);
 		if (trackPlayer)
 		{
-			laserCtrl.SpawnLaser(trackLaserSpawnTime, trackLaserSpawnDelay, groupCtrl.GetGroupCenterPoint(), 1, HandleOnLaser1Spawn);
+			laserCtrl.SpawnLaser(trackLaserSpawnTime, trackLaserSpawnDelay, targetPos, 1, HandleOnLaser1Spawn);
 		}
 		else
 		{

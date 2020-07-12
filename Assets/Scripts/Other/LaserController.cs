@@ -135,8 +135,7 @@ public class LaserController : MonoBehaviour
 	/// <param name="_onSpawnCallback"></param>
 	public void SpawnLaser(float _spawnTime, float _spawnDelay, Vector3 _targetPosition, Action _onSpawnCallback)
 	{
-		_targetPosition.y = transform.position.y;
-		transform.localRotation = Quaternion.LookRotation((transform.position - _targetPosition).normalized, Vector3.up);
+		transform.LookAt(new Vector3(_targetPosition.x, transform.position.y, _targetPosition.z)); 
 
 		spawnRoutine = SpawnLaserCoroutine(_spawnTime, _spawnDelay, _onSpawnCallback);
 		StartCoroutine(spawnRoutine);

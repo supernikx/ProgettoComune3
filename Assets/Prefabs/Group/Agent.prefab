@@ -64,6 +64,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7251747f7616d27479bfc5429553d18a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  materials:
+  - {fileID: 2100000, guid: aecaee6abf1a6804ca6f9d222c276ae7, type: 2}
+  - {fileID: 2100000, guid: d415a31a9bb51204e80dc027c07098d5, type: 2}
+  - {fileID: 2100000, guid: 73c80fc5e56241046b2b23df75ddcf97, type: 2}
   deathVFX: 6
 --- !u!1 &4898873885526971862
 GameObject:
@@ -197,11 +201,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4898873884623623286}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: a460d09c062051b4ca13f796b3954420,
-        type: 3}
-      propertyPath: m_Name
-      value: CH_Pitottinov3
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: a460d09c062051b4ca13f796b3954420,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -271,6 +270,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: a460d09c062051b4ca13f796b3954420,
+        type: 3}
+      propertyPath: m_Name
+      value: CH_Pitottinov3
       objectReference: {fileID: 0}
     - target: {fileID: 1325650687175484783, guid: a460d09c062051b4ca13f796b3954420,
         type: 3}
@@ -539,11 +543,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4898873884623623286}
     m_Modifications:
-    - target: {fileID: 8656458363289441284, guid: 509b660564f84044eb6f54d365f65ed1,
-        type: 3}
-      propertyPath: m_Name
-      value: VFX_PitottiniGenerali
-      objectReference: {fileID: 0}
     - target: {fileID: 3464519844350668920, guid: 509b660564f84044eb6f54d365f65ed1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -598,6 +597,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8656458363289441284, guid: 509b660564f84044eb6f54d365f65ed1,
+        type: 3}
+      propertyPath: m_Name
+      value: VFX_PitottiniGenerali
       objectReference: {fileID: 0}
     - target: {fileID: 6010108840005704545, guid: 509b660564f84044eb6f54d365f65ed1,
         type: 3}
