@@ -47,9 +47,11 @@ public class Boss1Controller : BossControllerBase
 		soundCtrl = GetComponent<SoundController>();
 		graphicCtrl = GetComponentInChildren<Boss1GraphicController>();
 
+#if !UNITY_EDITOR
 		int bossDefeated = UserData.GetBossDefeated();
 		if (bossDefeated > 0 && bossDefeated < 3)
 			gameObject.SetActive(false);
+#endif
 	}
 
 	#region API

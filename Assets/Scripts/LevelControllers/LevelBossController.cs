@@ -73,8 +73,11 @@ public class LevelBossController : MonoBehaviour
 
 			currentBoss.OnBossDead += HandleOnBossDead;
 			currentBoss.StartBoss();
-			bossOts.Play();
-			bossOts.DOFade(1, 1f);
+			if (bossOts)
+			{
+				bossOts.Play();
+				bossOts.DOFade(1, 1f);
+			}
 			OnBossFightStart?.Invoke(currentBoss);
 		}
 	}
@@ -95,7 +98,8 @@ public class LevelBossController : MonoBehaviour
 
 			OnBossFightEnd?.Invoke(currentBoss, true);
 			currentBoss = null;
-			bossOts.DOFade(0, 1f).OnComplete(() => bossOts.Stop());
+			if (bossOts)
+				bossOts.DOFade(0, 1f).OnComplete(() => { if (bossOts) bossOts.Stop(); });
 		}
 	}
 
@@ -113,7 +117,8 @@ public class LevelBossController : MonoBehaviour
 		closeArenaObj.SetActive(false);
 		OnBossFightEnd?.Invoke(currentBoss, false);
 		currentBoss = null;
-		bossOts.DOFade(0, 1f).OnComplete(() => bossOts.Stop());
+		if (bossOts)
+			bossOts.DOFade(0, 1f).OnComplete(() => { if (bossOts) bossOts.Stop(); });
 	}
 	#endregion
 

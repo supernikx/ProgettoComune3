@@ -58,11 +58,13 @@ public class Boss2Controller : BossControllerBase
 		soundCtrl = GetComponent<SoundController>();
 		graphicCtrl = GetComponentInChildren<Boss2GraphicController>();
 
+#if !UNITY_EDITOR
 		int bossDefeated = UserData.GetBossDefeated();
 		if (bossDefeated > 0 && bossDefeated < 3 && bossDefeated != 1)
 			gameObject.SetActive(false);
 		else
 			coverBlockCtrl.Setup();
+#endif
 	}
 
 	#region API
@@ -99,7 +101,7 @@ public class Boss2Controller : BossControllerBase
 		OnBossDead?.Invoke(this);
 	}
 
-	#region Getter
+#region Getter
 	/// <summary>
 	/// Funzione che ritorna il LaserController
 	/// </summary>
@@ -144,6 +146,6 @@ public class Boss2Controller : BossControllerBase
 	{
 		return graphicCtrl;
 	}
-	#endregion
-	#endregion
+#endregion
+#endregion
 }
